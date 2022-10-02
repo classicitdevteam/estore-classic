@@ -373,6 +373,15 @@
     opacity: 1;
 }
 
+/*Mobile-bottom-menu*/
+.header-bottom-1{
+    padding-top: 10px;
+}
+.mobile-hor-swipe{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 /*Footer Section*/
 /*.container-footer{
     max-width: 1140px;

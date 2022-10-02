@@ -393,6 +393,23 @@
                 </div>
             </div>
         </div>
+        <div class="header-bottom-1 header-bottom-bg-color sticky-bar d-lg-none">
+            <div class="container">
+                <ul class="mobile-hor-swipe header-wrap header-space-between position-relative">
+                    @foreach(get_categories() as $category)
+                        <li class="mb-10">
+                            <a class="p-10" href="{{ route('product.category', $category->slug) }}">
+                                @if(session()->get('language') == 'bangla') 
+                                    {{ $category->name_bn }}
+                                @else 
+                                    {{ $category->name_en }} 
+                                @endif
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </header>
     <!-- Mobile Side menu Start -->
     <div class="mobile-header-active mobile-header-wrapper-style">

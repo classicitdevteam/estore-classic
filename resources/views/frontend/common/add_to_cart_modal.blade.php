@@ -75,14 +75,25 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="detail-extralink d-flex mb-30" style="margin-top: 30px;">
-                                <div class="detail-qty border radius">
+                            <div class="detail-extralink align-items-baseline d-flex" style="margin-top: 30px;">
+                                            <div class="mr-10">
+                                                <span class="">Quantity:</span>
+                                            </div>
+                                            <div class="detail-qty border radius">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <input type="text" name="quantity" class="qty-val" value="1" min="1" id="qty">
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+
+                                        </div>
+                            <div class="detail-extralink d-flex mb-30" style="margin-top: 10px;">
+                                <!-- <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
 
                                     <input type="text" name="quantity" class="qty-val" id="qty" value="1" min="1">
 
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                </div>
+                                </div> -->
                                 <div class="product-extra-link2">
                                     <input type="hidden" id="product_id">
                                     <input type="hidden" id="pname">
@@ -90,7 +101,10 @@
                                     <input type="hidden" id="discount_amount">
                                     <input type="hidden" id="pfrom" value="modal">
                                     <input type="hidden" id="pvarient" value="">
+
                                     <button  class="button button-add-to-cart" onclick="addToCart()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Add to cart</button>
+
+                                    <button  class="button button-add-to-cart bg-danger ml-5" onclick="buyNow()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Buy Now</button>
                                 </div>
                             </div>
                         </div>

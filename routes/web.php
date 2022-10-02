@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\SubscriberController;
 
 /*================== Frontend All Route ==============*/
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/home2', [FrontendController::class, 'index2'])->name('home2');
 
 /* ==================== Start User dashboard Route ================== */
 Route::get('/dashboard',[UserController::class, 'index'])->name('dashboard');

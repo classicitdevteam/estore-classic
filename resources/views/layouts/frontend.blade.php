@@ -431,6 +431,10 @@
         /* ============= End Product View With Modal ========== */
 
         /* ============= Start AddToCart View With Modal ========== */
+        function buyNow(){
+            addToCart();
+            window.location = '/checkout';
+        }
         function addToCart(){
             $('.size-filter li').removeClass("active");
             var product_name = $('#pname').val();
@@ -577,6 +581,8 @@
 
                     if(Object.keys(response.carts).length > 0){
                         $.each(response.carts, function(key,value){
+                            var slug = value.options.slug;
+                            var base_url = window.location.origin;
                           miniCart += `
                             <ul>
                                 <li>
@@ -584,7 +590,7 @@
                                         <a href="#"><img alt="" src="/${value.options.image}" /></a>
                                     </div>
                                     <div class="shopping-cart-title">
-                                        <h4><a href="${value.options.slug}">${value.name}</a></h4>
+                                        <h4><a href="${base_url}/product-details/${slug}">${value.name}</a></h4>
                                         <h4 class="align-items-center d-flex">
                                         <div class="d-inline-flex flex-column">
 
@@ -681,6 +687,8 @@
           $('#total_cart_qty').text(Object.keys(response.carts).length);
           if(Object.keys(response.carts).length > 0){
               $.each(response.carts, function(key,value){
+                        var slug = value.options.slug;
+                        var base_url = window.location.origin;
                   rows += `
                             <tr class="pt-30">
                                 <td class="custome-checkbox pl-30">
@@ -689,7 +697,7 @@
                                 </td>
                                 <td class="image product-thumbnail pt-40"><img src="/${value.options.image}" alt="#"></td>
                                 <td class="product-des product-name">
-                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="#">${value.name}</a></h6>`;
+                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="${base_url}/product-details/${slug}">${value.name}</a></h6>`;
                   $.each(value.options.attribute_names, function(index,val){
                     rows +=               `<span>`+val+`: `+value.options.attribute_values[index]+`</span><br/>`;
                   });
@@ -750,11 +758,13 @@
 
                 if(Object.keys(response.carts).length > 0){
                     $.each(response.carts, function(key,value){
+                        var slug = value.options.slug;
+                        var base_url = window.location.origin;
                         rows += `
                                 <tr>
                                     <td class="image product-thumbnail"><img src="/${value.options.image}" alt="#"></td>
                                     <td>
-                                        <h6 class="w-160 mb-5"><a href="shop-product-full.html" class="text-heading">${value.name}</a></h6></span>`;
+                                        <h6 class="w-160 mb-5"><a href="${base_url}/product-details/${slug}" class="text-heading">${value.name}</a></h6></span>`;
                                     $.each(value.options.attribute_names, function(index,val){
                     rows +=               `<span>`+val+`: `+value.options.attribute_values[index]+`</span><br/>`;
                   });
