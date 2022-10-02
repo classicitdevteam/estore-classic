@@ -292,7 +292,7 @@
 	    </div>
 	</section>
 	@endif
-	<!--End Best Sales-->
+	<!--End Today Best Sales-->
 
 	@if(count($hot_deals) > 0)
 	<!-- Start Hot Deals -->

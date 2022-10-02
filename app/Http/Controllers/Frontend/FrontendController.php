@@ -65,6 +65,10 @@ class FrontendController extends Controller
         $todays_sale  = OrderDetail::whereDay('created_at',date('d'))->get();
         // dd($todays_sale);
 
+        // today_best_sales
+        // $today_best_sales  = Product::where('status',1)->where('is_deals',1)->latest()->get();
+        // dd($today_best_sales);
+
         //Home2 featured category
         $home2_featured_categories = Category::orderBy('name_en','DESC')->where('is_featured','=',1)->where('status','=',1)->get();
         // Hot deals product
