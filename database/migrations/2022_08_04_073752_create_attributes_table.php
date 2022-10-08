@@ -17,6 +17,7 @@ class CreateAttributesTable extends Migration
             $table->id();
             $table->string('name',50);
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

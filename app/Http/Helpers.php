@@ -160,3 +160,10 @@ if (!function_exists('get_product_varient_price')) {
         }
     }
 }
+
+if (!function_exists('get_divisions')) {
+    function get_divisions()
+    {
+        return Division::where('status', 1)->get();
+    }
+}

@@ -11,6 +11,7 @@ use Image;
 use Illuminate\Support\Str;
 use App\Utility\CategoryUtility;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class CategoryController extends Controller
 {
@@ -101,6 +102,7 @@ class CategoryController extends Controller
         }
         $category->is_featured = $request->is_featured;
         $category->image = $save_url;
+        $category->created_by = Auth::guard('admin')->user()->id;
         $category->created_at = Carbon::now();
 
         // dd($request()->all());
@@ -196,6 +198,8 @@ class CategoryController extends Controller
         }
 
         $category->is_featured = $request->is_featured;
+        $category->created_by = Auth::guard('admin')->user()->id;
+
         $category->updated_at = Carbon::now();
 
         // dd($request()->all());

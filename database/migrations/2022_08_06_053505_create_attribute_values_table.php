@@ -18,6 +18,7 @@ class CreateAttributeValuesTable extends Migration
             $table->foreignIdFor(\App\Models\Attribute::class)->constrained()->cascadeOnDelete();
             $table->string('value', 100);
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

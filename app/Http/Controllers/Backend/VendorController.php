@@ -8,6 +8,7 @@ use App\Models\Vendor;
 use Hash;
 use Image;
 use Session;
+use Auth;
 
 class VendorController extends Controller
 {
@@ -104,8 +105,8 @@ class VendorController extends Controller
             'shop_cover' => $shop_cover,
             'nid' => $nid,
             'trade_license' => $trade_license,
-            'status' => $request->status
-
+            'status' => $request->status,
+            'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
         Session::flash('success','Vendor Inserted Successfully');
@@ -230,6 +231,7 @@ class VendorController extends Controller
             $request->status = 0;
         }
         $vendor->status = $request->status;
+        $vendor->created_by = Auth::guard('admin')->user()->id;
 
         $vendor->save();
 

@@ -45,6 +45,7 @@ class CreateOrdersTable extends Migration
             $table->string('return_date', 30)->nullable();
             $table->text('return_reason')->nullable();
             $table->unsignedTinyInteger('type')->default(1)->comment('1=>Not guest order, 2=>Guest Order');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ use Carbon\Carbon;
 use Image;
 use Session;
 use Illuminate\Support\Str;
+use Auth;
 
 
 class ProductController extends Controller
@@ -114,6 +115,7 @@ class ProductController extends Controller
             'is_digital'            => $request->is_digital,
             'status'                => $request->status,
             'product_thumbnail'     => $save_url,
+            'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
         
@@ -319,7 +321,7 @@ class ProductController extends Controller
             'is_digital'            => $request->is_digital,
             'status'                => $request->status,
             'product_thumbnail'     => $save_url,
-
+            'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
         /* ========= Product Previous Stock Clear ========= */

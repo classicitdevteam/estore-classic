@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Brand;
 use Image;
 use Session;
+use Auth;
 
 class BrandController extends Controller
 {
@@ -60,6 +61,7 @@ class BrandController extends Controller
         }
         $brand->status = $request->status;
         $brand->brand_image = $save_url;
+        $brand->created_by = Auth::guard('admin')->user()->id;
         $brand->created_at = Carbon::now();
 
         $brand->save();
@@ -114,7 +116,8 @@ class BrandController extends Controller
             $request->status = 0;
         }
         $brand->status = $request->status;
-
+        $brand->created_by = Auth::guard('admin')->user()->id;
+        
         $brand->save();
 
         $notification = array(

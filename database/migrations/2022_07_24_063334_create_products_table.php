@@ -48,6 +48,7 @@ class CreateProductsTable extends Migration
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
             $table->unsignedTinyInteger('is_approved')->default(1)->comment('1=>Approved, 0=>Not Approved');
             $table->unsignedTinyInteger('is_digital')->default(0)->comment('1=>Digital, 0=>Not Digital');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

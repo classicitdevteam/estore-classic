@@ -20,6 +20,7 @@ class CreateSuppliersTable extends Migration
             $table->string('email', 30)->nullable();
             $table->text('address')->nullable();
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

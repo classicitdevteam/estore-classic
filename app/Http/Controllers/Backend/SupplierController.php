@@ -56,6 +56,7 @@ class SupplierController extends Controller
                 'email' => $request->email,
                 'address' => $request->address,
                 'status' => $request->status,
+                'created_by' => Auth::guard('admin')->user()->id,
             ]);
 
             Session::flash('success','Supplier Inserted Successfully');
@@ -86,6 +87,7 @@ class SupplierController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'status' => $request->status,
+            'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
         Session::flash('success','Supplier Updated Successfully');

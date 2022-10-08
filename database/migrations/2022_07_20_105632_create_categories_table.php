@@ -25,6 +25,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedTinyInteger('type')->default(1)->comment('1=>Category, 2=>SubCategory, 3=> SubSubCategory');
             $table->unsignedTinyInteger('is_featured')->default(0)->comment('1=>Featured, 0=>Not Featured');
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class CreateVendorsTable extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->contrained('users')->onDelete('cascade');
             $table->string('shop_name', 50)->nullable();
             $table->string('fb_url', 100)->default('#');
             $table->string('bank_account', 80)->nullable();

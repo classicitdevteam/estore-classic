@@ -22,6 +22,7 @@ class CreateBrandsTable extends Migration
             $table->text('description_bn')->nullable();
             $table->string('brand_image')->nullable();
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
+            $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
