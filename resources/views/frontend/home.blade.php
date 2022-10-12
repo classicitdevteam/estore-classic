@@ -476,6 +476,47 @@
 	        </div>
 	    </div>
 	</section>
+
+	<!--Start Vendors-->
+	<section class="popular-categories section-padding">
+	    <div class="container wow animate__animated animate__fadeIn">
+	        <div class="section-title">
+	            <div class="title">
+	                <h3>Vendor List</h3>
+	            </div>
+	            <div class="slider-arrow slider-arrow-2 flex-right carausel-10-columns-arrow-vendors" id="carausel-10-columns-arrows-vendors"></div>
+	        </div>
+	        <div class="carausel-10-columns-cover position-relative">
+	            <div class="carausel-10-columns-vendors" id="carausel-10-columns-vendors">
+	            	@foreach(get_vendors() as $vendor)
+	                <div class="card-2 mx-2 bg-9 d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+	                    <figure class="img-hover-scale overflow-hidden">
+	                        <a href="#">
+	                        	@if($vendor->shop_profile && $vendor->shop_profile != '' && $vendor->shop_profile != 'Null')
+				                    <img class="default-img" src="{{ asset($vendor->shop_profile) }}" alt="" />
+				                @else
+				                    <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}" alt="" />
+				                @endif
+	                        </a>
+	                    </figure>
+	                    <h6>
+	                    	<a href="#">
+	                    		@if(session()->get('language') == 'bangla') 
+	                                {{ $vendor->shop_name }}
+	                            @else 
+	                                {{ $vendor->shop_name }} 
+	                            @endif
+	                    	</a>
+	                    </h6>
+	                  <!--   <span>26 items</span> -->
+	                </div>
+	                @endforeach
+	            </div>
+	        </div>
+	    </div>
+	</section>
+	<!--End Vendors-->
+
 	<!--End Deals-->
 	<section class="section-padding mb-30">
 	    <div class="container">

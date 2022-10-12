@@ -11,6 +11,7 @@ use App\Models\Page;
 use App\Models\Setting;
 use App\Models\Attribute;
 use App\Models\ProductStock;
+use App\Models\Vendor;
 use Illuminate\Support\Collection;
 
 if (!function_exists('get_setting')) {
@@ -161,9 +162,9 @@ if (!function_exists('get_product_varient_price')) {
     }
 }
 
-if (!function_exists('get_divisions')) {
-    function get_divisions()
+if (!function_exists('get_vendors')) {
+    function get_vendors()
     {
-        return Division::where('status', 1)->get();
+        return Vendor::where('status', 1)->get();
     }
 }

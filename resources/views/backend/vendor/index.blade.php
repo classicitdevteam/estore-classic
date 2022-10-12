@@ -38,9 +38,9 @@
                                 </a>
                             </td>
                             <td> {{ $vendor->shop_name ?? 'NULL' }} </td>
-                            <td> {{ $vendor->abc ?? 'NULL' }} </td>
-                            <td> {{ $vendor->email ?? 'NULL' }} </td>
-                            <td> {{ $vendor->phone ?? 'NULL' }} </td>
+                            <td> {{ $vendor->user->username ?? 'NULL' }} </td>
+                            <td> {{ $vendor->user->email ?? 'NULL' }} </td>
+                            <td> {{ $vendor->user->phone ?? 'NULL' }} </td>
                             <td>
                                 @if($vendor->status == 1)
                                   <a href="{{ route('vendor.in_active',['id'=>$vendor->id]) }}">

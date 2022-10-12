@@ -10,6 +10,7 @@ use App\Models\AttributeValue;
 use Image;
 use Session;
 use App\Helpers\Classes\Combinations;
+use Auth;
 
 class AttributeController extends Controller
 {
@@ -70,8 +71,8 @@ class AttributeController extends Controller
 
         $attribute = new Attribute();
         $attribute->name = $request->name;
+        $attribute->created_by = Auth::guard('admin')->user()->id;
         $attribute->created_at = Carbon::now();
-
         $attribute->save();
 
         Session::flash('success','Attribute Inserted Successfully');
@@ -116,6 +117,7 @@ class AttributeController extends Controller
 
         // Attribute table update
         $attribute->name = $request->name;
+        $attribute->created_by = Auth::guard('admin')->user()->id;
         $attribute->save();
 
         $notification = array(
@@ -149,19 +151,6 @@ class AttributeController extends Controller
     }
 
 
-    // Color All
-    // public function color_index()
-    // {   
-    //     $colors = Color::latest()->get();
-    //     return view('backend.color.index',compact('colors'));
-    // }
-
-    // // Color create
-    // public function color_create()
-    // {   
-    //     return view('backend.color.create');
-    // }
-
     // Value Store
     public function value_store(Request $request)
     {
@@ -172,37 +161,13 @@ class AttributeController extends Controller
         $value = new AttributeValue();
         $value->attribute_id = $request->attribute_id;
         $value->value = $request->value;
+        $value->created_by = Auth::guard('admin')->user()->id;
         $value->created_at = Carbon::now();
-
         $value->save();
 
         Session::flash('success','Value Inserted Successfully');
         return redirect()->back();
     }
-
-    // // Color Edit
-    // public function color_edit($id)
-    // {
-    //     $color = Color::findOrFail($id);
-    //     return view('backend.color.edit',compact('color'));
-    // }
-
-    // // Color UpadateColor
-    // public function color_update(Request $request, $id)
-    // {
-    //     $color = Color::find($id);
-
-    //     // Attribute table update
-    //     $color->name = $request->name;
-    //     $color->color_code = $request->color_code;
-    //     $color->save();
-
-    //     $notification = array(
-    //         'message' => 'Color Updated Successfully.',
-    //         'alert-type' => 'success'
-    //     );
-    //     return redirect()->route('color.index')->with($notification);
-    // }
 
     // Attribute Value Delete
     public function value_destroy($id)

@@ -101,15 +101,13 @@
                                     </form>
                                 </div> -->
                                 <div class="header-action-icon-2">
-                                    <a href="#">
-                                        <img class="svgInject" alt="Nest" src="{{asset('frontend/assets/imgs/theme/icons/icon-compare.svg')}}" />
-                                        <span class="pro-count blue">3</span>
-                                    </a>
-                                    <a href="#"><span class="lable ml-0">Compare</span></a>
+                                    <div class="" id="compare">
+                                        @include('frontend.common.compare')
+                                    </div>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a href="#">
-                                        <img class="svgInject" alt="Nest" src="{{asset('frontend/assets/imgs/theme/icons/icon-heart.svg')}}" />
+                                        <img class="svgInject" alt="estore-classic" src="{{asset('frontend/assets/imgs/theme/icons/icon-heart.svg')}}" />
                                         <span class="pro-count blue">6</span>
                                     </a>
                                     <a href="#"><span class="lable">Wishlist</span></a>
@@ -416,7 +414,16 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{route('home')}}"><img src="{{asset('frontend/assets/imgs/theme/logo.svg')}}" alt="logo" /></a>
+                    <a href="{{route('home')}}">
+                        @php
+                            $logo = get_setting('site_logo');
+                        @endphp
+                        @if($logo != null)
+                            <img src="{{ asset(get_setting('site_logo')->value ?? 'null') }}" alt="{{ env('APP_NAME') }}">
+                        @else
+                            <img src="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" style="height: 60px !important; width: 80px !important; min-width: 80px !important;">
+                        @endif
+                    </a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">

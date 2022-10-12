@@ -104,10 +104,6 @@
     <!-- Custom Js -->
     <script src="{{asset('frontend/js/app.js')}}"></script>
 
-    
-
-
-
     <!-- Image Show -->
     <script type="text/javascript">
         $(document).ready(function(){
@@ -151,7 +147,6 @@
         });
     </script>
 
-
     <!-- all toastr message show  Update-->
     <script>
         @if(Session::has('message'))
@@ -190,7 +185,6 @@
               'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
             }
         });
-
 
         function selectAttribute(id, value, pid){
             $('#'+id).val(value);
@@ -460,7 +454,6 @@
                   timer: 1200
             });
 
-
             $.ajax({
             type:'POST',
             url:'/cart/data/store/'+id,
@@ -520,7 +513,6 @@
                   timer: 1200
             });
 
-
             $.ajax({
             type:'POST',
             url:'/cart/data/store/'+id,
@@ -561,7 +553,6 @@
         }
         /* ============= Start AddToCart View With Modal ========== */
     </script>
-
 
     <script type="text/javascript">
         /* ============= Start MiniCart Add ========== */ 
@@ -841,29 +832,42 @@
           }
       });
     }
-/* ==================== End  cartIncrement ================== */
+    /* ==================== End  cartIncrement ================== */
 
-/* ==================== Start  Cart Decrement ================== */
-    function cartDecrement(rowId){
-      $.ajax({
-          type:'GET',
-          url: "/cart-decrement/"+rowId,
-          dataType:'json',
-          success:function(data){
-            // console.log(data)
-            //console.log(data);
-            // if(data == 2){
-            //     alert("#"+rowId);
-            //     $("#"+rowId).attr("disabled", "true");
-            // }
-            cart();
-            miniCart();
-          }
-      });
+    /* ==================== Start  Cart Decrement ================== */
+        function cartDecrement(rowId){
+          $.ajax({
+              type:'GET',
+              url: "/cart-decrement/"+rowId,
+              dataType:'json',
+              success:function(data){
+                // console.log(data)
+                //console.log(data);
+                // if(data == 2){
+                //     alert("#"+rowId);
+                //     $("#"+rowId).attr("disabled", "true");
+                // }
+                cart();
+                miniCart();
+              }
+          });
+        }
+    /* ==================== End  Cart Decrement ================== */
+
+    function addToCompare(id){
+        $.post('{{ route('compare.addToCompare') }}', {"_token": "{{ csrf_token() }}","id": id },function(data){
+            $('#compare').html(data);
+            // Start Message 
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 1200
+            });
+            // $('#compare_items_sidenav').html(parseInt($('#compare_items_sidenav').html())+1);
+        });
     }
-/* ==================== End  Cart Decrement ================== */
-
-
    
     </script>
     @stack('footer-script')

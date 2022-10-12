@@ -135,6 +135,7 @@ class CheckoutController extends Controller
             'upazilla_id' => $request->upazilla_id,
             'address' => $request->address,
             'type' => $type,
+            'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
         if(get_setting('otp_system')){

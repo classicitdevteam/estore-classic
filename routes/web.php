@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\BkashController;
 use App\Http\Controllers\Frontend\AamarpayController;
 use App\Http\Controllers\Frontend\PublicSslCommerzPaymentController;
 use App\Http\Controllers\Backend\SubscriberController;
+use App\Http\Controllers\Backend\CompareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,7 +162,10 @@ Route::post('/aamarpay/fail', [AamarpayController::class, 'fail'])->name('aamarp
 //Subscribers
 Route::POST('/subscribers/store', [SubscriberController::class, 'store'])->name('subscribers.store');
 
-
+// Compare
+Route::get('/compare', 'CompareController@index')->name('compare');
+Route::get('/compare/reset', 'CompareController@reset')->name('compare.reset');
+Route::post('/compare/addToCompare', 'CompareController@addToCompare')->name('compare.addToCompare');
 
 
 require __DIR__.'/auth.php';

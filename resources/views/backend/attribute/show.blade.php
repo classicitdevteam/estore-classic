@@ -23,7 +23,7 @@
         <div class="col-lg-7">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h4>Attribute</h4>
+                    <h4 class="text-white">Attribute Edit</h4>
                 </div>
                 <div class="card-body">
                     <form method="post" action="{{ route('attribute.update',$attribute->id) }}" enctype="multipart/form-data">
@@ -50,7 +50,7 @@
         <div class="col-lg-4">
             <div class="card mb-4">
                 <div class="card-header">
-                    <h4>Value</h4>
+                    <h4 class="text-white">Value Create</h4>
                 </div>
                 <div class="card-body">
                     <form method="post" action="{{ route('attribute.value_store') }}" enctype="multipart/form-data">
@@ -133,33 +133,34 @@
     <!-- card end// -->
 </section>
 
-
-<!--  Attribute Modal -->
-<div class="modal fade attribute" id="value{{ $value->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header card-header">
-            <h3>Attribute Edit</h3>
-            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form method="post" action="#" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-4">
-                    <label for="name" class="col-form-label col-md-2" style="font-weight: bold;"> Name:</label>
-                    <input class="form-control" id="name" type="text" name="name" placeholder="Write attribute name" value="{{ $value->id }}">
-                    @error('name')
-                        <p class="text-danger">{{$message}}</p>
-                    @enderror
-                </div>
-
-                <div class="row mb-4 justify-content-sm-end">
-                    <div class="col-4">
-                        <input type="submit" name="" class="btn btn-primary" value="Submit">
+@if(count($values) > 0)
+    <!--  Attribute Modal -->
+    <div class="modal fade attribute" id="value{{ $value->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header card-header">
+                <h3>Attribute Edit</h3>
+                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="#" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="name" class="col-form-label col-md-2" style="font-weight: bold;"> Name:</label>
+                        <input class="form-control" id="name" type="text" name="name" placeholder="Write attribute name" value="{{ $value->id }}">
+                        @error('name')
+                            <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
-                </div>
-            </form>
+
+                    <div class="row mb-4 justify-content-sm-end">
+                        <div class="col-4">
+                            <input type="submit" name="" class="btn btn-primary" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+@endif
 @endsection

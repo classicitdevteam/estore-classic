@@ -219,17 +219,13 @@ class OrderController extends Controller
     /*================= Start admin_user_update Methoed ================*/
     public function admin_user_update(Request $request, $user_id)
     {
-
-
         $user = User::where('id',$user_id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-
         ]);
 
         // dd($user);
-
 
         Session::flash('success','Customer Information Updated Successfully');
         return redirect()->back();
@@ -237,7 +233,7 @@ class OrderController extends Controller
 
     /* ============= Start getdivision Method ============== */
     public function getdivision($division_id){
-    $division = District::where('division_id', $division_id)->orderBy('district_name_en','ASC')->get();
+        $division = District::where('division_id', $division_id)->orderBy('district_name_en','ASC')->get();
 
         return json_encode($division);
     }
@@ -253,7 +249,6 @@ class OrderController extends Controller
 
     /* ============= Start invoice_download Method ============== */
     public function invoice_download($id){
-
         $order = Order::findOrFail($id);
 
         $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4')->setOptions([

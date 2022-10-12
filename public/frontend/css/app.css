@@ -2,6 +2,7 @@
 .header-style-1 .search-style-2 form input{
     background-image: none;
 }
+
 /*All Category Page*/
 .category_image{
     height: 50px;
@@ -380,6 +381,9 @@
 .mobile-hor-swipe{
     overflow-x: auto;
     white-space: nowrap;
+}
+.header-bottom-1.header-bottom-bg-color.sticky-bar.stick {
+    top: 55px;
 }
 
 /*Footer Section*/
