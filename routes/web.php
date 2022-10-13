@@ -63,6 +63,9 @@ Route::get('/hot-deals', [FrontendController::class, 'hotDeals'])->name('hot_dea
 /* ===============  Category Wise Product Show  ============= */
 Route::get('/category-product/{slug}',[FrontendController::class, 'CatWiseProduct'])->name('product.category');
 
+/* ===============  Vendor Wise Product Show  ============= */
+Route::get('/vendor-product/{slug}',[FrontendController::class, 'VendorWiseProduct'])->name('vendor.product');
+
 /* ===============  Tag Wise Product Show  ============= */
 Route::get('/tag-product/{id}/{slug}',[FrontendController::class, 'TagWiseProduct'])->name('product.tag');
 /* =============== Product Details Show ============= */

@@ -41,7 +41,7 @@
            
         </div>
         <div class="product-content-wrap">
-            <h2 class="mt-3">
+            <h2 class="mt-3" style="height: 40px;">
                 <a href="{{ route('product.details',$product->slug) }}">
                     @if(session()->get('language') == 'bangla')
                         <?php $p_name_bn =  strip_tags(html_entity_decode($product->name_bn))?>

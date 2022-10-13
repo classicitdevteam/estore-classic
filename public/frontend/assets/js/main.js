@@ -51,8 +51,10 @@
             // thousand: ",",
             // prefix: "$"
         });
+        var start_price = document.getElementById("filter_price_start").value;
+        var end_price = document.getElementById("filter_price_end").value;
         noUiSlider.create(rangeSlider, {
-            start: [1, 100],
+            start: [start_price, end_price],
             step: 1,
             range: {
                 min: [1],

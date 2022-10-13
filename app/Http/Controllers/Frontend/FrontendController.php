@@ -14,6 +14,7 @@ use App\Models\Attribute;
 use App\Models\MultiImg;
 use App\Models\Page;
 use App\Models\OrderDetail;
+use App\Models\Vendor;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\Hash;
@@ -178,6 +179,32 @@ class FrontendController extends Controller
         // dd($products);
 
         return view('frontend.product.category_view',compact('products','categories','category'));
+    } // end method
+    /* ========== End CatWiseProduct Method ======== */
+
+     /* ========== Start CatWiseProduct Method ======== */
+     public function VendorWiseProduct(Request $request,$slug){
+
+        $vendor = Vendor::where('slug', $slug)->first();
+        // dd($category);
+        
+        $products = Product::where('status', 1)->where('vendor_id',$vendor->id)->orderBy('id','DESC')->paginate(20);
+        // Price Filter
+        if ($request->get('filter_price_start')!== Null && $request->get('filter_price_end')!== Null ){ 
+            $filter_price_start = $request->get('filter_price_start');
+            $filter_price_end = $request->get('filter_price_end');
+
+            if ($filter_price_start>0 && $filter_price_end>0) {
+                $products = Product::where('status','=',1)->where('vendor_id',$vendor->id)->whereBetween('regular_price',[$filter_price_start,$filter_price_end])->paginate(20);
+                // dd($products);
+            }
+
+        }
+
+        $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->get();      
+        // dd($products);
+
+        return view('frontend.product.vendor_view',compact('products','categories','vendor'));
     } // end method
     /* ========== End CatWiseProduct Method ======== */
 

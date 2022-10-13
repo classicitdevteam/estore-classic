@@ -491,7 +491,7 @@
 	            	@foreach(get_vendors() as $vendor)
 	                <div class="card-2 mx-2 bg-9 d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
 	                    <figure class="img-hover-scale overflow-hidden">
-	                        <a href="#">
+	                        <a href="{{ route('vendor.product', $vendor->slug) }}">
 	                        	@if($vendor->shop_profile && $vendor->shop_profile != '' && $vendor->shop_profile != 'Null')
 				                    <img class="default-img" src="{{ asset($vendor->shop_profile) }}" alt="" />
 				                @else
@@ -500,7 +500,7 @@
 	                        </a>
 	                    </figure>
 	                    <h6>
-	                    	<a href="#">
+	                    	<a href="{{ route('vendor.product', $vendor->slug) }}">
 	                    		@if(session()->get('language') == 'bangla') 
 	                                {{ $vendor->shop_name }}
 	                            @else 

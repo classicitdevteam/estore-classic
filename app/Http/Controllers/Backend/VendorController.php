@@ -90,8 +90,11 @@ class VendorController extends Controller
             $trade_license = '';
         }
 
+        $slug = strtolower(str_replace(' ', '-', $request->shop_name));
+
        Vendor::insert([
             'shop_name' => $request->shop_name,
+            'slug' => $slug,
             'fb_url' => $request->fb_url,
             'bank_account' => $request->bank_account,
             'bank_name' => $request->bank_name,
@@ -216,9 +219,12 @@ class VendorController extends Controller
             $trade_photo = '';
         }
 
+        $slug = strtolower(str_replace(' ', '-', $request->shop_name));
+
         
         // Vendor table update
         $vendor->shop_name = $request->shop_name;
+        $vendor->slug = $slug;
         $vendor->fb_url = $request->fb_url;
         $vendor->bank_account = $request->bank_account;
         $vendor->bank_name = $request->bank_name;
