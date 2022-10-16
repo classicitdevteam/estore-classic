@@ -302,15 +302,18 @@
             @if(Auth::guard('admin')->user()->role == '1')
             <li class="menu-item has-submenu 
             {{ ($route == 'accounts.heads')? 'active':'' }}
+            {{ ($route == 'accounts.ledgers')? 'active':'' }}
             ">
                 <a class="menu-link" href="#">
                     <i class="icon material-icons md-person"></i>
                     <span class="text">Accounts</span>
                 </a>
-                <div class="submenu">
+                <div class="submenu 
+                {{ ($route == 'accounts.heads')? 'active':'' }}
+                {{ ($route == 'accounts.ledgers')? 'active':'' }}
+                ">
                     <a href="{{ route('accounts.heads') }}">Account Heads</a>
-                    <a href="#">User registration</a>
-                    <a href="#">Error 404</a>
+                    <a href="{{ route('accounts.ledgers') }}">Cashbook</a>
                 </div>
             </li>
             @endif

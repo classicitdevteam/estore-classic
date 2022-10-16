@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AccountHead;
+use App\Models\AccountLedger;
 use Session;
 
 class AccountsController extends Controller
@@ -42,10 +43,10 @@ class AccountsController extends Controller
      */
     public function ledgers()
     {
-        $account_heads = AccountHead::OrderBy('id', 'ASC')->get();
+        $account_ledgers = AccountLedger::OrderBy('id', 'ASC')->get();
         //$account_heads = AccountHead::where('status', 1)->latest()->get();
 
-        return view('backend.accounts.heads', compact('account_heads'));
+        return view('backend.accounts.ledgers', compact('account_ledgers'));
     }
 
 
@@ -128,6 +129,18 @@ class AccountsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+    }
+
+    public function head_destroy($id)
+    {
+        $head = AccountHead::find($id);
+        $head->delete();
+        Session::flash('success','Account Head Deleted Successfully.');
+        return redirect()->back();
+    }
+
+    public function ledger_destroy($id)
     {
         $head = AccountHead::find($id);
         $head->delete();

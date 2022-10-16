@@ -19,6 +19,8 @@ use App\Utility\SendSMSUtility;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\ProductStock;
+use App\Models\AccountHead;
+use App\Models\AccountLedger;
 
 class CheckoutController extends Controller
 {
@@ -228,6 +230,17 @@ class CheckoutController extends Controller
         }
 
         Cart::destroy();
+
+        //Ledger Entry
+        $ledger = AccountLedger::create([
+            'account_head_id' => 2,
+            'particulars' => 'Order ID: '.$order->id,
+            'credit' => $order->grand_total,
+            'order_id' => $order->id,
+            'type' => 2,
+        ]);
+        $ledger->balance = get_account_balance() + $order->grand_total;
+        $ledger->save();
 
         $notification = array(
             'message' => 'Your Order Successfully.', 

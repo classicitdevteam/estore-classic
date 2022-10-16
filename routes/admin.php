@@ -292,7 +292,7 @@ Route::prefix('accounts')->group(function(){
 	Route::post('/account-heads/store', [AccountsController::class, 'store'])->name('accounts.heads.store');
 	Route::get('/account-heads/change-status/{id}', [AccountsController::class, 'change_status'])->name('accounts.heads.change_status');
 	Route::get('/account-heads/delete/{id}', [AccountsController::class, 'destroy'])->name('accounts.heads.delete');
-	Route::get('/account-ledgers', [AccountsController::class, 'index'])->name('accounts.ledgers');
+	Route::get('/account-ledgers', [AccountsController::class, 'ledgers'])->name('accounts.ledgers');
 });
 
 /*========================== End Admin Route  ==========================*/

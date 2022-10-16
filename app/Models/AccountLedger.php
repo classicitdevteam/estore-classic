@@ -9,4 +9,8 @@ class AccountLedger extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function account_head(){
+        return $this->belongsTo(AccountHead::class);
+    }
 }

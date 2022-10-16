@@ -9,4 +9,9 @@ class AccountHead extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function ledgers()
+    {
+        return $this->hasMany(AccountLedger::class);
+    }
 }

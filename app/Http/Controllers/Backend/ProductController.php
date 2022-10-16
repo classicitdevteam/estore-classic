@@ -212,13 +212,16 @@ class ProductController extends Controller
 
         $product->save();
 
+        //Ledger Entry
         $ledger = AccountLedger::create([
             'account_head_id' => 1,
-            'particulars' => 'Product Purchase',
+            'particulars' => 'Product ID: '.$product->id,
             'debit' => $product->purchase_price,
+            'product_id' => $product->id,
+            'type' => 1,
         ]);
-
         $ledger->balance = get_account_balance() - $product->purchase_price;
+        $ledger->save();
 
         $notification = array(
             'message' => 'Product Inserted Successfully',
