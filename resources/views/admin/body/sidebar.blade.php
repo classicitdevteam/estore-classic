@@ -303,17 +303,15 @@
             <li class="menu-item has-submenu 
             {{ ($route == 'accounts.heads')? 'active':'' }}
             {{ ($route == 'accounts.ledgers')? 'active':'' }}
+            {{ ($route == 'accounts.heads.create')? 'active':'' }}
             ">
                 <a class="menu-link" href="#">
                     <i class="icon material-icons md-person"></i>
                     <span class="text">Accounts</span>
                 </a>
-                <div class="submenu 
-                {{ ($route == 'accounts.heads')? 'active':'' }}
-                {{ ($route == 'accounts.ledgers')? 'active':'' }}
-                ">
-                    <a href="{{ route('accounts.heads') }}">Account Heads</a>
-                    <a href="{{ route('accounts.ledgers') }}">Cashbook</a>
+                <div class="submenu">
+                    <a class="{{ ($route == 'accounts.heads')? 'active':'' }} {{ ($route == 'accounts.heads.create')? 'active':'' }}" href="{{ route('accounts.heads') }}">Account Heads</a>
+                    <a class="{{ ($route == 'accounts.ledgers')? 'active':'' }}" href="{{ route('accounts.ledgers') }}">Cashbook</a>
                 </div>
             </li>
             @endif

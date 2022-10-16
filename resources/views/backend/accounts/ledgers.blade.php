@@ -2,9 +2,9 @@
 @section('admin')
 <section class="content-main">
     <div class="content-header">
-        <h3 class="content-title">Account Ledgerss <span class="badge rounded-pill alert-success"> {{ count($account_ledgers) }} </span></h3>
+        <h3 class="content-title">Account Ledgers <span class="badge rounded-pill alert-success"> {{ count($account_ledgers) }} </span></h3>
         <div>
-            <a href="{{ route('accounts.heads.create') }}" class="btn btn-primary"><i class="material-icons md-plus"></i>Add New</a>
+            <a href="{{ route('accounts.ledgers.create') }}" class="btn btn-primary"><i class="material-icons md-plus"></i>Add New</a>
         </div>
     </div>
     </div>

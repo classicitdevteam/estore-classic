@@ -288,11 +288,14 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 // Admin Accounting All Routes
 Route::prefix('accounts')->group(function(){
 	Route::get('/account-heads', [AccountsController::class, 'heads'])->name('accounts.heads');
-	Route::get('/account-heads/create', [AccountsController::class, 'create'])->name('accounts.heads.create');
-	Route::post('/account-heads/store', [AccountsController::class, 'store'])->name('accounts.heads.store');
-	Route::get('/account-heads/change-status/{id}', [AccountsController::class, 'change_status'])->name('accounts.heads.change_status');
-	Route::get('/account-heads/delete/{id}', [AccountsController::class, 'destroy'])->name('accounts.heads.delete');
+	Route::get('/account-heads/create', [AccountsController::class, 'create_head'])->name('accounts.heads.create');
+	Route::post('/account-heads/store', [AccountsController::class, 'store_head'])->name('accounts.heads.store');
+	Route::get('/account-heads/change-status/{id}', [AccountsController::class, 'change_status_head'])->name('accounts.heads.change_status');
+	Route::get('/account-heads/delete/{id}', [AccountsController::class, 'head_destroy'])->name('accounts.heads.delete');
 	Route::get('/account-ledgers', [AccountsController::class, 'ledgers'])->name('accounts.ledgers');
+	Route::get('/account-ledgers/create', [AccountsController::class, 'create_ledger'])->name('accounts.ledgers.create');
+	Route::post('/account-ledgers/store', [AccountsController::class, 'store_ledger'])->name('accounts.ledgers.store');
+	Route::get('/account-ledgers/delete/{id}', [AccountsController::class, 'ledger_destroy'])->name('accounts.ledgers.delete');
 });
 
 /*========================== End Admin Route  ==========================*/

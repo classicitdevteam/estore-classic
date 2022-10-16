@@ -55,9 +55,19 @@ class AccountsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_head()
     {
         return view('backend.accounts.create_head');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_ledger()
+    {   $account_heads = AccountHead::where('status', 1)->OrderBy('id', 'ASC')->get();
+        return view('backend.accounts.create_ledger', compact('account_heads'));
     }
 
     /**
@@ -66,7 +76,7 @@ class AccountsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_head(Request $request)
     {
         $this->validate($request,[
             'title' => 'required',
@@ -86,6 +96,46 @@ class AccountsController extends Controller
         Session::flash('success','New Account Head created Successfully.');
 
         return redirect()->route('accounts.heads');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_ledger(Request $request)
+    {
+        $this->validate($request,[
+            'head_id' => 'required',
+            'type_id' => 'required',
+            'amount' => 'required',
+            'head_id' => 'required',
+        ]);
+
+        //dd($request);
+
+        $amount = get_account_balance();
+
+        $account_ledger = new AccountLedger();
+        $account_ledger->account_head_id = $request->head_id;
+        $account_ledger->particulars = $request->particulars;
+        $account_ledger->type = $request->type_id;
+        $account_ledger->save();
+
+        if($request->type_id == 1){
+            $account_ledger->debit = $request->amount;
+            $account_ledger->balance = $amount - $request->amount;
+        }else if($request->type_id == 2){
+            $account_ledger->credit = $request->amount;
+            $account_ledger->balance = $amount + $request->amount;
+        }
+
+        $account_ledger->save();
+
+        Session::flash('success','New Account Head created Successfully.');
+
+        return redirect()->route('accounts.ledgers');
     }
 
     /**
@@ -142,13 +192,13 @@ class AccountsController extends Controller
 
     public function ledger_destroy($id)
     {
-        $head = AccountHead::find($id);
-        $head->delete();
-        Session::flash('success','Account Head Deleted Successfully.');
+        $ledger = AccountLedger::find($id);
+        $ledger->delete();
+        Session::flash('success','Account Ledger Deleted Successfully.');
         return redirect()->back();
     }
 
-    public function change_status($id){
+    public function change_status_head($id){
         $head = AccountHead::find($id);
         if($head){
             if($head->status == 1){
