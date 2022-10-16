@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\SmsController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\StaffController;
 use App\Http\Controllers\Backend\SubscriberController;
+use App\Http\Controllers\Backend\AccountsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -282,6 +283,16 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::get('/subscribers', [SubscriberController::class, 'index'])->name('subscribers.index');
 	Route::get('/subscribers/destroy/{id}', [SubscriberController::class, 'destroy'])->name('subscribers.destroy');
 
+});
+
+// Admin Accounting All Routes
+Route::prefix('accounts')->group(function(){
+	Route::get('/account-heads', [AccountsController::class, 'heads'])->name('accounts.heads');
+	Route::get('/account-heads/create', [AccountsController::class, 'create'])->name('accounts.heads.create');
+	Route::post('/account-heads/store', [AccountsController::class, 'store'])->name('accounts.heads.store');
+	Route::get('/account-heads/change-status/{id}', [AccountsController::class, 'change_status'])->name('accounts.heads.change_status');
+	Route::get('/account-heads/delete/{id}', [AccountsController::class, 'destroy'])->name('accounts.heads.delete');
+	Route::get('/account-ledgers', [AccountsController::class, 'index'])->name('accounts.ledgers');
 });
 
 /*========================== End Admin Route  ==========================*/

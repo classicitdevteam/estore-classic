@@ -13,6 +13,7 @@ use App\Models\Attribute;
 use App\Models\ProductStock;
 use App\Models\Vendor;
 use Illuminate\Support\Collection;
+use App\Models\AccountLedger;
 
 if (!function_exists('get_setting')) {
     function get_setting($name)
@@ -166,5 +167,17 @@ if (!function_exists('get_vendors')) {
     function get_vendors()
     {
         return Vendor::where('status', 1)->get();
+    }
+}
+
+if (!function_exists('get_account_balance')) {
+    function get_account_balance()
+    {
+        $ledger = AccountLedger::orderBy('id', 'DESC')->first();
+        if($ledger){
+            return $ledger->balance;
+        }else{
+            return 0.00;
+        }
     }
 }

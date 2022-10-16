@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountHead;
+use App\Models\AccountLedger;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Brand;
@@ -209,6 +211,14 @@ class ProductController extends Controller
         /* =========== End Product Tags =========== */
 
         $product->save();
+
+        $ledger = AccountLedger::create([
+            'account_head_id' => 1,
+            'particulars' => 'Product Purchase',
+            'debit' => $product->purchase_price,
+        ]);
+
+        $ledger->balance = get_account_balance() - $product->purchase_price;
 
         $notification = array(
             'message' => 'Product Inserted Successfully',

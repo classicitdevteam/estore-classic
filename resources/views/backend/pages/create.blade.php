@@ -4,7 +4,7 @@
     <div class="content-header">
         <h2 class="content-title">Page Add</h2>
         <div class="">
-            <a href="{{ route('page.index') }}" class="btn btn-primary"><i class="material-icons md-plus"></i> Page List</a>
+            <a href="{{ route('page.index') }}" class="btn btn-primary"><i class="material-icons md-list"></i> Page List</a>
         </div>
     </div> 
     <div class="row justify-content-center">

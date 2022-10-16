@@ -141,7 +141,7 @@
                 @if(Auth::guard('admin')->user()->role == '1' || in_array('34', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
                     <a class="menu-link" href="#">
                         <i class="fontawesome_icon_custom fa-solid fa-phone"></i>
-                        <span class="text">OTP Systeam</span>
+                        <span class="text">OTP System</span>
                     </a>
                 @endif
                 <div class="submenu">
@@ -300,13 +300,15 @@
                 </div>
             </li>
             @if(Auth::guard('admin')->user()->role == '1')
-            <li class="menu-item has-submenu">
+            <li class="menu-item has-submenu 
+            {{ ($route == 'accounts.heads')? 'active':'' }}
+            ">
                 <a class="menu-link" href="#">
                     <i class="icon material-icons md-person"></i>
-                    <span class="text">Account</span>
+                    <span class="text">Accounts</span>
                 </a>
                 <div class="submenu">
-                    <a href="#">User login</a>
+                    <a href="{{ route('accounts.heads') }}">Account Heads</a>
                     <a href="#">User registration</a>
                     <a href="#">Error 404</a>
                 </div>
