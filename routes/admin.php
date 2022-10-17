@@ -25,6 +25,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\StaffController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\AccountsController;
+use App\Http\Controllers\Backend\PosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -296,6 +297,11 @@ Route::prefix('accounts')->group(function(){
 	Route::get('/account-ledgers/create', [AccountsController::class, 'create_ledger'])->name('accounts.ledgers.create');
 	Route::post('/account-ledgers/store', [AccountsController::class, 'store_ledger'])->name('accounts.ledgers.store');
 	Route::get('/account-ledgers/delete/{id}', [AccountsController::class, 'ledger_destroy'])->name('accounts.ledgers.delete');
+});
+
+Route::prefix('pos')->group(function(){
+	Route::get('/', [PosController::class, 'index'])->name('pos.index');
+	Route::get('/product/{id}', [PosController::class, 'getProduct'])->name('pos.getProduct');
 });
 
 /*========================== End Admin Route  ==========================*/

@@ -43,7 +43,7 @@ $("#chartContainer").CanvasJSChart(options);
             <p>Whole data about your business here</p>
         </div>
         <div>
-            <a href="#" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Pos</a>
+            <a href="{{ route('pos.index') }}" class="btn btn-primary"><i class="text-muted material-icons md-post_add"></i>Pos</a>
         </div>
     </div>
     <div class="row">
