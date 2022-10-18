@@ -78,7 +78,7 @@
 		        			<div class="col-md-6 mb-4">
 	                         	<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
+                                    <select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id" required>
                                     	<option selected="">Select Vendor</option>
 					                	@foreach($vendors as $vendor)
 					                		<option value="{{ $vendor->id }}">{{ $vendor->shop_name }}</option>
@@ -89,7 +89,7 @@
 	                        <div class="col-md-6 mb-4">
 	                         	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
+                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id" required>
                                     	<option selected="">Select Supplier</option>
 					                	@foreach($suppliers as $supplier)
 					                		<option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
@@ -316,8 +316,8 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-12 mb-4">
-	                        <label for="bying_price" class="col-form-label" style="font-weight: bold;">Meta Title</label>
-	                        <input class="form-control" id="bying_price" type="number" name="purchase_price" placeholder="Write product bying price" required>
+	                        <label for="product_meta_title" class="col-form-label" style="font-weight: bold;">Meta Title</label>
+	                        <input class="form-control" id="product_meta_title" type="text" name="product_meta_title" placeholder="Write Product Meta Title" required>
 		                </div>
 					</div>
 				</div>
