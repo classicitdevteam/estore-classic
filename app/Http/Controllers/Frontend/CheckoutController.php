@@ -243,7 +243,7 @@ class CheckoutController extends Controller
         $ledger->save();
 
         $notification = array(
-            'message' => 'Your Order Successfully.', 
+            'message' => 'Your order has been placed successfully.', 
             'alert-type' => 'success'
         );
         return redirect()->route('checkout.success', $order->invoice_no)->with($notification);

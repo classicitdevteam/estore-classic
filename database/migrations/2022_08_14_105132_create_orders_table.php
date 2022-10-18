@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->string('phone', 50);
             $table->string('email', 100);
-            $table->integer('division_id')->contrained('divisions')->onDelete('cascade');
-            $table->integer('district_id')->contrained('districts')->onDelete('cascade');
-            $table->integer('upazilla_id')->contrained('upazillas')->onDelete('cascade');
+            $table->integer('division_id')->contrained('divisions')->onDelete('cascade')->default(0);
+            $table->integer('district_id')->contrained('districts')->onDelete('cascade')->default(0);
+            $table->integer('upazilla_id')->contrained('upazillas')->onDelete('cascade')->default(0);
             $table->text('address')->nullable();
             $table->string('payment_method', 25)->default('cash');
             $table->unsignedBigInteger('payment_status')->default(0)->comment('1=>paid, 0=>Unpaid');
@@ -44,7 +44,7 @@ class CreateOrdersTable extends Migration
             $table->string('cancel_date', 30)->nullable();
             $table->string('return_date', 30)->nullable();
             $table->text('return_reason')->nullable();
-            $table->unsignedTinyInteger('type')->default(1)->comment('1=>Not guest order, 2=>Guest Order');
+            $table->unsignedTinyInteger('type')->default(1)->comment('1=>Customer order, 2=>Guest Order, 3=>Inhouse Order');
             $table->bigInteger('created_by')->contrained('users')->onDelete('cascade');
             $table->timestamps();
         });

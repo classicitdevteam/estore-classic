@@ -302,6 +302,7 @@ Route::prefix('accounts')->group(function(){
 Route::prefix('pos')->group(function(){
 	Route::get('/', [PosController::class, 'index'])->name('pos.index');
 	Route::get('/product/{id}', [PosController::class, 'getProduct'])->name('pos.getProduct');
+	Route::POST('/store', [PosController::class, 'store'])->name('pos.store');
 });
 
 /*========================== End Admin Route  ==========================*/
