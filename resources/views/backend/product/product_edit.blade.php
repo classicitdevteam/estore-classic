@@ -93,7 +93,7 @@
 		        			<div class="col-md-6 mb-4">
 	                         	<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
+                                    <select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id" required>
                                     	<option selected="">Select Vendor</option>
 					                	@foreach($vendors as $vendor)
 					                		<option value="{{ $vendor->id }}" {{ $vendor->id == $product->vendor_id ? 'selected' : '' }}>{{ $vendor->shop_name ?? 'Null' }}</option>
@@ -104,7 +104,7 @@
 	                        <div class="col-md-6 mb-4">
 	                         	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
+                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id" required>
                                     	<option selected="">Select Supplier</option>
 					                	@foreach($suppliers as $supplier)
 					                		<option value="{{ $supplier->id }}" @if($product->supplier_id == $supplier->id) selected @endif>{{ $supplier->name ?? 'Null' }}</option>
