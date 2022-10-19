@@ -38,6 +38,22 @@ class PosController extends Controller
         return json_encode($product);
     }
 
+    public function filter()
+    {
+        $products = Product::where('status', 1);
+        if(isset($_GET['search_term'])){
+            $products = $products->where('name_en', 'like', '%'.$_GET['search_term'].'%');
+        }
+        if(isset($_GET['category_id'])){
+            $products = $products->where('category_id', $_GET['category_id']);
+        }
+        if(isset($_GET['brand_id'])){
+            $products = $products->where('brand_id', $_GET['brand_id']);
+        }
+        $products = $products->get();
+        return json_encode($products);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

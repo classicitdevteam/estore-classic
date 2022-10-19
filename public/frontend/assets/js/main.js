@@ -87,6 +87,8 @@
         autoplay: true
     });
 
+    $('#preloader-active1').hide();
+
     /*Carausel 8 columns*/
     $(".carausel-8-columns").each(function (key, item) {
         var id = $(this).attr("id");

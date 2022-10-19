@@ -1,5 +1,33 @@
 @extends('layouts.frontend')
 
+@push('css')
+<style>
+	.preloader1 {
+		background-color: #fff;
+		/* width: 100%; */
+		/* height: 100%; */
+		/* position: fixed; */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999999;
+		-webkit-transition: .6s;
+		transition: .6s;
+		margin: 0 auto;
+	}
+
+	
+.preloader-active1 {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+</style>
+@endpush
+
 @section('content-frontend-model')
 
 <!-- Modal -->
@@ -48,8 +76,17 @@
 @section('content-frontend')
 @include('frontend.common.add_to_cart_modal')
 	<section class="home-slider position-relative mb-30">
-		<div class="container">
-		    <div class="home-slide-cover mt-30">
+		<div class="container mt-30">
+			<div id="preloader-active1" class="preloader-active1">
+				<div class="preloader1 d-flex align-items-center justify-content-center">
+					<div class="preloader-inner position-relative">
+						<div class="text-center">
+							<img src="{{asset('frontend/assets/imgs/theme/loading.gif')}}" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		    <div class="home-slide-cover">
 		        <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
 		        	@foreach($sliders as $slider)
 		            <a href="{{$slider->slider_url}}">
