@@ -63,7 +63,8 @@ class FrontendController extends Controller
         $home_banners = Banner::where('status',1)->where('position',1)->orderBy('id','DESC')->get();
 
         // Daily Best Sells 
-        $todays_sale  = OrderDetail::whereDay('created_at',date('d'))->get();
+        //dd(date('Y-m-d'));
+        $todays_sale  = OrderDetail::where('created_at', 'like', '%'.date('Y-m-d').'%')->get();
         // dd($todays_sale);
 
         // today_best_sales
@@ -120,7 +121,8 @@ class FrontendController extends Controller
         $home_banners = Banner::where('status',1)->where('position',1)->orderBy('id','DESC')->get();
 
         // Daily Best Sells 
-        $todays_sale  = OrderDetail::whereDay('created_at',date('d'))->get();
+        //dd(date('Y-m-d'));
+        $todays_sale  = OrderDetail::where('created_at', 'like', '%'.date('Y-m-d').'%')->get();
         // dd($todays_sale);
 
         //Home2 featured category

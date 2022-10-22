@@ -489,37 +489,43 @@ class ProductController extends Controller
     /*=================== Start ProductDelete Method =================*/
     public function ProductDelete($id){
 
-        $product = Product::findOrFail($id);
-
-        try {
-            if(file_exists($product->product_thumbnail)){
-                unlink($product->product_thumbnail);
-            }
-        } catch (Exception $e) {
-            
-        }
-        
-        $product->delete();
-
-        $images = MultiImg::where('product_id',$id)->get();
-        foreach ($images as $img) {
+        if(!demo_mode()){
+            $product = Product::findOrFail($id);
+    
             try {
-                if(file_exists($img->photo_name)){
-                    unlink($img->photo_name);
+                if(file_exists($product->product_thumbnail)){
+                    unlink($product->product_thumbnail);
                 }
             } catch (Exception $e) {
                 
             }
-            MultiImg::where('product_id',$id)->delete();
+            
+            $product->delete();
+    
+            $images = MultiImg::where('product_id',$id)->get();
+            foreach ($images as $img) {
+                try {
+                    if(file_exists($img->photo_name)){
+                        unlink($img->photo_name);
+                    }
+                } catch (Exception $e) {
+                    
+                }
+                MultiImg::where('product_id',$id)->delete();
+            }
+    
+            $notification = array(
+                'message' => 'Product Deleted Successfully',
+                'alert-type' => 'success'
+            );
+        }else{
+            $notification = array(
+                'message' => 'Product can not be deleted on demo mode.',
+                'alert-type' => 'error'
+            );
         }
 
-        $notification = array(
-            'message' => 'Product Deleted Successfully',
-            'alert-type' => 'error'
-        );
-
         return redirect()->back()->with($notification);
-
     } // end method 
     /*=================== End ProductDelete Method =================*/
 

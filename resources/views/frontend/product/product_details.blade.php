@@ -257,6 +257,8 @@
 	                                        	<input type="hidden" id="product_price" value="{{ $amount }}">
 
 	                                        	<input type="hidden" id="pvarient" value="">
+												
+												<input type="hidden" id="buyNowCheck" value="0">
 
 	                                            <button type="submit" class="button button-add-to-cart" onclick="addToCart()"><i class="fi-rs-shoppi ng-cart"></i>Add to cart</button>
 

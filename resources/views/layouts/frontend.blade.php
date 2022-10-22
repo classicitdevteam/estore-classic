@@ -427,8 +427,8 @@
 
         /* ============= Start AddToCart View With Modal ========== */
         function buyNow(){
+            $('#buyNowCheck').val(1);
             addToCart();
-            window.location = '/checkout';
         }
         function addToCart(){
             $('.size-filter li').removeClass("active");
@@ -488,7 +488,11 @@
                         })
                     }
                     // Start Sweertaleart Message
-
+                    var buyNowCheck = $('#buyNowCheck').val();
+                    if(buyNowCheck){
+                        $('#buyNowCheck').val(0);
+                        window.location = '/checkout';
+                    }
 
                 }
             });
