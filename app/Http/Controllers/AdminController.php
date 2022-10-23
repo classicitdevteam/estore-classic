@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Session;
 use Artisan;
 use Cache;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -29,8 +30,45 @@ class AdminController extends Controller
 
     /*=================== Start Dashboard Methoed ===================*/
     public function Dashboard(){
+
+        $userCount = DB::table('users')
+            ->select(DB::raw('count(*) as total_users'))
+            ->where('status', 1)
+            ->where('role', 3)
+            ->first();
+
+        $productCount = DB::table('products')
+            ->select(DB::raw('count(*) as total_products'))
+            ->where('status', 1)
+            ->first();
+
+        $categoryCount = DB::table('categories')
+            ->select(DB::raw('count(*) as total_categories'))
+            ->where('status', 1)
+            ->first();
+
+        $brandCount = DB::table('brands')
+            ->select(DB::raw('count(*) as total_brands'))
+            ->where('status', 1)
+            ->first();
+
+        $vendorCount = DB::table('vendors')
+            ->select(DB::raw('count(*) as total_vendors'))
+            ->where('status', 1)
+            ->first();
+
+        $orderCount = DB::table('orders')
+            ->select(DB::raw('count(*) as total_orders, sum(grand_total) as total_sell'))
+            ->first();
+
+        $lowStockCount = DB::table('product_stocks')
+            ->select(DB::raw('count(*) as total_low_stocks'))
+            ->where('qty', '<=', 5)
+            ->first();
+
+        //dd($userCount->total_users);
     	
-    	return view('admin.index');
+    	return view('admin.index', compact('userCount', 'productCount', 'categoryCount', 'brandCount', 'vendorCount', 'orderCount', 'lowStockCount'));
     } // end method
 
     /*=================== End Dashboard Methoed ===================*/
