@@ -65,7 +65,7 @@
                         <div class="search-style-2">
                             <div class="search-area">
                                 <form action="{{ route('product.search')
-                                 }}" method="post">
+                                 }}" method="post" class="mx-auto">
                                     @csrf
                                     <select class="select-active" name="searchCategory" id="searchCategory">
                                         <option value="0">All Categories</option>
