@@ -102,6 +102,8 @@
                                     <input type="hidden" id="pfrom" value="modal">
                                     <input type="hidden" id="pvarient" value="">
 
+                                    <input type="hidden" id="buyNowCheck" value="0">
+
                                     <button  class="button button-add-to-cart" onclick="addToCart()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Add to cart</button>
 
                                     <button  class="button button-add-to-cart bg-danger ml-5" onclick="buyNow()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Buy Now</button>
