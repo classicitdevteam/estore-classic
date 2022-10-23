@@ -204,7 +204,7 @@
 	        	@foreach($home_banners->take(3) as $banner)
 	            <div class="col-lg-4 col-md-6">
 	                <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0">
-	                    <img src="{{asset($banner->banner_img)}}" class="img-fluid" alt="" />
+	                    <img src="{{asset($banner->banner_img)}}" class="img-fluid" alt="" style="height: 300px; width: 100%;"/>
 	                    <div class="banner-text">
 	                        <h4>
 	                        	@if(session()->get('language') == 'bangla') 
@@ -332,25 +332,25 @@
 	<!--End Today Best Sales-->
 
 	@if(count($hot_deals) > 0)
-	<!-- Start Hot Deals -->
-	<section class="section-padding pb-5">
-	    <div class="container">
-	        <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
-	            <h3 class="">Hot Deals</h3>
-	            <a class="show-all btn btn-primary text-white" href="{{ route('hot_deals.all') }}">
-	                All Deals
-	                <i class="fi-rs-angle-right"></i>
-	            </a>
-	        </div>
-	        <div class="row">
-	            @foreach($hot_deals as $product)
-                	@include('frontend.common.deals')
-                	<!--end product card-->
-                @endforeach
-	        </div>
-	    </div>
-	</section>
-	<!-- End Hot Deals -->
+		<!-- Start Hot Deals -->
+		<section class="section-padding pb-5">
+			<div class="container">
+				<div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
+					<h3 class="">Hot Deals</h3>
+					<a class="show-all btn btn-primary text-white" href="{{ route('hot_deals.all') }}">
+						All Deals
+						<i class="fi-rs-angle-right"></i>
+					</a>
+				</div>
+				<div class="row">
+					@foreach($hot_deals as $product)
+						@include('frontend.common.deals')
+						<!--end product card-->
+					@endforeach
+				</div>
+			</div>
+		</section>
+		<!-- End Hot Deals -->
 	@endif
 	<section class="section-padding pb-5">
 	    <div class="container">
