@@ -1792,6 +1792,16 @@ input.qty-val {
 }
 
 /*COMPONENTS -> SLIDER*/
+.home-slider .home-slide-cover{
+  visibility: hidden;
+}
+.home-slider .home-slide-cover .slick-initialized{
+  visibility: visible;
+}
+
+.home-slider .preloader-active1 .slick-initialized{
+  visibility: hidden;
+}
 .single-animation-wrap.slick-active .slider-animated-1 h1 {
   -webkit-animation-delay: 1.4s;
   animation-delay: 1.4s;
@@ -4910,6 +4920,7 @@ table .product-thumbnail img {
   position: absolute;
   top: -6px;
   width: 0;
+  display: none;
 }
 
 .slider-nav-thumbnails .slick-slide.slick-current img {

@@ -4,6 +4,8 @@
 
         <a class="btn btn-sm btn-danger nav-link d-inline-block" href="{{ route('cache.clear')}}"><i class="fa-solid fa-shower me-2"></i>Clear Cache</a>
         </a>
+
+        <a class="btn btn-sm btn-success nav-link d-inline-block" href="{{ route('pos.index') }}"><i class="material-icons md-post_add"></i>POS</a></a>
     </div>
     <div class="col-nav">
         <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i class="material-icons md-apps"></i></button>

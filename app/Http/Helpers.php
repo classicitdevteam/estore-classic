@@ -37,6 +37,13 @@ if (!function_exists('guest_checkout')) {
     }
 }
 
+if (!function_exists('demo_mode')) {
+    function demo_mode()
+    {
+        return env("DEMO_MODE");
+    }
+}
+
 // if (!function_exists('get_cart_data')) {
 //     function get_cart_data()
 //     {

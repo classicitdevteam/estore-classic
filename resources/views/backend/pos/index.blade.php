@@ -28,6 +28,20 @@
         vertical-align: middle !important;
         font-size: 15px !important;
     }
+    
+    .select2-container--default .select2-selection--single {
+        border-radius: 0px !important;
+    }
+    .select2-container--default {
+        width: 100% !important;
+    }
+    .flex-grow-1 {
+        margin-right: 10px;
+    }
+
+    .product_wrapper .card-body {
+        padding: 0.4rem 0.4rem;
+    }
 </style>
 @endpush
 <section class="content-main">
@@ -39,11 +53,11 @@
                         <form action="">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" placeholder="Search by Name">
+                                    <input class="form-control" type="text" name="search_term" id="search_term" placeholder="Search by Name" onkeyup="filter()">
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="custom_select">
-                                        <select name="category_id" id="category_id" class="form-control select-active w-100 form-select select-nice">
+                                        <select name="category_id" id="category_id" class="form-control select-active w-100 form-select select-nice" onchange="filter()">
                                             <option value="">-- Select Category --</option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name_en }}</option>
@@ -53,7 +67,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="custom_select">
-                                        <select name="brand_id" id="brand_id" class="form-control select-active w-100 form-select select-nice">
+                                        <select name="brand_id" id="brand_id" class="form-control select-active w-100 form-select select-nice" onchange="filter()">
                                             <option value="">-- Select Brand --</option>
                                             @foreach($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name_en }}</option>
@@ -68,7 +82,7 @@
                     <!-- card-body end// -->
                 </div>
             </div>
-            <div class="row">
+            <div class="row product_wrapper" id="product_wrapper">
                 @foreach($products as $product)
                     <div class="col-sm-2 col-xs-6 product-thumb" onclick="addToList({{ $product->id }})">
                         <div class="card mb-4">
@@ -82,7 +96,7 @@
                                 </div>
                                 <p style="font-size: 10px; font-weight: bold; line-height: 15px; height: 30px;">
                                     <?php $p_name_en =  strip_tags(html_entity_decode($product->name_en))?>
-                                    {{ Str::limit($p_name_en, $limit = 20, $end = '. . .') }}
+                                    {{ Str::limit($p_name_en, $limit = 30, $end = '. . .') }}
                                 </p>
                                 <div>
                                     @if ($product->discount_price > 0)
@@ -123,7 +137,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-primary" data-target="#new-customer" data-toggle="modal">
+                            <button type="button" class="btn btn-success" data-target="#new-customer" data-toggle="modal">
                                 <i class="material-icons md-local_shipping"></i>
                             </button>
                         </div>
@@ -196,7 +210,7 @@
 
             $.ajax({
                 type:'GET',
-                url:'/pos/product/'+id,
+                url:'/admin/pos/product/'+id,
                 dataType:'json',
                 success:function(data){
                     console.log(data);
@@ -353,5 +367,94 @@
                 $('#total_text').html(total);
             }
         }
+
+        function filter() {
+            var search_term = $('#search_term').val();
+            var category_id = $('#category_id').val();
+            var brand_id = $('#brand_id').val();
+
+            var url = '/admin/pos/get-products?filter=1';
+            var search_status = 0;
+            if(search_term){
+                if (/\S/.test(search_term)) {
+                    search_term = search_term.replace(/^\s+/g, '');
+                    search_term = search_term.replace(/\s+$/g, '');
+                    url += '&search_term='+search_term;
+                    //alert( '--'+search_term+'--' );
+                    search_status = 1;
+                }
+            }
+            if(category_id){
+                url += '&category_id='+category_id;
+                //alert( category_id );
+                search_status = 1;
+            }
+            if(brand_id){
+                url += '&brand_id='+brand_id;
+                //alert( brand_id );
+                search_status = 1;
+            }
+
+            if(search_status == 0){
+                url = '/admin/pos/get-products';
+            }
+
+            $.ajax({
+                    type:'GET',
+                    url:url,
+                    dataType:'json',
+                    success:function(data){
+                        console.log(data);
+                        var html = '';
+                        if(Object.keys(data).length > 0){
+                            $.each(data, function(key,value){
+                                var product_name = value.name_en;
+                                product_name = product_name.slice(0, 30) + (product_name.length > 30 ? "..." : "");
+
+                                var price_after_discount = value.regular_price;
+                                if(value.discount_type == 1){
+                                    price_after_discount = value.regular_price - value.discount_price;
+                                }else if(value.discount_type == 2){
+                                    price_after_discount = value.regular_price - (value.regular_price * value.discount_price / 100);
+                                }
+
+                                html += `<div class="col-sm-2 col-xs-6 product-thumb" onclick="addToList(${value.id})">
+                                            <div class="card mb-4">
+                                                <div class="card-body">
+                                                    <div class="product-image">`;
+                                                        if(value.product_thumbnail && value.product_thumbnail != '' && value.product_thumbnail != 'Null'){
+                                html  +=                    `<img class="default-img" src="/${value.product_thumbnail}" alt="" />`;
+                                                        }else{
+                                html  +=                     `<img class="default-img" src="/upload/no_image.jpg" alt="" />`;
+                                                        }
+                                html  +=            `</div>
+                                                    <p style="font-size: 10px; font-weight: bold; line-height: 15px; height: 30px;">
+                                                        ${product_name}
+                                                    </p>
+                                                    <div>`;
+                                                        if (value.discount_price > 0){
+                                                                
+                                html  +=                    `<div class="product-price">
+                                                                    <del class="old-price">৳ ${value.regular_price }</del>
+                                                                    <span class="price text-primary">৳ ${price_after_discount }</span>
+                                                                </div>`;
+                                                            }else{
+                                html  +=                        `<div class="product-price">
+                                                                    <span class="price text-primary">৳ ${value.regular_price }</span>
+                                                                </div>`;
+                                                            }
+                                html  +=            `</div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+
+                            });
+                        }else{
+                            html = '<div class="text-center"><p>No products found!</p></div>'
+                        }
+                        $('#product_wrapper').html(html);
+                    }
+                });
+        };
     </script>
 @endpush

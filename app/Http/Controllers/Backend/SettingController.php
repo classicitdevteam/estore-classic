@@ -72,81 +72,92 @@ class SettingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
-        // dd($request->types);
-        if($request->types !=null && count($request->types) > 0){
-            foreach ($request->types as $key => $type) {
-                $setting = Setting::where('name', $type)->first();
-                $setting->value = $request[$type];
-                // if ($request[$type] == ) {
-                //     # code...
-                // }
+    {   
+        if(!demo_mode()){
+
+            // dd($request->types);
+            if($request->types !=null && count($request->types) > 0){
+                foreach ($request->types as $key => $type) {
+                    $setting = Setting::where('name', $type)->first();
+                    $setting->value = $request[$type];
+                    // if ($request[$type] == ) {
+                    //     # code...
+                    // }
+                    $setting->save();
+                }
+            }
+
+            //Setting Logo Update
+            if ($request->file('site_logo')) {
+                $logo = $request->file('site_logo');
+                $logo_save = time().$logo->getClientOriginalName();
+                $logo->move('upload/setting/logo/',$logo_save);
+                $save_url_logo = 'upload/setting/logo/'.$logo_save;
+
+                $setting = Setting::where('name', 'site_logo')->first();
+                try {
+                    if(file_exists($setting->value)){
+                        unlink($setting->value);
+                    }
+                } catch (Exception $e) {
+                    
+                }
+                $setting->value = $save_url_logo;
+
                 $setting->save();
             }
-        }
 
-        //Setting Logo Update
-        if ($request->file('site_logo')) {
-            $logo = $request->file('site_logo');
-            $logo_save = time().$logo->getClientOriginalName();
-            $logo->move('upload/setting/logo/',$logo_save);
-            $save_url_logo = 'upload/setting/logo/'.$logo_save;
+            //Setting Logo Update
+            if ($request->file('site_footer_logo')) {
+                $logo = $request->file('site_footer_logo');
+                $logo_save = time().$logo->getClientOriginalName();
+                $logo->move('upload/setting/logo/',$logo_save);
+                $save_url_footer_logo = 'upload/setting/logo/'.$logo_save;
 
-            $setting = Setting::where('name', 'site_logo')->first();
-            try {
-                if(file_exists($setting->value)){
-                    unlink($setting->value);
+                $setting = Setting::where('name', 'site_footer_logo')->first();
+                try {
+                    if(file_exists($setting->value)){
+                        unlink($setting->value);
+                    }
+                } catch (Exception $e) {
+                    
                 }
-            } catch (Exception $e) {
-                
+                $setting->value = $save_url_footer_logo;
+
+                $setting->save();
             }
-            $setting->value = $save_url_logo;
 
-            $setting->save();
-        }
-
-        //Setting Logo Update
-        if ($request->file('site_footer_logo')) {
-            $logo = $request->file('site_footer_logo');
-            $logo_save = time().$logo->getClientOriginalName();
-            $logo->move('upload/setting/logo/',$logo_save);
-            $save_url_footer_logo = 'upload/setting/logo/'.$logo_save;
-
-            $setting = Setting::where('name', 'site_footer_logo')->first();
-            try {
-                if(file_exists($setting->value)){
-                    unlink($setting->value);
+            //Setting Favicon Update
+            if ($request->file('site_favicon')) {
+                $favicon = $request->file('site_favicon');
+                $favicon_save = time().$favicon->getClientOriginalName();
+                $favicon->move('upload/setting/favicon/',$favicon_save);
+                $save_url_favicon = 'upload/setting/favicon/'.$favicon_save;
+                
+                $setting = Setting::where('name', 'site_favicon')->first();
+                try {
+                    if(file_exists($setting->value)){
+                        unlink($setting->value);
+                    }
+                } catch (Exception $e) {
+                    
                 }
-            } catch (Exception $e) {
-                
-            }
-            $setting->value = $save_url_footer_logo;
+                $setting->value = $save_url_favicon;
 
-            $setting->save();
+                $setting->save();
+            }
+
+            Session::flash('success','Setting Updated Successfully');
+            return redirect()->back();
+
+        }else{
+            $notification = array(
+                'message' => 'Settings can not be change on demo mode.',
+                'alert-type' => 'error'
+            );
         }
 
-        //Setting Favicon Update
-        if ($request->file('site_favicon')) {
-            $favicon = $request->file('site_favicon');
-            $favicon_save = time().$favicon->getClientOriginalName();
-            $favicon->move('upload/setting/favicon/',$favicon_save);
-            $save_url_favicon = 'upload/setting/favicon/'.$favicon_save;
-            
-            $setting = Setting::where('name', 'site_favicon')->first();
-            try {
-                if(file_exists($setting->value)){
-                    unlink($setting->value);
-                }
-            } catch (Exception $e) {
-                
-            }
-            $setting->value = $save_url_favicon;
-
-            $setting->save();
-        }
-
-        Session::flash('success','Setting Updated Successfully');
-        return redirect()->back();
+        return redirect()->back()->with($notification);
 
     }
 

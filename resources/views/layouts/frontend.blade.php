@@ -24,6 +24,7 @@
     @endif
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css?v=5.3')}}" />
     <!-- front awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Sweetalert css-->
@@ -31,7 +32,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/slider-range.css ')}}" />
     <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/animate.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css?v=5.3')}}" />
+    
     <!-- Toastr css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <!-- front awesome -->
@@ -426,8 +427,8 @@
 
         /* ============= Start AddToCart View With Modal ========== */
         function buyNow(){
+            $('#buyNowCheck').val(1);
             addToCart();
-            window.location = '/checkout';
         }
         function addToCart(){
             $('.size-filter li').removeClass("active");
@@ -487,7 +488,11 @@
                         })
                     }
                     // Start Sweertaleart Message
-
+                    var buyNowCheck = $('#buyNowCheck').val();
+                    if(buyNowCheck){
+                        $('#buyNowCheck').val(0);
+                        window.location = '/checkout';
+                    }
 
                 }
             });

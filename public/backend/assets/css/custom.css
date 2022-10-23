@@ -87,3 +87,18 @@
     border: none;
     padding: 7px 12px;
 }
+
+.btn-success {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    background-color: #3BB77E;
+    border-radius: 4px;
+}
+
+.btn-success:hover {
+    border: 1px solid #3BB77E;
+    background-color: #fff;
+    color: #3BB77E;
+}

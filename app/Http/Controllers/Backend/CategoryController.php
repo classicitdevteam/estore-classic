@@ -217,12 +217,20 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-
-        CategoryUtility::delete_category($id);
-
-        Session::flash('success','Category has been deleted successfully');
-        return redirect()->route('category.index');
+        if(!demo_mode()){
+            $category = Category::findOrFail($id);
+    
+            CategoryUtility::delete_category($id);
+            
+            Session::flash('success','Category has been deleted successfully');
+            return redirect()->route('category.index');
+        }else{
+            $notification = array(
+                'message' => 'Category can not be deleted on demo mode.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 
 

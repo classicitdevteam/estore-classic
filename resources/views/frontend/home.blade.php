@@ -1,5 +1,33 @@
 @extends('layouts.frontend')
 
+@push('css')
+<style>
+	.preloader1 {
+		background-color: #fff;
+		/* width: 100%; */
+		/* height: 100%; */
+		/* position: fixed; */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999999;
+		-webkit-transition: .6s;
+		transition: .6s;
+		margin: 0 auto;
+	}
+
+	
+.preloader-active1 {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+</style>
+@endpush
+
 @section('content-frontend-model')
 
 <!-- Modal -->
@@ -48,8 +76,17 @@
 @section('content-frontend')
 @include('frontend.common.add_to_cart_modal')
 	<section class="home-slider position-relative mb-30">
-		<div class="container">
-		    <div class="home-slide-cover mt-30">
+		<div class="container mt-30">
+			<div id="preloader-active1" class="preloader-active1">
+				<div class="preloader1 d-flex align-items-center justify-content-center">
+					<div class="preloader-inner position-relative">
+						<div class="text-center">
+							<img src="{{asset('frontend/assets/imgs/theme/loading.gif')}}" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		    <div class="home-slide-cover">
 		        <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
 		        	@foreach($sliders as $slider)
 		            <a href="{{$slider->slider_url}}">
@@ -167,7 +204,7 @@
 	        	@foreach($home_banners->take(3) as $banner)
 	            <div class="col-lg-4 col-md-6">
 	                <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0">
-	                    <img src="{{asset($banner->banner_img)}}" class="img-fluid" alt="" />
+	                    <img src="{{asset($banner->banner_img)}}" class="img-fluid" alt="" style="height: 300px; width: 100%;"/>
 	                    <div class="banner-text">
 	                        <h4>
 	                        	@if(session()->get('language') == 'bangla') 
@@ -295,25 +332,25 @@
 	<!--End Today Best Sales-->
 
 	@if(count($hot_deals) > 0)
-	<!-- Start Hot Deals -->
-	<section class="section-padding pb-5">
-	    <div class="container">
-	        <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
-	            <h3 class="">Hot Deals</h3>
-	            <a class="show-all btn btn-primary text-white" href="{{ route('hot_deals.all') }}">
-	                All Deals
-	                <i class="fi-rs-angle-right"></i>
-	            </a>
-	        </div>
-	        <div class="row">
-	            @foreach($hot_deals as $product)
-                	@include('frontend.common.deals')
-                	<!--end product card-->
-                @endforeach
-	        </div>
-	    </div>
-	</section>
-	<!-- End Hot Deals -->
+		<!-- Start Hot Deals -->
+		<section class="section-padding pb-5">
+			<div class="container">
+				<div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
+					<h3 class="">Hot Deals</h3>
+					<a class="show-all btn btn-primary text-white" href="{{ route('hot_deals.all') }}">
+						All Deals
+						<i class="fi-rs-angle-right"></i>
+					</a>
+				</div>
+				<div class="row">
+					@foreach($hot_deals as $product)
+						@include('frontend.common.deals')
+						<!--end product card-->
+					@endforeach
+				</div>
+			</div>
+		</section>
+		<!-- End Hot Deals -->
 	@endif
 	<section class="section-padding pb-5">
 	    <div class="container">
