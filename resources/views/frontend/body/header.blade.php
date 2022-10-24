@@ -100,11 +100,11 @@
                                         </select>
                                     </form>
                                 </div> -->
-                                <div class="header-action-icon-2">
+                                {{-- <div class="header-action-icon-2">
                                     <div class="" id="compare">
                                         @include('frontend.common.compare')
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="estore-classic" src="{{asset('frontend/assets/imgs/theme/icons/icon-heart.svg')}}" />

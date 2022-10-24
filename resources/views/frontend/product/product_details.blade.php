@@ -189,11 +189,13 @@
 			                                    		<div class="attr-detail attr-size mb-30">
 					                                        <strong class="mr-10">{{ $attr->name }}: </strong>
 					                                        <input type="hidden" name="attribute_ids[]" id="attribute_id_{{ $i }}" value="{{ $attribute->attribute_id }}">
-							                                	<input type="hidden" name="attribute_names[]" id="attribute_name_{{ $i }}" value="{{ $attr->name }}">
+							                                <input type="hidden" name="attribute_names[]" id="attribute_name_{{ $i }}" value="{{ $attr->name }}">
+															<input type="hidden" id="attribute_check_{{ $i }}" value="0">
+															<input type="hidden" id="attribute_check_attr_{{ $i }}" value="0">
 					                                        <ul class="list-filter size-filter font-small">
 					                                        	@foreach($attribute->values as $value)
 						                                            <li>
-						                                            	<a href="#" onclick="selectAttribute('{{ $attribute->attribute_id }}{{ $attr->name }}', '{{ $value }}', '{{ $product->id }}')" style="border: 1px solid #7E7E7E;">{{ $value }}</a>
+						                                            	<a href="#" onclick="selectAttribute('{{ $attribute->attribute_id }}{{ $attr->name }}', '{{ $value }}', '{{ $product->id }}', '{{ $i }}')" style="border: 1px solid #7E7E7E;">{{ $value }}</a>
 						                                            </li>
 					                                            @endforeach
 					                                            <input type="hidden" name="attribute_options[]" id="{{ $attribute->attribute_id }}{{ $attr->name }}" class="attr_value_{{ $i }}">
@@ -225,6 +227,10 @@
 				                                @endif
 				                            </div>
 			                        	</form>
+
+										<div class="row" id="attribute_alert">
+											
+										</div>
 
 	                                    <!-- <div class="attr-detail attr-size mb-30">
 	                                        <strong class="mr-10">Size / Weight: </strong>

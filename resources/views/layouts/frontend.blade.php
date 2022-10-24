@@ -187,8 +187,21 @@
             }
         });
 
-        function selectAttribute(id, value, pid){
+        function selectAttribute(id, value, pid, position){
+            //alert(position);
             $('#'+id).val(value);
+            var checkVal = $('#attribute_check_'+position).val();
+            var checkProduct = $('#attribute_check_attr_'+position).val();
+            if(checkVal == 1){
+                if(checkProduct == value){
+                    $('#attribute_check_'+position).val(0);
+                }else{
+                    $('#attribute_check_attr_'+position).val(value);
+                }
+            }else{
+                $('#attribute_check_'+position).val(1);
+                $('#attribute_check_attr_'+position).val(value);
+            }
 
             var varient = '';
             var total = $('#total_attributes').val();
@@ -227,7 +240,7 @@
             });
         }
 
-        function selectAttributeModal(id){
+        function selectAttributeModal(id, position){
             const idArray = id.split("_");
 
             var value = idArray[2];
@@ -236,6 +249,21 @@
             
             $('.attr_val_li_'+idArray[1]).removeClass("active");
             $('#attr_val_li_'+idArray[1]+'_'+idArray[2]).addClass("active");
+
+            var checkVal = $('#attribute_check_'+position).val();
+            var checkProduct = $('#attribute_check_attr_'+position).val();
+            //alert(position);
+            if(checkVal == 1){
+                if(checkProduct == value){
+                    $('#attribute_check_'+position).val(0);
+                }else{
+                    $('#attribute_check_attr_'+position).val(value);
+                }
+            }else{
+                $('#attribute_check_'+position).val(1);
+                $('#attribute_check_attr_'+position).val(value);
+            }
+            
 
             var varient = '';
             var total = $('#total_attributes').val();
@@ -350,17 +378,19 @@
                         html +='<div class="attr-detail attr-size mb-30">';
                         html +=    '<strong class="mr-10">'+value.name+': </strong>';
                         html +=    '<input type="hidden" name="attribute_ids[]" id="attribute_id_'+i+'" value="'+value.id+'">';
-                        html +=        '<input type="hidden" name="attribute_names[]" id="attribute_name_'+i+'" value="'+value.name+'">';
+                        html +=    '<input type="hidden" name="attribute_names[]" id="attribute_name_'+i+'" value="'+value.name+'">';
+                        html +=    '<input type="hidden" id="attribute_check_'+i+'" value="0">';
+						html +=    '<input type="hidden" id="attribute_check_attr_'+i+'" value="0">';
                         html +=    '<ul class="list-filter size-filter font-small">';
                         $.each(value.values, function(key,attr_value){
                             if(key==0){
                                 html +=    '<li id="attr_val_li_'+value.id+value.name+'_'+attr_value+'" class="attr_val_li_'+value.id+value.name+'">';
-                                html +=        '<a id="attr_'+value.id+value.name+'_'+attr_value+'" onclick="selectAttributeModal(this.id)" style="border: 1px solid #7E7E7E;">'+attr_value+'</a>';
+                                html +=        '<a id="attr_'+value.id+value.name+'_'+attr_value+'" onclick="selectAttributeModal(this.id, '+i+')" style="border: 1px solid #7E7E7E;">'+attr_value+'</a>';
                                 html +=        '<input type="hidden" id="choice_option_attr_'+value.id+value.name+'" value="'+attr_value+'">';
                                 html +=    '</li>';
                             }else{
                                 html +=    '<li id="attr_val_li_'+value.id+value.name+'_'+attr_value+'" class="attr_val_li_'+value.id+value.name+'" style="margin-left: 5px;">';
-                                html +=        '<a id="attr_'+value.id+value.name+'_'+attr_value+'" onclick="selectAttributeModal(this.id)" style="border: 1px solid #7E7E7E;">'+attr_value+'</a>';
+                                html +=        '<a id="attr_'+value.id+value.name+'_'+attr_value+'" onclick="selectAttributeModal(this.id, '+i+')" style="border: 1px solid #7E7E7E;">'+attr_value+'</a>';
                                 html +=        '<input type="hidden" id="choice_option_attr_'+value.id+value.name+'" value="'+attr_value+'">';
                                 html +=    '</li>';
                             }
@@ -431,6 +461,27 @@
             addToCart();
         }
         function addToCart(){
+            var total_attributes = $('#total_attributes').val();
+            //alert(total_attributes);
+            var checkNotSelected = 0;
+            var checkAlertHtml = '';
+            for(var i=1; i<=total_attributes; i++){
+                var checkSelected = $('#attribute_check_'+i).val();
+                if(checkSelected == 0){
+                    checkNotSelected = 1;
+                    checkAlertHtml += `<div class="attr-detail mb-5">
+											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+												<div>
+													<i class="fa fa-warning mr-10"></i> <span> Select `+$('#attribute_name_'+i).val()+`</span>
+												</div>
+											</div>
+										</div>`;
+                }
+            }
+            if(checkNotSelected == 1){
+                $('#attribute_alert').html(checkAlertHtml);
+                return false;
+            }
             $('.size-filter li').removeClass("active");
             var product_name = $('#pname').val();
             var id = $('#product_id').val();
@@ -489,7 +540,8 @@
                     }
                     // Start Sweertaleart Message
                     var buyNowCheck = $('#buyNowCheck').val();
-                    if(buyNowCheck){
+                    //alert(buyNowCheck);
+                    if(buyNowCheck && buyNowCheck == 1){
                         $('#buyNowCheck').val(0);
                         window.location = '/checkout';
                     }

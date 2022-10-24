@@ -76,16 +76,19 @@
                                 </ul>
                             </div>
                             <div class="detail-extralink align-items-baseline d-flex" style="margin-top: 30px;">
-                                            <div class="mr-10">
-                                                <span class="">Quantity:</span>
-                                            </div>
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <input type="text" name="quantity" class="qty-val" value="1" min="1" id="qty">
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
+                                <div class="mr-10">
+                                    <span class="">Quantity:</span>
+                                </div>
+                                <div class="detail-qty border radius">
+                                    <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                    <input type="text" name="quantity" class="qty-val" value="1" min="1" id="qty">
+                                    <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                </div>
 
-                                        </div>
+                            </div>
+                            <div class="row" id="attribute_alert">
+											
+                            </div>
                             <div class="detail-extralink d-flex mb-30" style="margin-top: 10px;">
                                 <!-- <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
@@ -101,6 +104,8 @@
                                     <input type="hidden" id="discount_amount">
                                     <input type="hidden" id="pfrom" value="modal">
                                     <input type="hidden" id="pvarient" value="">
+
+                                    <input type="hidden" id="buyNowCheck" value="0">
 
                                     <button  class="button button-add-to-cart" onclick="addToCart()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Add to cart</button>
 
