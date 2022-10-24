@@ -171,9 +171,9 @@
 	                                    <div class="short-desc mb-30">
 	                                        <p class="font-lg">
 	                                        	@if(session()->get('language') == 'bangla') 
-							                        {{ $product->description_bn ?? 'No Decsription'}}
+							                        {!! $product->description_bn ?? 'No Decsription' !!}
 							                    @else 
-							                        {{ $product->description_en ?? 'No Decsription'}} 
+													{!! $product->description_en ?? 'No Decsription' !!} 
 							                    @endif
 	                                        </p>
 	                                    </div>
@@ -284,14 +284,16 @@
 	                                            </span></li>
 	                                        </ul>
 	                                        <ul class="float-start">
-	                                            <li class="mb-5">
-	                                            	Whole Sell Price: 
-	                                            	<a href="#">{{ $product->wholesell_price }}</a>
-	                                            </li>
-	                                            <li class="mb-5">
-	                                            	Whole Sell Quantity: 
-	                                            	<a href="#">{{ $product->wholesell_minimum_qty }}</a>
-	                                            </li>
+												@if($product->wholesell_price > 0)
+													<li class="mb-5">
+														Whole Sell Price: 
+														<a href="#">{{ $product->wholesell_price }}</a>
+													</li>
+													<li class="mb-5">
+														Whole Sell Quantity: 
+														<a href="#">{{ $product->wholesell_minimum_qty }}</a>
+													</li>
+												@endif
 	                                            <li class="mb-5">Brand:
 	                                            	<a href="#" rel="tag">
 	                                            		{{ $product->brand->name_en ?? 'No Brand'}} 
@@ -312,9 +314,11 @@
 	                                    <li class="nav-item">
 	                                        <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
 	                                    </li>
-	                                    <li class="nav-item">
-	                                        <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
-	                                    </li>
+										@if(get_setting('multi_vendor')->value)
+											<li class="nav-item">
+												<a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Seller</a>
+											</li>
+										@endif
 	                                    <li class="nav-item">
 	                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
 	                                    </li>
@@ -324,9 +328,9 @@
 	                                        <div class="">
 	                                            <p>
 	                                            	@if(session()->get('language') == 'bangla') 
-								                        {{ $product->description_en ?? 'No Product Long Descrption'}}
+														{!! $product->description_en ?? 'No Product Long Descrption' !!}
 								                    @else 
-								                        {{ $product->description_bn ?? 'No Product Logn Descrption'}} 
+														{!! $product->description_bn ?? 'No Product Logn Descrption' !!} 
 								                    @endif
 	                                            </p>
 	                                        </div>
@@ -355,43 +359,45 @@
 	                                            </tbody>
 	                                        </table>
 	                                    </div>
-	                                    <div class="tab-pane fade" id="Vendor-info">
-	                                        <div class="vendor-logo d-flex mb-30">
-	                                            <img src="{{asset('frontend')}}/assets/imgs/vendor/vendor-18.svg" alt="" />
-	                                            <div class="vendor-name ml-15">
-	                                                <h6>
-	                                                    <a href="#">Noodles Co.</a>
-	                                                </h6>
-	                                                <div class="product-rate-cover text-end">
-	                                                    <div class="product-rate d-inline-block">
-	                                                        <div class="product-rating" style="width: 90%"></div>
-	                                                    </div>
-	                                                    <span class="font-small ml-5 text-muted"> (32 reviews)</span>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                        <ul class="contact-infor mb-50">
-	                                            <li><img src="{{asset('frontend')}}/assets/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-	                                            <li><img src="{{asset('frontend')}}/assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>
-	                                        </ul>
-	                                        <div class="d-flex mb-55">
-	                                            <div class="mr-30">
-	                                                <p class="text-brand font-xs">Rating</p>
-	                                                <h4 class="mb-0">92%</h4>
-	                                            </div>
-	                                            <div class="mr-30">
-	                                                <p class="text-brand font-xs">Ship on time</p>
-	                                                <h4 class="mb-0">100%</h4>
-	                                            </div>
-	                                            <div>
-	                                                <p class="text-brand font-xs">Chat response</p>
-	                                                <h4 class="mb-0">89%</h4>
-	                                            </div>
-	                                        </div>
-	                                        <p>
-	                                            Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington, D.C.
-	                                        </p>
-	                                    </div>
+										@if(get_setting('multi_vendor')->value)
+											<div class="tab-pane fade" id="Vendor-info">
+												<div class="vendor-logo d-flex mb-30">
+													<img src="{{asset('frontend')}}/assets/imgs/vendor/vendor-18.svg" alt="" />
+													<div class="vendor-name ml-15">
+														<h6>
+															<a href="#">Noodles Co.</a>
+														</h6>
+														<div class="product-rate-cover text-end">
+															<div class="product-rate d-inline-block">
+																<div class="product-rating" style="width: 90%"></div>
+															</div>
+															<span class="font-small ml-5 text-muted"> (32 reviews)</span>
+														</div>
+													</div>
+												</div>
+												<ul class="contact-infor mb-50">
+													<li><img src="{{asset('frontend')}}/assets/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
+													<li><img src="{{asset('frontend')}}/assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>
+												</ul>
+												<div class="d-flex mb-55">
+													<div class="mr-30">
+														<p class="text-brand font-xs">Rating</p>
+														<h4 class="mb-0">92%</h4>
+													</div>
+													<div class="mr-30">
+														<p class="text-brand font-xs">Ship on time</p>
+														<h4 class="mb-0">100%</h4>
+													</div>
+													<div>
+														<p class="text-brand font-xs">Chat response</p>
+														<h4 class="mb-0">89%</h4>
+													</div>
+												</div>
+												<p>
+													Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington, D.C.
+												</p>
+											</div>
+										@endif
 	                                    <div class="tab-pane fade" id="Reviews">
 	                                        <!--Comments-->
 	                                        <div class="comments-area">

@@ -197,6 +197,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	// Setting All Route
 	Route::get('/settings/index', [SettingController::class, 'index'])->name('setting.index');
 	Route::post('/settings/update', [SettingController::class, 'update'])->name('update.setting');
+	Route::get('/settings/activation', [SettingController::class, 'activation'])->name('setting.activation');
 
 	// Shipping Methods Route
 	Route::get('/shipping/index', [ShippingController::class, 'index'])->name('shipping.index');

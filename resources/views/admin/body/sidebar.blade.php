@@ -49,7 +49,7 @@
             </li>
 
             <li class="menu-item has-submenu 
-                {{ ($prefix == 'admin/product') || ($prefix == 'admin/category') || ($prefix == 'admin/brand') ? 'active' : '' }}
+                {{ ($prefix == 'admin/product') || ($prefix == 'admin/category') || ($route == 'attribute.index') || ($prefix == 'admin/brand') ? 'active' : '' }}
             ">
                 @if(Auth::guard('admin')->user()->role == '1' || in_array('1', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
                     <a class="menu-link" href="#">
@@ -62,16 +62,38 @@
                         <a class="{{ ($route == 'product.add') ? 'active':'' }}" href="{{ route('product.add') }}">Product Add</a>
                     @endif
                     @if(Auth::guard('admin')->user()->role == '1' || in_array('2', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
-                        <a class="{{ ($route == 'product.all') ? 'active':'' }}" href="{{ route('product.all') }}">Product List</a>
+                        <a class="{{ ($route == 'product.all') ? 'active':'' }}" href="{{ route('product.all') }}">Products</a>
                     @endif
                     @if(Auth::guard('admin')->user()->role == '1' || in_array('5', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
-                        <a class="{{ ($prefix == 'admin/category') ? 'active':'' }}" href="{{ route('category.index') }}">Category List</a>
+                        <a class="{{ ($prefix == 'admin/category') ? 'active':'' }}" href="{{ route('category.index') }}">Categories</a>
+                    @endif
+                    @if(Auth::guard('admin')->user()->role == '1' || in_array('5', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
+                        <a class="{{ ($route == 'attribute.index') ? 'active':'' }}" href="{{ route('attribute.index') }}">Attributes</a>
                     @endif
                     @if(Auth::guard('admin')->user()->role == '1' || in_array('9', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
-                        <a class="{{ ($prefix == 'admin/brand') ? 'active':'' }}" href="{{ route('brand.all') }}">Brand List</a>
+                        <a class="{{ ($prefix == 'admin/brand') ? 'active':'' }}" href="{{ route('brand.all') }}">Brands</a>
                     @endif
                 </div>
             </li>
+            
+            @if(Auth::guard('admin')->user()->role == '1')
+                @if(get_setting('multi_vendor')->value)
+                    <li class="menu-item has-submenu
+                        {{ ($route == 'vendor.index')? 'active':'' }}
+                        {{ ($route == 'vendor.edit')? 'active':'' }}
+                        {{ ($route == 'vendor.create')? 'active':'' }}
+                    ">
+                        <a class="menu-link" href="#">
+                            <i class="icon material-icons md-person_add"></i>
+                            <span class="text">Vendors</span>
+                        </a>
+                        <div class="submenu">
+                            <a class="{{ ($route == 'vendor.index') ? 'active':'' }}" href="{{ route('vendor.index') }}">Vendor List</a>
+                            <a class="{{ ($route == 'vendor.create') ? 'active':'' }}" href="{{ route('vendor.create') }}">Vendor Add</a>
+                        </div>
+                    </li>
+                @endif
+            @endif
             <li class="menu-item has-submenu
                 {{ ($route == 'campaing.index')? 'active':'' }}
                 {{ ($route == 'campaing.create')? 'active':'' }}
@@ -222,28 +244,6 @@
             @endif
 
             <li class="menu-item has-submenu
-                {{ ($route == 'attribute.index')? 'active':'' }}
-                {{ ($route == 'attribute.edit')? 'active':'' }}
-                {{ ($route == 'attribute.create')? 'active':'' }}
-                {{ ($route == 'attribute.show')? 'active':'' }}
-            ">
-                @if(Auth::guard('admin')->user()->role == '1' || in_array('13', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
-                    <a class="menu-link" href="#">
-                        <i class="icon material-icons md-local_offer"></i>
-                        <span class="text">Attribute</span>
-                    </a>
-                @endif
-                <div class="submenu">
-                    @if(Auth::guard('admin')->user()->role == '1' || in_array('13', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
-                        <a class="{{ ($route == 'attribute.index') ? 'active':'' }}" href="{{ route('attribute.index') }}">Attribute List</a>
-                    @endif
-                    @if(Auth::guard('admin')->user()->role == '1' || in_array('14', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
-                        <a class="{{ ($route == 'attribute.create') ? 'active':'' }}" href="{{ route('attribute.create') }}">Attribute Add</a>
-                    @endif
-                </div>
-            </li>
-
-            <li class="menu-item has-submenu
                 {{ ($route == 'blog.index')? 'active':'' }}
                 {{ ($route == 'blog.edit')? 'active':'' }}
                 {{ ($route == 'blog.create')? 'active':'' }}
@@ -263,22 +263,7 @@
                     @endif
                 </div>
             </li>
-            @if(Auth::guard('admin')->user()->role == '1')
-            <li class="menu-item has-submenu
-                {{ ($route == 'vendor.index')? 'active':'' }}
-                {{ ($route == 'vendor.edit')? 'active':'' }}
-                {{ ($route == 'vendor.create')? 'active':'' }}
-            ">
-                <a class="menu-link" href="#">
-                    <i class="icon material-icons md-person_add"></i>
-                    <span class="text">Vendors</span>
-                </a>
-                <div class="submenu">
-                    <a class="{{ ($route == 'vendor.index') ? 'active':'' }}" href="{{ route('vendor.index') }}">Vendor List</a>
-                    <a class="{{ ($route == 'vendor.create') ? 'active':'' }}" href="{{ route('vendor.create') }}">Vendor Add</a>
-                </div>
-            </li>
-            @endif
+            
             <li class="menu-item has-submenu
                 {{ ($route == 'page.index')? 'active':'' }}
                 {{ ($route == 'page.edit')? 'active':'' }}
@@ -331,6 +316,7 @@
                 </a>
                 <div class="submenu">
                     <a class="{{ ($route == 'setting.index') ? 'active':'' }}" href="{{ route('setting.index') }}">Home</a>
+                    <a class="{{ ($route == 'setting.activation') ? 'active':'' }}" href="{{ route('setting.activation') }}">Activation</a>
                     <a class="{{ ($route == 'shipping.index')||($route == 'shipping.create')||($route == 'shipping.edit') ? 'active':'' }}" href="{{ route('shipping.index') }}">Shipping Methods</a>
                     <a class="{{ ($route == 'paymentMethod.config') ? 'active':'' }}" href="{{ route('paymentMethod.config') }}">Payment Methods</a>
                 </div>

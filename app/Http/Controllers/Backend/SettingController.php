@@ -22,6 +22,12 @@ class SettingController extends Controller
         return view('backend.setting.setting_update', compact('settings'));
     }
 
+    public function activation()
+    {
+        $settings = Setting::find(1);
+        return view('backend.setting.setting_activation', compact('settings'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

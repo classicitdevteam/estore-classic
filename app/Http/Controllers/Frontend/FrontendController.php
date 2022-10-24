@@ -16,10 +16,10 @@ use App\Models\Page;
 use App\Models\OrderDetail;
 use App\Models\Vendor;
 use Auth;
-use DB;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
 {
@@ -65,7 +65,9 @@ class FrontendController extends Controller
         // Daily Best Sells 
         //dd(date('Y-m-d'));
         $todays_sale  = OrderDetail::where('created_at', 'like', '%'.date('Y-m-d').'%')->get();
-        // dd($todays_sale);
+        //$todays_sale  = DB::table('order_details')->select('*')->where('created_at', 'like', '%'.date('Y-m-d').'%')->get();
+        $todays_sale = $todays_sale->unique('product_id');
+        //dd($todays_sale);
 
         // today_best_sales
         // $today_best_sales  = Product::where('status',1)->where('is_deals',1)->latest()->get();
@@ -185,7 +187,7 @@ class FrontendController extends Controller
     /* ========== End CatWiseProduct Method ======== */
 
      /* ========== Start CatWiseProduct Method ======== */
-     public function VendorWiseProduct(Request $request,$slug){
+    public function VendorWiseProduct(Request $request,$slug){
 
         $vendor = Vendor::where('slug', $slug)->first();
         // dd($category);
@@ -281,7 +283,7 @@ class FrontendController extends Controller
     /* ================= Start Product Search =================== */
     public function ProductSearch(Request $request){
 
-        $request->validate(["search" => "required"]);
+        //$request->validate(["search" => "required"]);
 
         $item = $request->search;
         $category_id = $request->searchCategory;

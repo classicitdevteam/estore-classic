@@ -84,6 +84,10 @@ class ProductController extends Controller
             $request->status = 0;
         }
 
+        if($request->vendor_id == null){
+            $request->vendor_id = 0;
+        }
+
         if($request->hasfile('product_thumbnail')){
             $image = $request->file('product_thumbnail');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
@@ -291,6 +295,10 @@ class ProductController extends Controller
 
         if($request->status == null){
             $request->status = 0;
+        }
+
+        if($request->vendor_id == null){
+            $request->vendor_id = 0;
         }
 
 
