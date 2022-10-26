@@ -28,7 +28,7 @@
                                         {{ Str::limit($b_description_en, $limit = 30, $end = '. . .') }}
                                     @endif
                                 @endif
-                                <span class="text-brand">eStore Classic</span>
+                                {{-- <span class="text-brand">eStore Classic</span> --}}
                             </p>
                             <form class="form-subcriber d-flex" method="POST" action="{{ route('subscribers.store') }}">
                                 @csrf
