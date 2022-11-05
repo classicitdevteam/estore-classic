@@ -39,7 +39,7 @@
                         <form action="{{ route('admin.login') }}" method="post">
                         @csrf
                             <div class="mb-3">
-                                <input class="form-control" placeholder="Username or email" type="text" id="email" name="email" />
+                                <input class="form-control" placeholder="Username or email" type="text" id="email" name="email" value="{{old('email')}}"/>
                                 @error('email')
                                     <span class="text-danger" style="font-weight: bold;">{{ $message }}</span>
                                 @enderror

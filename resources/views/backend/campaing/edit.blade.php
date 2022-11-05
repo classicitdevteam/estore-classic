@@ -32,6 +32,8 @@
 
 		                        <div class="mb-4">
 		                        	<label for="text" style="font-weight: bold;">Date:</label>
+									<input type="hidden" id="flashStartDate" value="{{ $campaing->flash_start }}">
+									<input type="hidden" id="flashEndDate" value="{{ $campaing->flash_end }}">
 		                        	<input type="text" name="date_range" class="form-control" placeholder="Select date" id="date" value="{{$campaing->date_range}}">
 		                        </div>
 
@@ -121,12 +123,14 @@
 
 <script>
 	$(function() {
-		var startDate = {{ $campaing->flash_start }};
-		alert('asd');
+		var startDate = $('#flashStartDate').val();
+		var endDate = $('#flashEndDate').val();
+		//startDate = startDate.toString();
+		//alert('asd');
 		$('input[name="date_range"]').daterangepicker({
 			timePicker: true,
-			startDate: '12-12-2022 00:30:00',
-			endDate: moment().startOf('hour').add(32, 'hour'),
+			startDate: startDate,
+			endDate: endDate,
 			locale: {
 			format: 'DD-MM-Y HH:mm:ss'
 			}

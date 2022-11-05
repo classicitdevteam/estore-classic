@@ -80,6 +80,15 @@ class FrontendController extends Controller
 
         $home_view = 'frontend.home';
 
+        // $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
+        // $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
+        // $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
+        // dd($end_diff);
+        // if($campaign && $start_diff->invert == 0 && $end_diff->invert == 0){
+        //     dd($campaign);
+        // }
+        //dd($campaign);
+
 
         return view($home_view, compact('categories','sliders','featured_category','products','product_top_sellings','product_trendings','product_recently_adds','product_top_rates','home_banners','sort_search','todays_sale','home2_featured_categories','hot_deals'));
     } // end method
@@ -217,7 +226,7 @@ class FrontendController extends Controller
 
         $products = Product::where('status','=',1)->where('subcategory_id',$id)->orderBy('id','DESC')->paginate(5);
         $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->limit(5)->get();
-        $subcategory = SubCategory::find($id);
+        //$subcategory = SubCategory::find($id);
         $new_products = Product::orderBy('name_en')->where('status','=',1)->limit(3)->latest()->get();
 
         return view('frontend.product.subcategory_view',compact('products','categories','subcategory','new_products'));
@@ -229,7 +238,7 @@ class FrontendController extends Controller
 
         $products = Product::where('status','=',1)->where('subsubcategory_id',$id)->orderBy('id','DESC')->paginate(5);
         $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->limit(5)->get();
-        $subsubcategory = SubSubCategory::find($id);
+        //$subsubcategory = SubSubCategory::find($id);
         $new_products = Product::orderBy('name_en')->where('status','=',1)->limit(3)->latest()->get();
 
         return view('frontend.product.childcategory_view',compact('products','categories','subsubcategory','new_products'));

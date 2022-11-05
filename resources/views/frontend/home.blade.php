@@ -162,11 +162,13 @@
 	<!-- Campaign Slider Start-->
 	@php
         $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
+        $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
+        $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
     @endphp
 
     <!-- {{-- @if($campaign != null && date('Y-m-d H:i:s') >= $campaign->flash_start && date('Y-m-d H:i:s') <= $campaign->flash_end) --}} -->
     
-    @if($campaign != null && strtotime(date('Y-m-d H:i:s')) >= $campaign->flash_start && strtotime(date('Y-m-d H:i:s')) <= $campaign->flash_end)
+    @if($campaign && $start_diff->invert == 0 && $end_diff->invert == 0)
 	<section class="common-product section-padding">
 	    <div class="container wow animate__animated animate__fadeIn">
 	        <div class="section-title">
@@ -174,7 +176,7 @@
 	                <h3>My Campaign Sell</h3>
 
 	                <div class="deals-countdown-wrap">
-	                    <div class="deals-countdown" data-countdown="{{ date('Y-m-d H:i:s'),$campaign->flash_end }}"></div>
+	                    <div class="deals-countdown" data-countdown="{{ date(('Y-m-d H:i:s'), strtotime($campaign->flash_end)) }}"></div>
 	                </div>
 	            </div>
 	            <a href="#" class="btn btn-sm btn-primary">View more</a>

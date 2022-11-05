@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\StaffController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\AccountsController;
 use App\Http\Controllers\Backend\PosController;
+use App\Http\Controllers\Backend\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,6 +153,9 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::get('/vendor/delete/{id}', [VendorController::class, 'destroy'])->name('vendor.delete');
 	Route::get('/vendor_active/{id}', [VendorController::class, 'active'])->name('vendor.active');
 	Route::get('/vendor_inactive/{id}', [VendorController::class, 'inactive'])->name('vendor.in_active');
+
+	// Admin Customer All Routes
+	Route::resource('/customer', UserController::class);
 
 	//Admin Campaign All Route
 	Route::resource('/campaing', CampaingController::class);

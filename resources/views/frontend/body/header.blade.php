@@ -225,6 +225,15 @@
                             <nav>
                                 <ul>
                                     <li>
+                                        <a href="{{ route('home') }}">
+                                            @if(session()->get('language') == 'bangla') 
+                                                হোম
+                                            @else
+                                                Home
+                                            @endif
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('product.show') }}">
                                             @if(session()->get('language') == 'bangla') 
                                                 দোকান

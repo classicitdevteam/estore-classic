@@ -285,43 +285,56 @@
                 </div>
             </li>
             @if(Auth::guard('admin')->user()->role == '1')
-            <li class="menu-item has-submenu 
-            {{ ($route == 'accounts.heads')? 'active':'' }}
-            {{ ($route == 'accounts.ledgers')? 'active':'' }}
-            {{ ($route == 'accounts.heads.create')? 'active':'' }}
-            ">
-                <a class="menu-link" href="#">
-                    <i class="icon material-icons md-person"></i>
-                    <span class="text">Accounts</span>
-                </a>
-                <div class="submenu">
-                    <a class="{{ ($route == 'accounts.heads')? 'active':'' }} {{ ($route == 'accounts.heads.create')? 'active':'' }}" href="{{ route('accounts.heads') }}">Account Heads</a>
-                    <a class="{{ ($route == 'accounts.ledgers')? 'active':'' }}" href="{{ route('accounts.ledgers') }}">Cashbook</a>
-                </div>
-            </li>
+                <li class="menu-item has-submenu 
+                {{ ($route == 'accounts.heads')? 'active':'' }}
+                {{ ($route == 'accounts.ledgers')? 'active':'' }}
+                {{ ($route == 'accounts.heads.create')? 'active':'' }}
+                ">
+                    <a class="menu-link" href="#">
+                        <i class="icon material-icons md-person"></i>
+                        <span class="text">Accounts</span>
+                    </a>
+                    <div class="submenu">
+                        <a class="{{ ($route == 'accounts.heads')? 'active':'' }} {{ ($route == 'accounts.heads.create')? 'active':'' }}" href="{{ route('accounts.heads') }}">Account Heads</a>
+                        <a class="{{ ($route == 'accounts.ledgers')? 'active':'' }}" href="{{ route('accounts.ledgers') }}">Cashbook</a>
+                    </div>
+                </li>
+            @endif
+            @if(Auth::guard('admin')->user()->role == '1')
+                <li class="menu-item has-submenu 
+                {{ ($route == 'customer.index')? 'active':'' }}
+                ">
+                    <a class="menu-link" href="#">
+                        <i class="icon material-icons md-person"></i>
+                        <span class="text">User Setting</span>
+                    </a>
+                    <div class="submenu">
+                        <a class="{{ ($route == 'customer.index')? 'active':'' }}" href="{{ route('customer.index') }}">User list</a>
+                    </div>
+                </li>
             @endif
         </ul>
         <hr />
         @if(Auth::guard('admin')->user()->role == '1')
-        <ul class="menu-aside">
-            <li class="menu-item has-submenu
-             {{ ($route == 'setting.index')? 'active':'' }}
-             {{ ($route == 'shipping.index')? 'active':'' }}
-             {{ ($route == 'shipping.create')? 'active':'' }}
-             {{ ($route == 'shipping.edit')? 'active':'' }}
-            ">
-                <a class="menu-link" href="#">
-                    <i class="icon material-icons md-settings"></i>
-                    <span class="text">Settings</span>
-                </a>
-                <div class="submenu">
-                    <a class="{{ ($route == 'setting.index') ? 'active':'' }}" href="{{ route('setting.index') }}">Home</a>
-                    <a class="{{ ($route == 'setting.activation') ? 'active':'' }}" href="{{ route('setting.activation') }}">Activation</a>
-                    <a class="{{ ($route == 'shipping.index')||($route == 'shipping.create')||($route == 'shipping.edit') ? 'active':'' }}" href="{{ route('shipping.index') }}">Shipping Methods</a>
-                    <a class="{{ ($route == 'paymentMethod.config') ? 'active':'' }}" href="{{ route('paymentMethod.config') }}">Payment Methods</a>
-                </div>
-            </li>
-        </ul>
+            <ul class="menu-aside">
+                <li class="menu-item has-submenu
+                {{ ($route == 'setting.index')? 'active':'' }}
+                {{ ($route == 'shipping.index')? 'active':'' }}
+                {{ ($route == 'shipping.create')? 'active':'' }}
+                {{ ($route == 'shipping.edit')? 'active':'' }}
+                ">
+                    <a class="menu-link" href="#">
+                        <i class="icon material-icons md-settings"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                    <div class="submenu">
+                        <a class="{{ ($route == 'setting.index') ? 'active':'' }}" href="{{ route('setting.index') }}">Home</a>
+                        <a class="{{ ($route == 'setting.activation') ? 'active':'' }}" href="{{ route('setting.activation') }}">Activation</a>
+                        <a class="{{ ($route == 'shipping.index')||($route == 'shipping.create')||($route == 'shipping.edit') ? 'active':'' }}" href="{{ route('shipping.index') }}">Shipping Methods</a>
+                        <a class="{{ ($route == 'paymentMethod.config') ? 'active':'' }}" href="{{ route('paymentMethod.config') }}">Payment Methods</a>
+                    </div>
+                </li>
+            </ul>
         @endif
         <br />
         <br />
