@@ -47,6 +47,7 @@ class ProductController extends Controller
     public function StoreProduct(Request $request){
         $this->validate($request,[
             'name_en'           => 'required|max:150',
+            'supplier_id'       => 'required|integer',
             'purchase_price'    => 'required|numeric',
             'wholesell_price'   => 'nullable|numeric',
             'discount_price'    => 'nullable|numeric',

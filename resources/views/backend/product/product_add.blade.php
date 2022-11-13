@@ -30,27 +30,27 @@
 		        		<div class="row">
 		                	<div class="col-md-6 mb-4">
 		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En):</label>
-		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" required="">
+		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" value="{{old('name_en')}}">
 		                        @error('product_name_en')
 		                            <p class="text-danger">{{$message}}</p>
 		                        @enderror
 		                    </div>
 		                    <div class="col-md-6 mb-4">
 	                           	<label for="product_name_bn" class="col-form-label" style="font-weight: bold;">Product Name (Bn):</label>
-	                           	<input class="form-control" id="product_name_bn" type="text" name="name_bn" placeholder="Write product name bangla">
+	                           	<input class="form-control" id="product_name_bn" type="text" name="name_bn" placeholder="Write product name bangla" value="{{old('name_bn')}}">
 		                    </div>
 		        		</div>
 
 		        		<div class="row">
 		        			<div class="col-md-6 mb-4 d-none">
 	                          <label for="product_code" class="col-form-label" style="font-weight: bold;">Product Code:</label>
-	                            <input class="form-control" id="product_code" type="text" name="product_code" placeholder="Write product code">
+	                            <input class="form-control" id="product_code" type="text" name="product_code" placeholder="Write product code" value="{{old('product_code')}}">
 	                        </div>
 		        			<div class="col-md-6 mb-4">
 	                          <label for="product_category" class="col-form-label" style="font-weight: bold;">Category:</label>
 	                          <a style="background-color: #3BB77E; "class="btn btn-sm float-end" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus text-white"></i></a>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" required>
+                                    <select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category">
                                     	<option value="">--Select Category--</option>
 		                                @foreach ($categories as $category)
 		                                    <option value="{{ $category->id }}">{{ $category->name_en }}</option>
@@ -59,6 +59,9 @@
 		                                    @endforeach
 		                                @endforeach
                                     </select>
+									@error('category_id')
+										<p class="text-danger">{{$message}}</p>
+									@enderror
                                 </div>
 	                        </div>
 		        		
@@ -66,20 +69,23 @@
 		        				<a style="background-color: #3BB77E; " type="button" class="btn btn-sm float-end" id="closeModal1" data-bs-toggle="modal" data-bs-target="#brand"><i class="fa-solid fa-plus text-white"></i></a>
 	                           <label for="brand_id" class="col-form-label" style="font-weight: bold;">Brand:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="brand_id" id="product_brand" required>
+                                    <select class="form-control select-active w-100 form-select select-nice" name="brand_id" id="brand_id">
                                     	<option value="">--Select Brand--</option>
 		                                @foreach ($brands as $brand)
 		                                    <option value="{{ $brand->id }}">{{ $brand->name_en }}</option>
 		                                @endforeach
                                     </select>
+									@error('brand_id')
+										<p class="text-danger">{{$message}}</p>
+									@enderror
                                 </div>
 	                        </div>
 		        		
-		        			@if(get_setting('multi_vendor')->value)
+		        			@if(get_setting('multi_vendor')->value ?? 'Null')
 								<div class="col-md-6 mb-4">
 									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 									<div class="custom_select">
-										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id" required>
+										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
 											<option selected="">Select Vendor</option>
 											@foreach($vendors as $vendor)
 												<option value="{{ $vendor->id }}">{{ $vendor->shop_name }}</option>
@@ -92,12 +98,15 @@
 	                        <div class="col-md-6 mb-4">
 	                         	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id" required>
+                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
                                     	<option selected="">Select Supplier</option>
 					                	@foreach($suppliers as $supplier)
 					                		<option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
 					               		@endforeach
                                     </select>
+									@error('supplier_id')
+										<p class="text-danger">{{$message}}</p>
+									@enderror
                                 </div>
 				            </div>
 			        		<div class="col-md-6 mb-4">
@@ -109,9 +118,12 @@
                                 </div>
 	                        </div>
 	                        <div class="col-md-6 mb-4">
-		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Tags:</label>
-			                    <input class="form-control tags-input" type="text"name="tags[]"placeholder="Type and hit enter to add a tag">
+		                        <label for="" class="col-form-label" style="font-weight: bold;">Tags:</label>
+			                    <input class="form-control tags-input" type="text"name="tags[]"placeholder="Type and hit enter to add a tag" value="{{old('tags[]')}}">
 			                    <small class="text-muted d-block">This is used for search. </small>
+								@error('tags[]')
+									<p class="text-danger">{{$message}}</p>
+								@enderror
 		                    </div>
 		        		</div>
 		        		<!-- row //-->
@@ -157,15 +169,15 @@
 		        	<div class="card-body">
 		        		<div class="row">
 		        			<div class="col-md-12 mb-4">
-	                          	<label for="bying_price" class="col-form-label" style="font-weight: bold;">Product Buying Price:</label>
-	                            <input class="form-control" id="bying_price" type="number" name="purchase_price" placeholder="Write product bying price" required>
-		                        @error('bying_price')
+	                          	<label for="purchase_price" class="col-form-label" style="font-weight: bold;">Product Buying Price:</label>
+	                            <input class="form-control" id="purchase_price" type="number" name="purchase_price" placeholder="Write product bying price" value="{{old('purchase_price')}}">
+		                        @error('purchase_price')
                                     <p class="text-danger">{{$message}}</p>
                                 @enderror
 		                    </div>
 		                    <div class="col-md-6 mb-4">
 	                          	<label for="whole_sell_price" class="col-form-label" style="font-weight: bold;">Whole Sell Price:</label>
-	                            <input class="form-control" id="whole_sell_price" type="number" name="wholesell_price" placeholder="Write product whole sell price" value="0">
+	                            <input class="form-control" id="whole_sell_price" type="number" name="wholesell_price" placeholder="Write product whole sell price" min="0" value="{{old('wholesell_price', 0)}}" >
 	                        </div>
 	                        <div class="col-md-6 mb-4">
 	                          	<label for="whole_sell_qty" class="col-form-label" style="font-weight: bold;">Whole Sell Minimum Quantity:</label>
@@ -176,7 +188,7 @@
 		        		<div class="row">
 			        		<div class="col-md-4 mb-4">
 	                          	<label for="regular_price" class="col-form-label" style="font-weight: bold;">Regular Price:</label>
-	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" required min="0">
+	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" min="0">
 		                        @error('regular_price')
 	                                <p class="text-danger">{{$message}}</p>
 	                            @enderror
@@ -260,7 +272,7 @@
 	        			<!-- Porduct Image Start -->
                         <div class="mb-4">
                           	<label for="product_thumbnail" class="col-form-label" style="font-weight: bold;">Product Image:</label>
-                            <input type="file" name="product_thumbnail" class="form-control" id="product_thumbnail" onChange="mainThamUrl(this)" required>
+                            <input type="file" name="product_thumbnail" class="form-control" id="product_thumbnail" onChange="mainThamUrl(this)">
 							<img src="" class="p-2" id="mainThmb">
 						</div>
                         <div class="mb-4">

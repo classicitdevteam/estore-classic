@@ -2,7 +2,7 @@
 @section('content-frontend')
 @include('frontend.common.add_to_cart_modal')
 @section('title')
-Categories Nest Online Shop
+    Categories Online Shop
 @endsection
 	<div class="page-header breadcrumb-wrap">
         <div class="container">

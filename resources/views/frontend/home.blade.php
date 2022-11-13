@@ -165,10 +165,8 @@
         $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
         $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
     @endphp
-
-    <!-- {{-- @if($campaign != null && date('Y-m-d H:i:s') >= $campaign->flash_start && date('Y-m-d H:i:s') <= $campaign->flash_end) --}} -->
-    
-    @if($campaign && $start_diff->invert == 0 && $end_diff->invert == 0)
+	
+    @if($campaign  && $start_diff->invert == 0 && $end_diff->invert == 0)
 	<section class="common-product section-padding">
 	    <div class="container wow animate__animated animate__fadeIn">
 	        <div class="section-title">
