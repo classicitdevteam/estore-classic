@@ -37,15 +37,30 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $userEmail = User::where('email', $request->email)->first();
+        $userUser = User::where('username', $request->username)->first();
+        $userPhone = User::where('phone', $request->phone)->first();
         if ($userEmail) {
             $notification = array(
                 'message' => 'User email already Created', 
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }elseif($userUser){
+            $notification = array(
+                'message' => 'User name already Created', 
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }elseif($userPhone){
+            $notification = array(
+                'message' => 'User Phone already Created', 
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
@@ -54,6 +69,7 @@ class RegisteredUserController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password),
             ]);
         }

@@ -24,22 +24,47 @@
                                         <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate>
                                             @csrf
                                             <div class="form-group">
-                                                <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required />
-                                            </div>
-                                            <div class="invalid-feedback">
-                                                Please choose a username.
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required />
+                                                <label for="name" class="fw-900">Name : *</label>
+                                                <input type="text" name="name" placeholder="Name" id="name" value="{{ old('name') }}" />
+                                                @error('name')
+                                                    <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" required="" name="email" placeholder="Email" value="{{ old('email') }}"/>
+                                                <label for="username" class="fw-900">User Name : *</label>
+                                                <input type="text" name="username" placeholder="Username" id="username" value="{{ old('username') }}" />
+                                                @error('username')
+                                                    <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <input required="" type="password" name="password" placeholder="Password" autocomplete="new-password"/>
+                                                <label for="phone" class="fw-900">Phone Number : *</label>
+                                                <input type="number" name="phone" id="phone" placeholder="Phone Number" value="{{ old('phone') }}"/>
+                                                @error('phone')
+                                                    <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
-                                                <input required="" type="password" placeholder="Confirm password" name="password_confirmation"/>
+                                                <label for="email" class="fw-900">Email : *</label>
+                                                <input type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}"/>
+                                                @error('email')
+                                                    <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password" class="fw-900">Password : *</label>
+                                                <input type="password" name="password" placeholder="Password" id="password" autocomplete="new-password"/>
+                                                <span>password must be at least 8 characters</span>
+                                                @error('password')
+                                                    <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="fw-900">Confirm password : *</label>
+                                                <input type="password" placeholder="Confirm password" name="password_confirmation"/>
+                                                @error('password')
+                                                    <div class="text-danger" style="font-weight: bold;">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="login_footer form-group mb-50">
                                                 <div class="chek-form">
