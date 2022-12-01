@@ -31,6 +31,7 @@ class CreateVendorsTable extends Migration
             $table->string('shop_cover')->nullable();
             $table->string('nid')->nullable();
             $table->string('trade_license')->nullable();
+            $table->integer('created_by')->nullable();
             $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
             $table->timestamps();
         });

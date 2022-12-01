@@ -26,34 +26,44 @@
 		                        <div class="mb-4">
 		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name :</label>
 		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" required="" value="{{$vendor->shop_name}}">
-		                        </div> 
+		                        </div>
 
-		                        <div class="mb-4">
+								<div class="mb-4">
+		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone :</label>
+		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" required="" value="{{$vendor->user->phone}}">
+		                        </div>
+
+								<div class="mb-4">
+		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email :</label>
+		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" required="" value="{{$vendor->user->email}}">
+		                        </div>
+
+		                        <div class="mb-4 d-none">
 		                          <label for="fb_url" class="col-form-label col-md-4" style="font-weight: bold;">Fb page url :</label>
-		                            <input class="form-control" id="fb_url" type="text" name="fb_url" placeholder="Write fb page url" required="" value="{{$vendor->fb_url}}">
+		                            <input class="form-control" id="fb_url" type="text" name="fb_url" placeholder="Write fb page url" value="{{$vendor->fb_url}}">
 		                        </div>
 
-		                        <div class="mb-4">
+		                        <div class="mb-4 d-none">
 		                          <label for="bank_account" class="col-form-label col-md-4" style="font-weight: bold;">Bank Account :</label>
-		                            <input class="form-control" id="bank_account" type="text" name="bank_account" placeholder="Write vendor bank account" required="" value="{{$vendor->bank_account}}">
+		                            <input class="form-control" id="bank_account" type="text" name="bank_account" placeholder="Write vendor bank account" value="{{$vendor->bank_account}}">
 		                        </div>
 
-		                        <div class="mb-4">
+		                        <div class="mb-4 d-none">
 		                          <label for="bank_name" class="col-form-label col-md-4" style="font-weight: bold;">Bank Name :</label>
-		                            <input class="form-control" id="bank_name" type="text" name="bank_name" placeholder="Write bank name" required="" value="{{$vendor->bank_name}}">
+		                            <input class="form-control" id="bank_name" type="text" name="bank_name" placeholder="Write bank name" value="{{$vendor->bank_name}}">
 		                        </div>
 
-		                        <div class="mb-4">
+		                        <div class="mb-4 d-none">
 		                          <label for="holder_name" class="col-form-label col-md-4" style="font-weight: bold;">Holder Name :</label>
-		                            <input class="form-control" id="holder_name" type="text" name="holder_name" placeholder="Write holder name" required="" value="{{$vendor->holder_name}}">
+		                            <input class="form-control" id="holder_name" type="text" name="holder_name" placeholder="Write holder name" value="{{$vendor->holder_name}}">
 		                        </div>
 
-		                        <div class="mb-4">
+		                        <div class="mb-4 d-none">
 		                          <label for="branch_name" class="col-form-label col-md-4" style="font-weight: bold;">Branch Name :</label>
-		                            <input class="form-control" id="branch_name" type="text" name="branch_name" placeholder="Write branch name" required="" value="{{$vendor->branch_name}}">
+		                            <input class="form-control" id="branch_name" type="text" name="branch_name" placeholder="Write branch name" value="{{$vendor->branch_name}}">
 		                        </div>
 
-		                        <div class="mb-4">
+		                        <div class="mb-4 d-none">
 		                          <label for="routing_name" class="col-form-label col-md-4" style="font-weight: bold;">Routing :</label>
 		                            <input class="form-control" id="routing_name" type="text" name="routing_name" placeholder="Write routing" value="{{$vendor->routing_name}}">
 		                        </div>

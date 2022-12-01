@@ -17,6 +17,7 @@ use App\Http\Controllers\Frontend\AamarpayController;
 use App\Http\Controllers\Frontend\PublicSslCommerzPaymentController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\CompareController;
+use App\Http\Middleware\UserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,12 @@ use App\Http\Controllers\Backend\CompareController;
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/home2', [FrontendController::class, 'index2'])->name('home2');
 
+Route::middleware([UserMiddleware::class])->group(function () {
+    Route::get('/dashboard',[UserController::class, 'index'])->name('dashboard');
+});
+
 /* ==================== Start User dashboard Route ================== */
-Route::get('/dashboard',[UserController::class, 'index'])->name('dashboard');
+// Route::get('/dashboard',[UserController::class, 'index'])->name('dashboard')->middleware('web');
 
 /* ====================  User Order Route ================== */
 Route::get('/user/orders/{invoice_no}',[UserController::class, 'orderView'])->name('order.view');

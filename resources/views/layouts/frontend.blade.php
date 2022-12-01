@@ -629,6 +629,7 @@
 
                     if(Object.keys(response.carts).length > 0){
                         $.each(response.carts, function(key,value){
+                            console.log(value);
                             var slug = value.options.slug;
                             var base_url = window.location.origin;
                           miniCart += `

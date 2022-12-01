@@ -17,14 +17,19 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('admin')->user() || Auth::guard('admin')->user()->role =="5"){
-            if(!Auth::guard('admin')->user()->role == "1"){
-                return redirect()->route('login_form')->with('error','Plz login First');
+        //dd(Auth::check());
+        if(Auth::guard('admin')->check()){
+            if(Auth::guard('admin')->user() || Auth::guard('admin')->user()->role =="5"){
+                if(!Auth::guard('admin')->user()->role == "1"){
+                    return redirect()->route('login_form')->with('error','Plz login First');
+                }
+            }else if(Auth::guard('web')->user()){
+                abort(404);
+            }else{
+                abort(404);
             }
-        }else if(Auth::guard('web')->user()){
-            abort(404);
         }else{
-            abort(404);
+            return redirect()->route('login_form');
         }
 
         // if (auth()->user()->type == 'admin') {

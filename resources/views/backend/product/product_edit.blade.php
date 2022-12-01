@@ -785,16 +785,18 @@
 	});
 </script>
 
+
 <!-- ==================== Start Gallery Image Remove =============== -->
 <script type="text/javascript">
     function productRemove(id){
+        // console.log(id);
         $.ajax({
            type:'GET',
-           url:"/multiimg/delete/"+id,
+           url:"/admin/product/multiimg/delete/"+id,
            dataType: 'json',
            success:function(data){
-
-           	console.log(data);
+             location.reload();
+           	//console.log(data);
            	// location.reload();
             // Start Message 
             const Toast = Swal.mixin({
