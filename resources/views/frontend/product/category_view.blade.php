@@ -49,6 +49,27 @@ Category Nest Online Shop
     </div>
     <div class="container mb-30">
         <div class="row">
+            <div class="col-md-2">
+                <div class="product-cart-wrap style-2">
+                    <div class="product-img-action-wrap">
+                        <div class="product-img">
+                            <a href="#">
+                                <img src="{{asset('upload/nest-img/product-5-1.jpg')}}" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product-content-wrap">
+                        <div class="deals-content">
+                            <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
+                            <div>
+                                <span class="font-small text-muted">By <a href="#">NestFood</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-4-5">
                 <div class="shop-product-fillter">
                     <div class="totall-product">

@@ -188,7 +188,7 @@ class FrontendController extends Controller
 
         }
 
-        $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->get();      
+        $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->get();
         // dd($products);
 
         return view('frontend.product.category_view',compact('products','categories','category'));
