@@ -67,7 +67,12 @@ class ProductController extends Controller
             $request->description_bn = $request->description_en;
         }
 
-        $slug = strtolower(str_replace(' ', '-', $request->name_en));
+        // $slug = strtolower(str_replace(' ', '-', $request->name_en));
+        if ($request->slug != null) {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
+        }else {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
+        }
 
         if($request->is_featured == null){
             $request->is_featured = 0;
@@ -87,6 +92,10 @@ class ProductController extends Controller
 
         if($request->vendor_id == null){
             $request->vendor_id = 0;
+        }
+
+        if($request->supplier_id == null || $request->supplier_id==""){
+            $request->supplier_id = 0;
         }
 
         if($request->hasfile('product_thumbnail')){
@@ -131,19 +140,20 @@ class ProductController extends Controller
 
         /* ========= Start Multiple Image Upload ========= */
         $images = $request->file('multi_img');
-        foreach ($images as $img) {
-            $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-            Image::make($img)->resize(917,1000)->save('upload/products/multi-image/'.$make_name);
-            $uploadPath = 'upload/products/multi-image/'.$make_name;
+        if($images){
+            foreach ($images as $img) {
+                $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+                Image::make($img)->resize(917,1000)->save('upload/products/multi-image/'.$make_name);
+                $uploadPath = 'upload/products/multi-image/'.$make_name;
 
-            MultiImg::insert([
-                'product_id' => $product->id,
-                'photo_name' => $uploadPath,
-                'created_at' => Carbon::now(),   
-                 
+                MultiImg::insert([
+                    'product_id' => $product->id,
+                    'photo_name' => $uploadPath,
+                    'created_at' => Carbon::now(),   
+                    
 
-            ]);
-
+                ]);
+            }
         }
         /* ========= End Multiple Image Upload ========= */
 
@@ -280,7 +290,12 @@ class ProductController extends Controller
             $request->description_bn = $request->description_en;
         }
 
-        $slug = strtolower(str_replace(' ', '-', $request->name_en));
+        // $slug = strtolower(str_replace(' ', '-', $request->name_en));
+        if ($request->slug != null) {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
+        }else {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
+        }
 
         if($request->is_featured == null){
             $request->is_featured = 0;
@@ -302,6 +317,9 @@ class ProductController extends Controller
             $request->vendor_id = 0;
         }
 
+        if($request->supplier_id == null || $request->supplier_id==""){
+            $request->supplier_id = 0;
+        }
 
 
         if($request->hasfile('product_thumbnail')){

@@ -23,9 +23,9 @@
 			                        </div>
 			                    </div>
 			                    <div class="form-group row mb-4">
-			                        <label class="col-md-3 col-form-label" for="name_bn">Name Bangla</label>
+			                        <label class="col-md-3 col-form-label" for="name_bn">Name Arabic</label>
 			                        <div class="col-md-9">
-			                            <input type="text" placeholder="Name Bangla" id="name_bn" name="name_bn" value="{{old('name_bn')}}" class="form-control" >
+			                            <input type="text" placeholder="Name Arabic" id="name_bn" name="name_bn" value="{{old('name_bn')}}" class="form-control" >
 			                        </div>
 			                    </div>
 			                    <div class="form-group row mb-4">
@@ -60,7 +60,7 @@
 			                        </div>
 			                    </div>
 			                    <div class="form-group row mb-4">
-			                        <label class="col-md-3 col-form-label" for="description_bn">Description Bangla</label>
+			                        <label class="col-md-3 col-form-label" for="description_bn">Description Arabic</label>
 			                        <div class="col-md-9">
 			                        	<textarea name="description_bn" rows="5" class="form-control">{{old('description_bn')}}</textarea>
 			                        </div>

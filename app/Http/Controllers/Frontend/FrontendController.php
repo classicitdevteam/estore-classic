@@ -149,7 +149,9 @@ class FrontendController extends Controller
 
         $product = Product::where('slug', $slug)->first();
         // dd($product);
-        $multiImg = MultiImg::where('product_id',$product->id)->get();
+        if($product->id){
+            $multiImg = MultiImg::where('product_id',$product->id)->get();
+        }
         // dd($multiImg);
 
         /* ================= Product Color Eng ================== */
@@ -164,9 +166,13 @@ class FrontendController extends Controller
         $cat_id = $product->category_id;
         $relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$product->id)->orderBy('id','DESC')->get();
 
+        $specs = ProductSpec::where('product_id',$product->id)->get();
+
+        //dd($specs);
+
         $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->limit(5)->get();
         $new_products = Product::orderBy('name_en')->where('status','=',1)->limit(3)->latest()->get();
-        return view('frontend.product.product_details', compact('product','multiImg','categories','new_products','product_color_en','product_size_en','relatedProduct'));
+        return view('frontend.product.product_details', compact('product','multiImg','categories','new_products','product_color_en','product_size_en','relatedProduct', 'specs'));
     }
 
     /* ========== Start CatWiseProduct Method ======== */

@@ -3,6 +3,7 @@
 namespace App\Utility;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class CategoryUtility
 {
@@ -92,16 +93,60 @@ class CategoryUtility
     {
         $category = Category::where('id', $id)->first();
         if (!is_null($category)) {
-            CategoryUtility::move_children_to_parent($category->id);
-            try {
-                if(file_exists($category->image)){
-                    unlink($category->image);
+
+            $subcats = Category::where('parent_id', $id)->get();
+
+            if(count($subcats)>0){
+                //dd($subcats);
+                foreach($subcats as $subcat){
+                    CategoryUtility::update_subcategory($subcat->id);
                 }
-            } catch (Exception $e) {
-                
+
+                DB::table('categories')
+                    ->where('parent_id', $id)
+                    ->decrement('type', 1);
+                DB::table('categories')
+                    ->where('parent_id', $id)
+                    ->update(['parent_id' => 0]);
+                $category->delete();
+            } else{
+                try {
+                    if(file_exists($category->image)){
+                        unlink($category->image);
+                    }
+                } catch (Exception $e) {
+                    
+                }
+                $category->delete();
             }
-            $category->delete();
+
+            // DB::table('categories')
+            //   ->where('parent_id', $id)
+            //   ->decrement('type', 1);
+
+            // DB::table('categories')
+            //   ->where('parent_id', $id)
+            //   ->update(['parent_id' => 0]);
+
+            //CategoryUtility::move_children_to_parent($category->id);
+            
         }
 
+    }
+
+    public static function update_subcategory($id)
+    {
+        $subcats = Category::where('parent_id', $id)->get();
+
+        if(count($subcats)>0){
+            foreach($subcats as $subcat){
+                CategoryUtility::update_subcategory($subcat->id);
+            }
+        } else{
+            //dd($id);
+            DB::table('categories')
+              ->where('id', $id)
+              ->decrement('type', 1);
+        }
     }
 }
