@@ -24,52 +24,34 @@
 
 		                        <div class="mb-4">
 		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name :</label>
-		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" required="" value="{{old('shop_name')}}">
+		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" value="{{old('shop_name')}}">
+									@error('shop_name')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 								<div class="mb-4">
 		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone :</label>
-		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" required="" value="{{old('phone')}}">
+		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" value="{{old('phone')}}">
+									@error('phone')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 								<div class="mb-4">
 		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email :</label>
-		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" required="" value="{{old('email')}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="fb_url" class="col-form-label col-md-4" style="font-weight: bold;">Fb page url :</label>
-		                            <input class="form-control" id="fb_url" type="text" name="fb_url" placeholder="Write fb page url" value="{{old('fb_url')}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="bank_account" class="col-form-label col-md-4" style="font-weight: bold;">Bank Account :</label>
-		                            <input class="form-control" id="bank_account" type="text" name="bank_account" placeholder="Write vendor bank account" value="{{old('bank_account')}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="bank_name" class="col-form-label col-md-4" style="font-weight: bold;">Bank Name :</label>
-		                            <input class="form-control" id="bank_name" type="text" name="bank_name" placeholder="Write bank name" value="{{old('bank_name')}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="holder_name" class="col-form-label col-md-4" style="font-weight: bold;">Holder Name :</label>
-		                            <input class="form-control" id="holder_name" type="text" name="holder_name" placeholder="Write holder name" value="{{old('holder_name')}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="branch_name" class="col-form-label col-md-4" style="font-weight: bold;">Branch Name :</label>
-		                            <input class="form-control" id="branch_name" type="text" name="branch_name" placeholder="Write branch name" value="{{old('branch_name')}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="routing_name" class="col-form-label col-md-4" style="font-weight: bold;">Routing :</label>
-		                            <input class="form-control" id="routing_name" type="text" name="routing_name" placeholder="Write routing" value="{{old('routing_name')}}">
+		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" value="{{old('email')}}">
+									@error('email')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 		                        <div class="mb-4">
 		                          <label for="address" class="col-form-label col-md-4" style="font-weight: bold;">Address :</label>
-		                            <input class="form-control" id="address" type="text" name="address" placeholder="Write vendor address" required="" value="{{old('address')}}">
+		                            <input class="form-control" id="address" type="text" name="address" placeholder="Write vendor address" value="{{old('address')}}">
+									@error('address')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 		                        <div class="mb-4">
@@ -89,7 +71,10 @@
 				                        </div>
 		                        		<div class="mb-4">
 				                         	<label for="image" class="col-form-label" style="font-weight: bold;">Shop Profile:</label>
-				                            <input name="shop_profile" class="form-control" type="file" required="" id="image">
+				                            <input name="shop_profile" class="form-control" type="file" id="image">
+											@error('shop_profile')
+												<p class="text-danger">{{$message}}</p>
+											@enderror
 				                        </div>
 				                    </div>
 
@@ -99,7 +84,10 @@
 				                        </div>
 				                    	<div class="mb-4">
 				                         	<label for="image2" class="col-form-label" style="font-weight: bold;">Shop Cover Photo:</label>
-				                            <input name="shop_cover" class="form-control" type="file" required="" id="image2">
+				                            <input name="shop_cover" class="form-control" type="file" id="image2">
+											@error('shop_cover')
+												<p class="text-danger">{{$message}}</p>
+											@enderror
 				                        </div>
 				                    </div>
 		                        </div>

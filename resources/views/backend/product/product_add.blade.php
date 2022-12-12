@@ -9,7 +9,7 @@
         </div>
     </div> 
 	<div class="row">
-		@if ($errors->any())
+		{{-- @if ($errors->any())
 		    <div class="alert alert-danger">
 		        <ul>
 		            @foreach ($errors->all() as $error)
@@ -17,7 +17,7 @@
 		            @endforeach
 		        </ul>
 		    </div>
-		@endif
+		@endif --}}
         <div class="col-md-8">
 			<form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
 				@csrf
@@ -31,7 +31,7 @@
 		                	<div class="col-md-6 mb-4">
 		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En):</label>
 		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" value="{{old('name_en')}}">
-		                        @error('product_name_en')
+		                        @error('name_en')
 		                            <p class="text-danger">{{$message}}</p>
 		                        @enderror
 		                    </div>
@@ -46,26 +46,29 @@
 	                          <label for="product_code" class="col-form-label" style="font-weight: bold;">Product Code:</label>
 	                            <input class="form-control" id="product_code" type="text" name="product_code" placeholder="Write product code" value="{{old('product_code')}}">
 	                        </div>
-		        			<div class="col-md-6 mb-4">
-	                          <label for="product_category" class="col-form-label" style="font-weight: bold;">Category:</label>
-	                          <a style="background-color: #3BB77E; "class="btn btn-sm float-end" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus text-white"></i></a>
-				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category">
-                                    	<option value="">--Select Category--</option>
-		                                @foreach ($categories as $category)
-		                                    <option value="{{ $category->id }}">{{ $category->name_en }}</option>
-		                                    @foreach ($category->childrenCategories as $childCategory)
-		                                        @include('backend.include.child_category', ['child_category' => $childCategory])
-		                                    @endforeach
-		                                @endforeach
-                                    </select>
+							<div class="col-md-6 mb-4">
+								<label for="product_category" class="col-form-label" style="font-weight: bold;">Category:</label>
+								<a style="background-color: #3BB77E; "class="btn btn-sm float-end" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus text-white"></i></a>
+								@php
+									$selectedCategory = 0;
+								@endphp
+								<div class="custom_select">
+									<select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" value="{{old('category_id')}}">
+										<option value="">--Select Category--</option>
+										@foreach ($categories as $category)
+											<option value="{{ $category->id }}">{{ $category->name_en }}</option>
+											@foreach ($category->childrenCategories as $childCategory)
+												@include('backend.include.child_category', ['child_category' => $childCategory])
+											@endforeach
+										@endforeach
+									</select>
 									@error('category_id')
 										<p class="text-danger">{{$message}}</p>
 									@enderror
-                                </div>
-	                        </div>
+								</div>
+							</div>
 		        		
-		        			<div class="col-md-6 mb-4">
+							<div class="col-md-6 mb-4">
 		        				<a style="background-color: #3BB77E; " type="button" class="btn btn-sm float-end" id="closeModal1" data-bs-toggle="modal" data-bs-target="#brand"><i class="fa-solid fa-plus text-white"></i></a>
 	                           <label for="brand_id" class="col-form-label" style="font-weight: bold;">Brand:</label>
 				                <div class="custom_select">
@@ -81,7 +84,7 @@
                                 </div>
 	                        </div>
 		        		
-		        			@if(get_setting('multi_vendor')->value ?? 'Null')
+		        			@if(get_setting('multi_vendor')->value ?? ' ')
 								<div class="col-md-6 mb-4">
 									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 									<div class="custom_select">
@@ -96,34 +99,31 @@
 							@endif
 
 	                        <div class="col-md-6 mb-4">
-	                         	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
-				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
-                                    	<option selected="">Select Supplier</option>
-					                	@foreach($suppliers as $supplier)
-					                		<option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-					               		@endforeach
-                                    </select>
+								<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
+								<div class="custom_select">
+									<select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
+										<option selected="">Select Supplier</option>
+										@foreach($suppliers as $supplier)
+											<option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+											@endforeach
+									</select>
 									@error('supplier_id')
 										<p class="text-danger">{{$message}}</p>
 									@enderror
-                                </div>
-				            </div>
-			        		<div class="col-md-6 mb-4">
-	                         	<label for="campaing_id" class="col-form-label" style="font-weight: bold;">Campaing:</label>
-				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="campaing_id" id="campaing_id">
-                                    	<option selected="">Select Campaing</option>
-                                    </select>
-                                </div>
-	                        </div>
-	                        <div class="col-md-6 mb-4">
+								</div>
+						   	</div>
+							<div class="col-md-6 mb-4">
+								<label for="campaing_id" class="col-form-label" style="font-weight: bold;">Campaing:</label>
+								<div class="custom_select">
+									<select class="form-control select-active w-100 form-select select-nice" name="campaing_id" id="campaing_id">
+										<option selected="">Select Campaing</option>
+									</select>
+								</div>
+						   	</div>
+							<div class="col-md-6 mb-4">
 		                        <label for="" class="col-form-label" style="font-weight: bold;">Tags:</label>
 			                    <input class="form-control tags-input" type="text"name="tags[]"placeholder="Type and hit enter to add a tag" value="{{old('tags[]')}}">
 			                    <small class="text-muted d-block">This is used for search. </small>
-								@error('tags[]')
-									<p class="text-danger">{{$message}}</p>
-								@enderror
 		                    </div>
 		        		</div>
 		        		<!-- row //-->
@@ -138,7 +138,6 @@
 					</div>
 		        	<div class="card-body">
 		        		<div class="row">
-		        			
 	                        <!-- Variation Start -->
 	                        <div class="col-md-6 mb-4">
 				                <div class="custom_select cit-multi-select">
@@ -209,13 +208,16 @@
 	                        <div class="col-md-4 mb-4">
 								<label for="product_qty" class="col-form-label" style="font-weight: bold;">Minimum Buy Quantity:</label>
 								<input class="form-control" id="product_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="1" min="1" required>
-								@error('product_qty')
+								@error('minimum_buy_qty')
 									<p class="text-danger">{{$message}}</p>
 								@enderror
 							</div>
 							<div class="col-md-6 mb-4">
 								<label for="stock_qty" class="col-form-label" style="font-weight: bold;">Stock Quantity:</label>
 								<input class="form-control" id="stock_qty" type="number" name="stock_qty" value="0" min="0" placeholder="Write product stock  qty">
+								@error('stock_qty')
+								   <p class="text-danger">{{$message}}</p>
+							   	@enderror
 							</div>
 
 							<!-- Product Attribute Price combination Starts -->
@@ -252,7 +254,7 @@
 		        			<!-- Description Start -->
 	                        <div class="col-md-6 mb-4">
 	                          	<label for="long_descp_en" class="col-form-label" style="font-weight: bold;">Description (En):</label>
-	                            <textarea name="description_en" rows="2" cols="2" class="form-control summernote" placeholder="Write Long Description English"></textarea> 
+	                            <textarea name="description_en" rows="2" cols="2" class="form-control summernote" placeholder="Write Long Description English"></textarea>
 	                        </div>
 	                        <div class="col-md-6 mb-4">
 	                          	<label for="long_descp_bn" class="col-form-label" style="font-weight: bold;">Description (Bn):</label>
@@ -271,15 +273,17 @@
 		        	<div class="card-body">
 	        			<!-- Porduct Image Start -->
                         <div class="mb-4">
-                          	<label for="product_thumbnail" class="col-form-label" style="font-weight: bold;">Product Image:</label>
-                            <input type="file" name="product_thumbnail" class="form-control" id="product_thumbnail" onChange="mainThamUrl(this)">
+							<label for="product_thumbnail" class="col-form-label" style="font-weight: bold;">Product Image:</label>
+							<input type="file" name="product_thumbnail" class="form-control" id="product_thumbnail" onChange="mainThamUrl(this)">
 							<img src="" class="p-2" id="mainThmb">
+							@error('product_thumbnail')
+								<p class="text-danger">{{$message}}</p>
+							@enderror
 						</div>
-                        <div class="mb-4">
-                          	<label for="multiImg" class="col-form-label" style="font-weight: bold;">Product Gallery Image:</label>
-                            <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
+						<div class="mb-4">
+								<label for="multiImg" class="col-form-label" style="font-weight: bold;">Product Gallery Image:</label>
+							<input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
 							<div class="row  p-2" id="preview_img">
-								
 							</div>
 						</div>
 						<!-- Porduct Image End -->
@@ -475,7 +479,7 @@
 									<td><input type="text" name="vprices[]" class="form-control vdp" value="`+price+`" required></td>
 									<td><input type="text" name="vskus[]" class="form-control" required value="sku-${index}"></td>
 									<td><input type="text" name="vqtys[]" class="form-control" value="10" required></td>
-									<td><input type="file" name="vimages[]" class="form-control" required></td>
+									<td><input type="file" name="vimages[]" class="form-control"></td>
 								</tr>`;
 					}).join());
 					$('#variation_wrapper').show();
@@ -563,55 +567,6 @@
 </script>
 
 
-<!-- ajax -->
-<script type="text/javascript">
-	/* ============== Category With Subcategory Show ============= */
-   	$(document).ready(function() {
-        $('select[name="category_id"]').on('change', function(){
-            var category_id = $(this).val();
-            if(category_id) {
-                $.ajax({
-                    url: "{{  url('/admin/product/category/subcategory/ajax') }}/"+category_id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data) {
-                       $('select[name="subcategory_id"]').html('<option value="" selected="" disabled="">Select Subcategory</option>');
-                          $.each(data, function(key, value){
-                              $('select[name="subcategory_id"]').append('<option value="'+ value.id +'">' + value.subcategory_name_en + '</option>');
-                          });
-                          $('select[name="subsubcategory_id"]').html('<option value="" selected="" disabled="">Select ChildeCategory</option>');
-                    },
-                });
-            } else {
-                alert('danger');
-            }
-        });
-
-        /* ============== SubCategory With Childe Category Show ============= */
-		$('select[name="subcategory_id"]').on('change', function(){
-            var subcategory_id = $(this).val();
-            if(subcategory_id) {
-                $.ajax({
-                    url: "{{  url('/admin/product/subcategory/minicategory/ajax/') }}/"+subcategory_id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data) {
-                       	var d =$('select[name="subsubcategory_id"]').empty();
-                          	$.each(data, function(key, value){
-                              	$('select[name="subsubcategory_id"]').append('<option value="'+ value.id +'">' + value.subsubcategory_name_en + '</option>');
-                          });
-                    },
-                });
-            } else {
-                alert('danger');
-            }
-		});
-		 
-
-	});
-</script>
-
-
 <!-- Malti Tags  -->
 <script type="text/javascript">
 	$(document).ready(function(){        
@@ -620,60 +575,6 @@
 
 	});
 </script>
-
-<!-- ajax category store  -->
-<!-- <script>
-	$(document).ready(function() {
-	   
-	    $('#btnsave').on('click', function() {
-	      	var name_en = $('#name_en').val();
-	      	var name_bn = $('#name_bn').val();
-	      	var image = $('#image').val();
-	      	var parent_id = $('#parent_id').val();
-
-          	$.ajax({
-              	url: '',
-              	type: "POST",
-              	data: {
-                  _token: $("#csrf").val(),
-                  name_en: name_en,
-                  name_bn: name_bn,
-                  image  : image,
-                  parent_id: parent_id,
-              	},
-              	dataType:'json',
-              	success: function(data){
-                	// console.log(data);
-                 	$('[name="name_en"]').val(null);
-                 	$('[name="name_bn"]').val(null);
-                 	$('[name="image"]').val(null);
-                   // Start Message 
-
-	                const Toast = Swal.mixin({
-	                      toast: true,
-	                      position: 'top-end',
-	                      icon: 'success',
-	                      showConfirmButton: false,
-	                      timer: 2000
-	                    })
-	                if ($.isEmptyObject(data.error)) {
-	                    Toast.fire({
-	                        type: 'success',
-	                        title: data.success
-	                    })
-	                }else{
-	                	Swal.fire({
-						  icon: 'error',
-						  title: data.error,
-						})
-	                   
-	                }
-	                // End Message
-              	}
-          	});
-	     });
-	});
-</script> -->
 
 <!-- Ajax Update Category Store -->
 <script type="text/javascript">

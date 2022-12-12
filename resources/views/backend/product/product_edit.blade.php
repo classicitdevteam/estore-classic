@@ -9,7 +9,7 @@
         </div>
     </div> 
 	<div class="row">
-		@if ($errors->any())
+		{{-- @if ($errors->any())
 		    <div class="alert alert-danger">
 		        <ul>
 		            @foreach ($errors->all() as $error)
@@ -17,7 +17,7 @@
 		            @endforeach
 		        </ul>
 		    </div>
-		@endif
+		@endif --}}
         <div class="col-md-8">
 			<form method="post" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data">
 				@csrf
@@ -30,7 +30,7 @@
 		        		<div class="row">
 		                	<div class="col-md-6 mb-4">
 		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En):</label>
-		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" required="" value="{{ $product->name_en }}">
+		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" value="{{ $product->name_en }}">
 		                        @error('product_name_en')
 		                            <p class="text-danger">{{$message}}</p>
 		                        @enderror
@@ -46,16 +46,10 @@
 	                          <label for="product_code" class="col-form-label" style="font-weight: bold;">Product Code:</label>
 	                            <input class="form-control" id="product_code" type="text" name="product_code" placeholder="Write product code" value="{{ $product->product_code }}">
 	                        </div>
-		        			<div class="col-md-6 mb-4">
+		        			{{-- <div class="col-md-6 mb-4">
 	                          <label for="category_id" class="col-form-label" style="font-weight: bold;">Category:</label>
-	                            <!-- <select id="category_id" name="category_id" class="form-select select2" aria-label="Default select example">
-				                	<option selected="">Select Category</option>
-				                	@foreach($categories as $category)
-				                		<option value="{{ $category->id }}">{{ $category->category_name_en }}</option>
-				               		@endforeach
-				                </select> -->
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" data-selected="{{ $product->category_id }}" required>
+                                    <select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" data-selected="{{ $product->category_id }}">
                                     	@foreach ($categories as $category)
 	                                    <option value="{{ $category->id }}">{{ $category->name_en }}</option>
 		                                    @foreach ($category->childrenCategories as $childCategory)
@@ -64,21 +58,30 @@
 	                                    @endforeach
                                     </select>
                                 </div>
-	                        </div>
-	                        <!-- <div class="col-md-4 mb-4">
-	                          <label for="subcategory_id" class="col-form-label" style="font-weight: bold;">SubCategory Name:</label>
-	                            <select id="subcategory_id" name="subcategory_id" class="form-select" >
-									<option value="" selected="" disabled="">Select SubCategory</option>
-								</select>
-	                        </div>
-	                        <div class="col-md-4 mb-4">
-	                         	<label for="subsubcategory_id" class="col-form-label" style="font-weight: bold;">ChildeCategory Name:</label>
-	                           	<select id="subsubcategory_id" name="subsubcategory_id" class="form-select" >
-									<option value="" selected="" disabled="">Select ChildeCategory</option>
-								</select>
-	                        </div> -->
+	                        </div> --}}
+							<div class="col-md-6 mb-4">
+								<label for="product_category" class="col-form-label" style="font-weight: bold;">Category:</label>
+								<a style="background-color: #3BB77E; "class="btn btn-sm float-end" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus text-white"></i></a>
+								@php
+									$selectedCategory = 0;
+								@endphp
+								<div class="custom_select">
+									<select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" value="{{old('category_id')}}">
+										<option value="">--Select Category--</option>
+										@foreach ($categories as $category)
+											<option value="{{ $category->id }}">{{ $category->name_en }}</option>
+											@foreach ($category->childrenCategories as $childCategory)
+												@include('backend.include.child_category', ['child_category' => $childCategory])
+											@endforeach
+										@endforeach
+									</select>
+									@error('category_id')
+										<p class="text-danger">{{$message}}</p>
+									@enderror
+								</div>
+							</div>
 		        		
-		        			<div class="col-md-6 mb-4">
+		        			{{-- <div class="col-md-6 mb-4">
 	                           <label for="brand_id" class="col-form-label" style="font-weight: bold;">Brand:</label>
 				                <div class="custom_select">
                                     <select class="form-control select-active w-100 form-select select-nice" name="brand_id" id="product_brand" required>
@@ -88,13 +91,28 @@
 		                                @endforeach
                                     </select>
                                 </div>
+	                        </div> --}}
+							<div class="col-md-6 mb-4">
+		        				<a style="background-color: #3BB77E; " type="button" class="btn btn-sm float-end" id="closeModal1" data-bs-toggle="modal" data-bs-target="#brand"><i class="fa-solid fa-plus text-white"></i></a>
+	                           <label for="brand_id" class="col-form-label" style="font-weight: bold;">Brand:</label>
+				                <div class="custom_select">
+                                    <select class="form-control select-active w-100 form-select select-nice" name="brand_id" id="brand_id">
+                                    	<option value="">--Select Brand--</option>
+		                                @foreach ($brands as $brand)
+		                                    <option value="{{ $brand->id }}" {{ $brand->id == $product->brand_id ? 'selected' : '' }}>{{ $brand->name_en }}</option>
+		                                @endforeach
+                                    </select>
+									@error('brand_id')
+										<p class="text-danger">{{$message}}</p>
+									@enderror
+                                </div>
 	                        </div>
 		        		
 		        			@if(get_setting('multi_vendor')->value)
 								<div class="col-md-6 mb-4">
 									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 									<div class="custom_select">
-										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id" required>
+										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
 											<option selected="">Select Vendor</option>
 											@foreach($vendors as $vendor)
 												<option value="{{ $vendor->id }}" {{ $vendor->id == $product->vendor_id ? 'selected' : '' }}>{{ $vendor->shop_name ?? 'Null' }}</option>
@@ -107,7 +125,7 @@
 	                        <div class="col-md-6 mb-4">
 	                         	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
 				                <div class="custom_select">
-                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id" required>
+                                    <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
                                     	<option selected="">Select Supplier</option>
 					                	@foreach($suppliers as $supplier)
 					                		<option value="{{ $supplier->id }}" @if($product->supplier_id == $supplier->id) selected @endif>{{ $supplier->name ?? 'Null' }}</option>
@@ -141,7 +159,6 @@
 					</div>
 		        	<div class="card-body">
 		        		<div class="row">
-		        			
 	                        <!-- Variation Start -->
 	                        <div class="col-md-6 mb-4">
 				                <div class="custom_select cit-multi-select">
@@ -207,25 +224,25 @@
 		        		<div class="row">
 		        			<div class="col-md-12 mb-4">
 	                          	<label for="bying_price" class="col-form-label" style="font-weight: bold;">Product Buying Price:</label>
-	                            <input class="form-control" id="bying_price" type="number" name="purchase_price" placeholder="Write product bying price" value="{{ $product->purchase_price }}" required>
-		                        @error('bying_price')
+	                            <input class="form-control" id="purchase_price" type="number" name="purchase_price" placeholder="Write product bying price" value="{{ $product->purchase_price }}">
+		                        @error('purchase_price')
                                     <p class="text-danger">{{$message}}</p>
                                 @enderror
 		                    </div>
 		                    <div class="col-md-6 mb-4">
-	                          	<label for="whole_sell_price" class="col-form-label" style="font-weight: bold;">Whole Sell Price:</label>
-	                            <input class="form-control" id="whole_sell_price" type="number" name="wholesell_price" placeholder="Write product whole sell price" value="{{ $product->wholesell_price }}">
+	                          	<label for="wholesell_price" class="col-form-label" style="font-weight: bold;">Whole Sell Price:</label>
+	                            <input class="form-control" id="wholesell_price" type="number" name="wholesell_price" placeholder="Write product whole sell price" value="{{ $product->wholesell_price }}">
 	                        </div>
 	                        <div class="col-md-6 mb-4">
-	                          	<label for="whole_sell_qty" class="col-form-label" style="font-weight: bold;">Whole Sell Minimum Quantity:</label>
-	                            <input class="form-control" id="whole_sell_qty" type="number" name="wholesell_minimum_qty" placeholder="Write product whole sell qty" value="{{ $product->wholesell_minimum_qty }}">
+	                          	<label for="wholesell_minimum_qty" class="col-form-label" style="font-weight: bold;">Whole Sell Minimum Quantity:</label>
+	                            <input class="form-control" id="wholesell_minimum_qty" type="number" name="wholesell_minimum_qty" placeholder="Write product whole sell qty" value="{{ $product->wholesell_minimum_qty }}">
 	                        </div>
 		        		</div>
 		        		<!-- Row //-->
 		        		<div class="row">
 			        		<div class="col-md-4 mb-4">
 	                          	<label for="regular_price" class="col-form-label" style="font-weight: bold;">Regular Price:</label>
-	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" value="{{ $product->regular_price }}" required min="0">
+	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" value="{{ $product->regular_price }}" min="0">
 		                        @error('regular_price')
 	                                <p class="text-danger">{{$message}}</p>
 	                            @enderror
@@ -244,15 +261,18 @@
                                 </div>
 	                        </div>
 	                        <div class="col-md-4 mb-4">
-								<label for="product_qty" class="col-form-label" style="font-weight: bold;">Minimum Buy Quantity:</label>
-								<input class="form-control" id="product_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="{{ $product->minimum_buy_qty }}" min="1" required>
-								@error('product_qty')
+								<label for="minimum_buy_qty" class="col-form-label" style="font-weight: bold;">Minimum Buy Quantity:</label>
+								<input class="form-control" id="minimum_buy_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="{{ $product->minimum_buy_qty }}" min="1">
+								@error('minimum_buy_qty')
 									<p class="text-danger">{{$message}}</p>
 								@enderror
 							</div>
 							<div class="col-md-6 mb-4">
 								<label for="stock_qty" class="col-form-label" style="font-weight: bold;">Stock Quantity:</label>
-								<input class="form-control" id="stock_qty" type="number" name="stock_qty" value="{{ $product->stock_qty }}" min="0" placeholder="Write product stock  qty">
+								<input class="form-control" id="stock_qty" type="number" name="stock_qty" value="{{ $product->stock_qty }}" min="0" placeholder="Write product stock qty">
+								@error('stock_qty')
+									<p class="text-danger">{{$message}}</p>
+								@enderror
 							</div>
 
 							<!-- Product Attribute Price combination Starts -->
@@ -354,13 +374,6 @@
 					         	</div>
 						   </div>
 		                </div>
-                        <!-- <div class="mb-4">
-                          	<label for="multiImg" class="col-form-label" style="font-weight: bold;">Product Gallery Image:</label>
-                            <input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
-							<div class="row  p-2" id="preview_img">
-								
-							</div>
-						</div> -->
 						<!-- Porduct Image End -->
 		        		<!-- Checkbox Start -->
                         <div class="mb-4">
@@ -403,86 +416,19 @@
 		</div>
 		<!-- col-6 //-->
 		<div class="col-md-4">
-			<div class="card">
+	        <div class="card">
 				<div class="card-header">
-					<h3>Category Create</h3>
+					<h3>Product Meta</h3>
 				</div>
-	        	<div class="card-body">
-	        		<div class="row">
-	                	<input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
-                        <div class="mb-1">
-                            <label class="col-form-label" style="font-weight: bold;">Name English:</label>
-                            <input class="form-control" type="text" id="name_en" name="name_en"  placeholder="Write category name english">
-                        </div>
-                        <div class="mb-1">
-                            <label class="col-form-label" style="font-weight: bold;">Name Bangla:</label>
-                            <input type="text" placeholder="Write category name bangla" id="name_bn" name="name_bn"  class="form-control" >
-                        </div>
-                        <div class="mb-1">
-                        	<label class="col-form-label" style="font-weight: bold;">Parent Category:</label>
-                            <div class="custom_select">
-                                <select class="form-control select-active w-100 form-select select-nice" name="parent_id" id="parent_id">
-                                	<option value="0">--No Parent--</option>
-	                                @foreach ($categories as $category)
-	                                    <option value="{{ $category->id }}">{{ $category->name_en }}</option>
-	                                    @foreach ($category->childrenCategories as $childCategory)
-	                                        @include('backend.include.child_category', ['child_category' => $childCategory])
-	                                    @endforeach
-	                                @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-1">
-                            <img id="showImage" class="rounded avatar-lg" src="{{ (!empty($editData->profile_image))? url('upload/admin_images/'.$editData->profile_image):url('upload/no_image.jpg') }}" alt="Card image cap" width="100px" height="80px;">
-                        </div>
-                        <form enctype="multipart/form-data">
-                            <div class="mb-1">
-                                <label for="image" class="col-form-label" style="font-weight: bold;">Image:</label>
-                                <input name="image" class="form-control" type="file" id="image">
-                            </div>
-                        </form>	
-                        <div class="row mt-1">
-                            <div class="col-2">
-                                <button type="submit" id="btnsave" name="" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-	        		</div>
-	        	</div>
-		    </div>
-		    <!-- card //-->
-		    <div class="card">
-				<div class="card-header">
-					<h3>Brand Create</h3>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12 mb-4">
+	                        <label for="product_meta_title" class="col-form-label" style="font-weight: bold;">Meta Title</label>
+	                        <input class="form-control" id="product_meta_title" type="text" name="product_meta_title" placeholder="Write Product Meta Title" required>
+		                </div>
+					</div>
 				</div>
-	        	<div class="card-body">
-	        		<div class="row">
-	                	<input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
-                        <div class="mb-1">
-                            <label class="col-form-label" style="font-weight: bold;">Name English:</label>
-                            <input class="form-control name_en" type="text" name="name_en"  placeholder="Write brand name english">
-                        </div>
-                        <div class="mb-1">
-                            <label class="col-form-label" style="font-weight: bold;">Name Bangla:</label>
-                            <input type="text" placeholder="Write brand name bangla"  name="name_bn"  class="form-control name_bn" >
-                        </div>
-                        <div class="mb-1">
-                            <img id="showImage" class="rounded avatar-lg" src="{{ (!empty($editData->profile_image))? url('upload/admin_images/'.$editData->profile_image):url('upload/no_image.jpg') }}" alt="Card image cap" width="100px" height="80px;">
-                        </div>
-                        <form enctype="multipart/form-data">
-                            <div class="mb-1">
-                                <label for="image" class="col-form-label" style="font-weight: bold;">Image:</label>
-                                <input name="brand_image" class="form-control" type="file" id="brand_image">
-                            </div>
-                        </form>	
-                        <div class="row mt-1">
-                            <div class="col-2">
-                                <button type="submit" id="Brandsave" name="" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-	        		</div>
-	        	</div>
-		    </div>
-		    <!-- card //-->
+			</div>
 		</div>
 		<!-- col-6 //-->
 	</div>
@@ -519,7 +465,7 @@
 									<td><input type="text" name="vprices[]" class="form-control vdp" value="`+price+`" required></td>
 									<td><input type="text" name="vskus[]" class="form-control" required value="sku-${index}"></td>
 									<td><input type="text" name="vqtys[]" class="form-control" value="10" required></td>
-									<td><input type="file" name="vimages[]" class="form-control" required></td>
+									<td><input type="file" name="vimages[]" class="form-control"></td>
 								</tr>`;
 					}).join());
 					$('#variation_wrapper').show();
@@ -574,7 +520,7 @@
 				};
 				reader.readAsDataURL(input.files[0]);
 			}
-		}	
+		}
 	</script>
 
 	<!-- Image Show -->
@@ -625,55 +571,6 @@
 </script>
 
 
-<!-- ajax -->
-<script type="text/javascript">
-	/* ============== Category With Subcategory Show ============= */
-   	$(document).ready(function() {
-        $('select[name="category_id"]').on('change', function(){
-            var category_id = $(this).val();
-            if(category_id) {
-                $.ajax({
-                    url: "{{  url('/admin/product/category/subcategory/ajax') }}/"+category_id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data) {
-                       $('select[name="subcategory_id"]').html('<option value="" selected="" disabled="">Select Subcategory</option>');
-                          $.each(data, function(key, value){
-                              $('select[name="subcategory_id"]').append('<option value="'+ value.id +'">' + value.subcategory_name_en + '</option>');
-                          });
-                          $('select[name="subsubcategory_id"]').html('<option value="" selected="" disabled="">Select ChildeCategory</option>');
-                    },
-                });
-            } else {
-                alert('danger');
-            }
-        });
-
-        /* ============== SubCategory With Childe Category Show ============= */
-		$('select[name="subcategory_id"]').on('change', function(){
-            var subcategory_id = $(this).val();
-            if(subcategory_id) {
-                $.ajax({
-                    url: "{{  url('/admin/product/subcategory/minicategory/ajax/') }}/"+subcategory_id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data) {
-                       	var d =$('select[name="subsubcategory_id"]').empty();
-                          	$.each(data, function(key, value){
-                              	$('select[name="subsubcategory_id"]').append('<option value="'+ value.id +'">' + value.subsubcategory_name_en + '</option>');
-                          });
-                    },
-                });
-            } else {
-                alert('danger');
-            }
-		});
-		 
-
-	});
-</script>
-
-
 <!-- Malti Tags  -->
 <script type="text/javascript">
 	$(document).ready(function(){        
@@ -683,108 +580,141 @@
 	});
 </script>
 
-<!-- ajax category store  -->
-<script>
-	$(document).ready(function() {
-	   
-	    $('#btnsave').on('click', function() {
-	      	var name_en = $('#name_en').val();
-	      	var name_bn = $('#name_bn').val();
-	      	var image = $('#image').val();
-	      	var parent_id = $('#parent_id').val();
+<!-- Ajax Update Category Store -->
+<script type="text/javascript">
+	$(document).ready(function (e) {
+		
+			$('#category_store').submit(function(e) {
+				e.preventDefault();
+				var formData = new FormData(this);
 
-          	$.ajax({
-              	url: '{{ route('category.ajax.store') }}',
-              	type: "POST",
-              	data: {
-                  _token: $("#csrf").val(),
-                  name_en: name_en,
-                  name_bn: name_bn,
-                  image  : image,
-                  parent_id: parent_id,
-              	},
-              	dataType:'json',
-              	success: function(data){
-                	// console.log(data);
-                 	$('[name="name_en"]').val(null);
-                 	$('[name="name_bn"]').val(null);
-                 	$('[name="image"]').val(null);
-                   // Start Message 
-	                const Toast = Swal.mixin({
-	                      toast: true,
-	                      position: 'top-end',
-	                      icon: 'success',
-	                      showConfirmButton: false,
-	                      timer: 2000
-	                    })
-	                if ($.isEmptyObject(data.error)) {
-	                    Toast.fire({
-	                        type: 'success',
-	                        title: data.success
-	                    })
-	                }else{
-	                    Toast.fire({
-	                        type: 'error',
-	                        title: data.error
-	                    })
-	                }
-	                // End Message
-              	}
-          	});
-	     });
+			$.ajax({
+				type:'POST',
+				url: "{{ route('category.ajax.store') }}",
+				data: formData,
+				cache:false,
+				contentType: false,
+				processData: false,
+				success: (data) => {
+					$('select[name="category_id"]').html('<option value="" selected="" disabled="">Select Category</option>');
+                    $.each(data.categories, function(key, value){
+                        $('select[name="category_id"]').append('<option value="'+ value.id +'">' + value.name_en + '</option>');
+                        $.each(value.children_categories, function(k, sub) {
+                        	var stx = '';
+						    for (var i=0; i < sub.type; i++){
+						        stx += '--';
+						    }
+                        	$('select[name="category_id"]').append('<option value="'+ sub.id +'">'+ stx + sub.name_en + '</option>');
+                        });
+                    });
+
+					// console.log(data);
+					$('#category' ).modal('hide');
+					$('#showImage').remove();
+					$('#cat{{$category->id}}').remove();
+					this.reset();
+					// Start Message 
+                    const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          icon: 'success',
+                          showConfirmButton: false,
+                          timer: 2000
+                        })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
+                        })
+                    }else{
+                        Swal.fire({
+						  icon: 'error',
+						  title: data.error,
+						})
+                    }
+                    // End Message
+
+
+					// alert('Image has been uploaded using jQuery ajax successfully');
+				},
+				
+				error: function(data){
+					console.log(data);
+				}
+			});
+		});
 	});
 </script>
 
-<!-- ajax brand store  -->
-<script>
-	$(document).ready(function() {
-	   
-	    $('#Brandsave').on('click', function() {
-	      	var name_en = $('.name_en').val();
-	      	var name_bn = $('.name_bn').val();
-	      	var brand_image = $('#brand_image').val();
+<!-- Ajax Brand Update Store -->
+<script type="text/javascript">
+	$(document).ready(function (e) {
+		
+			$('#brand_store').submit(function(e) {
+				e.preventDefault();
+				var formData = new FormData(this);
 
-          	$.ajax({
-              	url: '{{ route('brand.ajax.store') }}',
-              	type: "POST",
-              	data: {
-                  _token: $("#csrf").val(),
-                  name_en: name_en,
-                  name_bn: name_bn,
-                  brand_image  : brand_image,
-              	},
-              	dataType:'json',
-              	success: function(data){
-                	// console.log(data);
-                 	$('[name="name_en"]').val(null);
-                 	$('[name="name_bn"]').val(null);
-                 	$('[name="brand_image"]').val(null);
-                   // Start Message 
-	                const Toast = Swal.mixin({
-	                      toast: true,
-	                      position: 'top-end',
-	                      icon: 'success',
-	                      showConfirmButton: false,
-	                      timer: 2000
-	                    })
-	                if ($.isEmptyObject(data.error)) {
-	                    Toast.fire({
-	                        type: 'success',
-	                        title: data.success
-	                    })
-	                }else{
-	                    Toast.fire({
-	                        type: 'error',
-	                        title: data.error
-	                    })
-	                }
-	                // End Message
-              	}
-          	});
-	     });
+			$.ajax({
+				type:'POST',
+				url: "{{ route('brand.ajax.store') }}",
+				data: formData,
+				cache:false,
+				contentType: false,
+				processData: false,
+				success: (data) => {
+					$('select[name="brand_id"]').html('<option value="" selected="" disabled="">Select Brand</option>');
+                    $.each(data.brands, function(key, value){
+                        $('select[name="brand_id"]').append('<option value="'+ value.id +'">' + value.name_en + '</option>');
+                    });
+
+					$( '#brand' ).modal('hide');
+					$('.showImage').remove();
+					this.reset();
+					// Start Message 
+                    const Toast = Swal.mixin({
+                          toast: true,
+                          position: 'top-end',
+                          icon: 'success',
+                          showConfirmButton: false,
+                          timer: 2000
+                        })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
+                        })
+                    }else{
+                        Swal.fire({
+						  icon: 'error',
+						  title: data.error,
+						})
+                    }
+                    // End Message
+
+					// alert('Image has been uploaded using jQuery ajax successfully');
+				},
+				
+				error: function(data){
+					console.log(data);
+				}
+			});
+		});
 	});
 </script>
 
+
+<!-- modal brand show image  -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.brand_image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('.showImage').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+</script>
 
 <!-- ==================== Start Gallery Image Remove =============== -->
 <script type="text/javascript">

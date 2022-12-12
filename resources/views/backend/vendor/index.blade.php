@@ -37,10 +37,10 @@
                                     </div>
                                 </a>
                             </td>
-                            <td> {{ $vendor->shop_name ?? 'NULL' }} </td>
-                            <td> {{ $vendor->user->username ?? 'NULL' }} </td>
-                            <td> {{ $vendor->user->email ?? 'NULL' }} </td>
-                            <td> {{ $vendor->user->phone ?? 'NULL' }} </td>
+                            <td> {{ $vendor->shop_name ?? ' ' }} </td>
+                            <td> {{ $vendor->user->username ?? ' ' }} </td>
+                            <td> {{ $vendor->user->email ?? ' ' }} </td>
+                            <td> {{ $vendor->user->phone ?? ' ' }} </td>
                             <td>
                                 @if($vendor->status == 1)
                                   <a href="{{ route('vendor.in_active',['id'=>$vendor->id]) }}">

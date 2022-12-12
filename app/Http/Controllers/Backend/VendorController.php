@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
-use Hash;
+use App\Models\User;
 use Image;
 use Session;
 use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class VendorController extends Controller
 {
@@ -43,15 +45,11 @@ class VendorController extends Controller
     {
         $this->validate($request,[
             'shop_name' => 'required',
-            'fb_url' => 'required',
-            'bank_account' => 'required',
-            'bank_name' => 'required',
-            'holder_name' => 'required',
-            'branch_name' => 'required',
-            'routing_name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
             'address' => 'required',
-            'description' => 'required',
             'shop_profile' => 'required',
+            'shop_cover' => 'required',
         ]);
 
         if($request->hasfile('shop_profile')){
@@ -90,17 +88,34 @@ class VendorController extends Controller
             $trade_license = '';
         }
 
-        $slug = strtolower(str_replace(' ', '-', $request->shop_name));
+        if ($request->slug != null) {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
+        }else {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->shop_name)).'-'.Str::random(5);
+        }
 
-       Vendor::insert([
+        $role = 2;
+
+        $user = User::create([
+            'name' => $request->shop_name,
+            'username' => $slug,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'profile_image' => $shop_profile,
+            'password' => Hash::make("12345678"),
+            'status' => $request->status,
+            'created_by' => Auth::guard('admin')->user()->id,
+            'role' => $role,
+        ]);
+
+        $user->role = 2;
+        $user->save();
+
+        Vendor::insert([
             'shop_name' => $request->shop_name,
             'slug' => $slug,
-            'fb_url' => $request->fb_url,
-            'bank_account' => $request->bank_account,
-            'bank_name' => $request->bank_name,
-            'holder_name' => $request->holder_name,
-            'branch_name' => $request->branch_name,
-            'routing_name' => $request->routing_name,
+            'user_id'=> $user->id,
             'address' => $request->address,
             'commission' => $request->commission,
             'description' => $request->description,
@@ -148,8 +163,45 @@ class VendorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'shop_name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+        ]);
 
         $vendor = Vendor::find($id);
+
+        if ($request->slug != null) {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
+        }else {
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->shop_name)).'-'.Str::random(5);
+        }
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
+
+        $user = User::find($vendor->user_id);
+        $user->name = $request->shop_name;
+        $user->username = $slug;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->status = $request->status;
+
+        $user->save();
+        
+        // Vendor table update
+        $vendor->shop_name = $request->shop_name;
+        $vendor->slug = $slug;
+        $vendor->address = $request->address;
+        $vendor->commission = $request->commission;
+        $vendor->description = $request->description;
+        $vendor->status = $request->status;
+        $vendor->created_by = Auth::guard('admin')->user()->id;
+
+        $vendor->save();
 
         //Shop Profile Photo Update
         if($request->hasfile('shop_profile')){
@@ -163,7 +215,9 @@ class VendorController extends Controller
             $shop_profile = $request->shop_profile;
             $shop_pro = time().$shop_profile->getClientOriginalName();
             $shop_profile->move('upload/vendor/',$shop_pro);
+            
             $vendor->shop_profile = 'upload/vendor/'.$shop_pro;
+            $user->profile_image = 'upload/vendor/'.$shop_pro;
         }else{
             $shop_pro = '';
         }
@@ -180,6 +234,7 @@ class VendorController extends Controller
             $shop_cover = $request->shop_cover;
             $shop_cover_photo = time().$shop_cover->getClientOriginalName();
             $shop_cover->move('upload/vendor/',$shop_cover_photo);
+
             $vendor->shop_cover = 'upload/vendor/'.$shop_cover_photo;
         }else{
             $shop_cover_photo = '';
@@ -219,29 +274,10 @@ class VendorController extends Controller
             $trade_photo = '';
         }
 
-        $slug = strtolower(str_replace(' ', '-', $request->shop_name));
-
-        
-        // Vendor table update
-        $vendor->shop_name = $request->shop_name;
-        $vendor->slug = $slug;
-        $vendor->fb_url = $request->fb_url;
-        $vendor->bank_account = $request->bank_account;
-        $vendor->bank_name = $request->bank_name;
-        $vendor->holder_name = $request->holder_name;
-        $vendor->routing_name = $request->routing_name;
-        $vendor->address = $request->address;
-        $vendor->commission = $request->commission;
-        $vendor->description = $request->description;
-        if($request->status == Null){
-            $request->status = 0;
-        }
-        $vendor->status = $request->status;
-        $vendor->created_by = Auth::guard('admin')->user()->id;
-
+        $user->save();
         $vendor->save();
 
-        Session::flash('success','Vendor Update Successfully');
+        Session::flash('success','Vendor Updated Successfully');
         return redirect()->route('vendor.index');
     }
 
@@ -254,7 +290,8 @@ class VendorController extends Controller
     public function destroy($id)
     {
         $vendor = Vendor::findOrFail($id);
-
+        $user = $vendor->user_id;
+        $users = User::where('id', $user)->first();
         try {
             if(file_exists($vendor->shop_cover)){
                 unlink($vendor->shop_cover);
@@ -285,6 +322,7 @@ class VendorController extends Controller
         }
         
         $vendor->delete();
+        $users->delete();
 
         $notification = array(
             'message' => 'Vendor Deleted Successfully.', 

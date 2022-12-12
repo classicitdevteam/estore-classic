@@ -45,13 +45,16 @@
 		                        </div>
 
 		                        <div class="custom_select">
-		                        	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Role:</label>
+		                        	<label for="role_id" class="col-form-label" style="font-weight: bold;">Role:</label>
                                     <select class="form-control select-active w-100 form-select select-nice" name="role_id" id="role_id">
-                                    	<option selected="">Select Role</option>
+                                    	<option value="">Select Role</option>
 					                	@foreach($roles as $role)
 					                		<option value="{{ $role->id }}">{{ $role->name }}</option>
 					               		@endforeach
                                     </select>
+									@error('role_id')
+	                                    <p class="text-danger">{{$message}}</p>
+	                                @enderror
                                 </div>
 		                        <div class="row  mt-3 justify-content-sm-end" style="margin-right: 30px;">
 									<div class="col-lg-3 col-md-4 col-sm-5 col-6">

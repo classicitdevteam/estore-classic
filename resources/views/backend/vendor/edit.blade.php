@@ -14,63 +14,45 @@
 		        <div class="card-body">
 		            <div class="row">
 		                <div class="col-md-12">
-		                	@if(count($errors))
+		                	{{-- @if(count($errors))
 		                        @foreach ($errors->all() as $error)
 		                           <p class="alert alert-danger alert-dismissible fade show"> {{ $error}} </p>
 		                        @endforeach
-	                        @endif
+	                        @endif --}}
 		                    <form method="POST" action="{{ route('vendor.update',$vendor->id) }}" enctype="multipart/form-data">
 		                    	@csrf
 		                    	@method('PUT')
 
 		                        <div class="mb-4">
 		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name :</label>
-		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" required="" value="{{$vendor->shop_name}}">
+		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" value="{{$vendor->shop_name}}">
+									@error('shop_name')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 								<div class="mb-4">
 		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone :</label>
-		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" required="" value="{{$vendor->user->phone}}">
+		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" value="{{$vendor->user->phone}}">
+									@error('phone')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 								<div class="mb-4">
 		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email :</label>
-		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" required="" value="{{$vendor->user->email}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="fb_url" class="col-form-label col-md-4" style="font-weight: bold;">Fb page url :</label>
-		                            <input class="form-control" id="fb_url" type="text" name="fb_url" placeholder="Write fb page url" value="{{$vendor->fb_url}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="bank_account" class="col-form-label col-md-4" style="font-weight: bold;">Bank Account :</label>
-		                            <input class="form-control" id="bank_account" type="text" name="bank_account" placeholder="Write vendor bank account" value="{{$vendor->bank_account}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="bank_name" class="col-form-label col-md-4" style="font-weight: bold;">Bank Name :</label>
-		                            <input class="form-control" id="bank_name" type="text" name="bank_name" placeholder="Write bank name" value="{{$vendor->bank_name}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="holder_name" class="col-form-label col-md-4" style="font-weight: bold;">Holder Name :</label>
-		                            <input class="form-control" id="holder_name" type="text" name="holder_name" placeholder="Write holder name" value="{{$vendor->holder_name}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="branch_name" class="col-form-label col-md-4" style="font-weight: bold;">Branch Name :</label>
-		                            <input class="form-control" id="branch_name" type="text" name="branch_name" placeholder="Write branch name" value="{{$vendor->branch_name}}">
-		                        </div>
-
-		                        <div class="mb-4 d-none">
-		                          <label for="routing_name" class="col-form-label col-md-4" style="font-weight: bold;">Routing :</label>
-		                            <input class="form-control" id="routing_name" type="text" name="routing_name" placeholder="Write routing" value="{{$vendor->routing_name}}">
+		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" value="{{$vendor->user->email}}">
+									@error('email')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 		                        <div class="mb-4">
 		                          <label for="address" class="col-form-label col-md-4" style="font-weight: bold;">Address :</label>
-		                            <input class="form-control" id="address" type="text" name="address" placeholder="Write vendor address" required="" value="{{$vendor->address}}">
+		                            <input class="form-control" id="address" type="text" name="address" placeholder="Write vendor address" value="{{$vendor->address}}">
+									@error('address')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
 		                        </div>
 
 		                        <div class="mb-4">

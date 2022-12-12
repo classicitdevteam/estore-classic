@@ -42,7 +42,6 @@ class SliderController extends Controller
     {   
         $this->validate($request,[
             'title_en' => 'required',
-            'slider_url' => 'required',
             'description_en' => 'required',
             'slider_img' => 'required',
         ]);
@@ -78,6 +77,7 @@ class SliderController extends Controller
         }
         $slider->status = $request->status;
         $slider->slider_img = $save_url;
+        $slider->slider_url = $request->slider_url;
         $slider->created_at = Carbon::now();
 
         $slider->save();
@@ -158,6 +158,7 @@ class SliderController extends Controller
             $request->status = 0;
         }
         $slider->status = $request->status;
+        $slider->slider_url = $request->slider_url;
         $slider->created_at = Carbon::now();
 
         $slider->save();

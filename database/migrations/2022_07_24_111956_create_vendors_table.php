@@ -18,12 +18,6 @@ class CreateVendorsTable extends Migration
             $table->integer('user_id')->contrained('users')->onDelete('cascade');
             $table->string('shop_name', 150)->nullable();
             $table->string('slug', 150)->nullable();
-            $table->string('fb_url', 100)->default('#');
-            $table->string('bank_account', 80)->nullable();
-            $table->string('bank_name', 50)->nullable();
-            $table->string('holder_name', 100)->nullable();
-            $table->string('branch_name', 50)->nullable();
-            $table->string('routing_name', 100)->nullable();
             $table->text('address')->nullable();
             $table->string('commission', 50)->nullable();
             $table->text('description')->nullable();

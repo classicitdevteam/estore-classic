@@ -20,7 +20,7 @@ use Image;
 use Session;
 use Illuminate\Support\Str;
 use Auth;
-
+use Illuminate\Support\Collection;
 
 class ProductController extends Controller
 {
@@ -47,16 +47,16 @@ class ProductController extends Controller
     public function StoreProduct(Request $request){
         $this->validate($request,[
             'name_en'           => 'required|max:150',
-            'supplier_id'       => 'required|integer',
             'purchase_price'    => 'required|numeric',
             'wholesell_price'   => 'nullable|numeric',
             'discount_price'    => 'nullable|numeric',
             'regular_price'     => 'required|numeric',
             'stock_qty'         => 'required|integer',
-            'description_en'    => 'nullable|string',
+            'minimum_buy_qty'   => 'required|integer',
+            'description_en'    => 'required|string',
             'category_id'       => 'required|integer',
             'brand_id'          => 'required|integer',
-            'product_thumbnail' => 'required|file',
+            'product_thumbnail' => 'nullable|file',
         ]);
 
         if(!$request->name_bn){
@@ -90,7 +90,7 @@ class ProductController extends Controller
             $request->status = 0;
         }
 
-        if($request->vendor_id == null){
+        if($request->vendor_id == null || $request->vendor_id==""){
             $request->vendor_id = 0;
         }
 
@@ -149,9 +149,7 @@ class ProductController extends Controller
                 MultiImg::insert([
                     'product_id' => $product->id,
                     'photo_name' => $uploadPath,
-                    'created_at' => Carbon::now(),   
-                    
-
+                    'created_at' => Carbon::now(),
                 ]);
             }
         }
@@ -249,7 +247,6 @@ class ProductController extends Controller
     public function EditProduct($id){
 
         $product = Product::findOrFail($id);
-        //dd(json_decode($product->attribute_values));
 
         $multiImgs = MultiImg::where('product_id',$id)->get();
 
@@ -313,7 +310,7 @@ class ProductController extends Controller
             $request->status = 0;
         }
 
-        if($request->vendor_id == null){
+        if($request->vendor_id == null || $request->vendor_id==""){
             $request->vendor_id = 0;
         }
 
