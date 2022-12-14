@@ -490,4 +490,14 @@
 .header-top-ptb-1 #news-flash {
     line-height: 14px!important;
     }
+.header-style-1 .header-top-ptb-1 {
+    background-color: #d8d9d1;
+    color: #2d2d2d;
+}
+.header-action-2 .header-action-icon-2 > a span {
+    color: #2d2d2d;
+}
+.header-info > ul > li a {
+    color: #2d2d2d;
+}
 

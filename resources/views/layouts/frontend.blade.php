@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/app.css')}}" />
     <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
-    
+        
     @stack('css')
 </head>
 

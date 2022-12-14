@@ -449,6 +449,21 @@
         $(this).siblings(".categories-dropdown-active-large").addClass("open");
     });
 
+    // searchToggle.on("click", function (e) {
+    //     e.preventDefault();
+    //     if ($(this).hasClass("open")) {
+    //         $(this).removeClass("open");
+    //         $(this).siblings(".categories-dropdown-active-large").removeClass("open");
+    //     } else {
+    //         $(this).addClass("open");
+    //         $(this).siblings(".categories-dropdown-active-large").addClass("open");
+    //     }
+    // });
+    $(".categories-dropdown-active-large").mouseenter(function () {
+        $(this).addClass("open");
+        $(this).siblings(".categories-dropdown-active-large").addClass("open");
+    });
+
     searchToggle.on("click", function (e) {
         e.preventDefault();
         if ($(this).hasClass("open")) {

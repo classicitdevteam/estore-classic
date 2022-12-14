@@ -81,7 +81,7 @@ class FrontendController extends Controller
         // Hot deals product
         $hot_deals = Product::where('status',1)->where('is_deals',1)->latest()->take(4)->get();
 
-        $home_view = 'frontend.home2';
+        $home_view = 'frontend.home';
 
         // $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
         // $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));

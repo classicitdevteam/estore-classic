@@ -183,7 +183,7 @@ class OrderController extends Controller
 
         $notification = array(
             'message' => 'Order Deleted Successfully.', 
-            'alert-type' => 'error'
+            'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
     }
