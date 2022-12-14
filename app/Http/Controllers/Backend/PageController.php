@@ -41,6 +41,7 @@ class PageController extends Controller
     {
         $this->validate($request,[
             'name_en' => 'required',
+            'description_en' => 'required',
         ]);
 
         $page = new Page();
@@ -109,6 +110,11 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'name_en' => 'required',
+            'description_en' => 'required',
+        ]);
+        
         $page = Page::find($id);
 
         // Page table update

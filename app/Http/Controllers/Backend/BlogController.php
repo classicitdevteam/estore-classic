@@ -40,9 +40,9 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-       
         $this->validate($request,[
             'title_en' => 'required',
+            'blog_img' => 'required',
         ]);
 
         if($request->hasfile('blog_img')){
@@ -108,6 +108,10 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'title_en' => 'required',
+        ]);
+        
         $blog = Blog::find($id);
 
         // Blog Photo Update

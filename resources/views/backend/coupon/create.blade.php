@@ -38,16 +38,13 @@
 		                        </div>
 
 		                        <div class="col-md-6 mb-4">
-		                          	<label for="discount" class="col-form-label" style="font-weight: bold;">Discount Amount/Percent: *</label>
-		                            <input class="form-control" id="discount" type="number" name="discount" placeholder="Write discount amount/percent" required min="0" value="0">
-			                        @error('discount')
-		                                <p class="text-danger">{{$message}}</p>
-		                            @enderror
+		                          	<label for="discount" class="col-form-label" style="font-weight: bold;">Discount Amount/Percent:</label>
+		                            <input class="form-control" id="discount" type="number" name="discount" placeholder="Write discount amount/percent" min="0" value="0">
 		                        </div>
 
 		                        <div class="col-md-6 mb-4">
 		                          	<label for="limit_per_user" class="col-form-label" style="font-weight: bold;">Use Limit Per User: *</label>
-		                            <input class="form-control" id="limit_per_user" type="number" name="limit_per_user" placeholder="Write use limit per user" required min="0" value="0">
+		                            <input class="form-control" id="limit_per_user" type="number" name="limit_per_user" placeholder="Write use limit per user" min="0" value="0">
 			                        @error('limit_per_user')
 		                                <p class="text-danger">{{$message}}</p>
 		                            @enderror

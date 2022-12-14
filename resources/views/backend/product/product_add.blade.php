@@ -78,9 +78,6 @@
 		                                    <option value="{{ $brand->id }}">{{ $brand->name_en }}</option>
 		                                @endforeach
                                     </select>
-									@error('brand_id')
-										<p class="text-danger">{{$message}}</p>
-									@enderror
                                 </div>
 	                        </div>
 		        		
@@ -107,9 +104,6 @@
 											<option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
 											@endforeach
 									</select>
-									@error('supplier_id')
-										<p class="text-danger">{{$message}}</p>
-									@enderror
 								</div>
 						   	</div>
 							<div class="col-md-6 mb-4">
@@ -206,8 +200,8 @@
                                 </div>
 	                        </div>
 	                        <div class="col-md-4 mb-4">
-								<label for="product_qty" class="col-form-label" style="font-weight: bold;">Minimum Buy Quantity:</label>
-								<input class="form-control" id="product_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="1" min="1" required>
+								<label for="minimum_buy_qty" class="col-form-label" style="font-weight: bold;">Minimum Buy Quantity:</label>
+								<input class="form-control" id="minimum_buy_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="1" min="1">
 								@error('minimum_buy_qty')
 									<p class="text-danger">{{$message}}</p>
 								@enderror
@@ -281,7 +275,7 @@
 							@enderror
 						</div>
 						<div class="mb-4">
-								<label for="multiImg" class="col-form-label" style="font-weight: bold;">Product Gallery Image:</label>
+							<label for="multiImg" class="col-form-label" style="font-weight: bold;">Product Gallery Image:</label>
 							<input type="file" name="multi_img[]" class="form-control" multiple="" id="multiImg" >
 							<div class="row  p-2" id="preview_img">
 							</div>

@@ -30,9 +30,6 @@
 		                        <div class="mb-4">
 		                          <label for="slider_url" class="col-form-label col-md-2" style="font-weight: bold;"> Slider Url:</label>
 		                            <input class="form-control" id="slider_url" type="text" name="slider_url" placeholder="Write Slider Url" value="{{old('slider_url')}}">
-		                            @error('slider_url')
-		                            	<span class="text-danger">{{ $message }}</span>
-		                            @enderror
 		                        </div>
 
 		                        <div class="mb-4">
@@ -45,9 +42,6 @@
 		                        <div class="mb-4">
 		                          	<label for="description_bn" class="col-form-label col-md-3" style="font-weight: bold;">Description (Bangla):</label>
 		                            <textarea name="description_bn" id="description_bn" cols="5" placeholder="Write Slider description english" class="form-control ">{{old('description_bn')}}</textarea>
-		                            @error('description_bn')
-		                            	<span class="text-danger">{{ $message }}</span>
-		                            @enderror
 		                        </div>
 		                        <div class="mb-4">
 		                         	<img id="showImage" class="rounded avatar-lg" src="{{ (!empty($editData->profile_image))? url('upload/admin_images/'.$editData->profile_image):url('upload/no_image.jpg') }}" alt="Card image cap" width="100px" height="80px;">

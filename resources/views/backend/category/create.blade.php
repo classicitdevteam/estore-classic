@@ -20,12 +20,15 @@
 			                        <label class="col-md-3 col-form-label" for="name_en">Name English</label>
 			                        <div class="col-md-9">
 			                            <input type="text" placeholder="Name English" id="name_en" name="name_en" value="{{old('name_en')}}" class="form-control" >
+										@error('name_en')
+											<p class="text-danger">{{$message}}</p>
+										@enderror
 			                        </div>
 			                    </div>
 			                    <div class="form-group row mb-4">
-			                        <label class="col-md-3 col-form-label" for="name_bn">Name Arabic</label>
+			                        <label class="col-md-3 col-form-label" for="name_bn">Name Bangla</label>
 			                        <div class="col-md-9">
-			                            <input type="text" placeholder="Name Arabic" id="name_bn" name="name_bn" value="{{old('name_bn')}}" class="form-control" >
+			                            <input type="text" placeholder="Name Bangla" id="name_bn" name="name_bn" value="{{old('name_bn')}}" class="form-control" >
 			                        </div>
 			                    </div>
 			                    <div class="form-group row mb-4">
@@ -60,7 +63,7 @@
 			                        </div>
 			                    </div>
 			                    <div class="form-group row mb-4">
-			                        <label class="col-md-3 col-form-label" for="description_bn">Description Arabic</label>
+			                        <label class="col-md-3 col-form-label" for="description_bn">Description Bangla</label>
 			                        <div class="col-md-9">
 			                        	<textarea name="description_bn" rows="5" class="form-control">{{old('description_bn')}}</textarea>
 			                        </div>

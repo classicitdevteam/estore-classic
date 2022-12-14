@@ -19,7 +19,7 @@
 		                    	
 		                        <div class="mb-4">
 		                           <label for="title_en" class="col-form-label col-md-2" style="font-weight: bold;"> Title (English):</label>
-		                            <input class="form-control" id="titie_en" type="text" name="title_en" placeholder="Write blog title english" value="{{ $blog->title_en }}">'
+		                            <input class="form-control" id="title_en" type="text" name="title_en" placeholder="Write blog title english" value="{{ $blog->title_en }}">'
 		                            @error('title_en')
 	                                    <p class="text-danger">{{$message}}</p>
 	                                @enderror

@@ -9,6 +9,7 @@ use App\Models\ProductStock;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\Category;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {

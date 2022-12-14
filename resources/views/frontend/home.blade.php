@@ -77,7 +77,7 @@
 @include('frontend.common.add_to_cart_modal')
 	<section class="home-slider position-relative mb-30">
 		<div class="container mt-30">
-			<div id="preloader-active1" class="preloader-active1">
+			{{-- <div id="preloader-active1" class="preloader-active1">
 				<div class="preloader1 d-flex align-items-center justify-content-center">
 					<div class="preloader-inner position-relative">
 						<div class="text-center">
@@ -85,7 +85,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 		    <div class="home-slide-cover">
 		        <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
 		        	@foreach($sliders as $slider)
@@ -111,7 +111,7 @@
 			                        <input type="email" name="email" placeholder="Your emaill address" required="" />
 			                        <button class="btn" type="submit">Subscribe</button>
 			                    </form>
-			                </div>
+			                </div> 
 			            </div>
 		            </a>
 		            @endforeach
@@ -229,15 +229,15 @@
 	<section class="product-tabs section-padding position-relative">
 	    <div class="container">
 	        <div class="section-title style-2 wow animate__animated animate__fadeIn">
-	            <h3>Popular Products</h3>
+	            <h3>Featured Products</h3>
 	            <ul class="nav nav-tabs links" id="myTab" role="tablist">
 	            	<li class="nav-item" role="presentation">
 	                    <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
 	                </li>
 	                @foreach(get_categories()->take(5) as $category)
-	                <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#category{{ $category->id }}" type="button" role="tab" aria-controls="tab-two" aria-selected="false">{{ $category->name_en}}</button>
-                    </li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#category{{ $category->id }}" type="button" role="tab" aria-controls="tab-two" aria-selected="false">{{ $category->name_en}}</button>
+						</li>
                     @endforeach
 	               
 	            </ul>
@@ -297,15 +297,15 @@
 	            </ul>
 	        </div>
 	        <div class="row justify-content-center">
-	            <div class="col-lg-3 d-none d-lg-flex wow animate__animated animate__fadeIn">
+	            {{-- <div class="col-lg-3 d-none d-lg-flex wow animate__animated animate__fadeIn">
 	                <div class="banner-img style-2">
 	                    <div class="banner-text">
 	                        <h2 class="mb-100">Bring nature into your home</h2>
 	                        <a href="#" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
 	                    </div>
 	                </div>
-	            </div>
-	            <div class="col-lg-9 col-md-12 wow animate__animated animate__fadeIn" data-wow-delay=".4s">
+	            </div> --}}
+	            <div class="col-lg-12 col-md-12 wow animate__animated animate__fadeIn" data-wow-delay=".4s">
 	                <div class="tab-content" id="myTabContent-1">
 	                    <div class="tab-pane fade show active" id="tab-one-1" role="tabpanel" aria-labelledby="tab-one-1">
 	                        <div class="carausel-4-columns-cover arrow-center position-relative">
@@ -315,7 +315,9 @@
 	                            		@php
 				                            $product = \App\Models\Product::find($today_product->product_id);
 				                        @endphp
-		                                @include('frontend.common.product_grid_view',['product' => $product])
+										@if($product)
+		                                	@include('frontend.common.product_grid_view',['product' => $product])
+										@endif
 	                                @endforeach
 	                                <!--End product Wrap-->             
 	                            </div>
@@ -352,7 +354,8 @@
 		</section>
 		<!-- End Hot Deals -->
 	@endif
-	<section class="section-padding pb-5">
+
+	{{-- <section class="section-padding pb-5">
 	    <div class="container">
 	        <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
 	            <h3 class="">Deals Of The Day</h3>
@@ -512,7 +515,7 @@
 	            </div>
 	        </div>
 	    </div>
-	</section>
+	</section> --}}
 
 	@if(get_setting('multi_vendor')->value)
 		<!--Start Vendors-->

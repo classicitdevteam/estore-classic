@@ -28,7 +28,6 @@ class BrandController extends Controller
     public function BrandStore(Request $request){
         $this->validate($request,[
             'name_en' => 'required',
-            'description_en' => 'required',
             'brand_image' => 'required',
         ]);
 
@@ -79,6 +78,10 @@ class BrandController extends Controller
 
     /*=================== Start BrandUpdate Methoed ===================*/
     public function BrandUpdate(Request $request, $id){
+        $this->validate($request,[
+            'name_en' => 'required',
+        ]);
+
         $brand = Brand::find($id);
         //Brand Photo Update
         if($request->hasfile('brand_image')){

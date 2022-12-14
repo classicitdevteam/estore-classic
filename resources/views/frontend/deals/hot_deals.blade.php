@@ -10,46 +10,32 @@
 	                    <p>We found <strong class="text-brand">{{ count($products)}}</strong> items for you!</p>
 	                </div>
 	                <div class="sort-by-product-area">
-	                    <div class="sort-by-cover mr-10">
-	                        <div class="sort-by-product-wrap">
-	                            <div class="sort-by">
-	                                <span><i class="fi-rs-apps"></i>Show:</span>
-	                            </div>
-	                            <div class="sort-by-dropdown-wrap">
-	                                <span class="align-items-center d-flex"> 50 <i class="fi-rs-angle-small-down"></i></span>
-	                            </div>
-	                        </div>
-	                        <div class="sort-by-dropdown">
-	                            <ul>
-	                                <li><a class="active" href="#">50</a></li>
-	                                <li><a href="#">100</a></li>
-	                                <li><a href="#">150</a></li>
-	                                <li><a href="#">200</a></li>
-	                                <li><a href="#">All</a></li>
-	                            </ul>
-	                        </div>
-	                    </div>
-	                    <div class="sort-by-cover">
-	                        <div class="sort-by-product-wrap">
-	                            <div class="sort-by">
-	                                <span class="align-items-center d-flex"><i class="fi-rs-apps-sort"></i>Sort by:</span>
-	                            </div>
-	                            <div class="sort-by-dropdown-wrap">
-	                                <span class="align-items-center d-flex"> Featured <i class="fi-rs-angle-small-down"></i></span>
-	                            </div>
-	                        </div>
-	                        <div class="sort-by-dropdown">
-	                            <ul>
-	                                <li><a class="active" href="#">Featured</a></li>
-	                                <li><a href="#">Price: Low to High</a></li>
-	                                <li><a href="#">Price: High to Low</a></li>
-	                                <li><a href="#">Release Date</a></li>
-	                                <li><a href="#">Avg. Rating</a></li>
-	                            </ul>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
+                        <div class="sort-by-cover d-flex">
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-12 col-md-6">
+                                    <div class="custom_select">
+                                        <select class="form-control select-active" onchange="filter()" name="brand">
+                                            <option value="">All Brands</option>
+                                            @foreach (\App\Models\Brand::all() as $brand)
+                                                <option value="{{ $brand->slug }}" @if ($brand_id == $brand->id) selected @endif >{{ $brand->name_en ?? 'Null' }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>  
+                                <div class="form-group col-lg-6 col-12 col-md-6">
+                                    <div class="custom_select">
+                                        <select class="form-control select-active" name="sort_by" onchange="filter()">
+                                            <option value="newest" @if ($sort_by =='newest') selected @endif>Newest</option>
+                                            <option value="oldest" @if ($sort_by =='oldest') selected @endif >Oldest</option>
+                                            <option value="price-asc" @if ($sort_by == 'price-asc') selected @endif >Price Low to High</option>
+                                            <option value="price-desc" @if ($sort_by == 'price-desc') selected @endif >Price High to Low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 	            <div class="row product-grid gutters-5">
 	            	@forelse($products as $product)
 	                   @include('frontend.common.product_grid_view',['product' => $product])
@@ -72,166 +58,6 @@
 	                </nav>
 	            </div>
                 <!-- Pagination -->
-	            <section class="section-padding pb-5">
-                    <div class="section-title">
-                        <h3 class="">Deals Of The Day</h3>
-                        <a class="show-all" href="#">
-                            All Deals
-                            <i class="fi-rs-angle-right"></i>
-                        </a>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product-cart-wrap style-2">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img">
-                                        <a href="#">
-                                            <img src="{{asset('upload/nest-img/product-5-1.jpg')}}" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="deals-countdown-wrap">
-                                        <div class="deals-countdown" data-countdown="2025/03/25 00:00:00"></div>
-                                    </div>
-                                    <div class="deals-content">
-                                        <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-small text-muted">By <a href="#">NestFood</a></span>
-                                        </div>
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product-cart-wrap style-2">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img">
-                                        <a href="$">
-                                            <img src="{{asset('upload/nest-img/product-4-1.jpg')}}" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="deals-countdown-wrap">
-                                        <div class="deals-countdown" data-countdown="2026/04/25 00:00:00"></div>
-                                    </div>
-                                    <div class="deals-content">
-                                        <h2><a href="#">Perdue Simply Smart Organics Gluten</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-small text-muted">By <a href="#">Old El Paso</a></span>
-                                        </div>
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
-                                                <span>$24.85</span>
-                                                <span class="old-price">$26.8</span>
-                                            </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 d-none d-lg-block">
-                            <div class="product-cart-wrap style-2">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img">
-                                        <a href="shop-product-right.html">
-                                            <img src="{{asset('upload/nest-img/product-3-1.jpg')}}" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="deals-countdown-wrap">
-                                        <div class="deals-countdown" data-countdown="2027/03/25 00:00:00"></div>
-                                    </div>
-                                    <div class="deals-content">
-                                        <h2><a href="#">Signature Wood-Fired Mushroom</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 80%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (3.0)</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-small text-muted">By <a href="#">Progresso</a></span>
-                                        </div>
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
-                                                <span>$12.85</span>
-                                                <span class="old-price">$13.8</span>
-                                            </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 d-none d-xl-block">
-                            <div class="product-cart-wrap style-2">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img">
-                                        <a href="#">
-                                            <img src="{{asset('upload/nest-img/product-2-1.jpg')}}" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="deals-countdown-wrap">
-                                        <div class="deals-countdown" data-countdown="2025/02/25 00:00:00"></div>
-                                    </div>
-                                    <div class="deals-content">
-                                        <h2><a href="#">Simply Lemonade with Raspberry Juice</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 80%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (3.0)</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-small text-muted">By <a href="#">Yoplait</a></span>
-                                        </div>
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
-                                                <span>$15.85</span>
-                                                <span class="old-price">$16.8</span>
-                                            </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--End Deals-->
 	        </div>
             <!-- Side Filter Start -->
 	        <div class="col-lg-1-5 primary-sidebar sticky-sidebar">

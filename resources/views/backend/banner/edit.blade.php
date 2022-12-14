@@ -54,9 +54,6 @@
                                         <option value="1" {{ $banner->position == 1 ? 'selected': '' }}>Home</option>
                                         <option value="0" {{ $banner->position == 0 ? 'selected': '' }}>Footer</option>
                                     </select>
-                                    @error('position')
-                                        <p class="text-danger">{{$message}}</p>
-                                    @enderror
                                 </div>
                             </div>
                            <div class="mb-2 col-sm-6">

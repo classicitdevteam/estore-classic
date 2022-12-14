@@ -43,8 +43,6 @@ class CouponController extends Controller
     {
         $this->validate($request,[
             'coupon_code' => 'required|max:50',
-            'discount_type' => 'required',
-            'discount' => 'required',
             'limit_per_user' => 'required',
             'total_use_limit' => 'required',
             'expire_date' => 'nullable',

@@ -32,9 +32,6 @@
 		                        <div class="mb-4">
 		                          <label for="description_en" class="col-form-label col-md-2" style="font-weight: bold;">Description (English):</label>
 		                            <textarea name="description_en" id="description_en" cols="5" placeholder="Write brand description english" class="form-control">{{old('description_en')}}</textarea>
-		                            @error('description_en')
-                                        <p class="text-danger">{{$message}}</p>
-                                    @enderror
 		                        </div>
 
 		                        <div class="mb-4">
@@ -47,7 +44,7 @@
 		                        </div>
 		                        <div class="mb-4">
 		                         	<label for="image" class="col-form-label col-md-2" style="font-weight: bold;">Brand Photo:</label>
-		                            <input name="brand_image" class="form-control" type="file" id="image" required>
+		                            <input name="brand_image" class="form-control" type="file" id="image">
 		                            @error('brand_image')
                                         <p class="text-danger">{{$message}}</p>
                                     @enderror

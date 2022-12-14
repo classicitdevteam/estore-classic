@@ -20,7 +20,7 @@
 		        		<div class="row">
 		                	<div class="col-sm-6 mb-4">
 	                           	<label for="title_en" class="col-form-label" style="font-weight: bold;"> Title (English):</label>
-	                            <input class="form-control" id="titie_en" type="text" name="title_en" placeholder="Write banner title english" value="{{old('title_en')}}" required>
+	                            <input class="form-control" id="title_en" type="text" name="title_en" placeholder="Write banner title english" value="{{old('title_en')}}">
 	                            @error('title_en')
                                     <p class="text-danger">{{$message}}</p>
                                 @enderror
@@ -42,10 +42,7 @@
 	                                
                             <div class="col-sm-6 mb-4">
 	                          	<label for="banner_url" class="col-form-label" style="font-weight: bold;"> Banner Url:</label>
-	                            <input class="form-control" type="text" name="banner_url" placeholder="Write banner url" value="{{old('banner_url')}}" required>
-	                            @error('banner_url')
-                                    <p class="text-danger">{{$message}}</p>
-                                @enderror
+	                            <input class="form-control" type="text" name="banner_url" placeholder="Write banner url" value="{{old('banner_url')}}">
 	                        </div>
 	                        <div class="col-sm-6 mb-4">
 	                        	<label for="position" class="col-form-label" style="font-weight: bold;"> Position:</label>
@@ -54,9 +51,6 @@
                                         <option value="1">Home</option>
                                         <option value="0">Footer</option>
                                     </select>
-                                    @error('position')
-	                                    <p class="text-danger">{{$message}}</p>
-	                                @enderror
                                 </div>
                             </div>
 	                       <div class="mb-2 col-sm-6">
@@ -64,7 +58,7 @@
 	                       </div>
 	                        <div class="col-sm-12 mb-4">
 	                         	<label for="image" class="col-form-label" style="font-weight: bold;">Banner Photo:</label>
-	                            <input name="banner_img" class="form-control" type="file" id="image" required>
+	                            <input name="banner_img" class="form-control" type="file" id="image">
 	                            @error('banner_img')
                                 	<p class="text-danger">{{$message}}</p>
                             	@enderror

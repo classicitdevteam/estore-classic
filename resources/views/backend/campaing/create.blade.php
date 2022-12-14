@@ -52,7 +52,7 @@
 		                        <div class="mb-4">
 		                        	<img src="" class="p-2" id="mainThmb"><br>
 		                         	<label for="image" class="col-form-label" style="font-weight: bold;">Campaign Photo:</label>
-		                            <input name="campaing_image" class="form-control" type="file" required="" id="image" onChange="mainThamUrl(this)">
+		                            <input name="campaing_image" class="form-control" type="file" id="image" onChange="mainThamUrl(this)">
 		                            @error('campaing_image')
 	                                    <p class="text-danger">{{$message}}</p>
 	                                @enderror

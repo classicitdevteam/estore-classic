@@ -20,7 +20,7 @@
 
 		                        <div class="mb-4">
 		                           <label for="name_en" class="col-form-label" style="font-weight: bold;"> Name (English)*:</label>
-		                            <input class="form-control" id="name_en" type="text" name="name_en" placeholder="Write page name english" required="" value="{{$page->name_en}}">
+		                            <input class="form-control" id="name_en" type="text" name="name_en" placeholder="Write page name english" value="{{$page->name_en}}">
 		                            @error('name_en')
 	                                    <p class="text-danger">{{$message}}</p>
 	                                @enderror
@@ -57,9 +57,6 @@
 	                                        <option value="Bottom" @if($page->position == "Bottom") selected @endif>Bottom</option>
 	                                        <option value="Both" @if($page->position == "Both") selected @endif>Both</option>
 	                                    </select>
-	                                    @error('position')
-	                                        <p class="text-danger">{{$message}}</p>
-	                                    @enderror
                                     </div>
 		                        </div>
 

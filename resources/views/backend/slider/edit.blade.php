@@ -34,6 +34,9 @@
                                 <div class="mb-4">
                                   <label for="description_en" class="col-form-label col-md-3" style="font-weight: bold;">Description (English):</label>
                                     <textarea name="description_en" id="description_en" cols="5" placeholder="Write Slider description english" class="form-control " >{{ $slider->description_en }}</textarea>
+                                    @error('description_en')
+		                            	<span class="text-danger">{{ $message }}</span>
+		                            @enderror
                                 </div>
                                 <div class="mb-4">
                                     <label for="description_bn" class="col-form-label col-md-3" style="font-weight: bold;">Description (Bangla):</label>

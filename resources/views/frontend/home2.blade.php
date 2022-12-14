@@ -96,24 +96,26 @@
                         <div class="home-slide-cover mt-30">
                             <div class="hero-slider-1 style-5 dot-style-1 dot-style-1-position-2">
                             	@foreach($sliders as $slider)
-	                                <div class="single-hero-slider single-animation-wrap" style="background-image: url('{{asset($slider->slider_img)}}')">
-	                                    <div class="slider-content">
-	                                        <h1 class="display-2 mb-40">
-	                                            @if(session()->get('language') == 'bangla') 
-				                                    {{ $slider->title_bn }}
-				                                @else 
-				                                    {{ $slider->title_en }} 
-				                                @endif
-	                                        </h1>
-	                                        <p class="mb-65">
-	                                        	@if(session()->get('language') == 'bangla') 
-				                                    {{ $slider->description_bn }}
-				                                @else 
-				                                    {{ $slider->description_en }}
-				                                @endif
-	                                        </p>
-	                                    </div>
-	                                </div>
+                                    <a href="{{$slider->slider_url}}">
+                                        <div class="single-hero-slider single-animation-wrap" style="background-image: url('{{asset($slider->slider_img)}}')">
+                                            <div class="slider-content">
+                                                <h1 class="display-2 mb-40">
+                                                    @if(session()->get('language') == 'bangla') 
+                                                        {{ $slider->title_bn }}
+                                                    @else 
+                                                        {{ $slider->title_en }} 
+                                                    @endif
+                                                </h1>
+                                                <p class="mb-65">
+                                                    @if(session()->get('language') == 'bangla') 
+                                                        {{ $slider->description_bn }}
+                                                    @else 
+                                                        {{ $slider->description_en }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 @endforeach
                             </div>
                             <div class="slider-arrow hero-slider-1-arrow"></div>
@@ -150,7 +152,7 @@
         <!--End hero slider-->
 
         <!--Start category slider-->
-        <!-- <section class="popular-categories section-padding">
+        {{-- <section class="popular-categories section-padding">
             <div class="container wow animate__animated animate__fadeIn">
                 <div class="section-title">
                     <div class="title">
@@ -179,8 +181,47 @@
                     </div>
                 </div>
             </div>
-        </section> -->
+        </section> --}}
         <!--End category slider-->
+
+
+        <!-- Campaign Slider Start-->
+        @php
+            $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
+            $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
+            $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
+        @endphp
+
+        @if($campaign  && $start_diff->invert == 0 && $end_diff->invert == 0)
+        <section class="common-product section-padding">
+            <div class="container wow animate__animated animate__fadeIn">
+                <div class="section-title">
+                    <div class="title">
+                        <h3>My Campaign Sell</h3>
+
+                        <div class="deals-countdown-wrap">
+                            <div class="deals-countdown" data-countdown="{{ date(('Y-m-d H:i:s'), strtotime($campaign->flash_end)) }}"></div>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-primary">View more</a>
+                </div>
+                <div class="carausel-5-columns-cover position-relative">
+                    <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
+                    <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common">
+                        @foreach($campaign->campaing_products->take(20) as $campaing_product)
+                            @php
+                                $product = \App\Models\Product::find($campaing_product->product_id);
+                            @endphp
+                            @if ($product != null && $product->status != 0)
+                                @include('frontend.common.product_grid_view',['product' => $product])
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endif
+        <!-- Campaign Slider End-->
 
         <section class="product-tabs section-padding position-relative">
             <div class="container">
@@ -274,46 +315,49 @@
         <!--End banners-->
 
         @if(count($home2_featured_categories) > 0)
-            @foreach($home2_featured_categories as $home2_featured_category)
-            <section class="common-product section-padding">
-                <div class="container wow animate__animated animate__fadeIn">
-                    <div class="section-title">
-                        <div class="title">
-                            <h3>
-                                @if(session()->get('language') == 'bangla') 
-                                    {{
-                                        $home2_featured_category->name_bn 
-                                    }}
-                                @else
-                                    {{
-                                        $home2_featured_category->name_en 
-                                    }} 
-                                @endif
-                            </h3>
+        @foreach($home2_featured_categories->take(5) as $home2_featured_category)
+            @if(count($home2_featured_category->products) > 0)
+                <section class="common-product section-padding">
+                    <div class="container wow animate__animated animate__fadeIn">
+                        <div class="section-title">
+                            <div class="title">
+                                <h3>
+                                    @if(session()->get('language') == 'bangla') 
+                                        {{
+                                            $home2_featured_category->name_bn 
+                                        }}
+                                    @else
+                                        {{
+                                            $home2_featured_category->name_en 
+                                        }} 
+                                    @endif
+                                </h3>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-primary">View more</a>
                         </div>
-                        <a href="#" class="btn btn-sm btn-primary">View more</a>
-                    </div>
-                    <div class="carausel-5-columns-cover position-relative">
-                        <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
-                        <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common{{$home2_featured_category->id}}">
-                            @forelse($home2_featured_category->products as $product)
-                                @include('frontend.common.product_grid_view')
-                                <!--end product card-->
-                            @empty
-                                @if(session()->get('language') == 'bangla') 
-                                    <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5> 
-                                @else 
-                                   <h5 class="text-danger">No products were found here!</h5>
-                                @endif
-                            @endforelse
+                        <div class="carausel-5-columns-cover position-relative">
+                            <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
+                            <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common{{$home2_featured_category->id}}">
+                                
+                                    @forelse($home2_featured_category->products as $product)
+                                        @include('frontend.common.product_grid_view')
+                                        <!--end product card-->
+                                    @empty
+                                        @if(session()->get('language') == 'bangla') 
+                                            <h5 class="text-danger">এখানে কোন পণ্য খুঁজে পাওয়া যায়নি!</h5> 
+                                        @else 
+                                        <h5 class="text-danger">No products were found here!</h5>
+                                        @endif
+                                    @endforelse
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                @endif
             @endforeach
         @endif
         <!--Products Tabs-->
-        <!-- <section class="section-padding">
+        {{-- <section class="section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -357,7 +401,7 @@
                     </div>
                 </div>
             </div>
-        </section> -->
+        </section> --}}
         <!--End 4 banners-->
         @if(count($todays_sale) > 0)
         <section class="section-padding pb-5">
@@ -377,14 +421,14 @@
                     </ul>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-3 d-none d-lg-flex wow animate__animated animate__fadeIn">
+                    {{-- <div class="col-lg-3 d-none d-lg-flex wow animate__animated animate__fadeIn">
                         <div class="banner-img style-2">
                             <div class="banner-text">
                                 <h2 class="mb-100">Bring nature into your home</h2>
                                 <a href="#" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-9 col-md-12 wow animate__animated animate__fadeIn" data-wow-delay=".4s">
                         <div class="tab-content" id="myTabContent-1">
                             <div class="tab-pane fade show active" id="tab-one-1" role="tabpanel" aria-labelledby="tab-one-1">
@@ -395,7 +439,9 @@
                                             @php
                                                 $product = \App\Models\Product::find($today_product->product_id);
                                             @endphp
-                                            @include('frontend.common.product_grid_view',['product' => $product])
+                                            @if($product)
+                                                @include('frontend.common.product_grid_view',['product' => $product])
+                                            @endif
                                         @endforeach
                                         <!--End product Wrap-->             
                                     </div>
@@ -433,7 +479,7 @@
         @endif
 
         <!--End Best Sales-->
-        <!-- <section class="section-padding pb-5">
+        {{-- <section class="section-padding pb-5">
             <div class="container">
                 <div class="section-title wow animate__animated animate__fadeIn" data-wow-delay="0">
                     <h3 class="">Deals Of The Day</h3>
@@ -482,8 +528,8 @@
                     </div>
                 </div>
             </div>
-        </section>
- -->
+        </section> --}}
+
         <!--End Deals-->
         <section class="section-padding mb-30">
         <div class="container">

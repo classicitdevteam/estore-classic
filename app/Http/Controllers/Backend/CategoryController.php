@@ -133,7 +133,11 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $this->validate($request,[
+            'name_en' => 'required',
+        ]);
+
         $category = Category::findOrFail($id);
         //Category Photo Update
         if($request->hasfile('image')){
@@ -168,7 +172,7 @@ class CategoryController extends Controller
             $category->description_bn = $request->description_bn;
         }
 
-        /* ======== Category Parent Id  ======= */
+       /* ======== Category Parent Id  ======= */
         if ($request->parent_id != "0") {
             $category->parent_id = $request->parent_id;
 
@@ -176,7 +180,7 @@ class CategoryController extends Controller
             $category->type = $parent->type + 1 ;
         }else{
             $category->parent_id = 0;
-            $category->type = 0;
+            $category->type = 1;
         }
 
         /* ======== Category Slug   ======= */

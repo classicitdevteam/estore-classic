@@ -118,6 +118,10 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'title_en' => 'required',
+            'description_en' => 'required',
+        ]);
 
         $slider = Slider::find($id);
 

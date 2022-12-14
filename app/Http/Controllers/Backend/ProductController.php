@@ -55,7 +55,6 @@ class ProductController extends Controller
             'minimum_buy_qty'   => 'required|integer',
             'description_en'    => 'required|string',
             'category_id'       => 'required|integer',
-            'brand_id'          => 'required|integer',
             'product_thumbnail' => 'nullable|file',
         ]);
 

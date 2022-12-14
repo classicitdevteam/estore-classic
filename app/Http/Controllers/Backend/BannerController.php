@@ -115,6 +115,10 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'title_en' => 'required',
+        ]);
+        
         $banner = Banner::find($id);
         // //banner Photo Update
         if($request->hasfile('banner_img')){

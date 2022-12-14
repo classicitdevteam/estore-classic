@@ -8,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="" />
+    <meta property="og:title" content="{{ (get_setting('site_name')->value ?? ' ') }}" />
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
@@ -18,31 +18,26 @@
         $logo = get_setting('site_favicon');
     @endphp
     @if($logo != null)
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? 'null') }}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? ' ') }}" />
     @else
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" />
     @endif
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="{{asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css?v=5.3')}}" />
-    <!-- front awesome -->
+    <!-- font awesome -->
+    <link rel="stylesheet" href="{{asset('frontend/css/fontawesome.min.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <!-- Sweetalert css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.8/sweetalert2.css">
+    <link rel="stylesheet" href="{{asset('frontend/css/sweetalert2.css')}}">
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/slider-range.css ')}}" />
     <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/animate.min.css')}}" />
-    
     <!-- Toastr css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-    <!-- front awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{asset('frontend/css/toastr.css')}}">
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{asset('frontend/css/app.css')}}" />
-    <!-- Sweetalert css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.8/sweetalert2.css">
-    <!-- Toastr css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
     
@@ -67,7 +62,7 @@
     <!--/ Footer -->
 
     <!-- Preloader Start -->
-    <!-- <div id="preloader-active">
+    {{-- <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
@@ -75,7 +70,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> --}}
     <!-- Vendor JS-->
     <script src="{{asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
@@ -96,9 +91,9 @@
     <script src="{{asset('frontend/assets/js/plugins/jquery.theia.sticky.js')}}"></script>
     <script src="{{asset('frontend/assets/js/plugins/jquery.elevatezoom.js')}}"></script>
     <!-- Toastr js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{asset('frontend/js/toastr.min.js')}}"></script>
     <!-- Sweetalert js -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{asset('frontend/js/sweetalert2@11.js')}}"></script>
     <!-- Template  JS -->
     <script src="{{asset('frontend/assets/js/main.js?v=5.3')}}"></script>
     <script src="{{asset('frontend/assets/js/shop.js?v=5.3')}}"></script>

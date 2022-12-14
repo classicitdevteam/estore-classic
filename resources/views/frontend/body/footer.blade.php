@@ -132,7 +132,7 @@
                                     <img src="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" style="height: 60px !important; width: 80px !important; min-width: 80px !important;">
                                 @endif
                             </a>
-                            <p class="font-lg text-heading">Awesome grocery store website template</p>
+                            {{-- <p class="font-lg text-heading">Awesome grocery store website template</p> --}}
                             <ul class="contact-infor">
                                 <li>
                                     <h4 class="widget-title">Install App</h4>

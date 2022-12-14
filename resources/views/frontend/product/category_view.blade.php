@@ -7,7 +7,8 @@ Category Nest Online Shop
 <main class="main">
     <div class="page-header mt-30 mb-50">
         <div class="container">
-            <div class="archive-header" style="background-image: url({{ asset($category->image) }});">
+            {{-- <div class="archive-header" style="background-image: url({{ asset($category->image) }});"> --}}
+            <div class="archive-header">
                 <div class="row align-items-center">
                     <div class="col-xl-3">
                         <h1 class="mb-15">
@@ -27,7 +28,7 @@ Category Nest Online Shop
                             @endif
                         </div>
                     </div>
-                    <!--{{-- <div class="col-xl-9 text-end d-none d-xl-block">
+                    {{-- <div class="col-xl-9 text-end d-none d-xl-block">
                         <ul class="tags-list">
                         	@foreach(get_categories()->sub_categories as $subcategory)
                             <li class="hover-up">
@@ -42,76 +43,62 @@ Category Nest Online Shop
                             </li>
 	                  		@endforeach
                         </ul>
-                    </div> --}}-->
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
     <div class="container mb-30">
         <div class="row">
-            <div class="col-md-2">
-                <div class="product-cart-wrap style-2">
-                    <div class="product-img-action-wrap">
-                        <div class="product-img">
-                            <a href="#">
-                                <img src="{{asset('upload/nest-img/product-5-1.jpg')}}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="product-content-wrap">
-                        <div class="deals-content">
-                            <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
-                            <div>
-                                <span class="font-small text-muted">By <a href="#">NestFood</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            @foreach($subcategories as $key => $subcategory)
+            <div class="card-2 mr-20 bg-9 d-flex flex-column justify-content-center align-items-center wow animate__ animate__fadeInUp slick-slide slick-current slick-active" data-wow-delay=".1s" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 137px; visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <figure class="img-hover-scale overflow-hidden">
+		             <a href="{{ route('product.category', $subcategory->slug) }}">
+                    	@if($subcategory->image && $subcategory->image != '' && $subcategory->image != 'Null')
+		                    <img class="default-img" src="{{ asset($subcategory->image) }}" alt="" />
+		                @else
+		                    <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}" alt="" />
+		                @endif
+                    </a>
+                </figure>
+                <h6>
+                	<a href="{{ route('product.category', $subcategory->slug) }}" tabindex="0">{{ $subcategory->name_en }}</a>
+                </h6>
+              <!--   <span>26 items</span> -->
             </div>
+            @endforeach
         </div>
+    </div>
+    <div class="container mb-30">
         <div class="row">
             <div class="col-lg-4-5">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
-                        <p>We found <strong class="text-brand">{{ count($products) }}</strong> items for you!</p>
+                        <p>We found <strong class="text-brand">{{ count($products)}}</strong> items for you!</p>
                     </div>
                     <div class="sort-by-product-area">
-                        <div class="sort-by-cover mr-10">
-                            <div class="sort-by-product-wrap">
-                                <div class="sort-by">
-                                    <span><i class="fi-rs-apps"></i>Show:</span>
+                        <div class="sort-by-cover d-flex">
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-12 col-md-6">
+                                    <div class="custom_select">
+                                        <select class="form-control select-active" onchange="filter()" name="brand">
+                                            <option value="">All Brands</option>
+                                            @foreach (\App\Models\Brand::all() as $brand)
+                                                <option value="{{ $brand->slug }}" @if ($brand_id == $brand->id) selected @endif >{{ $brand->name_en ?? 'Null' }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>  
+                                <div class="form-group col-lg-6 col-12 col-md-6">
+                                    <div class="custom_select">
+                                        <select class="form-control select-active" name="sort_by" onchange="filter()">
+                                            <option value="newest" @if ($sort_by =='newest') selected @endif>Newest</option>
+                                            <option value="oldest" @if ($sort_by =='oldest') selected @endif >Oldest</option>
+                                            <option value="price-asc" @if ($sort_by == 'price-asc') selected @endif >Price Low to High</option>
+                                            <option value="price-desc" @if ($sort_by == 'price-desc') selected @endif >Price High to Low</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="sort-by-dropdown-wrap">
-                                    <span class="align-items-center d-flex"> 50 <i class="fi-rs-angle-small-down"></i></span>
-                                </div>
-                            </div>
-                            <div class="sort-by-dropdown">
-                                <ul>
-                                    <li><a class="active" href="#">50</a></li>
-                                    <li><a href="#">100</a></li>
-                                    <li><a href="#">150</a></li>
-                                    <li><a href="#">200</a></li>
-                                    <li><a href="#">All</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="sort-by-cover">
-                            <div class="sort-by-product-wrap">
-                                <div class="sort-by">
-                                    <span class="align-items-center d-flex"><i class="fi-rs-apps-sort"></i>Sort by:</span>
-                                </div>
-                                <div class="sort-by-dropdown-wrap">
-                                    <span class="align-items-center d-flex"> Featured <i class="fi-rs-angle-small-down"></i></span>
-                                </div>
-                            </div>
-                            <div class="sort-by-dropdown">
-                                <ul>
-                                    <li><a class="active" href="#">Featured</a></li>
-                                    <li><a href="#">Price: Low to High</a></li>
-                                    <li><a href="#">Price: High to Low</a></li>
-                                    <li><a href="#">Release Date</a></li>
-                                    <li><a href="#">Avg. Rating</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -221,92 +208,6 @@ Category Nest Online Shop
                         </ul>
                     </nav>
                 </div>
-                <section class="section-padding pb-5">
-                    <div class="section-title">
-                        <h3 class="">Deals Of The Day</h3>
-                        <a class="show-all" href="#">
-                            All Deals
-                            <i class="fi-rs-angle-right"></i>
-                        </a>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product-cart-wrap style-2">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img">
-                                        <a href="#">
-                                            <img src="{{asset('upload/nest-img/product-5-1.jpg')}}" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="deals-countdown-wrap">
-                                        <div class="deals-countdown" data-countdown="2025/03/25 00:00:00"></div>
-                                    </div>
-                                    <div class="deals-content">
-                                        <h2><a href="#">Seeds of Change Organic Quinoa, Brown</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-small text-muted">By <a href="#">NestFood</a></span>
-                                        </div>
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product-cart-wrap style-2">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img">
-                                        <a href="shop-product-right.html">
-                                            <img src="{{asset('upload/nest-img/product-4-1.jpg')}}" alt="" />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="deals-countdown-wrap">
-                                        <div class="deals-countdown" data-countdown="2026/04/25 00:00:00"></div>
-                                    </div>
-                                    <div class="deals-content">
-                                        <h2><a href="#">Perdue Simply Smart Organics Gluten</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
-                                        <div>
-                                            <span class="font-small text-muted">By <a href="#">Old El Paso</a></span>
-                                        </div>
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
-                                                <span>$24.85</span>
-                                                <span class="old-price">$26.8</span>
-                                            </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--End Deals-->
             </div>
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
                 <!-- Fillter By Price -->

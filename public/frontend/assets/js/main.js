@@ -40,38 +40,38 @@
         $(".sticky-sidebar").theiaStickySidebar();
     }
 
-    // Slider Range JS
-    if ($("#slider-range").length) {
-        $(".noUi-handle").on("click", function () {
-            $(this).width(50);
-        });
-        var rangeSlider = document.getElementById("slider-range");
-        var moneyFormat = wNumb({
-            decimals: 0,
-            // thousand: ",",
-            // prefix: "$"
-        });
-        var start_price = document.getElementById("filter_price_start").value;
-        var end_price = document.getElementById("filter_price_end").value;
-        noUiSlider.create(rangeSlider, {
-            start: [start_price, end_price],
-            step: 1,
-            range: {
-                min: [1],
-                max: [200000]
-            },
-            format: moneyFormat,
-            connect: true
-        });
+    // // Slider Range JS
+    // if ($("#slider-range").length) {
+    //     $(".noUi-handle").on("click", function () {
+    //         $(this).width(50);
+    //     });
+    //     var rangeSlider = document.getElementById("slider-range");
+    //     var moneyFormat = wNumb({
+    //         decimals: 0,
+    //         // thousand: ",",
+    //         // prefix: "$"
+    //     });
+    //     var start_price = document.getElementById("filter_price_start").value;
+    //     var end_price = document.getElementById("filter_price_end").value;
+    //     noUiSlider.create(rangeSlider, {
+    //         start: [start_price, end_price],
+    //         step: 1,
+    //         range: {
+    //             min: [1],
+    //             max: [200000]
+    //         },
+    //         format: moneyFormat,
+    //         connect: true
+    //     });
 
-        // Set visual min and max values and also update value hidden form inputs
-        rangeSlider.noUiSlider.on("update", function (values, handle) {
-            document.getElementById("slider-range-value1").innerHTML = values[0];
-            document.getElementById("slider-range-value2").innerHTML = values[1];
-            document.getElementsByName("min-value").value = moneyFormat.from(values[0]);
-            document.getElementsByName("max-value").value = moneyFormat.from(values[1]);
-        });
-    }
+    //     // Set visual min and max values and also update value hidden form inputs
+    //     rangeSlider.noUiSlider.on("update", function (values, handle) {
+    //         document.getElementById("slider-range-value1").innerHTML = values[0];
+    //         document.getElementById("slider-range-value2").innerHTML = values[1];
+    //         document.getElementsByName("min-value").value = moneyFormat.from(values[0]);
+    //         document.getElementsByName("max-value").value = moneyFormat.from(values[1]);
+    //     });
+    // }
 
     /*------ Hero slider 1 ----*/
     $(".hero-slider-1").slick({
@@ -433,22 +433,32 @@
         $(".categories-button-active").removeClass("open");
     });
 
-    searchToggle.on("click", function (e) {
+    searchToggle.mouseleave(function () {
+        $(this).removeClass("open");
+        $(".categories-button-active").removeClass("open");
+    });
+
+    searchToggle.on("mouseleave", function (e) {
         e.preventDefault();
         $(this).siblings(".categories-dropdown-active-large").removeClass("open");
         $(this).removeClass("open");
     });
 
-    // searchToggle.on("click", function (e) {
-    //     e.preventDefault();
-    //     if ($(this).hasClass("open")) {
-    //         $(this).removeClass("open");
-    //         $(this).siblings(".categories-dropdown-active-large").removeClass("open");
-    //     } else {
-    //         $(this).addClass("open");
-    //         $(this).siblings(".categories-dropdown-active-large").addClass("open");
-    //     }
-    // });
+    $(".categories-dropdown-active-large").mouseenter(function () {
+        $(this).addClass("open");
+        $(this).siblings(".categories-dropdown-active-large").addClass("open");
+    });
+
+    searchToggle.on("click", function (e) {
+        e.preventDefault();
+        if ($(this).hasClass("open")) {
+            $(this).removeClass("open");
+            $(this).siblings(".categories-dropdown-active-large").removeClass("open");
+        } else {
+            $(this).addClass("open");
+            $(this).siblings(".categories-dropdown-active-large").addClass("open");
+        }
+    });
 
     /*---------------------
         Price range
