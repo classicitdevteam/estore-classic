@@ -577,6 +577,19 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
     } // end method 
 
+    public function changeFeatureStatus($id){
+        $product = Product::find($id);
+        if($product->is_featured == 0){
+            $product->is_featured = 1;
+        }else{
+            $product->is_featured = 0;
+        }
+        $product->save();
+
+        Session::flash('success','Feature Status Changed Successfully.');
+        return redirect()->back();
+    }
+
     /*=================== Start Category With SubCategory  Ajax ===================*/
     public function GetSubProductCategory($category_id){
         $subcat = SubCategory::where('category_id',$category_id)->orderBy('subcategory_name_en','ASC')->get();

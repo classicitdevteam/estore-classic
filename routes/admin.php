@@ -136,9 +136,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/category/subcategory/ajax/{category_id}', [ProductController::class, 'GetSubProductCategory']);
 		Route::get('/subcategory/minicategory/ajax/{subcategory_id}', [ProductController::class, 'GetSubSubCategory']);
 
-
-
-
+		Route::get('/product_feature_status_change/{id}', [ProductController::class, 'changeFeatureStatus'])->name('product.changeFeatureStatus');
 	});
 
 

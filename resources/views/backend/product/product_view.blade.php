@@ -22,6 +22,7 @@
                             <th scope="col">Product Price </th>
 							<th scope="col">Quantity </th>
 							<th scope="col">Discount </th>
+                            <th scope="col">Featured</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="text-end">Action</th>
                         </tr>
@@ -58,6 +59,15 @@
                                 @else
 								 	<span class="badge rounded-pill alert-danger">No Discount</span>
 								@endif
+                            </td>
+                            <td>
+                                @if($item->is_featured == 1)
+                                  <a href="{{ route('product.changeFeatureStatus',['id'=>$item->id]) }}">
+                                    <span class="badge rounded-pill alert-success"><i class="material-icons md-check"></i></span>
+                                  </a>
+                                @else
+                                  <a href="{{ route('product.changeFeatureStatus',['id'=>$item->id]) }}" > <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
+                                @endif
                             </td>
                             <td>
                                 @if($item->status == 1)
