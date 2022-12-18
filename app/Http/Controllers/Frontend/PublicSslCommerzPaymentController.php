@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Auth;
 use App\Models\CombinedOrder;
-use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\WalletController;
 use App\Models\CustomerPackage;
 use App\Models\SellerPackage;
@@ -87,7 +87,7 @@ class PublicSslCommerzPaymentController extends Controller
             // $post_data['value_d'] = "ref004";
 
             Session::put('checkout_request', $request->all());
-
+            
             $sslc = new SSLCommerz();
             # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
             $payment_options = $sslc->initiate($post_data, false);

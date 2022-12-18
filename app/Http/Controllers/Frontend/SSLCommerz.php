@@ -40,13 +40,18 @@ class SSLCommerz
     }
 
     public function initiate($post_data, $get_pay_options = false)
-    {
+    {   
+        //dd($post_data != '' && is_array($post_data));
         if ($post_data != '' && is_array($post_data)) {
 
             $post_data['store_id'] = $this->store_id;
             $post_data['store_passwd'] = $this->store_pass;
+            
+            //dd($post_data);
 
             $load_sslc = $this->sendRequest($post_data);
+            
+            //dd($load_sslc);
 
             if ($load_sslc) {
                 if (isset($this->sslc_data['status']) && $this->sslc_data['status'] == 'SUCCESS') {
@@ -304,7 +309,8 @@ class SSLCommerz
 
     # VALIDATE SSLCOMMERZ TRANSACTION
     protected function validate($merchant_trans_id, $merchant_trans_amount, $merchant_trans_currency, $post_data)
-    {
+    {;
+        dd($post_data);
         # MERCHANT SYSTEM INFO
         if ($merchant_trans_id != "" && $merchant_trans_amount != 0) {
 

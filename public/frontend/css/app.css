@@ -111,6 +111,14 @@
     flex-wrap: nowrap;
 }
 
+.banners .banner-img {
+    height:100%;
+    padding-bottom:20px;
+ }
+ .banners .banner-img img{
+     height:100%; 
+ }
+
 @media only screen and (max-width: 1199px){
     .mobile_margin_bottom{
         margin-bottom: 63px;

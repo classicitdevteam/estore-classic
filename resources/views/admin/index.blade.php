@@ -7,7 +7,7 @@ var options = {
     exportEnabled: true,
     animationEnabled: true,
     title:{
-        text: "eStore Classic"
+        text: "{{ get_setting('site_name')->value ?? ' ' }}"
     },
     legend:{
         horizontalAlign: "right",
