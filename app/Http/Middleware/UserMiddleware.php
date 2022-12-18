@@ -17,9 +17,10 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        //dd(Auth::check());
+        //dd(Auth::guard('web')->check());
         if(Auth::guard('web')->check()){
-            if(Auth::guard('web')->user() || Auth::guard('web')->user()->role =="3"){
+            if(Auth::guard('web')->user() && Auth::guard('web')->user()->role =="3"){
+                //dd(Auth::guard('web')->user());
                 if(!Auth::guard('web')->user()->role == "3"){
                     return redirect()->route('login')->with('error','Plz login First');
                 }
@@ -30,6 +31,6 @@ class UserMiddleware
             return redirect()->route('home');
         }
 
-        // return $next($request);
+        return $next($request);
     }
 }

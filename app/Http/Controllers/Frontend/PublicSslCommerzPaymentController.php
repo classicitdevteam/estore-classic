@@ -58,10 +58,10 @@ class PublicSslCommerzPaymentController extends Controller
                 
                 
                 # CUSTOMER INFORMATION
-                $user = Auth::user();
-                $post_data['cus_name'] = $user->name;
-                $post_data['cus_phone'] = $user->phone;
-                $post_data['cus_email'] = $user->email;
+                //$user = Auth::user();
+                $post_data['cus_name'] = $request->name;
+                $post_data['cus_phone'] = $request->phone;
+                $post_data['cus_email'] = $request->email;
             }
 
             $server_name=$request->root()."/";
@@ -86,6 +86,8 @@ class PublicSslCommerzPaymentController extends Controller
             // $post_data['value_c'] = "ref003";
             // $post_data['value_d'] = "ref004";
 
+            Session::put('checkout_request', $request->all());
+
             $sslc = new SSLCommerz();
             # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
             $payment_options = $sslc->initiate($post_data, false);
@@ -100,6 +102,7 @@ class PublicSslCommerzPaymentController extends Controller
     public function success(Request $request)
     {
         //echo "Transaction is Successful";
+        //dd($request);
 
         $sslc = new SSLCommerz();
         #Start to received these value from session. which was saved in index function.
@@ -108,9 +111,11 @@ class PublicSslCommerzPaymentController extends Controller
         $payment = json_encode($request->all());
 
         if(isset($request->value_c)){
-            if($request->value_c == 'cart_payment'){
+            if(Session::get('payment_type') == 'cart_payment'){
                 $checkoutController = new CheckoutController;
-                return $checkoutController->checkout_done($request->value_b, $payment);
+                $checkout_request = new Request;
+                $checkout_request = new Request(Session::get('checkout_request'));
+                return $checkoutController->store($checkout_request);
             }
             elseif ($request->value_c == 'wallet_payment') {
                 $data['amount'] = $request->value_b;

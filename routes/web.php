@@ -14,9 +14,9 @@ use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\NagadController;
 use App\Http\Controllers\Frontend\BkashController;
 use App\Http\Controllers\Frontend\AamarpayController;
-use App\Http\Controllers\Frontend\PublicSslCommerzPaymentController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\CompareController;
+use App\Http\Controllers\Frontend\PublicSslCommerzPaymentController;
 use App\Http\Middleware\UserMiddleware;
 
 /*
@@ -36,6 +36,10 @@ Route::get('/home2', [FrontendController::class, 'index2'])->name('home2');
 
 Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/dashboard',[UserController::class, 'index'])->name('dashboard');
+});
+
+Route::get('/refresh-csrf', function() {
+    return csrf_token();
 });
 
 /* ==================== Start User dashboard Route ================== */

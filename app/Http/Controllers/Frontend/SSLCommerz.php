@@ -53,6 +53,7 @@ class SSLCommerz
                     if (!$get_pay_options) {
                         if (isset($this->sslc_data['GatewayPageURL']) && $this->sslc_data['GatewayPageURL'] != '') {
                             //header("Location: " . $this->sslc_data['GatewayPageURL']);
+                            //dd($this->sslc_data['GatewayPageURL']);
                             echo "
                                 <script>
                                     window.location.href = '" . $this->sslc_data['GatewayPageURL'] . "';
