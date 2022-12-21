@@ -39,6 +39,14 @@
         right: 0;
     }
 }
+.main-menu > nav > ul > li:hover ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0;
+}
+.header-style-1 .categories-dropdown-active-large {
+    margin-top: 13px;
+}
 /*Custom Dashboard*/
 
 /*Product fixed*/

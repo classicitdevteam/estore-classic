@@ -160,23 +160,19 @@
 						        <tbody>
 							        <tr>
 							            <th class="gry-color text-left">Sub Total</th>
-							            <td class="currency">{{ $order->grand_total ?? 'NULL' }}</td>
+							            <td class="currency">{{ $order->sub_total ?? '0.00' }}</td>
 							        </tr>
 							        <tr>
 							            <th class="gry-color text-left">Shipping Cost</th>
-							            <td class="currency">{{ $order->order_Detail->shipping_cost ?? '0.00' }}</td>
-							        </tr>
-							        <tr class="border-bottom">
-							            <th class="gry-color text-left">Total Tax</th>
-							            <td class="currency">{{ $order->order_Detail->tax ?? '0.00' }}</td>
+							            <td class="currency">{{ $order->shipping_charge ?? '0.00' }}</td>
 							        </tr>
 				                    <tr class="border-bottom">
-							            <th class="gry-color text-left">Coupon Discount</th>
-							            <td class="currency">0.00</td>
+							            <th class="gry-color text-left">Discount</th>
+							            <td class="currency">{{ $order->discount ?? '0.00' }}</td>
 							        </tr>
 							        <tr>
 							            <th class="text-left strong">Grand Total</th>
-							            <td class="currency">{{ $order->grand_total ?? 'NULL' }}</td>
+							            <td class="currency">{{ ($order->grand_total-$order->discount) ?? '0.00'}}</td>
 							        </tr>
 						        </tbody>
 						    </table>

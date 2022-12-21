@@ -12,10 +12,13 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     @php
-        $setting = App\Models\Setting::find(1);
-    @endphp 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset($setting->favicon)}}" />
+        $logo = get_setting('site_favicon');
+    @endphp
+    @if($logo != null)
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? ' ') }}" />
+    @else
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" />
+    @endif
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3 ') }}" />
 </head>
 
@@ -123,29 +126,34 @@
                                                     price ?? 'NULL'}}</td>
                                                     <td class="text-center">{{$order_detail->
                                                     qty ?? 'NULL'}}</td>
-                                                    <td class="text-right">{{ $order->grand_total ?? 'Null' }}</td>
+                                                    <td class="text-right">{{ ($order_detail->price * $order_detail->
+                                                        qty) ?? ' ' }}</td>
                                                 </tr>
                                                 @endforeach
                                                  <tr>
                                                     <td colspan="3" class="text-end f-w-600">SubTotal</td>
-                                                    <td class="text-right">{{ $order->grand_total ?? 'NULL' }}</td>
+                                                    <td class="text-right">{{ $order->sub_total ?? ' ' }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3" class="text-end f-w-600">Shipping cost:</td>
-                                                    <td class="text-right">10.00</td>
+                                                    <td class="text-right">{{ $order->shipping_charge ?? '' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" class="text-end f-w-600">Discount:</td>
+                                                    <td class="text-right">{{ $order->discount ?? '0.00' }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3" class="text-end f-w-600">Grand Total</td>
-                                                    <td class="text-right f-w-600">{{ $order->grand_total ?? 'NULL' }}</td>
+                                                    <td class="text-right f-w-600">{{ ($order->grand_total-$order->discount) ?? ' '}}</td>
                                                 </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="invoice-bottom">
+                            <div class="invoice-bottom mb-5">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div>
+                                        {{-- <div>
                                             <h3 class="invoice-title-1">Important Note</h3>
                                             <ul class="important-notes-list-1">
                                                 <li>All amounts shown on this invoice are in BDT</li>
@@ -153,7 +161,7 @@
                                                 <li>Once order done, money can't refund</li>
                                                 <li>Delivery might delay due to some external dependency</li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="col-sm-6 col-offsite">
                                         <div class="text-end">

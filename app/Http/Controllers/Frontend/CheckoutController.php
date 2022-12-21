@@ -22,6 +22,7 @@ use App\Models\ProductStock;
 use App\Models\AccountHead;
 use App\Models\AccountLedger;
 use App\Http\Controllers\Frontend\PublicSslCommerzPaymentController;
+use App\Models\Shipping;
 
 class CheckoutController extends Controller
 {
@@ -36,10 +37,20 @@ class CheckoutController extends Controller
             return redirect()->route('login');
         }
         $addresses = Address::where('status', 1)->get();
+        $shippings = Shipping::where('status', 1)->get();
 
-        return view('frontend.checkout.index',compact('addresses'));
+        $carts = Cart::content();
+        $cartTotal = Cart::total();
+
+        //dd($shippings);
+
+        return view('frontend.checkout.index',compact('addresses','shippings', 'carts', 'cartTotal'));
     } // end method
 
+    public function shippingAjax($shipping_id){
+        $shipping = Shipping::find($shipping_id);
+        return json_encode($shipping);
+    }
 
     /* ============== Start GetCheckoutProduct Method ============= */
     public function getCheckoutProduct(){
@@ -91,8 +102,18 @@ class CheckoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //dd($request);
+    {   
+        $data = $request->validate([
+            'name' => 'required|max:191',
+            'email' => 'nullable|email|max:191',
+            'phone' => ['required','regex:/(\+){0,1}(88){0,1}01(3|4|5|6|7|8|9)(\d){8}/','min:11','max:15'],
+            'address' => 'required|max:10000',  
+            'payment_option'=>'required',
+            'comment' => 'nullable|max:2000',
+            'shipping_id' => 'required',
+        ]);
+        // dd(Cart::total()+$request->total_amount);
+        // dd($request->total_amount);
         // if($request->payment_option == 'nagad'){
         //     return redirect()->route('checkout.payment');
         // }
@@ -126,7 +147,9 @@ class CheckoutController extends Controller
         // order add //
         $order = Order::create([
             'user_id' => $user_id,
-            'grand_total' => Cart::total(),
+            'sub_total' => $request->sub_total,
+            'grand_total' => $request->grand_total,
+            'shipping_charge' => $request->shipping_charge,
             'payment_method' => $request->payment_option,
             'payment_status' => $payment_status,
             'invoice_no' => date('Ymd-His') . rand(10, 99),

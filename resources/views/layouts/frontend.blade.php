@@ -615,8 +615,9 @@
                 dataType:'json',
                 success:function(response){
                     // alert(response);
-                    checkout();
+                    //checkout();
                     $('span[id="cartSubTotal"]').text(response.cartTotal);
+                    $('#cartSubTotalShi').val(response.cartTotal);
                     $('.cartQty').text(Object.keys(response.carts).length);
                     $('#total_cart_qty').text(Object.keys(response.carts).length);
 
@@ -624,7 +625,7 @@
 
                     if(Object.keys(response.carts).length > 0){
                         $.each(response.carts, function(key,value){
-                            console.log(value);
+                            //console.log(value);
                             var slug = value.options.slug;
                             var base_url = window.location.origin;
                           miniCart += `

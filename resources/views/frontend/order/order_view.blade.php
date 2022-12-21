@@ -12,10 +12,13 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     @php
-        $setting = App\Models\Setting::find(1);
-    @endphp 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset($setting->favicon)}}" />
+        $logo = get_setting('site_favicon');
+    @endphp
+    @if($logo != null)
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? ' ') }}" />
+    @else
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" />
+    @endif
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3 ') }}" />
 </head>
 
@@ -39,7 +42,7 @@
                                                         $logo = get_setting('site_footer_logo');
                                                     @endphp
                                                     @if($logo != null)
-                                                        <img src="{{ asset(get_setting('site_footer_logo')->value ?? 'null') }}" alt="{{ env('APP_NAME') }}">
+                                                        <img src="{{ asset(get_setting('site_footer_logo')->value ?? ' ') }}" alt="{{ env('APP_NAME') }}">
                                                     @else
                                                         <img src="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" style="height: 60px !important; width: 80px !important; min-width: 80px !important;">
                                                     @endif
@@ -62,10 +65,10 @@
                                         <div class="invoice-number">
                                             <h4 class="invoice-title-1 mb-10">Invoice To</h4>
                                             <p class="invoice-addr-1 text-capitalize">
-                                                <strong>{{ get_setting('business_name')->value ?? 'Null'}}</strong> <br />
-                                                {{ get_setting('business_address')->value ?? 'Null'}}<br>
-                                                <abbr title="Phone">Phone:</abbr> {{ get_setting('phone')->value ?? 'Null'}}<br>
-                                                <abbr title="Email">Email: </abbr>{{ get_setting('email')->value ?? 'Null'}}<br>
+                                                <strong>{{ get_setting('business_name')->value ?? ' '}}</strong> <br />
+                                                {{ get_setting('business_address')->value ?? ' '}}<br>
+                                                <abbr title="Phone">Phone:</abbr> {{ get_setting('phone')->value ?? ' '}}<br>
+                                                <abbr title="Email">Email: </abbr>{{ get_setting('email')->value ?? ' '}}<br>
                                             </p>
                                         </div>
                                     </div>
@@ -73,9 +76,9 @@
                                         <div class="invoice-number">
                                             <h4 class="invoice-title-1 mb-10">Bill To</h4>
                                             <p class="invoice-addr-1 text-capitalize">
-                                                <strong>{{ $order->user->name ?? 'NULL' }}</strong> <br />
-                                                {{ $order->address ?? 'NULL' }}<br>
-                                                {{ $order->upazilla->name_en ?? 'NULL' }}, {{ $order->district->district_name_en ?? 'NULL' }}, {{ $order->division->division_name_en ?? 'NULL' }}<br>
+                                                <strong>{{ $order->user->name ?? ' ' }}</strong> <br />
+                                                {{ $order->address ?? ' ' }}<br>
+                                                {{ $order->upazilla->name_en ?? ' ' }}, {{ $order->district->district_name_en ?? ' ' }}, {{ $order->division->division_name_en ?? 'NULL' }}<br>
                                                 <abbr title="Phone">Phone:</abbr> {{ $order->user->phone }}<br>
                                                 <abbr title="Email">Email: </abbr>{{ $order->user->email }}<br>
                                             </p>
@@ -123,20 +126,25 @@
                                                     price ?? 'NULL'}}</td>
                                                     <td class="text-center">{{$order_detail->
                                                     qty ?? 'NULL'}}</td>
-                                                    <td class="text-right">{{ $order->grand_total ?? 'Null' }}</td>
+                                                    <td class="text-right">{{ ($order_detail->price * $order_detail->
+                                                        qty) ?? ' ' }}</td>
                                                 </tr>
                                                 @endforeach
-                                                <tr>
+                                                 <tr>
                                                     <td colspan="3" class="text-end f-w-600">SubTotal</td>
-                                                    <td class="text-right">{{ $order->grand_total ?? 'NULL' }}</td>
+                                                    <td class="text-right">{{ $order->sub_total ?? '0.00' }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3" class="text-end f-w-600">Shipping cost:</td>
-                                                    <td class="text-right">10.00</td>
+                                                    <td class="text-right">{{ $order->shipping_charge ?? '0.00' }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" class="text-end f-w-600">Discount:</td>
+                                                    <td class="text-right">{{ $order->discount ?? '0.00' }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3" class="text-end f-w-600">Grand Total</td>
-                                                    <td class="text-right f-w-600">{{ $order->grand_total ?? 'NULL' }}</td>
+                                                    <td class="text-right f-w-600">{{ ($order->grand_total-$order->discount) ?? '0.00'}}</td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -158,7 +166,7 @@
                                     <div class="col-sm-6 col-offsite">
                                         <div class="text-end">
                                             <p class="mb-0 text-13">Thank you for your business</p>
-                                            <p><strong>{{ get_setting('business_name')->value ?? 'Null'}}</strong></p>
+                                            <p><strong>{{ get_setting('business_name')->value ?? ' '}}</strong></p>
                                         </div>
                                     </div>
                                 </div>

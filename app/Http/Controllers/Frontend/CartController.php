@@ -81,6 +81,7 @@ class CartController extends Controller
                 'weight' => 1, 
                 'options' => [
                     'image' => $product->product_thumbnail,
+                    'slug' => $product->slug,
                     'is_varient' => 1,
                     'varient' => $request->product_varient,
                     'attribute_ids' => $attribute_ids,

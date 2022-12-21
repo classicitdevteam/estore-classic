@@ -18,6 +18,7 @@
                             <th scope="col">Sl</th>
                             <th scope="col">Name</th> 
                             <th scope="col">Type</th> 
+                            <th scope="col">Shipping Charge</th> 
                             <th scope="col">Shipping Time</th> 
                             <th scope="col">Status</th>
                             <th scope="col" class="text-end">Action</th>
@@ -28,7 +29,7 @@
                         <tr>
                             <td> {{ $key+1}} </td>
                            
-                            <td> {{ $shipping->name ?? 'NULL' }} </td>
+                            <td> {{ $shipping->name ?? ' ' }} </td>
                             <td>
                                 @if($shipping->type == 1)
                                     Inside Dhaka
@@ -36,7 +37,8 @@
                                     Outside Dhaka
                                 @endif
                             </td>
-                            <td> {{ $shipping->time ?? 'NULL' }} </td>
+                            <td> {{ $shipping->shipping_charge ?? ' ' }} </td>
+                            <td> {{ $shipping->time ?? ' ' }} </td>
                             <td>
                                 @if($shipping->status == 1)
                                   <a href="{{ route('shipping.in_active',['id'=>$shipping->id]) }}">

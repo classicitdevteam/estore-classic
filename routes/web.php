@@ -114,6 +114,8 @@ Route::get('/checkout-product', [CheckoutController::class, 'getCheckoutProduct'
 Route::post('/checkout/store',[CheckoutController::class,'store'])->name('checkout.store');
 Route::get('/checkout/success/{id}',[CheckoutController::class,'show'])->name('checkout.success');
 
+Route::get('/checkout/shipping/ajax/{shipping_cost}',[CheckoutController::class,'shippingAjax'])->name('checkout.shippingAjax');
+
 /*================  Ajax  ==================*/
 Route::get('/division-district/ajax/{division_id}',[CheckoutController::class,'getdivision'])->name('division.ajax');
 Route::get('/district-upazilla/ajax/{district_id}',[CheckoutController::class,'getupazilla'])->name('upazilla.ajax');

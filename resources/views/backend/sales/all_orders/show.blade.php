@@ -120,7 +120,6 @@
                     <table class="table table-bordered">
                         <form action="{{ route('admin.orders.update',$order->id) }}" method="post">
                             @csrf
-                            @method('PUT')
                             <tbody>
                                 <tr>
                                     <th>Invoice</th>
@@ -163,30 +162,20 @@
                                 <tr>
                                     <th>Payment Method</th>
                                     <td>
-                                        <select class="form-control select-active" name="payment_method" id="payment_method">
+                                        <select class="form-control select-active" name="payment_method" id="payment_method" required>
                                             <option selected=""  value="" >Select Payment Method</option>
                                                 <option value="cash">Cash</option>
                                                 <option value="bikash" >Bikash</option>
                                                 <option value="nagad">Nagad</option>
                                         </select>
                                     </td>
-                                    <th>Shipping Method</th>
-                                    <td>
-                                        <select class="form-control select-active" name="shipping_type" id="shipping_type" >
-                                            <option selected=""  value="" >Select Shipping Method</option>
-                                                <option value="cash">Cash</option>
-                                                <option value="bikash" >Bikash</option>
-                                                <option value="nagad">Nagad</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th>Shipping Charge</th>
-                                    <td><input type="" class="form-control" name="shipping_cost" value="70"></td>
-                                    <th>Discount</th>
-                                    <td><input type="" class="form-control" name="discount" value="0.00"></td>
+                                    <td><input type="" class="form-control" id="cartSubTotalShi" name="shipping_charge" value="{{ $order->shipping_charge ?? '0.00'}}"></td>
                                 </tr>
                                 <tr>
+                                    <th>Discount</th>
+                                    <td><input type="" class="form-control" name="discount" value="{{ $order->discount ?? '0.00' }}"></td>
+
                                     <th>Payment Status</th>
                                     <td>
                                         @php
@@ -198,14 +187,17 @@
                                         @endphp
                                         <span class="badge rounded-pill alert-success text-success">{!! $status !!}</span>
                                     </td>
-                                    <th>Payment Date</th>
-                                    <td>{{ date_format($order->created_at,"Y/m/d") ?? 'Null'}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Total</th>
-                                    <td>{{ $order->grand_total ?? 'Null'}} <strong>Tk</strong></td>
+                                    
+                                    <th>Payment Date</th>
+                                    <td>{{ date_format($order->created_at,"Y/m/d") ?? ' '}}</td>
+                                </tr>
+                                <tr>
                                     <th>Sub Total</th>
-                                    <td>{{ $order->grand_total ?? 'Null'}}</td>
+                                    <td>{{ $order->sub_total ?? ' '}} <strong>Tk</strong></td>
+                                    <th>Total</th>
+                                    <td>{{ ($order->grand_total-$order->discount) ?? ' '}}<strong>Tk</strong></td>
                                    <!--  <td>
                                          
                                         <span class="badge badge-success">Delivered</span>
@@ -237,11 +229,11 @@
                                         <td>
                                             <a class="itemside" href="#">
                                                 <div class="left">
-                                                    <img src="{{ asset($orderDetail->product->product_thumbnail ?? 'Null') }}" width="40" height="40" class="img-xs" alt="Item" />
+                                                    <img src="{{ asset($orderDetail->product->product_thumbnail ?? ' ') }}" width="40" height="40" class="img-xs" alt="Item" />
                                                 </div>
                                                 <div class="info">
                                                     <span class="text-bold">
-                                                        {{$orderDetail->product->name_en ?? 'NULL'}}
+                                                        {{$orderDetail->product->name_en ?? ' '}}
                                                     </span>
                                                     
                                                 @if($orderDetail->is_varient && count(json_decode($orderDetail->variation))>0)
@@ -252,9 +244,9 @@
                                                 </div>
                                             </a>
                                         </td>
-                                        <td>{{ $orderDetail->price ?? 'NULL' }}</td>
-                                        <td>{{ $orderDetail->qty ?? 'NULL' }}</td>
-                                        <td class="text-end">{{ $orderDetail->price ?? 'NULL' }}</td>
+                                        <td>{{ $orderDetail->price ?? '0.00' }}</td>
+                                        <td>{{ $orderDetail->qty ?? '0' }}</td>
+                                        <td class="text-end">{{ $orderDetail->price ?? '0.00' }}</td>
                                     </tr>
                                 @endforeach
                                 <tr>
@@ -262,15 +254,19 @@
                                         <article class="float-end">
                                             <dl class="dlist">
                                                 <dt>Subtotal:</dt>
-                                                <dd>{{ $order->grand_total ?? 'NULL' }}</dd>
+                                                <dd>{{ $order->sub_total ?? '0.00' }}</dd>
                                             </dl>
                                             <dl class="dlist">
                                                 <dt>Shipping cost:</dt>
-                                                <dd>10.00</dd>
+                                                <dd>{{ $order->shipping_charge ?? '0.00' }}</dd>
+                                            </dl>
+                                            <dl class="dlist">
+                                                <dt>Discount:</dt>
+                                                <dd><b class="">{{ $order->discount ?? '0.00' }}</b></dd>
                                             </dl>
                                             <dl class="dlist">
                                                 <dt>Grand total:</dt>
-                                                <dd><b class="h5">{{ $order->grand_total ?? 'NULL' }}</b></dd>
+                                                <dd><b class="h5">{{ ($order->grand_total-$order->discount) ?? ' '}}</b></dd>
                                             </dl>
                                             <dl class="dlist">
                                                 <dt class="text-muted">Status:</dt>
@@ -301,7 +297,7 @@
                         <p>
                             <img src="{{ asset('backend/assets/imgs/card-brands/2.png ') }}" class="border" height="20" /> Master Card ** ** 4768 <br />
                             Business name: Grand Market LLC <br />
-                            Phone: +1 (800) 555-154-52
+                            Phone: 
                         </p>
                     </div>
                     <div class="h-25 pt-4">
@@ -309,7 +305,7 @@
                             <label>Notes</label>
                             <textarea class="form-control" name="notes" id="notes" placeholder="Type some note"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Orders</button>
+                        <button type="submit" class="btn btn-primary">Update Order</button>
                     </div>
                     </form>
                 </div>
@@ -324,6 +320,30 @@
 @push('footer-script')
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="shipping_id"]').on('change', function(){
+            var shipping_cost = $(this).val();
+            if(shipping_cost) {
+                $.ajax({
+                    url: "{{  url('/checkout/shipping/ajax') }}/"+shipping_cost,
+                    type:"GET",
+                    dataType:"json",
+                    success:function(data) {
+                        //console.log(data);
+                        $('#ship_amount').text(data.shipping_charge);
+                        
+                        let shipping_price = parseInt(data.shipping_charge);
+                        let grand_total_price = parseInt($('#cartSubTotalShi').val());
+                        grand_total_price += shipping_price;
+                        $('#grand_total_set').html(grand_total_price);
+                        $('#total_amount').val(grand_total_price);
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+    });
 
     /* ============ Update Payment Status =========== */
     $('#update_payment_status').on('change', function(){

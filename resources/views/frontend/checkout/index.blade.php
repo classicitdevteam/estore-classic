@@ -102,16 +102,22 @@
                         <div class="row">
                             <div class="form-group col-lg-6">
                                 <label for="name" class="fw-bold text-black"><span class="text-danger">*</span> Name </label>
-                                <input type="text" required="" id="name" name="name" placeholder="Full Name" value="{{ Auth::user()->name ?? '' }}">
+                                <input type="text" required="" id="name" name="name" placeholder="Full Name" value="{{ Auth::user()->name ?? old('name') }}">
+                                @error('name')
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="phone" class="fw-bold text-black"><span class="required text-danger">*</span> Phone </label>
-                                <input required="" type="number" name="phone" placeholder="Phone" id="phone" value="{{ Auth::user()->phone ?? '' }}">
+                                <input required="" type="number" name="phone" placeholder="Phone" id="phone" value="{{ Auth::user()->phone ?? old('phone') }}">
+                                @error('phone')
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             
                             <div class="form-group col-lg-6">
                                 <label for="email" class="fw-bold text-black">Email</label>
-                                <input id="email" type="email" name="email" placeholder="Email address *" value="{{ Auth::user()->email ?? ''}}">
+                                <input id="email" type="email" name="email" placeholder="Email address *" value="{{ Auth::user()->email ?? old('email') }}">
                             </div>
 
                             @if(auth()->check())
@@ -124,7 +130,7 @@
                                 <label for="address_id" class="fw-bold text-black col-form-label"><span class="text-danger">*</span>Address</label>
                                 <div class="form-row">
                                     <div class="col-10 float-start address_select_custom">
-                                        <div class="custom_select">
+                                        <div class="custom_select custom_address_modal">
                                             <select class="form-select select-active select-nice" aria-label="Default select example"  name="address_id" id="address_id" required>
                                                 <option selected>Select Address</option>
                                                     @foreach($addresses as $address)
@@ -141,8 +147,8 @@
 
                         @if(!auth()->check())
                         <div class="row shipping_calculator">
-                            <div class="form-group col-lg-6">
-                                <div class="custom_select">
+                            <div class="form-group col-lg-6 address_select_custom">
+                                <div class="custom_select custom_address_modal">
                                     <label for="division_id" class="fw-bold text-black"><span class="text-danger">*</span> Division</label>
                                     <select class="form-control select-active"  name="division_id" id="division_id" required>
                                         <option value="">Select Division</option>
@@ -153,16 +159,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <div class="custom_select">
+                            <div class="form-group col-lg-6 address_select_custom">
+                                <div class="custom_select custom_address_modal">
                                     <label for="district_id" class="fw-bold text-black"><span class="text-danger">*</span> District</label>
                                     <select class="form-control select-active" name="district_id" id="district_id" required>
                                         <option selected=""  value="">Select District</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <div class="custom_select">
+                            <div class="form-group col-lg-6 address_select_custom">
+                                <div class="custom_select custom_address_modal">
                                     <label for="upazilla_id" class="fw-bold text-black"><span class="text-danger">*</span> Upazilla</label>
                                     <select class="form-control select-active" name="upazilla_id" id="upazilla_id" required>
                                         <option selected=""  value="">Select Upazilla</option>
@@ -170,10 +176,13 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="address" class="fw-bold text-black"><span class="text-danger">*</span> Address</label>
-                            <textarea name="address" id="address" class="form-control" placeholder="Address" required></textarea>
+                            <div class="form-group col-lg-6">
+                                <label for="address" class="fw-bold text-black"><span class="text-danger">*</span> Address</label>
+                                <textarea name="address" id="address" class="form-control" placeholder="Address" required>{{ old('address') }}</textarea>
+                                @error('address')
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
                         </div>
                         @else
                         <div class="card bg-lite-main mb-2 d-none selected_address">
@@ -202,7 +211,21 @@
                           </div>
                         </div>
                         @endif
-                        <div class="form-group">
+                        <div class="form-group col-lg-6 address_select_custom">
+                            <div class="custom_select">
+                                <label for="shipping_id" class="fw-bold text-black col-12"><span class="text-danger">*</span> Shipping</label>
+                                <select class="form-control select-active col-12" name="shipping_id" id="shipping_id" required>
+                                    <option value="">--Select--</option>
+                                    @foreach ($shippings as $key => $shipping)
+                                        <option value="{{ $shipping->id }}">@if($shipping->type == 1) Outside Dhaka @else Inside Dhaka @endif </option>
+                                    @endforeach
+                                </select>
+                                @error('shipping_id')
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
                             <label for="comment" class="fw-bold text-black">Comments</label>
                             <textarea name="comment" id="comment" class="form-control" placeholder="Additional information"></textarea>
                         </div>
@@ -217,12 +240,37 @@
                         <div class="divider-2 mb-30"></div>
                         <div class="table-responsive order_table checkout">
                             <table class="table no-border">
-                                <tbody id="cartCheckout">
-                                    
+                                <tbody id="">
+                                    @foreach ($carts as $cart)
+                                    <tr>
+                                        <td class="image product-thumbnail"><img src="/{{$cart->options->image}}" alt="#"></td>
+                                        <td>
+                                            <h6 class="w-160 mb-5"><a href="{{ route('product.details', $cart->options->slug) }}" class="text-heading">{{$cart->name}}</a></h6></span>
+                                            @if($cart->options->attribute_names)
+                                                @for($i=0; $i<sizeof($cart->options->attribute_names); $i++)
+                                                    <span>{{ $cart->options->attribute_names[$i] }}: {{ $cart->options->attribute_values[$i] }}</span><br/>
+                                                @endfor
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <h6 class="text-muted pl-20 pr-20">x {{$cart->qty}}</h6>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-brand">৳{{$cart->subtotal}}</h4>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <tfoot>
-                                <h6 class="text-muted" id="cartSubTotal">Subtotal</h6>
+                                <tr>
+                                    <td><h6 class="d-flex justify-content-between mb-2">Subtotal : <span class="text-brand text-end">৳<span id="cartSubTotal">{{ $cartTotal }}</span></span></h6></td>
+                                    <td><h6 class="d-flex justify-content-between mb-2">Shipping : <span class="text-brand text-end">৳<span id="ship_amount">0.00</span></span><h6></td>
+                                    <input type="hidden" value="" name="shipping_charge" class="ship_amount" />
+                                    <input type="hidden" value="" name="sub_total" id="cartSubTotalShi" />
+                                    <input type="hidden" value="" name="grand_total" id="grand_total" />
+                                    <td><h4 class="d-flex justify-content-between">Total : <span class="text-brand text-end">৳<span id="grand_total_set">{{ $cartTotal }}</span></span><h4></td>
+                                </tr>
                             </tfoot>
                         </div>
                     </div>
@@ -419,6 +467,34 @@
 @endsection
 
 @push('footer-script')
+    <script>
+        $(document).ready(function() {
+            $('select[name="shipping_id"]').on('change', function(){
+                var shipping_cost = $(this).val();
+                if(shipping_cost) {
+                    $.ajax({
+                        url: "{{  url('/checkout/shipping/ajax') }}/"+shipping_cost,
+                        type:"GET",
+                        dataType:"json",
+                        success:function(data) {
+                            //console.log(data);
+                            $('#ship_amount').text(data.shipping_charge);
+                            $('.ship_amount').val(data.shipping_charge);
+
+                            let shipping_price = parseInt(data.shipping_charge);
+                            let grand_total_price = parseInt($('#cartSubTotalShi').val());
+                            // console.log(grand_total_price);
+                            grand_total_price += shipping_price;
+                            $('#grand_total_set').html(grand_total_price);
+                            $('#grand_total').val(grand_total_price);
+                        },
+                    });
+                } else {
+                    alert('danger');
+                }
+            });
+        });
+    </script>
 
 <!--  Division To District Show Ajax -->
 <script type="text/javascript">

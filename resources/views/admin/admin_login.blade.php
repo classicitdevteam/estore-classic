@@ -10,8 +10,15 @@
         <meta property="og:type" content="" />
         <meta property="og:url" content="" />
         <meta property="og:image" content="" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('backend/assets/imgs/theme/favicon.svg ' ) }}" />
+         <!-- Favicon -->
+        @php
+            $logo = get_setting('site_favicon');
+        @endphp
+        @if($logo != null)
+            <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? ' ') }}" />
+        @else
+            <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" />
+        @endif
         <!-- Template CSS -->
         <link href="{{ asset('backend/assets/css/main.css?v=1.1 ' ) }}" rel="stylesheet" type="text/css" />
         <!-- toastr css -->

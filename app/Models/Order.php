@@ -20,6 +20,10 @@ class Order extends Model
         return $this->belongsTo(Address::class, 'address_id');
     }
 
+    public function shipping()
+    {
+        return $this->belongsTo(Shipping::class);
+    }
 
     public function product(){
         return $this->belongsTo(Product::class, 'product_id','id');

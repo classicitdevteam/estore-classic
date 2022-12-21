@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\District;
 use App\Models\Upazilla;
+use App\Models\Shipping;
 use Session;
 use PDF;
 
@@ -127,8 +128,9 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::findOrFail($id);
+        $shippings = Shipping::where('status', 1)->get();
         
-        return view('backend.sales.all_orders.show', compact('order'));
+        return view('backend.sales.all_orders.show', compact('order', 'shippings'));
     }
 
     /**
@@ -150,7 +152,10 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $this->validate($request,[
+            'payment_method' => 'required',
+        ]);
         $order = Order::findOrFail($id);
 
         $order->division_id = $request->division_id;
@@ -158,9 +163,9 @@ class OrderController extends Controller
         $order->upazilla_id = $request->upazilla_id;
         $order->payment_method = $request->payment_method;
 
-        OrderDetail::where('id', $id)->update([
-            'shipping_cost' => $request->shipping_cost,
-            'shipping_type' => $request->shipping_type
+        Order::where('id', $id)->update([
+            'shipping_charge' => $request->shipping_charge,
+            'discount' => $request->discount,
         ]);
 
         $order->save();

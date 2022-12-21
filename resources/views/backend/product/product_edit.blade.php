@@ -63,21 +63,17 @@
 								<label for="product_category" class="col-form-label" style="font-weight: bold;">Category:</label>
 								<a style="background-color: #3BB77E; "class="btn btn-sm float-end" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus text-white"></i></a>
 								@php
-									$selectedCategory = 0;
+									$selectedCategory = $product->category_id;
 								@endphp
 								<div class="custom_select">
-									<select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" value="{{old('category_id')}}">
-										<option value="">--Select Category--</option>
+									<select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category">
 										@foreach ($categories as $category)
-											<option value="{{ $category->id }}">{{ $category->name_en }}</option>
+											<option value="{{ $category->id }}" @if($category->id==$selectedCategory) selected  @endif>{{ $category->name_en }}</option>
 											@foreach ($category->childrenCategories as $childCategory)
 												@include('backend.include.child_category', ['child_category' => $childCategory])
 											@endforeach
 										@endforeach
 									</select>
-									@error('category_id')
-										<p class="text-danger">{{$message}}</p>
-									@enderror
 								</div>
 							</div>
 		        		
