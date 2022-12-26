@@ -93,7 +93,7 @@
 	                           <label for="brand_id" class="col-form-label" style="font-weight: bold;">Brand:</label>
 				                <div class="custom_select">
                                     <select class="form-control select-active w-100 form-select select-nice" name="brand_id" id="brand_id">
-                                    	<option value="">--Select Brand--</option>
+                                    	<option value="0">--Select Brand--</option>
 		                                @foreach ($brands as $brand)
 		                                    <option value="{{ $brand->id }}" {{ $brand->id == $product->brand_id ? 'selected' : '' }}>{{ $brand->name_en }}</option>
 		                                @endforeach
@@ -109,7 +109,7 @@
 									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 									<div class="custom_select">
 										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
-											<option selected="">Select Vendor</option>
+											<option value="0">--Select Vendor--</option>
 											@foreach($vendors as $vendor)
 												<option value="{{ $vendor->id }}" {{ $vendor->id == $product->vendor_id ? 'selected' : '' }}>{{ $vendor->shop_name ?? 'Null' }}</option>
 											@endforeach
@@ -122,21 +122,21 @@
 	                         	<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
 				                <div class="custom_select">
                                     <select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
-                                    	<option selected="">Select Supplier</option>
+                                    	<option value="0">--Select Supplier--</option>
 					                	@foreach($suppliers as $supplier)
 					                		<option value="{{ $supplier->id }}" @if($product->supplier_id == $supplier->id) selected @endif>{{ $supplier->name ?? 'Null' }}</option>
 					               		@endforeach
                                     </select>
                                 </div>
 				            </div>
-			        		<div class="col-md-6 mb-4">
+			        		{{-- <div class="col-md-6 mb-4">
 	                         	<label for="campaing_id" class="col-form-label" style="font-weight: bold;">Campaing:</label>
 				                <div class="custom_select">
                                     <select class="form-control select-active w-100 form-select select-nice" name="campaing_id" id="campaing_id">
                                     	<option selected="">Select Campaing</option>
                                     </select>
                                 </div>
-	                        </div>
+	                        </div> --}}
 	                        <div class="col-md-6 mb-4">
 		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Tags:</label>
 			                    <input class="form-control tags-input" type="text"name="tags[]" value="{{ $product->tags }}" placeholder="Type and hit enter to add a tag">

@@ -162,11 +162,14 @@
 	<!-- Campaign Slider Start-->
 	@php
         $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
+    @endphp
+	
+    @if($campaign)
+	@php
         $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
         $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
     @endphp
-	
-    @if($campaign  && $start_diff->invert == 0 && $end_diff->invert == 0)
+	@if ($start_diff->invert == 0 && $end_diff->invert == 0)
 	<section class="common-product section-padding">
 	    <div class="container wow animate__animated animate__fadeIn">
 	        <div class="section-title">
@@ -194,6 +197,7 @@
 	        </div>
 	    </div>
 	</section>
+	@endif
 	@endif
 	<!-- Campaign Slider End-->
 

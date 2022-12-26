@@ -53,10 +53,10 @@
 									$selectedCategory = 0;
 								@endphp
 								<div class="custom_select">
-									<select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category" value="{{old('category_id')}}">
-										<option value="">--Select Category--</option>
+									<select class="form-control select-active w-100 form-select select-nice" name="category_id" id="product_category">
+										<option disabled hidden {{old('category_id') ? '' : 'selected'}} readonly value="">--Select Category--</option>
 										@foreach ($categories as $category)
-											<option value="{{ $category->id }}">{{ $category->name_en }}</option>
+											<option value="{{ $category->id }}" {{old('category_id')== $category->id ? 'selected' :  '' }}>{{ $category->name_en }}</option>
 											@foreach ($category->childrenCategories as $childCategory)
 												@include('backend.include.child_category', ['child_category' => $childCategory])
 											@endforeach
@@ -73,9 +73,9 @@
 	                           <label for="brand_id" class="col-form-label" style="font-weight: bold;">Brand:</label>
 				                <div class="custom_select">
                                     <select class="form-control select-active w-100 form-select select-nice" name="brand_id" id="brand_id">
-                                    	<option value="">--Select Brand--</option>
+                                    	<option {{old('brand_id') ? '' : 'selected'}} readonly value="">--Select Brand--</option>
 		                                @foreach ($brands as $brand)
-		                                    <option value="{{ $brand->id }}">{{ $brand->name_en }}</option>
+		                                    <option value="{{ $brand->id }}" {{ old('brand_id')== $brand->id ? 'selected' : '' }}>{{ $brand->name_en }}</option>
 		                                @endforeach
                                     </select>
                                 </div>
@@ -86,9 +86,9 @@
 									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 									<div class="custom_select">
 										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
-											<option selected="">Select Vendor</option>
+											<option {{old('vendor_id') ? '' : 'selected'}} readonly value="">--Select Vendor--</option>
 											@foreach($vendors as $vendor)
-												<option value="{{ $vendor->id }}">{{ $vendor->shop_name }}</option>
+												<option value="{{ $vendor->id }}" {{ old('vendor_id')== $vendor->id ? 'selected' : '' }}>{{ $vendor->shop_name }}</option>
 											@endforeach
 										</select>
 									</div>
@@ -99,21 +99,21 @@
 								<label for="supplier_id" class="col-form-label" style="font-weight: bold;">Supplier:</label>
 								<div class="custom_select">
 									<select class="form-control select-active w-100 form-select select-nice" name="supplier_id" id="supplier_id">
-										<option selected="">Select Supplier</option>
+										<option {{old('supplier_id') ? '' : 'selected'}} readonly value="">--Select Supplier--</option>
 										@foreach($suppliers as $supplier)
-											<option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
-											@endforeach
+											<option value="{{ $supplier->id }}" {{ old('supplier_id')== $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
+										@endforeach
 									</select>
 								</div>
 						   	</div>
-							<div class="col-md-6 mb-4">
+							{{-- <div class="col-md-6 mb-4">
 								<label for="campaing_id" class="col-form-label" style="font-weight: bold;">Campaing:</label>
 								<div class="custom_select">
 									<select class="form-control select-active w-100 form-select select-nice" name="campaing_id" id="campaing_id">
-										<option selected="">Select Campaing</option>
+										<option disabled hidden {{old('campaing_id') ? '' : 'selected'}} readonly value="">Select Campaing</option>
 									</select>
 								</div>
-						   	</div>
+						   	</div> --}}
 							<div class="col-md-6 mb-4">
 		                        <label for="" class="col-form-label" style="font-weight: bold;">Tags:</label>
 			                    <input class="form-control tags-input" type="text"name="tags[]"placeholder="Type and hit enter to add a tag" value="{{old('tags[]')}}">

@@ -58,6 +58,10 @@
     min-height: 385px;
 }*/
 
+.product-tabs .common-product .product-cart-wrap{
+    margin: 0px 5px;
+}
+
 /*Product fixed*/
 
 .product-cart-wrap .product-badges-right {

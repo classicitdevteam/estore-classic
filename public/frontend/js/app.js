@@ -38,6 +38,44 @@
         });
     });
 
+         /*Carausel 5 columns*/
+    $(".carausel-6-columns-common").each(function (key, item) {
+        var id = $(this).attr("id");
+        var sliderID = "#" + id;
+        var appendArrowsClassName = "#" + id + "-arrows";
+
+        $(sliderID).slick({
+            dots: false,
+            infinite: true,
+            speed: 1000,
+            arrows: true,
+            autoplay: true,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            loop: true,
+            adaptiveHeight: true,
+            responsive: [
+                {
+                    breakpoint: 1025,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ],
+            prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-arrow-small-left"></i></span>',
+            nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-arrow-small-right"></i></span>',
+            appendArrows: appendArrowsClassName
+        });
+    });
+    
     /*Carausel 10 columns for vendors*/
     $(".carausel-10-columns-vendors").each(function (key, item) {
         var id = $(this).attr("id");

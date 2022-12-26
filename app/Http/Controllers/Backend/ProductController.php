@@ -655,20 +655,8 @@ class ProductController extends Controller
             $save_url = '';
         }
 
-
-        // if($request->hasfile('image')){
-        //     $image = $request->image;
-        //     $image_logo_new_name = time().$image->getClientOriginalName();
-        //     $image->move('upload/category/',$image_logo_new_name);
-        //     $image_logo_new_name = 'upload/category/'.$image_logo_new_name;
-
-        // }else{
-        //     $image_logo_new_name = '';
-        // }
-
-        // $category->image = $image_logo_new_name;
-
         $category->image = $save_url;
+        $category->created_by = Auth::guard('admin')->user()->id;
         $category->save();
 
         $categories = Category::with('childrenCategories')->orderBy('name_en','asc')->get();
@@ -685,9 +673,6 @@ class ProductController extends Controller
     /* ============== Brand Store Ajax ============== */
     public function brandInsert(Request $request)
     {
-        // $this->validate($request,[
-        //     'name_en' => 'required',
-        // ]);
 
         if($request->name_en == Null){
             return response()->json(['error'=> 'Brand Field  Required']);
@@ -727,11 +712,9 @@ class ProductController extends Controller
         }
 
         $brand->brand_image = $save_url;
-
-        // dd($request->all());
+        $brand->created_by = Auth::guard('admin')->user()->id;
 
         $brand->save();
-
         $brands = Brand::all();
 
         return response()->json([ 

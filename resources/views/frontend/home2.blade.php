@@ -71,7 +71,7 @@
                             <div class="more_slide_open" style="display: none">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
-                                        @foreach(get_categories()->skip(10)->take(5) as $category)
+                                        @foreach(get_all_categories()->skip(10)->take(5) as $category)
 	                                    <li>
 	                                        <a href="{{ route('product.category', $category->slug) }}"> 
 	                                        	<img src="{{asset($category->image )}}" alt="" />
@@ -185,43 +185,47 @@
         <!--End category slider-->
 
 
-        <!-- Campaign Slider Start-->
-        @php
-            $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
-            $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
-            $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
-        @endphp
+       <!-- Campaign Slider Start-->
+	@php
+        $campaign = \App\Models\Campaing::where('status', 1)->where('is_featured', 1)->first();
+    @endphp
+	
+    @if($campaign)
+	@php
+        $start_diff=date_diff(date_create($campaign->flash_start), date_create(date('d-m-Y H:i:s')));
+        $end_diff=date_diff(date_create(date('d-m-Y H:i:s')), date_create($campaign->flash_end));
+    @endphp
+	@if ($start_diff->invert == 0 && $end_diff->invert == 0)
+	<section class="common-product section-padding">
+	    <div class="container wow animate__animated animate__fadeIn">
+	        <div class="section-title">
+	            <div class="title">
+	                <h3>My Campaign Sell</h3>
 
-        @if($campaign  && $start_diff->invert == 0 && $end_diff->invert == 0)
-        <section class="common-product section-padding">
-            <div class="container wow animate__animated animate__fadeIn">
-                <div class="section-title">
-                    <div class="title">
-                        <h3>My Campaign Sell</h3>
-
-                        <div class="deals-countdown-wrap">
-                            <div class="deals-countdown" data-countdown="{{ date(('Y-m-d H:i:s'), strtotime($campaign->flash_end)) }}"></div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-sm btn-primary">View more</a>
-                </div>
-                <div class="carausel-5-columns-cover position-relative">
-                    <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
-                    <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common">
-                        @foreach($campaign->campaing_products->take(20) as $campaing_product)
-                            @php
-                                $product = \App\Models\Product::find($campaing_product->product_id);
-                            @endphp
-                            @if ($product != null && $product->status != 0)
-                                @include('frontend.common.product_grid_view',['product' => $product])
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </section>
-        @endif
-        <!-- Campaign Slider End-->
+	                <div class="deals-countdown-wrap">
+	                    <div class="deals-countdown" data-countdown="{{ date(('Y-m-d H:i:s'), strtotime($campaign->flash_end)) }}"></div>
+	                </div>
+	            </div>
+	            <a href="#" class="btn btn-sm btn-primary">View more</a>
+	        </div>
+	        <div class="carausel-5-columns-cover position-relative">
+	        	<div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
+	            <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common">
+	            	@foreach($campaign->campaing_products->take(20) as $campaing_product)
+	            		@php
+                            $product = \App\Models\Product::find($campaing_product->product_id);
+                        @endphp
+                        @if ($product != null && $product->status != 0)
+	                		@include('frontend.common.product_grid_view',['product' => $product])
+	                	@endif
+	                @endforeach
+	            </div>
+	        </div>
+	    </div>
+	</section>
+	@endif
+	@endif
+	<!-- Campaign Slider End-->
 
         <section class="product-tabs section-padding position-relative">
             <div class="container">
@@ -241,9 +245,9 @@
                 <!--End nav-tabs-->
                 <div class="tab-content common-product" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                        <div class="carausel-5-columns-cover position-relative">
-                            <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
-                            <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common">
+                        <div class="carausel-6-columns-common-cover position-relative">
+            	        	<div class="slider-arrow slider-arrow-2 carausel-6-columns-common" id="carausel-6-columns-common-arrows"></div>
+            	            <div class="carausel-6-columns-common carausel-arrow-center" id="carausel-6-columns-common">
                                 @forelse($products as $product)
                                     @include('frontend.common.product_grid_view')
                                     <!--end product card-->
@@ -336,7 +340,6 @@
                             <a href="#" class="btn btn-sm btn-primary">View more</a>
                         </div>
                         <div class="carausel-5-columns-cover position-relative">
-                            <div class="slider-arrow slider-arrow-2 carausel-5-columns-common-arrow" id="carausel-5-columns-common-arrows"></div>
                             <div class="carausel-5-columns-common carausel-arrow-center" id="carausel-5-columns-common{{$home2_featured_category->id}}">
                                 
                                     @forelse($home2_featured_category->products as $product)
