@@ -103,6 +103,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {   
+        // dd($request);
         $data = $request->validate([
             'name' => 'required|max:191',
             'email' => 'nullable|email|max:191',
@@ -209,6 +210,7 @@ class CheckoutController extends Controller
 
         // order details add //
         foreach ($carts as $cart) {
+            // dd($cart);
             $product = Product::find($cart->id);
             if($cart->options->is_varient == 1){
                 $variations = array();
@@ -220,6 +222,7 @@ class CheckoutController extends Controller
                 OrderDetail::insert([
                     'order_id' => $order->id, 
                     'product_id' => $cart->id,
+                    'product_name' => $cart->name,
                     'is_varient' => 1,
                     'variation' => json_encode($variations, JSON_UNESCAPED_UNICODE),
                     'qty' => $cart->qty,
@@ -241,6 +244,7 @@ class CheckoutController extends Controller
                 OrderDetail::insert([
                     'order_id' => $order->id, 
                     'product_id' => $cart->id,
+                    'product_name' => $cart->name,
                     'is_varient' => 0,
                     'qty' => $cart->qty,
                     'price' => $cart->price,

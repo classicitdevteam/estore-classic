@@ -200,4 +200,11 @@ class AttributeController extends Controller
         Session::flash('warning','Attribute Value Inactive Successfully.');
         return redirect()->back();
     }
+
+    // Unit
+    public function index_unit()
+    {
+        $units = Attribute::latest()->get();
+        return view('backend.unit.index', compact('units'));
+    }
 }

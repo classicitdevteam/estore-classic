@@ -117,7 +117,7 @@
 							<div class="col-md-6 mb-4">
 		                        <label for="" class="col-form-label" style="font-weight: bold;">Tags:</label>
 			                    <input class="form-control tags-input" type="text"name="tags[]"placeholder="Type and hit enter to add a tag" value="{{old('tags[]')}}">
-			                    <small class="text-muted d-block">This is used for search. </small>
+			                    <small class="text-muted d-block">This is used for search.</small>
 		                    </div>
 		        		</div>
 		        		<!-- row //-->
@@ -146,7 +146,7 @@
 
 	                        <div class="col-md-12 mb-4">
 	                        	<div class="customer_choice_options" id="customer_choice_options">
-	                        	
+									
 	                        	</div>
 	                        </div>
 	                        <!-- Variation End -->

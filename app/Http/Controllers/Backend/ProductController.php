@@ -73,19 +73,19 @@ class ProductController extends Controller
             $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
         }
 
-        if($request->is_featured == null){
+        if($request->is_featured == null || $request->is_featured == ""){
             $request->is_featured = 0;
         }
 
-        if($request->is_deals == null){
+        if($request->is_deals == null || $request->is_deals == ""){
             $request->is_deals = 0;
         }
 
-        if($request->is_digital == null){
+        if($request->is_digital == null || $request->is_digital == ""){
             $request->is_digital = 0;
         }
 
-        if($request->status == null){
+        if($request->status == null || $request->status == ""){
             $request->status = 0;
         }
 
@@ -275,7 +275,7 @@ class ProductController extends Controller
             'stock_qty'         => 'required|integer',
             'description_en'    => 'nullable|string',
             'category_id'       => 'required|integer',
-            'brand_id'          => 'required|integer',
+            'brand_id'          => 'nullable|integer',
         ]);
 
         if(!$request->name_bn){
@@ -293,19 +293,19 @@ class ProductController extends Controller
             $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
         }
 
-        if($request->is_featured == null){
+        if($request->is_featured == null || $request->is_featured == ""){
             $request->is_featured = 0;
         }
 
-        if($request->is_deals == null){
+        if($request->is_deals == null || $request->is_deals == ""){
             $request->is_deals = 0;
         }
 
-        if($request->is_digital == null){
+        if($request->is_digital == null || $request->is_digital == ""){
             $request->is_digital = 0;
         }
 
-        if($request->status == null){
+        if($request->status == null || $request->status == ""){
             $request->status = 0;
         }
 
@@ -365,7 +365,14 @@ class ProductController extends Controller
         if(count( $product_stocks) > 0 ) {
             if($request->is_variation_changed){
                 foreach( $product_stocks as $stock ) {
-                    unlink($stock->image);
+                    // unlink($stock->image);
+                    try {
+                        if(file_exists($stock->image)){
+                            unlink($stock->image);
+                        }
+                    } catch (Exception $e) {
+                        
+                    }
                     $stock->delete();
                 }
             }else{

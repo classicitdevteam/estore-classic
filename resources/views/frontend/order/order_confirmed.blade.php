@@ -112,7 +112,7 @@
                                                 <tr>
                                                     <td>
                                                         <div class="item-desc-1">
-                                                            <span>{{$order_detail->product->name_en ?? 'NULL'}}</span>
+                                                            <span>{{$order_detail->product->name_en ?? ' '}}</span>
                                                             <span>
                                                                 @if($order_detail->is_varient && count(json_decode($order_detail->variation))>0)
                                                                     @foreach(json_decode($order_detail->variation) as $varient)
@@ -123,9 +123,9 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-center">{{$order_detail->
-                                                    price ?? 'NULL'}}</td>
+                                                    price ?? ''}}</td>
                                                     <td class="text-center">{{$order_detail->
-                                                    qty ?? 'NULL'}}</td>
+                                                    qty ?? ''}}</td>
                                                     <td class="text-right">{{ ($order_detail->price * $order_detail->
                                                         qty) ?? ' ' }}</td>
                                                 </tr>
@@ -166,7 +166,7 @@
                                     <div class="col-sm-6 col-offsite">
                                         <div class="text-end">
                                             <p class="mb-0 text-13">Thank you for your business</p>
-                                            <p><strong>{{ get_setting('business_name')->value ?? 'Null'}}</strong></p>
+                                            <p><strong>{{ get_setting('business_name')->value ?? ' '}}</strong></p>
                                         </div>
                                     </div>
                                 </div>

@@ -217,7 +217,7 @@
                                 <select class="form-control select-active col-12" name="shipping_id" id="shipping_id" required>
                                     <option value="">--Select--</option>
                                     @foreach ($shippings as $key => $shipping)
-                                        <option value="{{ $shipping->id }}">@if($shipping->type == 1) Outside Dhaka @else Inside Dhaka @endif </option>
+                                        <option value="{{ $shipping->id }}">@if($shipping->type == 1) Inside Dhaka @else Outside Dhaka @endif </option>
                                     @endforeach
                                 </select>
                                 @error('shipping_id')

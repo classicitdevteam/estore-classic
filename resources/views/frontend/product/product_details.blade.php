@@ -130,9 +130,9 @@
 
 		                          		@if ($product->discount_price > 0)
 		                          			@if ($product->discount_type == 1)
-	                                			<span class="stock-status out-stock"> ৳{{ $discount }} Off </span>
+	                                			<span class="stock-status out-stock"> ৳{{ $product->discount_price }} Off </span>
 	                                		@elseif ($product->discount_type == 2)
-	                                			<span class="stock-status out-stock"> {{ $discount }}% Off </span>
+	                                			<span class="stock-status out-stock"> {{ $product->discount_price }}% Off </span>
 	                                		@endif
 			                            @endif
 

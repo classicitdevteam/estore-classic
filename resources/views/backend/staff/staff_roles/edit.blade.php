@@ -224,6 +224,51 @@
 						   </ul>
 						</div><br>
 						<div class="bd-example">
+							<ul class="list-group">
+							   <li class="list-group-item bg-light" aria-current="true">Unit Type</li>
+							   <li class="list-group-item">
+								  <div class="row">
+									 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+										<div class="p-2 border mt-1 mb-4 checkbox_custom">
+										 <label class="control-label" id="flexSwitch1">View Unit
+											   <div class="form-check form-switch">
+												   <input class="form-check-input" name="permissions[]" value="53"  type="checkbox" id="flexSwitch1" @php if(in_array(53, $permissions)) echo "checked"; @endphp>
+											   </div>
+										 </label>
+										</div>
+									 </div>
+									 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+										<div class="p-2 border mt-1 mb-4 checkbox_custom">
+												<label class="control-label" id="flexSwitch2">Add Unit
+												   <div class="form-check form-switch">
+													   <input class="form-check-input" name="permissions[]" value="54"  type="checkbox" id="flexSwitch2" @php if(in_array(54, $permissions)) echo "checked"; @endphp>
+												   </div>
+											 </label>
+										</div>
+									 </div>
+									 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+										 <div class="p-2 border mt-1 mb-4 checkbox_custom">
+												<label class="control-label" id="flexSwitch2">Edit Unit
+												   <div class="form-check form-switch">
+													   <input class="form-check-input" name="permissions[]" value="55"  type="checkbox" id="flexSwitch2" @php if(in_array(55, $permissions)) echo "checked"; @endphp>
+												   </div>
+											 </label>
+										 </div>
+									 </div>
+									 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+										 <div class="p-2 border mt-1 mb-4 checkbox_custom">
+												<label class="control-label" id="flexSwitch2">Delete Unit
+												   <div class="form-check form-switch">
+													   <input class="form-check-input" name="permissions[]" value="56"  type="checkbox" id="flexSwitch2" @php if(in_array(56, $permissions)) echo "checked"; @endphp>
+												   </div>
+											 </label>
+										 </div>
+									 </div>
+								  </div>
+							   </li>
+							</ul>
+						</div><br>
+						<div class="bd-example">
 						   <ul class="list-group">
 						      <li class="list-group-item bg-light" aria-current="true">Sale</li>
 						      <li class="list-group-item">

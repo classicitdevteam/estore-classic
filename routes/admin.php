@@ -195,6 +195,9 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::get('/attribute_value_inactive/{id}', [AttributeController::class, 'value_inactive'])->name('attribute_value.in_active');
 	Route::get('/attribute/value/delete/{id}', [AttributeController::class, 'value_destroy'])->name('attribute_value.delete');
 
+	//Unit All Route
+	Route::get('/unit', [AttributeController::class, 'index_unit'])->name('unit.index');
+	
 
 	// Setting All Route
 	Route::get('/settings/index', [SettingController::class, 'index'])->name('setting.index');
