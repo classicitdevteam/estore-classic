@@ -240,7 +240,7 @@
 												   <div class="form-check form-switch">
 													   <input class="form-check-input" name="permissions[]" value="54"  type="checkbox" id="flexSwitch2">
 												   </div>
-											 </label>
+											 	</label>
 										</div>
 									 </div>
 									 <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">

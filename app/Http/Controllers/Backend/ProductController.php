@@ -15,6 +15,7 @@ use App\Models\MultiImg;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Models\ProductStock;
+use App\Models\Unit;
 use Carbon\Carbon;
 use Image;
 use Session;
@@ -38,14 +39,15 @@ class ProductController extends Controller
 		$brands = Brand::latest()->get();
         $vendors = Vendor::latest()->get();
         $suppliers = Supplier::latest()->get();
+        $units = Unit::latest()->get();
         $attributes = Attribute::latest()->get();
-    	return view('backend.product.product_add',compact('categories','brands','vendors','suppliers','attributes'));
+    	return view('backend.product.product_add',compact('categories','brands','vendors','suppliers','attributes','units'));
 
     } // end method
 
     /*=================== Start StoreProduct Methoed ===================*/
     public function StoreProduct(Request $request){
-        $this->validate($request,[
+        $request->validate([
             'name_en'           => 'required|max:150',
             'purchase_price'    => 'required|numeric',
             'wholesell_price'   => 'nullable|numeric',
@@ -53,8 +55,10 @@ class ProductController extends Controller
             'regular_price'     => 'required|numeric',
             'stock_qty'         => 'required|integer',
             'minimum_buy_qty'   => 'required|integer',
-            'description_en'    => 'required|string',
+            'description_en'    => 'nullable|string',
             'category_id'       => 'required|integer',
+            'unit_weight'       => 'nullable|numeric',
+            'unit_id'           => 'nullable|integer',
             'product_thumbnail' => 'nullable|file',
         ]);
 
@@ -73,28 +77,16 @@ class ProductController extends Controller
             $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
         }
 
-        if($request->is_featured == null || $request->is_featured == ""){
-            $request->is_featured = 0;
-        }
-
-        if($request->is_deals == null || $request->is_deals == ""){
-            $request->is_deals = 0;
-        }
-
-        if($request->is_digital == null || $request->is_digital == ""){
-            $request->is_digital = 0;
-        }
-
-        if($request->status == null || $request->status == ""){
-            $request->status = 0;
-        }
-
         if($request->vendor_id == null || $request->vendor_id==""){
             $request->vendor_id = 0;
         }
 
         if($request->supplier_id == null || $request->supplier_id==""){
             $request->supplier_id = 0;
+        }
+        
+        if($request->unit_id == null || $request->unit_id==""){
+            $request->unit_id = 0;
         }
 
         if($request->hasfile('product_thumbnail')){
@@ -111,9 +103,11 @@ class ProductController extends Controller
             'category_id'           => $request->category_id,
             'vendor_id'             => $request->vendor_id,
             'supplier_id'           => $request->supplier_id,
+            'unit_id'               => $request->unit_id,
             'name_en'               => $request->name_en,
             'name_bn'               => $request->name_bn,
             'slug'                  => $slug,
+            'unit_weight'           => $request->unit_weight,
             'purchase_price'        => $request->purchase_price,
             'wholesell_price'       => $request->wholesell_price,
             'wholesell_minimum_qty' => $request->wholesell_minimum_qty,
@@ -125,10 +119,10 @@ class ProductController extends Controller
             'stock_qty'             => $request->stock_qty,
             'description_en'        => $request->description_en,
             'description_bn'        => $request->description_bn,
-            'is_featured'           => $request->is_featured,
-            'is_deals'              => $request->is_deals,
-            'is_digital'            => $request->is_digital,
-            'status'                => $request->status,
+            'is_featured'           => $request->is_featured ? 1 : 0,
+            'is_deals'              => $request->is_deals ? 1 : 0,
+            'is_digital'            => $request->is_digital ? 1 : 0,
+            'status'                => $request->status ? 1 : 0,
             'product_thumbnail'     => $save_url,
             'created_by' => Auth::guard('admin')->user()->id,
         ]);
@@ -253,11 +247,12 @@ class ProductController extends Controller
         $brands = Brand::latest()->get();
         $vendors = Vendor::latest()->get();
         $suppliers = Supplier::latest()->get();
+        $units = Unit::latest()->get();
         $attributes = Attribute::latest()->get();
 
         //dd($product->stocks);
         
-        return view('backend.product.product_edit',compact('categories','vendors','suppliers','brands','attributes','product','multiImgs'));
+        return view('backend.product.product_edit',compact('categories','vendors','suppliers','brands','attributes','product','multiImgs','units'));
 
     } // end method
 
@@ -276,6 +271,8 @@ class ProductController extends Controller
             'description_en'    => 'nullable|string',
             'category_id'       => 'required|integer',
             'brand_id'          => 'nullable|integer',
+            'unit_id'           => 'nullable|integer',
+            'unit_weight'       => 'nullable|numeric',
         ]);
 
         if(!$request->name_bn){
@@ -293,22 +290,6 @@ class ProductController extends Controller
             $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
         }
 
-        if($request->is_featured == null || $request->is_featured == ""){
-            $request->is_featured = 0;
-        }
-
-        if($request->is_deals == null || $request->is_deals == ""){
-            $request->is_deals = 0;
-        }
-
-        if($request->is_digital == null || $request->is_digital == ""){
-            $request->is_digital = 0;
-        }
-
-        if($request->status == null || $request->status == ""){
-            $request->status = 0;
-        }
-
         if($request->vendor_id == null || $request->vendor_id==""){
             $request->vendor_id = 0;
         }
@@ -317,6 +298,9 @@ class ProductController extends Controller
             $request->supplier_id = 0;
         }
 
+        if($request->unit_id == null || $request->unit_id==""){
+            $request->unit_id = 0;
+        }
 
         if($request->hasfile('product_thumbnail')){
             try {
@@ -339,9 +323,11 @@ class ProductController extends Controller
             'category_id'           => $request->category_id,
             'vendor_id'             => $request->vendor_id,
             'supplier_id'           => $request->supplier_id,
+            'unit_id'               => $request->unit_id,
             'name_en'               => $request->name_en,
             'name_bn'               => $request->name_bn,
             'slug'                  => $slug,
+            'unit_weight'           => $request->unit_weight,
             'purchase_price'        => $request->purchase_price,
             'wholesell_price'       => $request->wholesell_price,
             'wholesell_minimum_qty' => $request->wholesell_minimum_qty,
@@ -352,10 +338,10 @@ class ProductController extends Controller
             'stock_qty'             => $request->stock_qty,
             'description_en'        => $request->description_en,
             'description_bn'        => $request->description_bn,
-            'is_featured'           => $request->is_featured,
-            'is_deals'              => $request->is_deals,
-            'is_digital'            => $request->is_digital,
-            'status'                => $request->status,
+            'is_featured'           => $request->is_featured ? 1 : 0,
+            'is_deals'              => $request->is_deals ? 1 : 0,
+            'is_digital'            => $request->is_digital ? 1 : 0,
+            'status'                => $request->status ? 1 : 0,
             'product_thumbnail'     => $save_url,
             'created_by' => Auth::guard('admin')->user()->id,
         ]);

@@ -129,6 +129,21 @@
                                     </select>
                                 </div>
 				            </div>
+							<div class="col-md-6 mb-4">
+								<label for="unit_id" class="col-form-label" style="font-weight: bold;">Unit Type:</label>
+								<div class="custom_select">
+									<select class="form-control select-active w-100 form-select select-nice" name="unit_id" id="unit_id">
+										<option disabled hidden {{old('unit_id') ? '' : 'selected'}} readonly value="">--Select Unit Type--</option>
+										@foreach($units as $unit)
+											<option value="{{ $unit->id }}" @if($product->unit_id == $unit->id) selected @endif>{{ $unit->name }}</option>
+										@endforeach
+									</select>
+								</div>
+						   	</div>
+							<div class="col-md-6 mb-4">
+								<label for="unit_weight" class="col-form-label" style="font-weight: bold;">Unit Weight (e.g. 10 mg, 1 Carton, 15 Pcs)</label>
+								<input class="form-control" id="unit_weight" type="number" name="unit_weight" placeholder="Write unit weight" value="{{ $product->unit_weight }}">
+						   	</div>
 			        		{{-- <div class="col-md-6 mb-4">
 	                         	<label for="campaing_id" class="col-form-label" style="font-weight: bold;">Campaing:</label>
 				                <div class="custom_select">

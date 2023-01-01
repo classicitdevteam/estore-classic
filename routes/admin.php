@@ -197,6 +197,12 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	//Unit All Route
 	Route::get('/unit', [AttributeController::class, 'index_unit'])->name('unit.index');
+	Route::get('/unit/create', [AttributeController::class, 'create_unit'])->name('unit.create');
+	Route::post('/unit/store', [AttributeController::class, 'store_unit'])->name('unit.store');
+	Route::get('/unit/edit/{id}', [AttributeController::class, 'edit_unit'])->name('unit.edit');
+	Route::post('/unit/update/{id}', [AttributeController::class, 'update_unit'])->name('unit.update');
+	Route::get('/unit/delete/{id}', [AttributeController::class, 'destroy_unit'])->name('unit.delete');
+	Route::get('/unit-status/{id}', [AttributeController::class, 'changeStatus'])->name('unit.changeStatus');
 	
 
 	// Setting All Route

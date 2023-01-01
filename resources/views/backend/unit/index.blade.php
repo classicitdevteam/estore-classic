@@ -24,23 +24,23 @@
                         @foreach($units as $key => $unit)
                         <tr>
                             <td> {{ $key+1}} </td>
-                            <td> {{ $unit->unit_type ?? 'NULL' }} </td>
-                            {{-- <td>
-                                @if($banner->status == 1)
-                                  <a href="{{ route('banner.in_active',['id'=>$banner->id]) }}">
-                                    <span class="badge rounded-pill alert-success">Active</span>
+                            <td> {{ $unit->name ?? '' }} </td>
+                            <td>
+                                @if($unit->status == 1)
+                                  <a href="{{ route('unit.changeStatus',['id'=>$unit->id]) }}">
+                                    <span class="badge rounded-pill alert-success"><i class="material-icons md-check"></i></span>
                                   </a>
                                 @else
-                                  <a href="{{ route('banner.active',['id'=>$banner->id]) }}" > <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a href="{{ route('unit.changeStatus',['id'=>$unit->id]) }}" > <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
                                 @endif
-                            </td> --}}
+                            </td>
                             <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
                                 <div class="dropdown">
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('banner.edit', $banner->id) }}">Edit info</a>
-                                        <a class="dropdown-item text-danger" href="{{ route('banner.delete',$banner->id) }}" id="delete">Delete</a>
+                                        <a class="dropdown-item" href="{{ route('unit.edit', $unit->id) }}">Edit info</a>
+                                        <a class="dropdown-item text-danger" href="{{ route('unit.delete',$unit->id) }}" id="delete">Delete</a>
                                     </div>
                                 </div>
                                 <!-- dropdown //end -->

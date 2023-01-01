@@ -106,6 +106,21 @@
 									</select>
 								</div>
 						   	</div>
+							<div class="col-md-6 mb-4">
+								<label for="unit_id" class="col-form-label" style="font-weight: bold;">Unit Type:</label>
+								<div class="custom_select">
+									<select class="form-control select-active w-100 form-select select-nice" name="unit_id" id="unit_id">
+										<option disabled hidden {{old('unit_id') ? '' : 'selected'}} readonly value="">--Select Unit Type--</option>
+										@foreach($units as $unit)
+											<option value="{{ $unit->id }}" {{ old('unit_id')== $unit->id ? 'selected' : '' }}>{{ $unit->name }}</option>
+										@endforeach
+									</select>
+								</div>
+						   	</div>
+							<div class="col-md-6 mb-4">
+								<label for="unit_weight" class="col-form-label" style="font-weight: bold;">Unit Weight (e.g. 10 mg, 1 Carton, 15 Pcs)</label>
+								<input class="form-control" id="unit_weight" type="number" name="unit_weight" placeholder="Write unit weight" value="{{old('unit_weight')}}">
+						   	</div>
 							{{-- <div class="col-md-6 mb-4">
 								<label for="campaing_id" class="col-form-label" style="font-weight: bold;">Campaing:</label>
 								<div class="custom_select">
@@ -174,21 +189,21 @@
 	                        </div>
 	                        <div class="col-md-6 mb-4">
 	                          	<label for="whole_sell_qty" class="col-form-label" style="font-weight: bold;">Whole Sell Minimum Quantity:</label>
-	                            <input class="form-control" id="whole_sell_qty" type="number" name="wholesell_minimum_qty" placeholder="Write product whole sell qty" value="1">
+	                            <input class="form-control" id="whole_sell_qty" type="number" name="wholesell_minimum_qty" placeholder="Write product whole sell qty" value="{{old('wholesell_minimum_qty', 0)}}">
 	                        </div>
 		        		</div>
 		        		<!-- Row //-->
 		        		<div class="row">
 			        		<div class="col-md-4 mb-4">
 	                          	<label for="regular_price" class="col-form-label" style="font-weight: bold;">Regular Price:</label>
-	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" min="0">
+	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" min="0" value="{{old('regular_price')}}">
 		                        @error('regular_price')
 	                                <p class="text-danger">{{$message}}</p>
 	                            @enderror
 	                        </div>
 	                        <div class="col-md-4 mb-4">
 	                          	<label for="discount_price" class="col-form-label" style="font-weight: bold;">Discount Price:</label>
-	                            <input class="form-control" id="discount_price" type="number" name="discount_price" value="0" min="0" placeholder="Write product discount price">
+	                            <input class="form-control" id="discount_price" type="number" name="discount_price" value="{{old('discount_price', 0)}}" min="0" placeholder="Write product discount price">
 	                        </div>
 	                        <div class="col-md-4 mb-4">
 	                         	<label for="discount_type" class="col-form-label" style="font-weight: bold;">Discount Type:</label>
@@ -201,14 +216,14 @@
 	                        </div>
 	                        <div class="col-md-4 mb-4">
 								<label for="minimum_buy_qty" class="col-form-label" style="font-weight: bold;">Minimum Buy Quantity:</label>
-								<input class="form-control" id="minimum_buy_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="1" min="1">
+								<input class="form-control" id="minimum_buy_qty" type="number" name="minimum_buy_qty" placeholder="Write product qty" value="{{old('minimum_buy_qty', 1)}}" min="1">
 								@error('minimum_buy_qty')
 									<p class="text-danger">{{$message}}</p>
 								@enderror
 							</div>
 							<div class="col-md-6 mb-4">
 								<label for="stock_qty" class="col-form-label" style="font-weight: bold;">Stock Quantity:</label>
-								<input class="form-control" id="stock_qty" type="number" name="stock_qty" value="0" min="0" placeholder="Write product stock  qty">
+								<input class="form-control" id="stock_qty" type="number" name="stock_qty" value="{{old('stock_qty', 0)}}" min="0" placeholder="Write product stock  qty">
 								@error('stock_qty')
 								   <p class="text-danger">{{$message}}</p>
 							   	@enderror
@@ -248,11 +263,11 @@
 		        			<!-- Description Start -->
 	                        <div class="col-md-6 mb-4">
 	                          	<label for="long_descp_en" class="col-form-label" style="font-weight: bold;">Description (En):</label>
-	                            <textarea name="description_en" rows="2" cols="2" class="form-control summernote" placeholder="Write Long Description English"></textarea>
+	                            <textarea name="description_en" rows="2" cols="2" class="form-control summernote" placeholder="Write Long Description English">{{old('description_en')}}</textarea>
 	                        </div>
 	                        <div class="col-md-6 mb-4">
 	                          	<label for="long_descp_bn" class="col-form-label" style="font-weight: bold;">Description (Bn):</label>
-	                            <textarea name="description_bn" id="long_descp_bn" rows="2" cols="2" class="form-control summernote" placeholder="Write Long Description Bangla"></textarea> 
+	                            <textarea name="description_bn" id="long_descp_bn" rows="2" cols="2" class="form-control summernote" placeholder="Write Long Description Bangla">{{old('description_bn')}}</textarea> 
 	                        </div>
 	                        <!-- Description End -->
 		        		</div>
@@ -285,25 +300,25 @@
                         <div class="mb-4">
                         	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_deals" id="is_deals" value="0">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_deals" id="is_deals">
                                     <label class="form-check-label cursor" for="is_deals">Today's Deal</label>
                                 </div>
                           	</div>
                           	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_digital" id="is_digital" value="0">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_digital" id="is_digital">
                                     <label class="form-check-label cursor" for="is_digital">Digital</label>
                                 </div>
                           	</div>
                           	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_featured" id="is_featured" value="0">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_featured" id="is_featured">
                                     <label class="form-check-label cursor" for="is_featured">Featured</label>
                                 </div>
                           	</div>
                           	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="status" id="status" checked value="1">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="status" id="status" checked>
                                     <label class="form-check-label cursor" for="status">Status</label>
                                 </div>
                           	</div>

@@ -10,6 +10,7 @@ use App\Models\AttributeValue;
 use Image;
 use Session;
 use App\Helpers\Classes\Combinations;
+use App\Models\Unit;
 use Auth;
 
 class AttributeController extends Controller
@@ -204,7 +205,77 @@ class AttributeController extends Controller
     // Unit
     public function index_unit()
     {
-        $units = Attribute::latest()->get();
+        $units = Unit::latest()->get();
         return view('backend.unit.index', compact('units'));
+    }
+    public function create_unit()
+    {
+        return view('backend.unit.create');
+    }
+    public function store_unit(Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required',
+        ]);
+
+        $unit = new Unit();
+        $unit->name = $request->name;
+        if($request->status == Null){
+            $request->status = 0;
+        }
+        $unit->status = $request->status;
+        $unit->created_by = Auth::guard('admin')->user()->id;
+        $unit->created_at = Carbon::now();
+        $unit->save();
+
+        Session::flash('success','Unit Inserted Successfully');
+        return redirect()->route('unit.index');
+    }
+    public function edit_unit($id)
+    {
+        $unit = Unit::findOrFail($id);
+        return view('backend.unit.edit',compact('unit'));
+    }
+    public function update_unit(Request $request, $id)
+    {
+        $unit = Unit::find($id);
+
+        // unit table update
+        $unit->name = $request->name;
+        if($request->status == Null){
+            $request->status = 0;
+        }
+        $unit->status = $request->status;
+        $unit->created_by = Auth::guard('admin')->user()->id;
+        $unit->save();
+
+        $notification = array(
+            'message' => 'Unit Updated Successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('unit.index')->with($notification);
+    }
+    public function destroy_unit($id)
+    {
+        $unit = Unit::findOrFail($id);
+        $unit->delete();
+
+        $notification = array(
+            'message' => 'Unit Deleted Successfully.',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
+    }
+    public function changeStatus($id){
+        $unit = Unit::find($id);
+        if($unit->status == 0){
+            $unit->status = 1;
+        }else{
+            $unit->status = 0;
+        }
+        $unit->save();
+
+        Session::flash('success','Status Changed Successfully.');
+        return redirect()->back();
     }
 }
