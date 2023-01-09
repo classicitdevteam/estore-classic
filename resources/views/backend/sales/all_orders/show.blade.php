@@ -13,15 +13,15 @@
     <div class="content-header">
         <div>
             <h2 class="content-title card-title">Order detail</h2>
-            <p>Details for Order ID: {{ $order->invoice_no?? 'Null'}}</p>
+            <p>Details for Order ID: {{ $order->invoice_no?? ''}}</p>
         </div>
     </div>
     <div class="card">
         <header class="card-header">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-4 mb-lg-0 mb-15">
-                    <span class="text-white"> <i class="material-icons md-calendar_today"></i> <b>Wed, Aug 13, 2020, 4:34PM</b> </span> <br />
-                    <small class="text-white">Order ID: {{ $order->invoice_no?? 'Null'}}</small>
+                    <span class="text-white"> <i class="material-icons md-calendar_today"></i> <b>{{ $order->created_at?? ''}}</b> </span> <br />
+                    <small class="text-white">Order ID: {{ $order->invoice_no?? ''}}</small>
                 </div>
                 @php
                     $payment_status = $order->payment_status;
@@ -59,16 +59,15 @@
                         <span class="icon icon-sm rounded-circle bg-primary-light">
                             <i class="text-primary material-icons md-person"></i>
                         </span>
-
                        
                         <div class="text">
                             <h6 class="mb-1">Customer</h6>
                             <p class="mb-1">
-                                {{ $order->user->name ?? 'Null'}} <br />
-                                {{ $order->user->email ?? 'Null'}} <br />
-                                {{ $order->user->phone ?? 'Null'}}
+                                {{ $order->name ?? ''}} <br />
+                                {{ $order->email ?? ''}} <br />
+                                {{ $order->phone ?? ''}}
                             </p>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop1{{ $order->user_id }}">Edit Customer</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop1{{ $order->id }}">Edit Customer</a>
                         </div>
                     </article>
                 </div>
@@ -81,9 +80,9 @@
                         <div class="text">
                             <h6 class="mb-1">Order info</h6>
                             <p class="mb-1">
-                                Order Id: {{ $order->invoice_no?? 'Null'}} </br>
-                                Shipping: Fargo express <br />
-                                Pay method: card <br />
+                                Order Id: {{ $order->invoice_no?? ''}} </br>
+                                Shipping: {{$order->shipping_name ?? ''}} <br />
+                                Pay method: @if($order->payment_method == 'cod') Cash On Delivery @else {{ $order->payment_method }} @endif <br />
                                 Status: @php
                                             $status = $order->delivery_status;
                                             if($order->delivery_status == 'cancelled') {
@@ -93,7 +92,7 @@
                                         @endphp
                                         {!! $status !!}
                             </p>
-                            <a href="#">Download info</a>
+                            {{-- <a href="#">Download info</a> --}}
                         </div>
                     </article>
                 </div>
@@ -125,7 +124,7 @@
                                     <th>Invoice</th>
                                     <td>{{ $order->invoice_no?? 'Null'}}</td>
                                     <th>Email</th>
-                                    <td><input type="" class="form-control" name="email" value="{{ $order->user->email ?? 'Null'}}"></td>
+                                    <td><input type="" class="form-control" name="email" value="{{ $order->email ?? 'Null'}}"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-2">Shipping Address</th>
@@ -164,17 +163,17 @@
                                     <td>
                                         <select class="form-control select-active" name="payment_method" id="payment_method" required>
                                             <option selected=""  value="" >Select Payment Method</option>
-                                                <option value="cash">Cash</option>
-                                                <option value="bikash" >Bikash</option>
-                                                <option value="nagad">Nagad</option>
+                                            <option value="cod" @if($order->payment_method == 'cod') selected @endif>Cash</option>
+                                            <option value="bikash" @if($order->payment_method == 'bikash') selected @endif>Bikash</option>
+                                            <option value="nagad" @if($order->payment_method == 'nagad') selected @endif>Nagad</option>
                                         </select>
                                     </td>
                                     <th>Shipping Charge</th>
-                                    <td><input type="" class="form-control" id="cartSubTotalShi" name="shipping_charge" value="{{ $order->shipping_charge ?? '0.00'}}"></td>
+                                    <td><input type="" class="form-control" id="cartSubTotalShi" name="shipping_charge" value="{{ $order->shipping_charge}}"></td>
                                 </tr>
                                 <tr>
                                     <th>Discount</th>
-                                    <td><input type="" class="form-control" name="discount" value="{{ $order->discount ?? '0.00' }}"></td>
+                                    <td><input type="" class="form-control" name="discount" value="{{ $order->discount }}"></td>
 
                                     <th>Payment Status</th>
                                     <td>
@@ -183,7 +182,6 @@
                                             if($order->delivery_status == 'cancelled') {
                                                 $status = 'Received';
                                             }
-
                                         @endphp
                                         <span class="badge rounded-pill alert-success text-success">{!! $status !!}</span>
                                     </td>
@@ -191,13 +189,14 @@
                                 <tr>
                                     
                                     <th>Payment Date</th>
-                                    <td>{{ date_format($order->created_at,"Y/m/d") ?? ' '}}</td>
+                                    <td>{{ date_format($order->created_at,"Y/m/d")}}</td>
                                 </tr>
                                 <tr>
                                     <th>Sub Total</th>
-                                    <td>{{ $order->sub_total ?? ' '}} <strong>Tk</strong></td>
+                                    <td>{{ $order->sub_total }} <strong>Tk</strong></td>
+                                    
                                     <th>Total</th>
-                                    <td>{{ ($order->grand_total-$order->discount) ?? ' '}}<strong>Tk</strong></td>
+                                    <td>{{ $order->grand_total }} <strong>Tk</strong></td>
                                    <!--  <td>
                                          
                                         <span class="badge badge-success">Delivered</span>
@@ -211,7 +210,7 @@
             </div>
             <!-- row // -->
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-md-12">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -246,7 +245,7 @@
                                         </td>
                                         <td>{{ $orderDetail->price ?? '0.00' }}</td>
                                         <td>{{ $orderDetail->qty ?? '0' }}</td>
-                                        <td class="text-end">{{ $orderDetail->price ?? '0.00' }}</td>
+                                        <td class="text-end">{{ $orderDetail->price*$orderDetail->qty ?? '0.00' }}</td>
                                     </tr>
                                 @endforeach
                                 <tr>
@@ -258,15 +257,15 @@
                                             </dl>
                                             <dl class="dlist">
                                                 <dt>Shipping cost:</dt>
-                                                <dd>{{ $order->shipping_charge ?? '0.00' }}</dd>
+                                                <dd>{{ $order->shipping_charge }}</dd>
                                             </dl>
                                             <dl class="dlist">
                                                 <dt>Discount:</dt>
-                                                <dd><b class="">{{ $order->discount ?? '0.00' }}</b></dd>
+                                                <dd><b class="">{{ $order->discount }}</b></dd>
                                             </dl>
                                             <dl class="dlist">
                                                 <dt>Grand total:</dt>
-                                                <dd><b class="h5">{{ ($order->grand_total-$order->discount) ?? ' '}}</b></dd>
+                                                <dd><b class="h5">{{ $order->grand_total }}</b></dd>
                                             </dl>
                                             <dl class="dlist">
                                                 <dt class="text-muted">Status:</dt>
@@ -291,7 +290,7 @@
                 </div>
                 <!-- col// -->
                 <div class="col-lg-1"></div>
-                <div class="col-lg-4">
+                {{-- <div class="col-lg-4">
                     <div class="box shadow-sm bg-light">
                         <h6 class="mb-15">Payment info</h6>
                         <p>
@@ -305,11 +304,13 @@
                             <label>Notes</label>
                             <textarea class="form-control" name="notes" id="notes" placeholder="Type some note"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Order</button>
                     </div>
-                    </form>
+                </div> --}}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Update Order</button>
                 </div>
                 <!-- col// -->
+            </form>
             </div>
         </div>
         <!-- card-body end// -->
@@ -476,28 +477,28 @@
 </script>
 
 <!-- Customer Edit Modal -->
-<div class="modal fade" id="staticBackdrop1{{ $order->user_id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop1{{ $order->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Edit Customer</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-        <form method="post" action="{{ route('admin.user.update',$order->user_id) }}">
+        <form method="post" action="{{ route('admin.user.update',$order->id) }}">
             @csrf
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="division_id" class="fw-bold text-black col-form-label"><span class="text-danger">*</span> Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter the name" value="{{ $order->user->name ?? 'Null'}}">
+                        <input type="text" class="form-control" name="name" placeholder="Enter the name" value="{{ $order->name ?? 'Null'}}">
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="division_id" class="fw-bold text-black col-form-label"><span class="text-danger">*</span> Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Enter the email" value="{{ $order->user->email ?? 'Null'}}">
+                        <input type="text" class="form-control" name="email" placeholder="Enter the email" value="{{ $order->email ?? 'Null'}}">
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="division_id" class="fw-bold text-black col-form-label"><span class="text-danger">*</span> Phone</label>
-                        <input type="number" class="form-control" name="phone" placeholder="Enter the phone" value="{{ $order->user->phone ?? 'Null'}}">
+                        <input type="number" class="form-control" name="phone" placeholder="Enter the phone" value="{{ $order->phone ?? 'Null'}}">
                     </div>
                     <!-- <div class="form-group col-lg-6">
                         <label for="division_id" class="fw-bold text-black col-form-label"><span class="text-danger">*</span> Password</label>

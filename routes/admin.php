@@ -248,7 +248,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	/*================  Admin Address Updated  ==================*/
 	Route::post('/address/update/{id}', [OrderController::class, 'admin_address_update'])->name('admin.address.update');
 	/*================  Admin User Updated  ==================*/
-	Route::post('/user/update/{user_id}', [OrderController::class, 'admin_user_update'])->name('admin.user.update');
+	Route::post('/user/update/{id}', [OrderController::class, 'admin_user_update'])->name('admin.user.update');
 	/*================  Ajax  ==================*/
 	Route::get('/division-district/ajax/{division_id}',[OrderController::class,'getdivision'])->name('division.ajax');
 	Route::get('/district-upazilla/ajax/{district_id}',[OrderController::class,'getupazilla'])->name('upazilla.ajax');

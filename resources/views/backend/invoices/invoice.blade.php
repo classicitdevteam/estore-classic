@@ -58,7 +58,7 @@
                             $logo = get_setting('site_logo');
                         @endphp
                         @if($logo != null)
-                            <img src="{{ asset(get_setting('site_logo')->value ?? 'null') }}" alt="{{ env('APP_NAME') }}" height="30" style="display:inline-block;">
+                            <img src="{{ asset(get_setting('site_logo')->value ?? '') }}" alt="{{ env('APP_NAME') }}" height="30" style="display:inline-block;">
                         @else
                             <img src="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" height="30" style="display:inline-block;">
                         @endif
@@ -68,16 +68,16 @@
 			</table>
 			<table>
 				<tr>
-					<td style="font-size: 1rem;" class="strong">{{ get_setting('site_name')->value ?? 'null' }}</td>
+					<td style="font-size: 1rem;" class="strong">{{ get_setting('site_name')->value ?? '' }}</td>
 					<td class="text-right"></td>
 				</tr>
 				<tr>
-					<td class="gry-color small">Email:  {{ $order->user->email ?? 'Null'}} </td>
+					<td class="gry-color small">Email:  {{ $order->email ?? ''}} </td>
 					<td class="text-right small"><span class="gry-color small">Order ID
-					:</span> <span class="strong">{{ $order->invoice_no ?? 'Null' }}</span></td>
+					:</span> <span class="strong">{{ $order->invoice_no ?? '' }}</span></td>
 				</tr>
 				<tr>
-					<td class="gry-color small">Phone:  {{ $order->user->phone ?? 'Null'}}</td>
+					<td class="gry-color small">Phone:  {{ $order->phone ?? ''}}</td>
 					<td class="text-right small"><span class="gry-color small">Order Date:</span> <span class=" strong">{{ date('d-m-Y', $order->date) }}</span></td>
 				</tr>
 				<tr>
@@ -87,7 +87,7 @@
 							Payment method:
 						</span>
 						<span class=" strong">
-							{{ $order->payment_method ?? 'Null' }}
+							@if($order->payment_method) Cash On Delivery @else {{ $order->payment_method }} @endif
 						</span>
 					</td>
 				</tr>
@@ -98,7 +98,7 @@
 		<div style="padding: 1rem;padding-bottom: 0">
             <table>
 				<tr><td class="strong small gry-color">Bill to:</td></tr>
-				<tr><td class="strong">{{ $order->user->name ?? 'Null'}}</td></tr>
+				<tr><td class="strong">{{ $order->name ?? 'Null'}}</td></tr>
 				<tr>
 					<td class="gry-color small">
 						{{ ucwords($order->upazilla->name_en ?? 'Null' ) }},
@@ -106,8 +106,8 @@
                     	{{ ucwords($order->division->division_name_en ?? 'Null') }}
                     </td>
 				</tr>
-				<tr><td class="gry-color small">Email: {{ $order->user->email ?? 'Null'}}</td></tr>
-				<tr><td class="gry-color small">Phone: {{ $order->user->phone ?? 'Null'}}</td></tr>
+				<tr><td class="gry-color small">Email: {{ $order->email ?? 'Null'}}</td></tr>
+				<tr><td class="gry-color small">Phone: {{ $order->phone ?? 'Null'}}</td></tr>
 			</table>
 		</div>
 

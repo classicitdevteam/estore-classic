@@ -163,9 +163,13 @@ class OrderController extends Controller
         $order->upazilla_id = $request->upazilla_id;
         $order->payment_method = $request->payment_method;
 
+        $discount_total = ($order->sub_total - $request->discount);
+        $total_ammount = ($discount_total + $request->shipping_charge);
+
         Order::where('id', $id)->update([
-            'shipping_charge' => $request->shipping_charge,
-            'discount' => $request->discount,
+            'shipping_charge'   => $request->shipping_charge,
+            'discount'          => $request->discount,
+            'grand_total'       => $total_ammount,
         ]);
 
         $order->save();
@@ -222,9 +226,9 @@ class OrderController extends Controller
 
 
     /*================= Start admin_user_update Methoed ================*/
-    public function admin_user_update(Request $request, $user_id)
+    public function admin_user_update(Request $request, $id)
     {
-        $user = User::where('id',$user_id)->update([
+        $user = Order::where('id',$id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,

@@ -111,7 +111,6 @@ class CheckoutController extends Controller
             'address' => 'required|max:10000',  
             'payment_option'=>'required',
             'comment' => 'nullable|max:2000',
-            'shipping_id' => 'required',
         ]);
         // dd(Cart::total()+$request->total_amount);
         // dd($request->total_amount);
@@ -145,15 +144,29 @@ class CheckoutController extends Controller
             $payment_status = 1;
         }
 
+        $invoice_data = Order::orderBy('id','desc')->first();
+        $lastId = $invoice_data->id;
+        if(empty($lastId)){
+            $invoice_no = "0000001";
+        }else{
+            // $idd = str_replace("E-", "", $lastId);
+            $id = str_pad($lastId + 1, 7, 0, STR_PAD_LEFT);
+            $invoice_no = $id;
+        }
+
         // order add //
         $order = Order::create([
             'user_id' => $user_id,
+            'name' => $request->name,
             'sub_total' => $request->sub_total,
             'grand_total' => $request->grand_total,
             'shipping_charge' => $request->shipping_charge,
+            'shipping_name' => $request->shipping_name,
+            'shipping_type' => $request->shipping_type,
             'payment_method' => $request->payment_option,
             'payment_status' => $payment_status,
-            'invoice_no' => date('Ymd-His') . rand(10, 99),
+            // 'invoice_no' => date('Ymd-His') . rand(10, 99),
+            'invoice_no' => $invoice_no,
             'delivery_status' => 'pending',
             'phone' => $request->phone,
             'email' => $request->email,

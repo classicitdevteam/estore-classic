@@ -85,12 +85,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        {{--<div class="col-lg-6">
                             <form method="post" class="apply-coupon">
                                 <input type="text" placeholder="Enter Coupon Code...">
                                 <button class="btn  btn-md" name="login">Apply Coupon</button>
                             </form>
-                        </div>
+                        </div>--}}
                     </div>
                 <form action="{{ route('checkout.payment') }}" method="post">
                     @csrf
@@ -267,6 +267,8 @@
                                     <td><h6 class="d-flex justify-content-between mb-2">Subtotal : <span class="text-brand text-end">৳<span id="cartSubTotal">{{ $cartTotal }}</span></span></h6></td>
                                     <td><h6 class="d-flex justify-content-between mb-2">Shipping : <span class="text-brand text-end">৳<span id="ship_amount">0.00</span></span><h6></td>
                                     <input type="hidden" value="" name="shipping_charge" class="ship_amount" />
+                                    <input type="hidden" value="" name="shipping_type" class="shipping_type" />
+                                    <input type="hidden" value="" name="shipping_name" class="shipping_name" />
                                     <input type="hidden" value="" name="sub_total" id="cartSubTotalShi" />
                                     <input type="hidden" value="" name="grand_total" id="grand_total" />
                                     <td><h4 class="d-flex justify-content-between">Total : <span class="text-brand text-end">৳<span id="grand_total_set">{{ $cartTotal }}</span></span><h4></td>
@@ -477,9 +479,11 @@
                         type:"GET",
                         dataType:"json",
                         success:function(data) {
-                            //console.log(data);
+                            // console.log(data);
                             $('#ship_amount').text(data.shipping_charge);
                             $('.ship_amount').val(data.shipping_charge);
+                            $('.shipping_name').val(data.name);
+                            $('.shipping_type').val(data.type);
 
                             let shipping_price = parseInt(data.shipping_charge);
                             let grand_total_price = parseInt($('#cartSubTotalShi').val());

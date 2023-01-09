@@ -20,6 +20,18 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" />
     @endif
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3 ') }}" />
+    <style>
+        .invoice-3 .invoice-header {
+            /* background: url(../imgs/invoice/header-bg-2.jpg) top left no-repeat; */
+            /* background-size: cover; */
+            /* color: #fff; */
+            padding: 30px;
+        }
+        .invoice .invoice-top {
+            padding: 15px 150px 5px 150px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,7 +46,7 @@
                         <div class="invoice-info" id="invoice_wrapper">
                             <div class="invoice-header">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-8">
                                         <div class="invoice-name">
                                             <div class="logo w-50">
                                                 <a href="{{route('home')}}">
@@ -42,18 +54,27 @@
                                                         $logo = get_setting('site_footer_logo');
                                                     @endphp
                                                     @if($logo != null)
-                                                        <img src="{{ asset(get_setting('site_footer_logo')->value ?? 'null') }}" alt="{{ env('APP_NAME') }}">
+                                                        <img src="{{ asset(get_setting('site_footer_logo')->value ?? 'null') }}" style="max-width: 200px !important;" alt="{{ env('APP_NAME') }}">
                                                     @else
-                                                        <img src="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" style="height: 60px !important; width: 80px !important; min-width: 80px !important;">
+                                                        <img src="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" style="max-width: 200px !important;">
                                                     @endif
                                                 </a>
+                                                <div>
+                                                    <strong>{{ get_setting('business_name')->value ?? ''}}</strong> <br />
+                                                    {{-- {{ get_setting('business_address')->value ?? ''}}<br> --}}
+                                                    <abbr title="Phone">Phone:</abbr> {{ get_setting('phone')->value ?? ''}}<br>
+                                                    <abbr title="Email">Email: </abbr>{{ get_setting('email')->value ?? ''}}<br>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                             
-                                    <div class="col-sm-6  text-end">
+                                    <div class="col-sm-4">
                                         <div class="invoice-numb">
                                             <h4 class="invoice-header-1 mb-10 mt-20">Invoice No:<span class="text-heading">{{ $order->invoice_no }}</span></h4>
+                                            <strong class="text-mute">Invoice Data:</strong> {{ \Carbon\Carbon::parse($order->date)->isoFormat('MMM Do YYYY')}}<br />
+                                            <strong class="text-mute">Payment Method:</strong> @if($order->payment_method == 'cod') Cash On Delivery @else {{ $order->payment_method }} @endif<br />
+                                            <strong class="text-mute">Status:</strong> <span class="">{{ $order->delivery_status }}</span>
                                         </div>
                                     </div>
                                    
@@ -61,36 +82,31 @@
                             </div>
                             <div class="invoice-top">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="invoice-number">
-                                            <h4 class="invoice-title-1 mb-10">Invoice To</h4>
-                                            <p class="invoice-addr-1 text-capitalize">
-                                                <strong>{{ get_setting('business_name')->value ?? 'Null'}}</strong> <br />
-                                                {{ get_setting('business_address')->value ?? 'Null'}}<br>
-                                                <abbr title="Phone">Phone:</abbr> {{ get_setting('phone')->value ?? 'Null'}}<br>
-                                                <abbr title="Email">Email: </abbr>{{ get_setting('email')->value ?? 'Null'}}<br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-md-8">
                                         <div class="invoice-number">
                                             <h4 class="invoice-title-1 mb-10">Bill To</h4>
                                             <p class="invoice-addr-1 text-capitalize">
-                                                <strong>{{ $order->user->name ?? 'NULL' }}</strong> <br />
-                                                {{ $order->address ?? 'NULL' }}<br>
-                                                {{ $order->upazilla->name_en ?? 'NULL' }}, {{ $order->district->district_name_en ?? 'NULL' }}, {{ $order->division->division_name_en ?? 'NULL' }}<br>
-                                                <abbr title="Phone">Phone:</abbr> {{ $order->user->phone }}<br>
-                                                <abbr title="Email">Email: </abbr>{{ $order->user->email }}<br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="invoice-number">
-                                            <h4 class="invoice-title-1 mb-10">Overview</h4>
-                                            <p class="invoice-addr-1 text-capitalize ">
-                                                <strong>Invoice Data:</strong> {{ \Carbon\Carbon::parse($order->date)->isoFormat('MMM Do YYYY')}}<br />
-                                                <strong>Payment Method:</strong> {{ $order->payment_method }}<br />
-                                                <strong>Status:</strong> <span class="text-brand">{{ $order->delivery_status }}</span>
+                                                {{-- @if($order->user->name)
+                                                    <strong>{{ $order->user->name ?? '' }}</strong> <br />
+                                                @else
+                                                    <strong>{{ $order->name ?? '' }}</strong> <br />
+                                                @endif --}}
+                                                <strong>{{ $order->name ?? '' }}</strong> <br />
+                                                {{ $order->address ?? '' }}<br>
+                                                {{ $order->upazilla->name_en ?? '' }}, {{ $order->district->district_name_en ?? '' }}, {{ $order->division->division_name_en ?? '' }}<br>
+                                                {{-- @if($order->user->phone)
+                                                    <abbr title="Phone">Phone:</abbr> {{ $order->user->phone ?? ''}}<br>
+                                                @else
+                                                    <abbr title="Phone">Phone:</abbr> {{ $order->phone ?? ''}}<br>
+                                                @endif --}}
+                                                <abbr title="Phone">Phone:</abbr> {{ $order->phone ?? ''}}<br>
+
+                                                {{-- @if($order->user->email)
+                                                    <abbr title="Email">Email: </abbr>{{ $order->user->email ?? ''}}<br>
+                                                @else
+                                                    <abbr title="Email">Email: </abbr>{{ $order->email ?? ''}}<br>
+                                                @endif --}}
+                                                <abbr title="Email">Email: </abbr>{{ $order->email ?? ''}}<br>
                                             </p>
                                         </div>
                                     </div>
@@ -165,7 +181,7 @@
                                     </div>
                                     <div class="col-sm-6 col-offsite">
                                         <div class="text-end">
-                                            <p class="mb-0 text-13">Thank you for your business</p>
+                                            <p class="mb-0 text-13">Thank you for your Order</p>
                                             <p><strong>{{ get_setting('business_name')->value ?? ' '}}</strong></p>
                                         </div>
                                     </div>
@@ -173,7 +189,7 @@
                             </div>
                         </div>
                         <div class="invoice-btn-section clearfix d-print-none">
-                            <a href="javascript:window.print()" class="btn btn-lg btn-custom btn-print hover-up"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-print.svg') }}" alt="" /> Print </a>
+                            {{-- <a href="javascript:window.print()" class="btn btn-lg btn-custom btn-print hover-up"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-print.svg') }}" alt="" /> Print </a> --}}
                             <a id="invoice_download_btn" class="btn btn-lg btn-custom btn-download hover-up"> <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-download.svg') }}" alt="" /> Download </a>
                         </div>
                     </div>

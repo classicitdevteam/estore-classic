@@ -113,7 +113,7 @@ class ProductController extends Controller
     {
         $stock = ProductStock::where('product_id', $id)->where('varient', $varient)->first();
         if($stock){
-            return $stock->price;
+            return $stock;
         }else{
             return null;
         }

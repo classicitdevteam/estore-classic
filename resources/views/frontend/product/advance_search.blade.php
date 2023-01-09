@@ -71,10 +71,10 @@
         <div class="col-md-12">
             <div class="card">
                 @foreach($products as $product)
-                <a href="{{ route('product.details',$item->slug) }}">
+                <a href="{{ route('product.details',$product->slug) }}">
                     @if($loop->index == (count($products) - 1))
                         <div class="list">
-                            <img src="{{ asset($item->product_thumbnail) }}" style="width: 30px; height: 30px;"> 
+                            <img src="{{ asset($product->product_thumbnail) }}" style="width: 30px; height: 30px;"> 
                             <div class="d-flex flex-column ml-3" style="margin-left: 10px;"> <span style="color: black;">{{ $product->name_en }} </span>
                             </div>
                         </div>

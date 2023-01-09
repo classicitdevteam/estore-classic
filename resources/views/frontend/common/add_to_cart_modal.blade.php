@@ -45,11 +45,15 @@
                             <form id="choice_form">
                                 <div class="row " id="attributes">
                                     <div class="form-group col-lg-6" id="colorArea">
-                                        <label style=" font-weight:bold;color: black;">Chose Color <span>**</span></label>
+                                        {{-- <label style=" font-weight:bold;color: black;">Chose Color <span>**</span></label>
                                         <select class="form-control" id="color" name="color">
                                             <option value="">--Choose Color--</option>
-                                        </select>
+                                        </select> --}}
                                     </div>
+                                </div>
+                                
+                                <div class="row" id="attribute_alert">
+                                                
                                 </div>
                             </form>
                             <div class="font-xs">
@@ -81,12 +85,11 @@
                                 </div>
                                 <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                    <input type="text" name="quantity" class="qty-val" value="1" min="1" id="qty">
+                                    <input type="text" name="quantity" class="qty-val" value="{{ $product->minimum_buy_qty ?? '1' }}" min="1" id="qty">
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
-
                             </div>
-                            <div class="row" id="attribute_alert">
+                            <div class="d-block" id="qty_alert">
 											
                             </div>
                             <div class="detail-extralink d-flex mb-30" style="margin-top: 10px;">
@@ -105,12 +108,18 @@
                                     <input type="hidden" id="pfrom" value="modal">
                                     <input type="hidden" id="pvarient" value="">
 
+                                    <input type="hidden" id="minimum_buy_qty" value="">
+	                                <input type="hidden" id="stock_qty" value="">
+
                                     <input type="hidden" id="buyNowCheck" value="0">
 
                                     <button  class="button button-add-to-cart" onclick="addToCart()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Add to cart</button>
 
                                     <button  class="button button-add-to-cart bg-danger ml-5" onclick="buyNow()" id="closeModel"><i class="fi-rs-shopping-cart" ></i>Buy Now</button>
                                 </div>
+                            </div>
+                            <div class="row mb-3" id="stock_alert">
+											
                             </div>
                         </div>
                         <!-- Detail Info -->

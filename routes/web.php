@@ -81,7 +81,7 @@ Route::get('/tag-product/{id}/{slug}',[FrontendController::class, 'TagWiseProduc
 Route::get('product-details/{slug}',[FrontendController::class, 'productDetails'])->name('product.details');
 
 // Page Setting
-Route::get('/{slug}',[FrontendController::class, 'pageAbout'])->name('page.about');
+Route::get('/page/{slug}',[FrontendController::class, 'pageAbout'])->name('page.about');
 
 
 /* =============== Start Product View Modal With Ajax ============== */

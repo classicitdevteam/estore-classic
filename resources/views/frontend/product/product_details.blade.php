@@ -90,7 +90,7 @@
 								            data-zoom-image-2x="{{ asset($product->product_thumbnail) }}"
 								            data-image-2x="{{ asset($product->product_thumbnail) }}"
 								        >
-								            <img style="max-width: 438px;max-height: 438px;" src="{{ asset($product->product_thumbnail ) }}" srcset="{{ asset($product->product_thumbnail) }}" alt=""/>
+								            <img id="product_zoom_img" style="max-width: 438px;max-height: 438px;" src="{{ asset($product->product_thumbnail ) }}" srcset="{{ asset($product->product_thumbnail) }}" alt=""/>
 								        </a>
 								        <div class="selectors mt-30">
 								        	@foreach($product->multi_imgs as $img)
@@ -104,6 +104,20 @@
 								            >
 								                <img style="height: 100px !important;" srcset="{{ asset($img->photo_name ) }}"/>
 								            </a>
+								            @endforeach
+											@foreach($product->stocks as $stock)
+												@if ($stock->image && $stock->image!='' && $stock->image!=NULL)
+													<a
+														class="me-4"
+														data-zoom-id="Zoom-1"
+														href="{{ asset($stock->image ) }}"
+														data-image="{{ asset($stock->image ) }}"
+														data-zoom-image-2x="{{ asset($stock->image ) }}"
+														data-image-2x="{{ asset($stock->image ) }}"
+													>
+														<img style="height: 100px !important;" srcset="{{ asset($stock->image ) }}"/>
+													</a>
+												@endif
 								            @endforeach
 								        </div>
 								    </div>
@@ -125,7 +139,6 @@
 	                                				$amount = $product->regular_price;
 	                                			}
 	                                		}
-				                            
 		                          		@endphp
 
 		                          		@if ($product->discount_price > 0)
@@ -248,10 +261,13 @@
 	                                    	</div>
 	                                        <div class="detail-qty border radius">
 	                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-	                                            <input type="text" name="quantity" class="qty-val" value="1" min="1" id="qty">
+	                                            <input type="text" name="quantity" class="qty-val" value="{{ $product->minimum_buy_qty ?? '1' }}" min="1" id="qty">
 	                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
 	                                        </div>
 
+											<div class="row" id="qty_alert">
+											
+											</div>
 	                                    </div>
 	                                    <div class="detail-extralink mb-50">
 	                                        <div class="product-extra-link2">
@@ -262,6 +278,9 @@
 
 	                                        	<input type="hidden" id="product_price" value="{{ $amount }}">
 
+	                                        	<input type="hidden" id="minimum_buy_qty" value="{{ $product->minimum_buy_qty }}" >
+	                                        	<input type="hidden" id="stock_qty" value="{{ $product->stock_qty }}">
+
 	                                        	<input type="hidden" id="pvarient" value="">
 												
 												<input type="hidden" id="buyNowCheck" value="0">
@@ -270,11 +289,15 @@
 
 	                                            <button type="submit" class="button button-add-to-cart ml-5 bg-danger" onclick="buyNow()"><i class="fi-rs-shoppi ng-cart"></i>Buy Now</button>
 
-	                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#"><i class="fi-rs-heart"></i></a>
+	                                            {{-- <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#"><i class="fi-rs-heart"></i></a>
 
-	                                            <a aria-label="Compare" class="action-btn hover-up" href="#"><i class="fi-rs-shuffle"></i></a>
+	                                            <a aria-label="Compare" class="action-btn hover-up" href="#"><i class="fi-rs-shuffle"></i></a> --}}
 	                                        </div>
+											
 	                                    </div>
+										<div class="row mb-3" id="stock_alert">
+											
+										</div>
 	                                    <div class="font-xs">
 	                                        <ul class="mr-50 float-start">
 	                                            <li class="mb-5">Regular Price: <span class="text-brand">{{ $product->regular_price }}</span></li>

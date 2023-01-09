@@ -216,20 +216,22 @@
             url:'/varient-price/'+pid+'/'+varient,
             dataType:'json',
                 success:function(data){
-                    //console.log(data);
+                    // console.log(data);
                     if(data && data != 'na'){
                         //$('.current-price').text('৳'+data);
                         var discount = $('#discount_amount').val();
                         if(discount>0){
-                            $('.current-price').text('৳'+(data-discount));
-                            $('.old-price').text('৳'+data);
-                            $('#product_price').val(data-discount);
+                            $('.current-price').text('৳'+(data.price-discount));
+                            $('.old-price').text('৳'+data.price);
+                            $('#product_price').val(data.price-discount);
                         }else{
-                            $('.current-price').text('৳'+data);
-                            $('#product_price').val(data);
+                            $('.current-price').text('৳'+data.price);
+                            $('#product_price').val(data.price);
                         }
                         $('#pvarient').val(varient);
                         //alert(discount);
+                        $('#product_zoom_img').attr("src", window.location.origin+'/'+data.image);
+                        $('#product_zoom_img').attr("srcset", window.location.origin+'/'+data.image);
                     }
                 }
             });
@@ -285,15 +287,16 @@
                         //$('.current-price').text('৳'+data);
                         var discount = $('#discount_amount').val();
                         if(discount>0){
-                            $('#pprice').text(data-discount);
-                            $('#oldprice').text(data);
-                            $('#product_price').val(data-discount);
+                            $('#pprice').text(data.price-discount);
+                            $('#oldprice').text('৳'+(data.price));
+                            $('#product_price').val(data.price-discount);
                         }else{
-                            $('#pprice').text(data);
-                            $('#product_price').val(data);
+                            $('#pprice').text(data.price);
+                            $('#product_price').val(data.price);
                         }
                         $('#pvarient').val(varient);
                         //alert(discount);
+                        $('#pimage').attr("src", window.location.origin+'/'+data.image);
                     }
                 }
             });
@@ -315,6 +318,8 @@
                     $('#pcategory').text(data.product.category.name_en);
                     $('#pbrand').text(data.product.brand.name_en);
                     $('#pimage').attr('src', '/' + data.product.product_thumbnail);
+                    $('#stock_qty').val(data.product.stock_qty);
+                    $('#minimum_buy_qty').val(data.product.minimum_buy_qty);
 
                     $('#pavailable').hide();
                     $('#pstockout').hide();
@@ -325,11 +330,11 @@
                         if(data.product.discount_type==1){
                             discount = data.product.discount_price;
                             $('#pprice').text(data.product.regular_price - discount);
-                            $('#oldprice').text(data.product.regular_price);
+                            $('#oldprice').text('৳'+(data.product.regular_price));
                         }else if(data.product.discount_type==2){
                             discount = data.product.discount_price*data.product.regular_price/100;
                             $('#pprice').text(data.product.regular_price - discount);
-                            $('#oldprice').text(data.product.regular_price);
+                            $('#oldprice').text('৳'+(data.product.regular_price));
                         }
                     }else{
                         $('#pprice').text(data.product.regular_price);
@@ -443,7 +448,8 @@
 
                     /* ========= Start Add To Cart Product id ======== */
                     $('#product_id').val(id);
-                    $('#qty').val(1);
+                    $('#qty').val(data.product.minimum_buy_qty);
+                    // $('#qty').attr('min',+data.product.minimum_buy_qty);
                     /* ========== End Add To Cart Product id ======== */
                 }
             });
@@ -474,7 +480,15 @@
                 }
             }
             if(checkNotSelected == 1){
-                $('#attribute_alert').html(checkAlertHtml);
+                $('#qty_alert').html('');
+                //$('#attribute_alert').html(checkAlertHtml);
+                $('#attribute_alert').html(`<div class="attr-detail mb-5">
+											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+												<div>
+													<i class="fa fa-warning mr-10"></i> <span> Select all attributes</span>
+												</div>
+											</div>
+										</div>`);
                 return false;
             }
             $('.size-filter li').removeClass("active");
@@ -485,6 +499,32 @@
             var size = $('#size option:selected').val();
             var quantity = $('#qty').val();
             var varient = $('#pvarient').val();
+
+            var min_qty = $('#minimum_buy_qty').val();
+            if(quantity < min_qty){
+                $('#attribute_alert').html('');
+                $('#qty_alert').html(`<div class="attr-detail mb-5">
+											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+												<div>
+													<i class="fa fa-warning mr-10"></i> <span> Minimum quantity `+ min_qty +` required.</span>
+												</div>
+											</div>
+										</div>`);
+                return false;
+            }
+            // console.log(min_qty);
+            var p_qty = $('#stock_qty').val();
+            if(quantity > p_qty){
+                $('#stock_alert').html(`<div class="attr-detail mb-5">
+											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+												<div>
+													<i class="fa fa-warning mr-10"></i> <span> Not enough stock.</span>
+												</div>
+											</div>
+										</div>`);
+                return false;
+            }
+
 
             // alert(varient);
 

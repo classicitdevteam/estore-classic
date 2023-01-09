@@ -151,27 +151,30 @@ class FrontendController extends Controller
     public function productDetails($slug){
 
         $product = Product::where('slug', $slug)->first();
-        // dd($product);
-        if($product->id){
-            $multiImg = MultiImg::where('product_id',$product->id)->get();
+        if($product){
+            if($product->id){
+                $multiImg = MultiImg::where('product_id',$product->id)->get();
+            }
+    
+            /* ================= Product Color Eng ================== */
+            $color_en = $product->product_color_en;
+            $product_color_en = explode(',', $color_en);
+    
+            /* ================= Product Size Eng =================== */
+            $size_en = $product->product_size_en;
+            $product_size_en = explode(',', $size_en);
+    
+            /* ================= Realted Product =============== */
+            $cat_id = $product->category_id;
+            $relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$product->id)->orderBy('id','DESC')->get();
+    
+            $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->limit(5)->get();
+            $new_products = Product::orderBy('name_en')->where('status','=',1)->limit(3)->latest()->get();
+            
+            return view('frontend.product.product_details', compact('product','multiImg','categories','new_products','product_color_en','product_size_en','relatedProduct'));
         }
-        // dd($multiImg);
-
-        /* ================= Product Color Eng ================== */
-        $color_en = $product->product_color_en;
-        $product_color_en = explode(',', $color_en);
-
-        /* ================= Product Size Eng =================== */
-        $size_en = $product->product_size_en;
-        $product_size_en = explode(',', $size_en);
-
-        /* ================= Realted Product =============== */
-        $cat_id = $product->category_id;
-        $relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$product->id)->orderBy('id','DESC')->get();
-
-        $categories = Category::orderBy('name_en','ASC')->where('status','=',1)->limit(5)->get();
-        $new_products = Product::orderBy('name_en')->where('status','=',1)->limit(3)->latest()->get();
-        return view('frontend.product.product_details', compact('product','multiImg','categories','new_products','product_color_en','product_size_en','relatedProduct'));
+        
+        return view('frontend.product.productNotFound');
     }
 
     /* ========== Start CatWiseProduct Method ======== */

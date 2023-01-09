@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 use DB;
 use Session;
@@ -102,7 +103,7 @@ class UserController extends Controller
 
         $address->save();
 
-        $addresses = Address::all();
+        $addresses = Address::where('user_id', Auth::user()->id)->orderBy('id','DESC')->get();
 
         return json_encode($addresses);
     }

@@ -83,8 +83,14 @@
                             	@foreach ($orders as $key => $order)
                                 <tr>
                                     <td>{{ $order->invoice_no }}</td>
-                                    <td><b>{{ $order->user->name }}</b></td>
-                                    <td>{{ $order->grand_total }}</td>
+                                    <td><b>{{ $order->name }}</b></td>
+                                    <td>
+                                        <?php 
+                                            $discount_total = $order->grand_total-$order->discount;
+                                            $total_ammount = $discount_total+$order->shipping_charge;
+                                        ?>
+                                        {{ $total_ammount }}
+                                    </td>
                                     <td>
                                     	@php
 			                                $status = $order->delivery_status;
