@@ -68,16 +68,16 @@
 			</table>
 			<table>
 				<tr>
-					<td style="font-size: 1rem;" class="strong">{{ get_setting('site_name')->value ?? '' }}</td>
+					<td style="font-size: 1rem;" class="strong">{{ get_setting('site_name')->value }}</td>
 					<td class="text-right"></td>
 				</tr>
 				<tr>
-					<td class="gry-color small">Email:  {{ $order->email ?? ''}} </td>
+					<td class="gry-color small">Email:  {{ $order->email }} </td>
 					<td class="text-right small"><span class="gry-color small">Order ID
-					:</span> <span class="strong">{{ $order->invoice_no ?? '' }}</span></td>
+					:</span> <span class="strong">{{ $order->invoice_no }}</span></td>
 				</tr>
 				<tr>
-					<td class="gry-color small">Phone:  {{ $order->phone ?? ''}}</td>
+					<td class="gry-color small">Phone:  {{ $order->phone }}</td>
 					<td class="text-right small"><span class="gry-color small">Order Date:</span> <span class=" strong">{{ date('d-m-Y', $order->date) }}</span></td>
 				</tr>
 				<tr>
@@ -98,16 +98,16 @@
 		<div style="padding: 1rem;padding-bottom: 0">
             <table>
 				<tr><td class="strong small gry-color">Bill to:</td></tr>
-				<tr><td class="strong">{{ $order->name ?? 'Null'}}</td></tr>
+				<tr><td class="strong">{{ $order->name }}</td></tr>
 				<tr>
 					<td class="gry-color small">
-						{{ ucwords($order->upazilla->name_en ?? 'Null' ) }},
-						{{ ucwords($order->district->district_name_en ?? 'Null') }},
-                    	{{ ucwords($order->division->division_name_en ?? 'Null') }}
+						{{ ucwords($order->upazilla->name_en) }},
+						{{ ucwords($order->district->district_name_en) }},
+                    	{{ ucwords($order->division->division_name_en) }}
                     </td>
 				</tr>
-				<tr><td class="gry-color small">Email: {{ $order->email ?? 'Null'}}</td></tr>
-				<tr><td class="gry-color small">Phone: {{ $order->phone ?? 'Null'}}</td></tr>
+				<tr><td class="gry-color small">Email: {{ $order->email }}</td></tr>
+				<tr><td class="gry-color small">Phone: {{ $order->phone }}</td></tr>
 			</table>
 		</div>
 
@@ -118,7 +118,6 @@
 	                    <th width="35%" class="text-left">Product Name</th>
 	                    <th width="10%" class="text-left">Qty</th>
 	                    <th width="15%" class="text-left">Unit Price</th>
-	                    <th width="10%" class="text-left">Tax</th>
 	                    <th width="15%" class="text-right">Total</th>
 	                </tr>
 				</thead>
@@ -132,9 +131,8 @@
                                     @endforeach
                                 @endif</td>
 								<td class="">{{ $orderDetail->qty }}</td>
-								<td class="currency">{{ ($orderDetail->price/$orderDetail->qty) }}</td>
-								<td class="currency">{{ ($orderDetail->tax/$orderDetail->qty) }}</td>
-			                    <td class="text-right currency">{{ ($orderDetail->price+$orderDetail->tax) }}</td>
+								<td class="currency">{{ $orderDetail->price }}</td>
+			                    <td class="text-right currency">{{ ($orderDetail->price*$orderDetail->qty) }}</td>
 							</tr>
 		                @endif
 					@endforeach
@@ -160,19 +158,19 @@
 						        <tbody>
 							        <tr>
 							            <th class="gry-color text-left">Sub Total</th>
-							            <td class="currency">{{ $order->sub_total ?? '0.00' }}</td>
+							            <td class="currency">{{ $order->sub_total }}</td>
 							        </tr>
 							        <tr>
 							            <th class="gry-color text-left">Shipping Cost</th>
-							            <td class="currency">{{ $order->shipping_charge ?? '0.00' }}</td>
+							            <td class="currency">{{ $order->shipping_charge }}</td>
 							        </tr>
 				                    <tr class="border-bottom">
 							            <th class="gry-color text-left">Discount</th>
-							            <td class="currency">{{ $order->discount ?? '0.00' }}</td>
+							            <td class="currency">{{ $order->discount }}</td>
 							        </tr>
 							        <tr>
 							            <th class="text-left strong">Grand Total</th>
-							            <td class="currency">{{ ($order->grand_total-$order->discount) ?? '0.00'}}</td>
+							            <td class="currency">{{ $order->grand_total }}</td>
 							        </tr>
 						        </tbody>
 						    </table>

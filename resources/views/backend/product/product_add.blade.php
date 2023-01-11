@@ -300,25 +300,25 @@
                         <div class="mb-4">
                         	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_deals" id="is_deals">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_deals" id="is_deals" value="1">
                                     <label class="form-check-label cursor" for="is_deals">Today's Deal</label>
                                 </div>
                           	</div>
                           	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_digital" id="is_digital">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_digital" id="is_digital" value="1">
                                     <label class="form-check-label cursor" for="is_digital">Digital</label>
                                 </div>
                           	</div>
                           	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_featured" id="is_featured">
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="is_featured" id="is_featured" value="1">
                                     <label class="form-check-label cursor" for="is_featured">Featured</label>
                                 </div>
                           	</div>
                           	<div class="row">
                           		<div class="custom-control custom-switch">
-                                    <input type="checkbox" class="form-check-input me-2 cursor" name="status" id="status" checked>
+                                    <input type="checkbox" class="form-check-input me-2 cursor" name="status" id="status" checked value="1">
                                     <label class="form-check-label cursor" for="status">Status</label>
                                 </div>
                           	</div>
