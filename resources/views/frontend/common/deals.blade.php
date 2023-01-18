@@ -1,12 +1,12 @@
 <div class="col-xl-3 col-lg-4 col-md-6 col-6">
-    <div class="product-cart-wrap style-2 wow animate__animated animate__fadeInUp" data-wow-delay="0">
+    <div class="product-cart-wrap style-2">
         <div class="product-img-action-wrap">
             <div class="product-img">
                 <a href="{{ route('product.details',$product->slug) }}">
                     @if($product->product_thumbnail && $product->product_thumbnail != '' && $product->product_thumbnail != 'Null')
-                        <img class="default-img" src="{{ asset($product->product_thumbnail) }}" alt="" />
+                        <img class="default-img" data-original="{{ asset($product->product_thumbnail) }}" alt="" />
                     @else
-                        <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}" alt="" />
+                        <img class="img-lg mb-3" data-original="{{ asset('upload/no_image.jpg') }}" alt="" />
                     @endif
                 </a>
             </div>
