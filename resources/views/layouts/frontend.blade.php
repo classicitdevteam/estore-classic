@@ -40,7 +40,8 @@
     <link rel="stylesheet" href="{{asset('frontend/css/app.css')}}" />
     <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
-        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
+
     @stack('css')
 </head>
 
@@ -99,6 +100,44 @@
     <script src="{{asset('frontend/assets/js/shop.js?v=5.3')}}"></script>
     <!-- Custom Js -->
     <script src="{{asset('frontend/js/app.js')}}"></script>
+
+    {{-- Image lazyload Start --}}
+    <script type="text/javascript">
+        $("img").lazyload({
+            effect : "fadeIn"
+        });
+    </script>
+    {{-- <script>
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll("img.lazyload");
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        } else {
+            // Dynamically import the LazySizes library
+          let script = document.createElement("script");
+          script.async = true;
+          script.src =
+            "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js";
+          document.body.appendChild(script);
+        }
+      </script> --}}
+    {{-- <script>
+        (async () => {
+            if ('loading' in HTMLImageElement.prototype) {
+                const images = document.querySelectorAll("img.lazyload");
+                images.forEach(img => {
+                    img.src = img.dataset.src;
+                });
+            } else {
+                // Dynamically import the LazySizes library
+                const lazySizesLib = await import('https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js');
+                Initiate LazySizes (reads data-src & class=lazyload)
+                lazySizes.init(); // lazySizes works off a global.
+            }
+        })();
+    </script> --}}
+    {{-- Image lazyload End --}}
 
     <!-- Image Show -->
     <script type="text/javascript">

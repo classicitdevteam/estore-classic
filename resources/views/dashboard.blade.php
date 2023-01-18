@@ -55,67 +55,74 @@ Dashboard Nest Online Shop
                             <div class="tab-content account dashboard-content pl-50">
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
-                                            <div class="card">
-                                                <p><i class="fas fa-coins"></i></p>
-                                                <span class="mb-4">PENDING POINT</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
-                                            <div class="card">
-                                                <p><i class="fas fa-coins"></i></p>
-                                                <span>TOTAL POINT</span>
-                                                <p>0</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
-                                            <div class="card">
-                                                <p><i class="fas fa-newspaper"></i></p>
-                                                <span>TOTAL BLOGS</span>
-                                                <p>0</p>
-                                            </div>
-                                        </div>
+                                        <!--<div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">-->
+                                        <!--    <div class="card">-->
+                                        <!--        <p><i class="fas fa-coins"></i></p>-->
+                                        <!--        <span class="mb-4">PENDING POINT</span>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">-->
+                                        <!--    <div class="card">-->
+                                        <!--        <p><i class="fas fa-coins"></i></p>-->
+                                        <!--        <span>TOTAL POINT</span>-->
+                                        <!--        <p>0</p>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">-->
+                                        <!--    <div class="card">-->
+                                        <!--        <p><i class="fas fa-newspaper"></i></p>-->
+                                        <!--        <span>TOTAL BLOGS</span>-->
+                                        <!--        <p>0</p>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
 
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
                                             <div class="card">
                                                 <p><i class="fas fa-box"></i></p>
                                                 <span>TOTAL ORDER</span>
-                                                <p>0</p>
+                                                <p>{{ count($all) }}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
                                             <div class="card">
                                                 <p><i class="fas fa-balance-scale"></i></p>
                                                 <span>PENDING ORDER</span>
-                                                <p>0</p>
+                                                <p>{{ count($pending) }}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
                                             <div class="card">
                                                 <p><i class="fas fa-hourglass-start"></i></p>
                                                 <span>PROCESSING ORDER</span>
-                                                <p>0</p>
+                                                <p>{{ count($processing) }}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
                                             <div class="card">
                                                 <p><i class="fas fa-plane"></i></p>
                                                 <span>SHIPPING ORDER</span>
-                                                <p>0</p>
+                                                <p>{{ count($shipping) }}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
                                             <div class="card">
                                                 <p><i class="fas fa-thumbs-up"></i></p>
                                                 <span>PICKED UP ORDER</span>
-                                                <p>0</p>
+                                                <p>{{ count($picked) }}</p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
                                             <div class="card">
                                                 <p><i class="fa fa-window-close"></i></p>
                                                 <span>CANCELED ORDER</span>
-                                                <p>0</p>
+                                                <p>{{ count($cancelled) }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-6 item text-center">
+                                            <div class="card">
+                                                <p><i class="fa fa-window-close"></i></p>
+                                                <span>COMPLETED ORDER</span>
+                                                <p>{{ count($completed) }}</p>
                                             </div>
                                         </div>
 

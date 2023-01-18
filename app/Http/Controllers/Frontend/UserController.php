@@ -25,7 +25,36 @@ class UserController extends Controller
     /* ============= Dashboard & user orders ============= */
     public function index(){
         $orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->get();
-        return view('dashboard',compact('orders'));
+        
+        $all = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'pending')
+                        ->get();
+                        
+        $pending = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'pending')
+                        ->get();
+                        
+        $processing = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'processing')
+                        ->get();
+                        
+        $shipping = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'shipped')
+                        ->get();
+                        
+        $picked = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'picked_up')
+                        ->get();
+                        
+        $completed = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'delivered')
+                        ->get();
+                        
+        $cancelled = Order::where('user_id', Auth::user()->id)
+                        ->where('delivery_status', 'cancel')
+                        ->get();
+                        
+        return view('dashboard',compact('orders', 'all', 'pending', 'processing', 'shipping', 'picked', 'completed', 'cancelled'));
     }
 
     /* ============= Order View ============= */

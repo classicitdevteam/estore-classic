@@ -213,7 +213,7 @@
                     </div>
                     <p class="font-sm">
                         Developed by:
-                        <a target="_blank" href="https://classicit.com.bd/">Classic it & Sky Mart Ltd</a>
+                        <a target="_blank" href="https://classicit.com.bd/">Classic IT & Sky Mart Ltd</a>
                     </p>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">

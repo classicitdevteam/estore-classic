@@ -3,11 +3,11 @@
         <div class="product-img-action-wrap">
             <div class="product-img product-img-zoom">
                 <a href="{{ route('product.details',$product->slug) }}">
-                    @if($product->product_thumbnail && $product->product_thumbnail != '' && $product->product_thumbnail != 'Null')
-                        <img class="default-img" src="{{ asset($product->product_thumbnail) }}" alt="" />
-                        <img class="hover-img" src="{{ asset($product->product_thumbnail) }}" alt="" />
+                    @if($product->product_thumbnail && $product->product_thumbnail != '' && $product->product_thumbnail != '')
+                        <img class="default-img lazyload img-responsive" data-original="{{ asset($product->product_thumbnail) }}" alt="">
+                        <img class="hover-img" data-original="{{ asset($product->product_thumbnail) }}" alt="" />
                     @else
-                        <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}" alt="" />
+                        <img class="img-lg mb-3" data-original="{{ asset('upload/no_image.jpg') }}" alt="" />
                     @endif
                 </a>
             </div>
