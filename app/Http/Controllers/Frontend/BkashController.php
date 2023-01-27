@@ -51,6 +51,7 @@ class BkashController extends Controller
         curl_setopt($url, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
 
         $resultdata = curl_exec($url);
+        //dd($url);
         curl_close($url);
 
         //dd($resultdata);

@@ -10,6 +10,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use App\Models\Category;
+use App\Models\ProductStock;
 
 class CartController extends Controller
 {
@@ -22,18 +23,47 @@ class CartController extends Controller
     }
     /* ============ Start AddToCart Methoed ============ */
       public function AddToCart(Request $request, $id){
-
+        //dd($request->all());
         $options = json_decode(stripslashes($request->get('options')));
 
         //dd($request);
         $attribute_ids = array();
         $attribute_names = array();
         $attribute_values = array();
-        // for($i=0; $i < $request->total_attributes; $i++){
-        //     //$name = 'attribute_ids' . $no;
-        //     $item = $options['attribute_ids'];
-        // }
         $product = Product::findOrFail($id);
+        //dd($product);
+        $carts = Cart::content();
+
+        if(!$product->is_varient){
+            $prev_cart_qty = 0;
+            foreach($carts as $cart){
+                if($cart->id == $id) {
+                    $prev_cart_qty += $cart->qty;
+                }
+            }
+            
+            $qty = $prev_cart_qty + $request->quantity;
+            
+            if($qty > $product->stock_qty){
+                return response()->json(['error'=> 'Not enough stock']);
+            }
+        }else{
+            $prev_cart_qty = 0;
+            foreach($carts as $cart){
+                if($cart->id == $id) {
+                    if($cart->options->varient == $request->product_varient){
+                        $prev_cart_qty += $cart->qty;
+                    }
+                }
+            }
+            
+            $qty = $prev_cart_qty + $request->quantity;
+            $stock = ProductStock::where('product_id', $id)->where('varient', $request->product_varient)->first();
+            
+            if($qty > $stock->qty){
+                return response()->json(['error'=> 'Not enough stock']);
+            }
+        }
         
         if($product->is_varient){
             foreach($options as $option){
@@ -50,12 +80,6 @@ class CartController extends Controller
             }
         }
 
-        //dd($attribute_names);
-
-        // return response()->json(array(
-        //     'options' => $options,
-        // ));
-
         if($request->product_price){
             $price = $request->product_price;
         }else{
@@ -69,8 +93,6 @@ class CartController extends Controller
                 $price = $product->regular_price;
             }
         }
-
-
 
     	if($product->is_varient){
             Cart::add([
@@ -154,9 +176,47 @@ class CartController extends Controller
     /* ================= Start CartIncrement Method =================== */
     public function cartIncrement($rowId){
         $row = Cart::get($rowId);
+        //dd($row);
+        $id = $row->id;
+        
+        $product = Product::findOrFail($id);
+        
+        if(!$product->is_varient){
+            $prev_cart_qty = 0;
+            $carts = Cart::content();
+            foreach($carts as $cart){
+                if($cart->id == $id) {
+                    $prev_cart_qty += $cart->qty;
+                }
+            }
+            
+            $qty = $prev_cart_qty + $row->qty;
+            
+            if($qty > $product->stock_qty){
+                return response()->json(['error'=> 'Not enough stock']);
+            }
+        }else{
+            $prev_cart_qty = 0;
+            $carts = Cart::content();
+            foreach($carts as $cart){
+                if($cart->id == $id) {
+                    if($cart->options->varient == $row->product_varient){
+                        $prev_cart_qty += $cart->qty;
+                    }
+                }
+            }
+            
+            $qty = $prev_cart_qty + $row->qty;
+            $stock = ProductStock::where('product_id', $id)->where('varient', $row->options->varient)->first();
+           
+            if($qty > $stock->qty){
+                return response()->json(['error'=> 'Not enough stock']);
+            }
+        }
+        
         Cart::update($rowId, $row->qty + 1);
  
-        return response()->json('increment');
+        return response()->json(['success'=> 'Successfully Added on Your Cart']);
 
     } // end mehtod 
 

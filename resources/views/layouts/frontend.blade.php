@@ -397,23 +397,6 @@
                     var html = '';
                     $.each(data.attributes, function(key,value){
                         i++;
-                        //console.log(value.name);
-                        // html += '<div class="form-group col-lg-6">';
-                        // html += '<input type="hidden" name="attribute_ids[]" id="attribute_id_'+key+'" value="'+value.id+'">';
-                        // html += '<input type="hidden" name="attribute_names[]" id="attribute_name_'+key+'" value="'+value.name+'">';
-                        // html += '    <label style=" font-weight:bold;color: black;">Chose '+value.name+' <span>**</span></label>';
-                        // html += '    <select class="form-control" name="attribute_options[]" id="attr'+value.id+'" name="attrs[]" onchange="get_varient_price('+data.product.id+')">';
-                        // html += '        <option value="">--Choose '+value.name+'--</option>';
-                        // // for(var i=0; i<value.values; i++) {
-                        // //     html += '        <option value="'+value.id+'">'+value.name+'</option>';
-                        // // }
-                        // $.each(value.values, function(key,attr_value){
-                        //     html += '<option value="'+attr_value+'">'+attr_value+'</option>';
-                        // });
-                        // html += '    </select>';
-                        // html += '</div>';
-
-
                         html +='<div class="attr-detail attr-size mb-30">';
                         html +=    '<strong class="mr-10">'+value.name+': </strong>';
                         html +=    '<input type="hidden" name="attribute_ids[]" id="attribute_id_'+i+'" value="'+value.id+'">';
@@ -442,41 +425,11 @@
                     html += '<input type="hidden" id="total_attributes" value="'+data.attributes.length+'">';
                     $('#attributes').html(html);
 
-                    //console.log(data.attributes.length);
-                    
-                    // for(i = 0; i<data.attributes.length; i++;){
-                  
-                    // };
-                    /* ========== End Color ============= */
-
-                    /* ========== Start Size ============= */
-                    /* ========== Size empty ============= */
-                    // $('select[name ="size"]').empty();
-
-                    // $.each(data.size, function(key,value){
-                    //     $('select[name="size"]').append(' <option value="">--Choose Size--</option>')
-                    //     $('select[name="size"]').append('<option value =" '+value+' "> '+value+'</option>')
-                    // })
-
-                    /* =========== Data size show hide ============ */
-                    // if(data.size == ""){
-                    //     $('#sizeArea').hide();
-                    // }else{
-                    //     $('#sizeArea').show();
-                    // }
-
-                    // if(data.color == ""){
-                    //     $('#colorArea').hide();
-                    // }else{
-                    //     $('#colorArea').show();
-                    // }
-                    /* ========== End Size ============= */
-
                     /* ========== Start Stock Option ========= */
                     if(data.product.product_qty > 0){
                         $('#aviable').text('');
                         $('#stockout').text('');
-                        $('#aviable').text('aviable');
+                        $('#aviable').text('available');
 
                     }else{
                         $('#aviable').text('');
@@ -488,7 +441,6 @@
                     /* ========= Start Add To Cart Product id ======== */
                     $('#product_id').val(id);
                     $('#qty').val(data.product.minimum_buy_qty);
-                    // $('#qty').attr('min',+data.product.minimum_buy_qty);
                     /* ========== End Add To Cart Product id ======== */
                 }
             });
@@ -501,12 +453,12 @@
             addToCart();
         }
         function addToCart(){
-            var total_attributes = $('#total_attributes').val();
+            var total_attributes = parseInt($('#total_attributes').val());
             //alert(total_attributes);
             var checkNotSelected = 0;
             var checkAlertHtml = '';
             for(var i=1; i<=total_attributes; i++){
-                var checkSelected = $('#attribute_check_'+i).val();
+                var checkSelected = parseInt($('#attribute_check_'+i).val());
                 if(checkSelected == 0){
                     checkNotSelected = 1;
                     checkAlertHtml += `<div class="attr-detail mb-5">
@@ -539,7 +491,7 @@
             var quantity = $('#qty').val();
             var varient = $('#pvarient').val();
 
-            var min_qty = $('#minimum_buy_qty').val();
+            var min_qty = parseInt($('#minimum_buy_qty').val());
             if(quantity < min_qty){
                 $('#attribute_alert').html('');
                 $('#qty_alert').html(`<div class="attr-detail mb-5">
@@ -552,17 +504,17 @@
                 return false;
             }
             // console.log(min_qty);
-            var p_qty = $('#stock_qty').val();
-            if(quantity > p_qty){
-                $('#stock_alert').html(`<div class="attr-detail mb-5">
-											<div class="alert alert-danger d-flex align-items-center" role="alert"> 
-												<div>
-													<i class="fa fa-warning mr-10"></i> <span> Not enough stock.</span>
-												</div>
-											</div>
-										</div>`);
-                return false;
-            }
+            var p_qty = parseInt($('#stock_qty').val());
+            // if(quantity > p_qty){
+            //     $('#stock_alert').html(`<div class="attr-detail mb-5">
+			// 								<div class="alert alert-danger d-flex align-items-center" role="alert"> 
+			// 									<div>
+			// 										<i class="fa fa-warning mr-10"></i> <span> Not enough stock.</span>
+			// 									</div>
+			// 								</div>
+			// 							</div>`);
+            //     return false;
+            // }
 
 
             // alert(varient);
@@ -593,24 +545,47 @@
                     $('#closeModel').click();
 
                     // Start Sweertaleart Message
-                    const Toast = Swal.mixin({
-                        toast:true,
-                        position: 'top-end',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1200
-                    })
-
                     if($.isEmptyObject(data.error)){
+                        const Toast = Swal.mixin({
+                            toast:true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+                        
                         Toast.fire({
                           type:'success',
                           title: data.success
                         })
+                        
+                        $('#qty').val(min_qty);
+                        $('#pvarient').val('');
+                        
+                        for(var i=1; i<=total_attributes; i++){
+                            $('#attribute_check_'+i).val(0);
+                        }
+                        
                     }else{
+                        const Toast = Swal.mixin({
+                            toast:true,
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+                        
                         Toast.fire({
                           type:'error',
                           title: data.error
                         })
+                        
+                        $('#qty').val(min_qty);
+                        $('#pvarient').val('');
+                        
+                        for(var i=1; i<=total_attributes; i++){
+                            $('#attribute_check_'+i).val(0);
+                        }
                     }
                     // Start Sweertaleart Message
                     var buyNowCheck = $('#buyNowCheck').val();
@@ -627,13 +602,8 @@
         /* =========== Add to cart direct ============ */
         function addToCartDirect(id){
             var product_name = $('#'+id+'-product_pname').val();
-            //var id = $('#product_product_id').val();
-            //alert(id);
-            // var color = $('#color option:selected').val(); 
-            // var size = $('#size option:selected').val();
+            //alert(product_name);
             var quantity = 1;
-
-            // alert(product_name);
 
             // Start Message 
             const Toast = Swal.mixin({
@@ -877,7 +847,6 @@
 
                 // cart();
                 // miniCart();
-                //alert(Object.keys(response.carts).length);
                 $('#total_cart_qty').text(Object.keys(response.carts).length);
 
                 if(Object.keys(response.carts).length > 0){
@@ -962,6 +931,48 @@
             // console.log(data)
             cart();
             miniCart();
+
+            const Toast = Swal.mixin({
+                toast:true,
+                position: 'top-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1200
+            })
+            Toast.fire({
+              type:'success',
+              title: data.success
+            })
+            
+            if($.isEmptyObject(data.error)){
+                const Toast = Swal.mixin({
+                    toast:true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1200
+                })
+                
+                Toast.fire({
+                  type:'success',
+                  title: data.success
+                })
+                
+            }else{
+                const Toast = Swal.mixin({
+                    toast:true,
+                    position: 'top-end',
+                    icon: 'error',
+                    showConfirmButton: false,
+                    timer: 1200
+                })
+                
+                Toast.fire({
+                  type:'error',
+                  title: data.error
+                })
+            }
+
           }
       });
     }

@@ -145,13 +145,14 @@ class CheckoutController extends Controller
         }
 
         $invoice_data = Order::orderBy('id','desc')->first();
-        $lastId = $invoice_data->id;
-        if(empty($lastId)){
-            $invoice_no = "0000001";
-        }else{
+        
+        if($invoice_data){
+            $lastId = $invoice_data->id;
             // $idd = str_replace("E-", "", $lastId);
             $id = str_pad($lastId + 1, 7, 0, STR_PAD_LEFT);
             $invoice_no = $id;
+        }else{
+            $invoice_no = "0000001";
         }
 
         // order add //
@@ -174,6 +175,7 @@ class CheckoutController extends Controller
             'district_id' => $request->district_id,
             'upazilla_id' => $request->upazilla_id,
             'address' => $request->address,
+            'comment' => $request->comment,
             'type' => $type,
             //'created_by' => Auth::guard('admin')->user()->id,
         ]);

@@ -143,9 +143,9 @@
 
 		                          		@if ($product->discount_price > 0)
 		                          			@if ($product->discount_type == 1)
-	                                			<span class="stock-status out-stock"> ৳{{ $product->discount_price }} Off </span>
+	                                			<span class="stock-status out-stock"> ৳{{  $discount }} Off </span>
 	                                		@elseif ($product->discount_type == 2)
-	                                			<span class="stock-status out-stock"> {{ $product->discount_price }}% Off </span>
+	                                			<span class="stock-status out-stock"> {{  $product->discount_price }}% Off </span>
 	                                		@endif
 			                            @endif
 
@@ -175,13 +175,13 @@
 			                                            @if ($product->discount_type == 1)
 					                                		<span class="save-price font-md color3 ml-15"> ৳{{ $discount }} Off </span>
 							                            @elseif ($product->discount_type == 2)
-							                             	<span class="save-price font-md color3 ml-15">{{ $discount }}% Off</span>
+							                             	<span class="save-price font-md color3 ml-15">{{ $product->discount_price }}% Off</span>
 							                            @endif
 	                                                <span class="old-price font-md ml-15">৳{{ $product->regular_price }}</span>
 					                            @endif
 	                                        </div>
 	                                    </div>
-	                                    <div class="short-desc mb-30">
+	                                    {{-- <div class="short-desc mb-30">
 	                                        <p class="font-lg">
 	                                        	@if(session()->get('language') == 'bangla') 
 							                        {!! $product->description_bn ?? 'No Decsription' !!}
@@ -189,7 +189,7 @@
 													{!! $product->description_en ?? 'No Decsription' !!} 
 							                    @endif
 	                                        </p>
-	                                    </div>
+	                                    </div> --}}
 	                                    <form id="choice_form">
 		                                    <div class="row " id="choice_attributes">
 		                                    	@if($product->is_varient)
@@ -261,7 +261,7 @@
 	                                    	</div>
 	                                        <div class="detail-qty border radius">
 	                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-	                                            <input type="text" name="quantity" class="qty-val" value="{{ $product->minimum_buy_qty ?? '1' }}" min="1" id="qty">
+	                                            <input type="text" name="quantity" class="qty-val" value="1" min="1" id="qty">
 	                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
 	                                        </div>
 
@@ -649,7 +649,7 @@
 			expandZoomOn: "always",
 			variableZoom: true,
 			// lazyZoom: true,
-			selectorTrigger: "hover"
+			// selectorTrigger: "hover"
 		};
 	</script>
 @endpush

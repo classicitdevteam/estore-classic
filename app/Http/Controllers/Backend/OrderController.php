@@ -257,15 +257,21 @@ class OrderController extends Controller
     /* ============= End getupazilla Method ============== */
 
     /* ============= Start invoice_download Method ============== */
+    // public function invoice_download($id){
+    //     $order = Order::findOrFail($id);
+
+    //     $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4')->setOptions([
+    //             'tempDir' => public_path(),
+    //             'chroot' => public_path(),
+    //     ]);
+    //     return $pdf->download('invoice.pdf');
+    // } // end method
     public function invoice_download($id){
         $order = Order::findOrFail($id);
-
-        $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4')->setOptions([
-                'tempDir' => public_path(),
-                'chroot' => public_path(),
-        ]);
+        //dd(app('url')->asset('upload/abc.png'));
+        $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4');
         return $pdf->download('invoice.pdf');
-    } // end method
+    }
     /* ============= End invoice_download Method ============== */
 
 }

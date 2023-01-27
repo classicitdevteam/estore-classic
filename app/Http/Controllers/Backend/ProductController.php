@@ -283,11 +283,14 @@ class ProductController extends Controller
             $request->description_bn = $request->description_en;
         }
 
-        // $slug = strtolower(str_replace(' ', '-', $request->name_en));
-        if ($request->slug != null) {
-            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
-        }else {
-            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
+        if($request->name_en != $product->name_en){
+            if ($request->slug != null) {
+                $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
+            }else {
+                $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->name_en)).'-'.Str::random(5);
+            }
+        }else{
+            $slug = $product->slug;
         }
 
         if($request->vendor_id == null || $request->vendor_id==""){
