@@ -20,7 +20,9 @@
                             <th scope="col">Name (English)</th> 
                             <th scope="col">Name (Bangla)</th> 
                             <th scope="col">Status</th>
-                            <th scope="col" class="text-end">Action</th>
+                            @if(!Auth::guard('admin')->user()->role == '2')
+                                <th scope="col" class="text-end">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -38,24 +40,26 @@
                             <td> {{ $brand->name_bn ?? 'NULL' }} </td>
                             <td>
                                 @if($brand->status == 1)
-                                  <a href="{{ route('brand.in_active',['id'=>$brand->id]) }}">
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('brand.in_active',['id'=>$brand->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a href="{{ route('brand.active',['id'=>$brand->id]) }}" > <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('brand.active',['id'=>$brand->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
                                 @endif
                             </td>
-                            <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                                <div class="dropdown">
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('brand.edit',$brand->id) }}">Edit info</a>
-                                        <a class="dropdown-item text-danger" href="{{ route('brand.delete',$brand->id) }}" id="delete">Delete</a>
+                            @if(!Auth::guard('admin')->user()->role == '2')
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                                    <div class="dropdown">
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('brand.edit',$brand->id) }}">Edit info</a>
+                                            <a class="dropdown-item text-danger" href="{{ route('brand.delete',$brand->id) }}" id="delete">Delete</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- dropdown //end -->
-                            </td>
+                                    <!-- dropdown //end -->
+                                </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

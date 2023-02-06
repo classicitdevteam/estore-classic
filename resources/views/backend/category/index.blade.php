@@ -22,7 +22,9 @@
                             <th scope="col">Parent</th>
                             <th scope="col">Status</th>
                             <th scope="col">Featured</th>
-                            <th scope="col" class="text-end">Action</th>
+                            @if(!Auth::guard('admin')->user()->role == '2')
+                                <th scope="col" class="text-end">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -50,33 +52,38 @@
 	                        <td> {{ $category->parent_name ?? '-' }} </td> 
                             <td>
                                 @if($category->status == 1)
-                                  <a href="{{ route('category.in_active',['id'=>$category->id]) }}">
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.in_active',['id'=>$category->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a href="{{ route('category.active',['id'=>$category->id]) }}" > <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.active',['id'=>$category->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
                                 @endif
                             </td>
                             <td>
                                 @if($category->is_featured == 1)
-                                  <a href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}">
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success"><i class="material-icons md-check"></i></span>
                                   </a>
                                 @else
-                                  <a href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" > <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" @endif> <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
                                 @endif
                             </td>
-                            <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                                <div class="dropdown">
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('category.edit',$category->id) }}">Edit info</a>
-                                        <a class="dropdown-item text-danger" href="{{ route('category.delete',$category->id) }}" id="delete">Delete</a>
-                                    </div>
-                                </div>
-                                <!-- dropdown //end -->
-                            </td>
+                            @if(!Auth::guard('admin')->user()->role == '2')
+                                <td class="text-end">
+                                    {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
+                                    <a class="btn btn-md rounded font-sm" href="{{ route('category.edit',$category->id) }}">Edit</a>
+                                    <a class="btn btn-md rounded font-sm bg-danger" href="{{ route('category.delete',$category->id) }}" id="delete">Delete</a>
+
+                                    {{-- <div class="dropdown">
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('category.edit',$category->id) }}">Edit info</a>
+                                            <a class="dropdown-item text-danger" href="{{ route('category.delete',$category->id) }}" id="delete">Delete</a>
+                                        </div>
+                                    </div> --}}
+                                    <!-- dropdown //end -->
+                                </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

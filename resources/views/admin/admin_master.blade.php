@@ -50,7 +50,11 @@
     <body>
         <div class="screen-overlay"></div>
         <!-- ========== Header Section ========== -->
-        @include('admin.body.sidebar')
+        @if(Auth::guard('admin')->user()->role == '2')
+            @include('admin.body.vendor_sidebar')
+        @else
+            @include('admin.body.sidebar')
+        @endif
         <main class="main-wrap">
             <!-- ========== Header Section ========== -->
             @include('admin.body.header')

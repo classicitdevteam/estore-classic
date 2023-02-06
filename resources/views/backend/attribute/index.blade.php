@@ -34,13 +34,15 @@
                             </td>
                             <td class="text-end">
                                 <a href="{{ route('attribute.show',$attribute->id) }}" class="btn btn-md rounded font-sm">Detail</a>
-                                <div class="dropdown">
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('attribute.edit',$attribute->id) }}">Edit info</a>
-                                        <a class="dropdown-item text-danger" href="{{ route('attribute.delete',$attribute->id) }}" id="delete">Delete</a>
+                                @if(!Auth::guard('admin')->user()->role == '2')
+                                    <div class="dropdown">
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('attribute.edit',$attribute->id) }}">Edit info</a>
+                                            <a class="dropdown-item text-danger" href="{{ route('attribute.delete',$attribute->id) }}" id="delete">Delete</a>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                                 <!-- dropdown //end -->
                             </td>
                         </tr>

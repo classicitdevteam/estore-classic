@@ -24,7 +24,7 @@
 		                    	@method('PUT')
 
 		                        <div class="mb-4">
-		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name :</label>
+		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" value="{{$vendor->shop_name}}">
 									@error('shop_name')
                                         <p class="text-danger">{{$message}}</p>
@@ -32,7 +32,7 @@
 		                        </div>
 
 								<div class="mb-4">
-		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone :</label>
+		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" value="{{$vendor->user->phone}}">
 									@error('phone')
                                         <p class="text-danger">{{$message}}</p>
@@ -40,7 +40,7 @@
 		                        </div>
 
 								<div class="mb-4">
-		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email :</label>
+		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" value="{{$vendor->user->email}}">
 									@error('email')
                                         <p class="text-danger">{{$message}}</p>
@@ -48,7 +48,7 @@
 		                        </div>
 
 		                        <div class="mb-4">
-		                          <label for="address" class="col-form-label col-md-4" style="font-weight: bold;">Address :</label>
+		                          <label for="address" class="col-form-label col-md-4" style="font-weight: bold;">Address : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="address" type="text" name="address" placeholder="Write vendor address" value="{{$vendor->address}}">
 									@error('address')
                                         <p class="text-danger">{{$message}}</p>
@@ -68,7 +68,7 @@
 		                        <div class="row">
 		                        	<div class="col-md-6">
 		                        		<div class="mb-4">
-				                         	<label for="image" class="col-form-label" style="font-weight: bold;">Shop Profile:</label>
+				                         	<label for="image" class="col-form-label" style="font-weight: bold;">Shop Profile: <span class="text-danger">*</span></label>
 				                            <input name="shop_profile" class="form-control" type="file" id="image">
 				                        </div>
 				                        <div class="mb-4">
@@ -78,7 +78,7 @@
 
 				                    <div class="col-md-6">
 				                    	<div class="mb-4">
-				                         	<label for="image2" class="col-form-label" style="font-weight: bold;">Shop Cover Photo:</label>
+				                         	<label for="image2" class="col-form-label" style="font-weight: bold;">Shop Cover Photo: <span class="text-danger">*</span></label>
 				                            <input name="shop_cover" class="form-control" type="file" id="image2">
 				                        </div>
 				                        <div class="mb-4">

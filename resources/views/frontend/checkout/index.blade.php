@@ -269,7 +269,7 @@
                                     <input type="hidden" value="" name="shipping_charge" class="ship_amount" />
                                     <input type="hidden" value="" name="shipping_type" class="shipping_type" />
                                     <input type="hidden" value="" name="shipping_name" class="shipping_name" />
-                                    <input type="hidden" value="" name="sub_total" id="cartSubTotalShi" />
+                                    <input type="hidden" value="{{ $cartTotal }}" name="sub_total" id="cartSubTotalShi" />
                                     <input type="hidden" value="" name="grand_total" id="grand_total" />
                                     <td><h4 class="d-flex justify-content-between">Total : <span class="text-brand text-end">৳<span id="grand_total_set">{{ $cartTotal }}</span></span><h4></td>
                                 </tr>

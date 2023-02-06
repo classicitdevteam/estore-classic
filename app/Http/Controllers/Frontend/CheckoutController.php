@@ -42,7 +42,7 @@ class CheckoutController extends Controller
         $carts = Cart::content();
         $cartTotal = Cart::total();
 
-        //dd($shippings);
+        // dd($cartTotal);
 
         return view('frontend.checkout.index',compact('addresses','shippings', 'carts', 'cartTotal'));
     } // end method

@@ -22,7 +22,6 @@
                             <th scope="col">Product Price </th>
 							<th scope="col">Quantity </th>
 							<th scope="col">Discount </th>
-                            <th scope="col">Featured</th>
                             <th scope="col">Status</th>
                             <th scope="col" class="text-end">Action</th>
                         </tr>
@@ -61,15 +60,6 @@
 								@endif
                             </td>
                             <td>
-                                @if($item->is_featured == 1)
-                                  <a href="{{ route('product.changeFeatureStatus',['id'=>$item->id]) }}">
-                                    <span class="badge rounded-pill alert-success"><i class="material-icons md-check"></i></span>
-                                  </a>
-                                @else
-                                  <a href="{{ route('product.changeFeatureStatus',['id'=>$item->id]) }}" > <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
-                                @endif
-                            </td>
-                            <td>
                                 @if($item->status == 1)
                                   <a href="{{ route('product.in_active',['id'=>$item->id]) }}">
                                     <span class="badge rounded-pill alert-success">Active</span>
@@ -84,8 +74,12 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="{{ route('product.edit',$item->id) }}">Edit info</a>
                                         <!-- <a class="dropdown-item" href="">View Details</a> -->
-                                        @if(Auth::guard('admin')->user()->role == '1' || in_array('4', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
+                                        @if(Auth::guard('admin')->user()->role == '2')
                                             <a class="dropdown-item text-danger" href="{{ route('product.delete',$item->id) }}" id="delete">Delete</a>
+                                        @else
+                                            @if(Auth::guard('admin')->user()->role == '1' || in_array('4', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
+                                                <a class="dropdown-item text-danger" href="{{ route('product.delete',$item->id) }}" id="delete">Delete</a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

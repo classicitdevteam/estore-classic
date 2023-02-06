@@ -7,7 +7,7 @@ var options = {
     exportEnabled: true,
     animationEnabled: true,
     title:{
-        text: "{{ get_setting('site_name')->value ?? ' ' }}"
+        text: "{{ get_setting('site_name')->value ?? ''}}"
     },
     legend:{
         horizontalAlign: "right",
@@ -47,6 +47,7 @@ $("#chartContainer").CanvasJSChart(options);
         </div>
     </div>
     <div class="row">
+        @if(Auth::guard('admin')->user()->role != '2')
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -59,6 +60,8 @@ $("#chartContainer").CanvasJSChart(options);
                 </article>
             </div>
         </div>
+        @endif
+        @if(Auth::guard('admin')->user()->role != '2')
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -71,6 +74,7 @@ $("#chartContainer").CanvasJSChart(options);
                 </article>
             </div>
         </div>
+        @endif
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -83,6 +87,7 @@ $("#chartContainer").CanvasJSChart(options);
                 </article>
             </div>
         </div>
+        @if(Auth::guard('admin')->user()->role != '2')
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -95,8 +100,8 @@ $("#chartContainer").CanvasJSChart(options);
                 </article>
             </div>
         </div>
-    </div>
-    <div class="row">
+        @endif
+  
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -104,11 +109,12 @@ $("#chartContainer").CanvasJSChart(options);
                     <div class="text">
                         <h6 class="mb-1 card-title">Brands</h6>
                         <span>{{ number_format($brandCount->total_brands) }}</span>
-                        <span class="text-sm"> In 19 Categories </span>
+                        <span class="text-sm"> All brands </span>
                     </div>
                 </article>
             </div>
         </div>
+        @if(Auth::guard('admin')->user()->role != '2')
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -121,6 +127,7 @@ $("#chartContainer").CanvasJSChart(options);
                 </article>
             </div>
         </div>
+        @endif
         <div class="col-lg-3">
             <div class="card card-body mb-4">
                 <article class="icontext">
@@ -128,19 +135,7 @@ $("#chartContainer").CanvasJSChart(options);
                     <div class="text">
                         <h6 class="mb-1 card-title">Low Stocks</h6>
                         <span>{{ number_format($lowStockCount->total_low_stocks) }}</span>
-                        <span class="text-sm"> Shipping fees are not included </span>
-                    </div>
-                </article>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card card-body mb-4">
-                <article class="icontext">
-                    <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-local_shipping"></i></span>
-                    <div class="text">
-                        <h6 class="mb-1 card-title">Orders</h6>
-                        <span>53.668</span>
-                        <span class="text-sm"> Excluding orders in transit </span>
+                        <span class="text-sm"> Products having stock <= 5 </span>
                     </div>
                 </article>
             </div>

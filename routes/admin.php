@@ -191,6 +191,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	// AttributeValue All Route
 	Route::post('/attribute/value', [AttributeController::class, 'value_store'])->name('attribute.value_store');
+	Route::get('/attribute/value/edit/{id}', [AttributeController::class, 'value_edit'])->name('attribute_value.edit');
+	Route::post('/attribute/value/update/{id}', [AttributeController::class, 'value_update'])->name('attribute.val_update');
 	Route::get('/attribute_value_active/{id}', [AttributeController::class, 'value_active'])->name('attribute_value.active');
 	Route::get('/attribute_value_inactive/{id}', [AttributeController::class, 'value_inactive'])->name('attribute_value.in_active');
 	Route::get('/attribute/value/delete/{id}', [AttributeController::class, 'value_destroy'])->name('attribute_value.delete');

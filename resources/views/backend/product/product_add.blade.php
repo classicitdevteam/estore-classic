@@ -29,7 +29,7 @@
 		        	<div class="card-body">
 		        		<div class="row">
 		                	<div class="col-md-6 mb-4">
-		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En):</label>
+		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En): </label>
 		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" value="{{old('name_en')}}">
 		                        @error('name_en')
 		                            <p class="text-danger">{{$message}}</p>
@@ -81,18 +81,26 @@
                                 </div>
 	                        </div>
 		        		
-		        			@if(get_setting('multi_vendor')->value ?? ' ')
+		        			@if(get_setting('multi_vendor')->value)
+		        			    @if(Auth::guard('admin')->user()->role == '2')
+		        			        <input type="hidden" name="vendor_id" id="vendor_id" value="{{ Auth::guard('admin')->user()->id }}" />
+		        			    @else
 								<div class="col-md-6 mb-4">
-									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
+									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor: <span class="text-danger">*</span></label>
 									<div class="custom_select">
 										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
+											<!--<option selected="">Select Vendor</option>-->
 											<option {{old('vendor_id') ? '' : 'selected'}} readonly value="">--Select Vendor--</option>
 											@foreach($vendors as $vendor)
-												<option value="{{ $vendor->id }}" {{ old('vendor_id')== $vendor->id ? 'selected' : '' }}>{{ $vendor->shop_name }}</option>
+												<option value="{{ $vendor->id }}">{{ $vendor->shop_name }}</option>
 											@endforeach
 										</select>
+										@error('vendor_id')
+        		                            <p class="text-danger">{{$message}}</p>
+        		                        @enderror
 									</div>
 								</div>
+								@endif
 							@endif
 
 	                        <div class="col-md-6 mb-4">

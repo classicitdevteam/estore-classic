@@ -627,20 +627,26 @@
                     $('#closeModel').click();
 
                     // Start Sweertaleart Message
-                    const Toast = Swal.mixin({
-                        toast:true,
-                        position: 'top-end',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1200
-                    })
-
                     if($.isEmptyObject(data.error)){
+                        const Toast = Swal.mixin({
+                            toast:true,
+                            position: 'top-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
                         Toast.fire({
                           type:'success',
                           title: data.success
                         })
                     }else{
+                        const Toast = Swal.mixin({
+                            toast:true,
+                            position: 'top-end',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
                         Toast.fire({
                           type:'error',
                           title: data.error

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Vendor;
 use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,16 +32,34 @@ class AdminController extends Controller
     /*=================== Start Dashboard Methoed ===================*/
     public function Dashboard(){
 
+        $vendor = Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
+
         $userCount = DB::table('users')
             ->select(DB::raw('count(*) as total_users'))
             ->where('status', 1)
             ->where('role', 3)
             ->first();
-
-        $productCount = DB::table('products')
-            ->select(DB::raw('count(*) as total_products'))
-            ->where('status', 1)
-            ->first();
+        
+        if(Auth::guard('admin')->user()->role == '2'){
+            $productCount = DB::table('products')
+                ->select(DB::raw('count(*) as total_products'))
+                ->where('vendor_id', Auth::guard('admin')->user()->id)
+                ->where('status', 1)
+                ->first();
+                
+            if($vendor){
+                $productCount = DB::table('products')
+                    ->select(DB::raw('count(*) as total_products'))
+                    ->where('vendor_id', $vendor->id)
+                    ->where('status', 1)
+                    ->first();
+            }
+        }else{
+            $productCount = DB::table('products')
+                ->select(DB::raw('count(*) as total_products'))
+                ->where('status', 1)
+                ->first();
+        }
 
         $categoryCount = DB::table('categories')
             ->select(DB::raw('count(*) as total_categories'))
@@ -60,11 +79,22 @@ class AdminController extends Controller
         $orderCount = DB::table('orders')
             ->select(DB::raw('count(*) as total_orders, sum(grand_total) as total_sell'))
             ->first();
-
-        $lowStockCount = DB::table('product_stocks')
-            ->select(DB::raw('count(*) as total_low_stocks'))
-            ->where('qty', '<=', 5)
+            
+        $lowStockCount = DB::table('product_stocks as s')
+            ->leftjoin('products as p', 's.product_id', '=', 'p.id')
+            ->select(DB::raw('count(s.id) as total_low_stocks'))
+            ->where('p.vendor_id', Auth::guard('admin')->user()->id)
+            ->where('s.qty', '<=', 5)
             ->first();
+            
+        if($vendor){
+            $lowStockCount = DB::table('product_stocks as s')
+                ->leftjoin('products as p', 's.product_id', '=', 'p.id')
+                ->select(DB::raw('count(s.id) as total_low_stocks'))
+                ->where('p.vendor_id', $vendor->id)
+                ->where('s.qty', '<=', 5)
+                ->first();
+        }
 
         //dd($userCount->total_users);
     	
@@ -85,7 +115,7 @@ class AdminController extends Controller
     	$check = $request->all();
     	if(Auth::guard('admin')->attempt(['email' => $check['email'], 'password'=> $check['password'] ])){
 
-            if(Auth::guard('admin')->user()->role == "1" || Auth::guard('admin')->user()->role == "5"){
+            if(Auth::guard('admin')->user()->role == "1" || Auth::guard('admin')->user()->role == "5" || Auth::guard('admin')->user()->role == "2"){
                 return redirect()->route('admin.dashboard')->with('success','Admin Login Successfully.');
             }else{
                 $notification = array(

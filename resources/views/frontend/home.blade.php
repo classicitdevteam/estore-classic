@@ -136,7 +136,7 @@
 	                    <figure class="img-hover-scale overflow-hidden">
 	                        <a href="{{ route('product.category', $cat->slug) }}">
 	                        	@if($cat->image && $cat->image != '' && $cat->image != 'Null')
-				                    <img class="default-img" src="{{ asset($cat->image) }}" alt="" />
+									<img class="default-img lazyload img-responsive" data-original="{{ asset($cat->image) }}" src="{{ asset('upload/product-default-sm.jpg') }}" alt="">
 				                @else
 				                    <img class="img-lg mb-3" src="{{ asset('upload/no_image.jpg') }}" alt="" />
 				                @endif

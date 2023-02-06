@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Vendor;
+use Auth;
 
 class ReportController extends Controller
 {
@@ -16,13 +18,25 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $sort_by =null;
-        $products = Product::orderBy('created_at', 'desc');
-        if ($request->has('category_id')){
-            $sort_by = $request->category_id;
-            $products = $products->where('category_id', $sort_by);
+        $products = Product::orderBy('created_at', 'desc')->where('vendor_id', Auth::guard('admin')->user()->id);
+
+        if(Auth::guard('admin')->user()->role == '2'){
+            if ($request->has('category_id')){
+                $sort_by = $request->category_id;
+                $products = $products->where('category_id', $sort_by);
+            }
+            $vendor = Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
+            if($vendor){
+                $products = Product::where('vendor_id', $vendor->id)->latest()->paginate(20);
+            }
+        }else{
+            if ($request->has('category_id')){
+                $sort_by = $request->category_id;
+                $products = $products->where('category_id', $sort_by);
+            }
+            $products = $products->paginate(20);
         }
 
-        $products = $products->paginate(20);
         return view('backend.reports.index', compact('products'));
     }
 

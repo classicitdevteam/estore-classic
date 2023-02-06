@@ -14,16 +14,16 @@
 		        <div class="card-body">
 		            <div class="row">
 		                <div class="col-md-12">
-		                	@if(count($errors))
+		                	{{-- @if(count($errors))
 		                        @foreach ($errors->all() as $error)
 		                           <p class="alert alert-danger alert-dismissible fade show"> {{ $error}} </p>
 		                        @endforeach
-	                        @endif
+	                        @endif --}}
 		                    <form method="post" action="{{ route('vendor.store') }}" enctype="multipart/form-data">
 		                    	@csrf
 
 		                        <div class="mb-4">
-		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name :</label>
+		                          <label for="shop_name" class="col-form-label col-md-4" style="font-weight: bold;"> Shop Name : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="shop_name" type="text" name="shop_name" placeholder="Write vendor shop name" value="{{old('shop_name')}}">
 									@error('shop_name')
                                         <p class="text-danger">{{$message}}</p>
@@ -31,7 +31,7 @@
 		                        </div>
 
 								<div class="mb-4">
-		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone :</label>
+		                          <label for="phone" class="col-form-label col-md-4" style="font-weight: bold;"> Phone : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="phone" type="text" name="phone" placeholder="Write vendor phone number" value="{{old('phone')}}">
 									@error('phone')
                                         <p class="text-danger">{{$message}}</p>
@@ -39,7 +39,7 @@
 		                        </div>
 
 								<div class="mb-4">
-		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email :</label>
+		                          <label for="email" class="col-form-label col-md-4" style="font-weight: bold;"> Email : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="email" type="email" name="email" placeholder="Write vendor email address" value="{{old('email')}}">
 									@error('email')
                                         <p class="text-danger">{{$message}}</p>
@@ -47,7 +47,7 @@
 		                        </div>
 
 		                        <div class="mb-4">
-		                          <label for="address" class="col-form-label col-md-4" style="font-weight: bold;">Address :</label>
+		                          <label for="address" class="col-form-label col-md-4" style="font-weight: bold;">Address : <span class="text-danger">*</span></label>
 		                            <input class="form-control" id="address" type="text" name="address" placeholder="Write vendor address" value="{{old('address')}}">
 									@error('address')
                                         <p class="text-danger">{{$message}}</p>
@@ -70,7 +70,7 @@
 				                         	<img id="showImage" class="rounded avatar-lg" src="{{ (!empty($editData->profile_image))? url('upload/admin_images/'.$editData->profile_image):url('upload/no_image.jpg') }}" alt="Card image cap" width="100px" height="80px;">
 				                        </div>
 		                        		<div class="mb-4">
-				                         	<label for="image" class="col-form-label" style="font-weight: bold;">Shop Profile:</label>
+				                         	<label for="image" class="col-form-label" style="font-weight: bold;">Shop Profile: <span class="text-danger">*</span></label>
 				                            <input name="shop_profile" class="form-control" type="file" id="image">
 											@error('shop_profile')
 												<p class="text-danger">{{$message}}</p>
@@ -83,7 +83,7 @@
 				                         	<img id="showImage2" class="rounded avatar-lg" src="{{ (!empty($editData->profile_image))? url('upload/admin_images/'.$editData->profile_image):url('upload/no_image.jpg') }}" alt="Card image cap" width="100px" height="80px;">
 				                        </div>
 				                    	<div class="mb-4">
-				                         	<label for="image2" class="col-form-label" style="font-weight: bold;">Shop Cover Photo:</label>
+				                         	<label for="image2" class="col-form-label" style="font-weight: bold;">Shop Cover Photo: <span class="text-danger">*</span></label>
 				                            <input name="shop_cover" class="form-control" type="file" id="image2">
 											@error('shop_cover')
 												<p class="text-danger">{{$message}}</p>
@@ -113,6 +113,24 @@
 				                        </div>
 		                       		</div>
 		                       </div>
+
+							    <div class="mb-4 row">
+									<div class="col-md-6">
+										<label for="password" class="col-form-label col-md-4" style="font-weight: bold;"> Password : <span class="text-danger">*</span></label>
+										<input class="form-control" id="password" type="password" name="password" placeholder="Write vendor Password">
+										@error('password')
+											<p class="text-danger">{{$message}}</p>
+										@enderror
+									</div>
+									<div class="col-md-6">
+										<label class="col-form-label col-md-4" style="font-weight: bold;" for="rtpassword">Confirm Password: <span class="text-danger">*</span></label>
+										<input class="form-control" placeholder="Confirm Password" type="password" name="password_confirmation" id="rtpassword" />
+										@error('password_confirmation')
+											<span class="text-danger">{{ $message }}</span>
+										@enderror
+									</div>
+							  	</div>
+								<!-- form-group// -->
 
 		                       <div class="mb-4">
                                     <div class="custom-control custom-switch">

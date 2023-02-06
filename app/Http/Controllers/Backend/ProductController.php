@@ -27,9 +27,16 @@ class ProductController extends Controller
 {
     /*=================== Start ProductView Methoed ===================*/
     public function ProductView(){
-
-    	$products = Product::latest()->get();
-    	return view('backend.product.product_view',compact('products'));
+    	if(Auth::guard('admin')->user()->role == '2'){
+            $products = Product::where('vendor_id', Auth::guard('admin')->user()->id)->latest()->get();
+            $vendor = Vendor::where('user_id', Auth::guard('admin')->user()->id)->first();
+            if($vendor){
+                $products = Product::where('vendor_id', $vendor->id)->latest()->get();
+            }
+        }else{
+            $products = Product::latest()->get();
+        }
+        return view('backend.product.product_view',compact('products'));
 
     } // end method
 
@@ -124,7 +131,7 @@ class ProductController extends Controller
             'is_digital'            => $request->is_digital ? 1 : 0,
             'status'                => $request->status ? 1 : 0,
             'product_thumbnail'     => $save_url,
-            'created_by' => Auth::guard('admin')->user()->id,
+            'created_by'            => Auth::guard('admin')->user()->id,
         ]);
 
         

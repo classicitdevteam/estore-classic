@@ -43,13 +43,15 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request,[
-            'shop_name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'shop_profile' => 'required',
-            'shop_cover' => 'required',
+            'shop_name'     => 'required',
+            'phone'         => ['required','regex:/(\+){0,1}(88){0,1}01(3|4|5|6|7|8|9)(\d){8}/','min:11','max:15'],
+            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'address'       => 'required',
+            'shop_profile'  => 'required',
+            'shop_cover'    => 'required',
+            'password'      => ['required', 'string', 'min:5', 'confirmed'],
         ]);
 
         if($request->hasfile('shop_profile')){
@@ -103,8 +105,8 @@ class VendorController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'profile_image' => $shop_profile,
-            'password' => Hash::make("12345678"),
-            'status' => $request->status,
+            'password' => Hash::make($request->password),
+            'status' => $request->status ? 1 : 0,
             'created_by' => Auth::guard('admin')->user()->id,
             'role' => $role,
         ]);
@@ -123,7 +125,7 @@ class VendorController extends Controller
             'shop_cover' => $shop_cover,
             'nid' => $nid,
             'trade_license' => $trade_license,
-            'status' => $request->status,
+            'status' => $request->status ? 1 : 0,
             'created_by' => Auth::guard('admin')->user()->id,
         ]);
 
@@ -164,10 +166,10 @@ class VendorController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'shop_name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'address' => 'required',
+            'shop_name'     => 'required',
+            'phone'         => ['required','regex:/(\+){0,1}(88){0,1}01(3|4|5|6|7|8|9)(\d){8}/','min:11','max:15'],
+            'email'         => ['required', 'string', 'email', 'max:255'],
+            'address'       => 'required',
         ]);
 
         $vendor = Vendor::find($id);
@@ -326,7 +328,7 @@ class VendorController extends Controller
 
         $notification = array(
             'message' => 'Vendor Deleted Successfully.', 
-            'alert-type' => 'error'
+            'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
     }

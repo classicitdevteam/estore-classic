@@ -20,37 +20,43 @@
                             <th scope="col">Email</th> 
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
-                            <th scope="col" class="text-end">Action</th>
+                            @if(!Auth::guard('admin')->user()->role == '2')
+                                <th scope="col" class="text-end">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($suppliers as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
-                            <td> {{ $item->name ?? 'NULL' }} </td>
-                            <td> {{ $item->phone ?? 'NULL' }} </td>
-                            <td> {{ $item->email ?? 'NULL' }} </td>
-                            <td> {{ $item->address ?? 'NULL' }} </td>
+                            <td> {{ $item->name ?? '' }} </td>
+                            <td> {{ $item->phone ?? '' }} </td>
+                            <td> {{ $item->email ?? '' }} </td>
+                            <td> {{ $item->address ?? '' }} </td>
                             <td>
                                 @if($item->status == 1)
-                                  <a href="{{ route('supplier.in_active',['id'=>$item->id]) }}">
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('supplier.in_active',['id'=>$item->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a href="{{ route('supplier.active',['id'=>$item->id]) }}" > <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('supplier.active',['id'=>$item->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
                                 @endif
                             </td>
-                            <td class="text-end">
-                                <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                                <div class="dropdown">
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('supplier.edit',$item->id) }}">Edit info</a>
-                                        <a class="dropdown-item text-danger" href="{{ route('supplier.destroy',$item->id) }}" id="delete">Delete</a>
-                                    </div>
-                                </div>
-                                <!-- dropdown //end -->
-                            </td>
+                            @if(!Auth::guard('admin')->user()->role == '2')
+                                <td class="text-end">
+                                    {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
+                                    <a class="btn btn-md rounded font-sm" href="{{ route('supplier.edit',$item->id) }}">Edit info</a>
+                                    <a class="btn btn-md rounded font-sm bg-danger" href="{{ route('supplier.destroy',$item->id) }}" id="delete">Delete</a>
+                                    {{-- <div class="dropdown">
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('supplier.edit',$item->id) }}">Edit info</a>
+                                            <a class="dropdown-item text-danger" href="{{ route('supplier.destroy',$item->id) }}" id="delete">Delete</a>
+                                        </div>
+                                    </div> --}}
+                                    <!-- dropdown //end -->
+                                </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>

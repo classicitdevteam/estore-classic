@@ -237,12 +237,12 @@
                     // }
                     // Start Sweertaleart Message
 
-                    var price = data.regular_price;
-                    if(data.discount_price > 0){
+                    var price = parseFloat(data.regular_price);
+                    if(parseFloat(data.discount_price) > 0){
                         if(data.discount_type == 1){
-                            price = data.regular_price - data.discount_price;
+                            price = parseFloat(data.regular_price - data.discount_price);
                         }else if(data.discount_type == 2){
-                            price = data.regular_price - (data.regular_price * data.discount_price / 100);
+                            price = parseFloat(data.regular_price - (data.regular_price * data.discount_price / 100));
                         }
                     }
 

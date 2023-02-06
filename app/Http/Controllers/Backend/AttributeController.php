@@ -170,6 +170,29 @@ class AttributeController extends Controller
         return redirect()->back();
     }
 
+    public function value_edit($id)
+    {
+        $attr_val = AttributeValue::findOrFail($id);
+        return view('backend.attribute.value_edit',compact('attr_val'));
+    }
+    
+    public function value_update(Request $request, $id)
+    {
+        //dd($request);
+        $attribute_val = AttributeValue::find($id);
+
+        // Attribute table update
+        $attribute_val->value = $request->value;
+        $attribute_val->created_by = Auth::guard('admin')->user()->id;
+        $attribute_val->update();
+
+        $notification = array(
+            'message' => 'Attribute Value Updated Successfully.',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('attribute.index')->with($notification);
+    }
+
     // Attribute Value Delete
     public function value_destroy($id)
     {

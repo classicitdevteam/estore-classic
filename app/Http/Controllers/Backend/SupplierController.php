@@ -14,7 +14,7 @@ class SupplierController extends Controller
 	/*=================== Start BrandView Methoed ===================*/
     public function SupplierView(){
 
-        if(Auth::guard('admin')->user()->role != '1'){
+        if(Auth::guard('admin')->user()->role != '1' && Auth::guard('admin')->user()->role != '2'){
             abort(404);
         }
 
@@ -25,7 +25,7 @@ class SupplierController extends Controller
 
     public function create()
     {   
-        if(Auth::guard('admin')->user()->role != '1'){
+        if(Auth::guard('admin')->user()->role != '1' && Auth::guard('admin')->user()->role != '2'){
             abort(404);
         }
 

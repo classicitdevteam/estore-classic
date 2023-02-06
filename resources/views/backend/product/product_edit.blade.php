@@ -105,17 +105,21 @@
 	                        </div>
 		        		
 		        			@if(get_setting('multi_vendor')->value)
+		        			    @if(Auth::guard('admin')->user()->role == '2')
+		        			        <input type="hidden" name="vendor_id" id="vendor_id" value="{{ Auth::guard('admin')->user()->id }}" />
+		        			    @else
 								<div class="col-md-6 mb-4">
 									<label for="vendor_id" class="col-form-label" style="font-weight: bold;">Vendor:</label>
 									<div class="custom_select">
-										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id">
-											<option value="0">--Select Vendor--</option>
+										<select class="form-control select-active w-100 form-select select-nice" name="vendor_id" id="vendor_id" required>
+											<option selected="">Select Vendor</option>
 											@foreach($vendors as $vendor)
 												<option value="{{ $vendor->id }}" {{ $vendor->id == $product->vendor_id ? 'selected' : '' }}>{{ $vendor->shop_name ?? 'Null' }}</option>
 											@endforeach
 										</select>
 									</div>
 								</div>
+								@endif
 							@endif
 							
 	                        <div class="col-md-6 mb-4">
