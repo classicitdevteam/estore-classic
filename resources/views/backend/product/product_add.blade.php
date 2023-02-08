@@ -18,7 +18,7 @@
 		        </ul>
 		    </div>
 		@endif --}}
-        <div class="col-md-8">
+        <div class="col-md-10 mx-auto">
 			<form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
 				@csrf
 
@@ -29,7 +29,7 @@
 		        	<div class="card-body">
 		        		<div class="row">
 		                	<div class="col-md-6 mb-4">
-		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En): </label>
+		                        <label for="product_name_en" class="col-form-label" style="font-weight: bold;">Product Name (En): <span class="text-danger">*</span></label>
 		                        <input class="form-control" id="product_name_en" type="text" name="name_en" placeholder="Write product name english" value="{{old('name_en')}}">
 		                        @error('name_en')
 		                            <p class="text-danger">{{$message}}</p>
@@ -47,7 +47,7 @@
 	                            <input class="form-control" id="product_code" type="text" name="product_code" placeholder="Write product code" value="{{old('product_code')}}">
 	                        </div>
 							<div class="col-md-6 mb-4">
-								<label for="product_category" class="col-form-label" style="font-weight: bold;">Category:</label>
+								<label for="product_category" class="col-form-label" style="font-weight: bold;">Category: <span class="text-danger">*</span></label>
 								<a style="background-color: #3BB77E; "class="btn btn-sm float-end" data-bs-toggle="modal" data-bs-target="#category"><i class="fa-solid fa-plus text-white"></i></a>
 								@php
 									$selectedCategory = 0;
@@ -185,7 +185,7 @@
 		        	<div class="card-body">
 		        		<div class="row">
 		        			<div class="col-md-12 mb-4">
-	                          	<label for="purchase_price" class="col-form-label" style="font-weight: bold;">Product Buying Price:</label>
+	                          	<label for="purchase_price" class="col-form-label" style="font-weight: bold;">Product Buying Price: <span class="text-danger">*</span></label>
 	                            <input class="form-control" id="purchase_price" type="number" name="purchase_price" placeholder="Write product bying price" value="{{old('purchase_price')}}">
 		                        @error('purchase_price')
                                     <p class="text-danger">{{$message}}</p>
@@ -203,7 +203,7 @@
 		        		<!-- Row //-->
 		        		<div class="row">
 			        		<div class="col-md-4 mb-4">
-	                          	<label for="regular_price" class="col-form-label" style="font-weight: bold;">Regular Price:</label>
+	                          	<label for="regular_price" class="col-form-label" style="font-weight: bold;">Regular Price: <span class="text-danger">*</span></label>
 	                            <input class="form-control" id="regular_price" type="number" name="regular_price" placeholder="Write product regular price" min="0" value="{{old('regular_price')}}">
 		                        @error('regular_price')
 	                                <p class="text-danger">{{$message}}</p>
@@ -230,7 +230,7 @@
 								@enderror
 							</div>
 							<div class="col-md-6 mb-4">
-								<label for="stock_qty" class="col-form-label" style="font-weight: bold;">Stock Quantity:</label>
+								<label for="stock_qty" class="col-form-label" style="font-weight: bold;">Stock Quantity: <span class="text-danger">*</span></label>
 								<input class="form-control" id="stock_qty" type="number" name="stock_qty" value="{{old('stock_qty', 0)}}" min="0" placeholder="Write product stock  qty">
 								@error('stock_qty')
 								   <p class="text-danger">{{$message}}</p>
@@ -290,7 +290,7 @@
 		        	<div class="card-body">
 	        			<!-- Porduct Image Start -->
                         <div class="mb-4">
-							<label for="product_thumbnail" class="col-form-label" style="font-weight: bold;">Product Image:</label>
+							<label for="product_thumbnail" class="col-form-label" style="font-weight: bold;">Product Image: <span class="text-danger">*</span></label>
 							<input type="file" name="product_thumbnail" class="form-control" id="product_thumbnail" onChange="mainThamUrl(this)">
 							<img src="" class="p-2" id="mainThmb">
 							@error('product_thumbnail')
@@ -337,14 +337,14 @@
 		        <!-- card -->
 
 			    <div class="row mb-4 justify-content-sm-end">
-					<div class="col-lg-3 col-md-4 col-sm-5 col-6">
+					<div class="col-lg-2 col-md-4 col-sm-5 col-6">
 						<input type="submit" class="btn btn-primary" value="Submit">
 					</div>
 				</div>
 		    </form>  
 		</div>
 		<!-- col-6 //-->
-		<div class="col-md-4">
+		{{-- <div class="col-md-4">
 	        <div class="card">
 				<div class="card-header">
 					<h3>Product Meta</h3>
@@ -358,7 +358,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 		<!-- col-6 //-->
 	</div>
 </section>

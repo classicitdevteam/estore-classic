@@ -19,8 +19,8 @@ class AdminMiddleware
     {
         //dd(Auth::check());
         if(Auth::guard('admin')->check()){
-            if(Auth::guard('admin')->user() || Auth::guard('admin')->user()->role =="5"){
-                if(!Auth::guard('admin')->user()->role == "1"){
+            if(Auth::guard('admin')->user() || Auth::guard('admin')->user()->role =="2"){
+                if(!Auth::guard('admin')->user()->role == "1" && !Auth::guard('admin')->user()->role == "2"){
                     return redirect()->route('login_form')->with('error','Plz login First');
                 }
             }else if(Auth::guard('web')->user()){

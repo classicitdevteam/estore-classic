@@ -119,7 +119,9 @@
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('attribute_value.active',$value->id) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                    <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('attribute_value.active',$value->id) }}" @endif>
+                                        <span class="badge rounded-pill alert-danger">Disable</span>
+                                    </a>
                                 @endif
                             </td>
                             @if(!Auth::guard('admin')->user()->role == '2')

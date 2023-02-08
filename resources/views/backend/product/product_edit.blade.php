@@ -18,7 +18,7 @@
 		        </ul>
 		    </div>
 		@endif --}}
-        <div class="col-md-8">
+        <div class="col-md-10 mx-auto">
 			<form method="post" action="{{ route('product.update',$product->id) }}" enctype="multipart/form-data">
 				@csrf
 
@@ -423,14 +423,14 @@
 		        <!-- card -->
 
 			    <div class="row mb-4 justify-content-sm-end">
-					<div class="col-lg-3 col-md-4 col-sm-5 col-6">
+					<div class="col-lg-2 col-md-4 col-sm-5 col-6">
 						<input type="submit" class="btn btn-primary" value="Update">
 					</div>
 				</div>
 		    </form>  
 		</div>
 		<!-- col-6 //-->
-		<div class="col-md-4">
+		{{-- <div class="col-md-4">
 	        <div class="card">
 				<div class="card-header">
 					<h3>Product Meta</h3>
@@ -444,7 +444,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --}}
 		<!-- col-6 //-->
 	</div>
 </section>
