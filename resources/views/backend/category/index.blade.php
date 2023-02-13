@@ -22,7 +22,7 @@
                             <th scope="col">Parent</th>
                             <th scope="col">Status</th>
                             <th scope="col">Featured</th>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <th scope="col" class="text-end">Action</th>
                             @endif
                         </tr>
@@ -52,23 +52,23 @@
 	                        <td> {{ $category->parent_name ?? '-' }} </td> 
                             <td>
                                 @if($category->status == 1)
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.in_active',['id'=>$category->id]) }}" @endif>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('category.in_active',['id'=>$category->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.active',['id'=>$category->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('category.active',['id'=>$category->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
                                 @endif
                             </td>
                             <td>
                                 @if($category->is_featured == 1)
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" @endif>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success"><i class="material-icons md-check"></i></span>
                                   </a>
                                 @else
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" @endif> <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('category.changeFeatureStatus',['id'=>$category->id]) }}" @endif> <span class="badge rounded-pill alert-danger"><i class="material-icons md-close"></i></span></a>
                                 @endif
                             </td>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
                                     {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
                                     <a class="btn btn-md rounded font-sm" href="{{ route('category.edit',$category->id) }}">Edit</a>

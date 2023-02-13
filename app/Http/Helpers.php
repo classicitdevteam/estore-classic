@@ -14,6 +14,8 @@ use App\Models\ProductStock;
 use App\Models\Vendor;
 use Illuminate\Support\Collection;
 use App\Models\AccountLedger;
+use App\Utility\CategoryUtility;
+use App\Models\Product;
 
 if (!function_exists('get_setting')) {
     function get_setting($name)
@@ -186,5 +188,28 @@ if (!function_exists('get_account_balance')) {
         }else{
             return 0.00;
         }
+    }
+}
+
+if (!function_exists('get_category_products')) {
+    function get_category_products($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        // dd($category);
+
+
+        $conditions = ['status' => 1];
+
+        $products = Product::where($conditions);
+
+        $category_ids = CategoryUtility::children_ids($category->id);
+        $category_ids[] = $category->id;
+        //dd($category_ids);
+
+        $products->whereIn('category_id', $category_ids);
+
+        $products = $products->orderBy('created_at', 'desc')->get();
+        
+        return $products;
     }
 }

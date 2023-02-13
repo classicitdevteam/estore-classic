@@ -520,4 +520,6 @@
 .header-info > ul > li a {
     color: #2d2d2d;
 }
-
+.footer-dark .dark-section .footer-link-widget .contact-infor img {
+    background: aliceblue;
+}

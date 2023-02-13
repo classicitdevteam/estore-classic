@@ -478,9 +478,7 @@ class ProductController extends Controller
                 MultiImg::insert([
                     'product_id' => $product->id,
                     'photo_name' => $uploadPath,
-                    'created_at' => Carbon::now(),   
-                     
-
+                    'created_at' => Carbon::now(),
                 ]);
 
             }
@@ -579,19 +577,22 @@ class ProductController extends Controller
         );
         return redirect()->back()->with($notification);
     } // end method 
-
-    public function changeFeatureStatus($id){
+    
+    /*=================== Start Featured Methoed ===================*/
+    public function featured($id){
         $product = Product::find($id);
-        if($product->is_featured == 0){
-            $product->is_featured = 1;
-        }else{
+        if($product->is_featured == 1){
             $product->is_featured = 0;
+        }else{
+            $product->is_featured = 1;
         }
         $product->save();
-
-        Session::flash('success','Feature Status Changed Successfully.');
-        return redirect()->back();
-    }
+        $notification = array(
+            'message' => 'Product Feature Status Changed Successfully.', 
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    } // end method 
 
     /*=================== Start Category With SubCategory  Ajax ===================*/
     public function GetSubProductCategory($category_id){

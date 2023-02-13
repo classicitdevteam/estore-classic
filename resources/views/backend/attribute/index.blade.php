@@ -34,7 +34,7 @@
                             </td>
                             <td class="text-end">
                                 <a href="{{ route('attribute.show',$attribute->id) }}" class="btn btn-md rounded font-sm">Detail</a>
-                                @if(!Auth::guard('admin')->user()->role == '2')
+                                @if(Auth::guard('admin')->user()->role != '2')
                                     <div class="dropdown">
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                         <div class="dropdown-menu">

@@ -49,7 +49,7 @@
             </li>
 
             <li class="menu-item has-submenu 
-                {{ ($prefix == 'admin/product') || ($prefix == 'admin/category') || ($route == 'attribute.index') || ($prefix == 'admin/brand') ? 'active' : '' }}
+                {{ ($prefix == 'admin/product') || ($prefix == 'admin/category')|| ($prefix == 'admin/unit') || ($route == 'attribute.index') || ($prefix == 'admin/brand') ? 'active' : '' }}
             ">
                 @if(Auth::guard('admin')->user()->role == '1' || in_array('1', json_decode(Auth::guard('admin')->user()->staff->role->permissions)))
                     <a class="menu-link" href="#">

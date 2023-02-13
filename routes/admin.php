@@ -129,14 +129,15 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 		Route::get('/product_active/{id}', [ProductController::class, 'active'])->name('product.active');
 		Route::get('/product_inactive/{id}', [ProductController::class, 'inactive'])->name('product.in_active');
+
+		Route::get('/product_featured/{id}', [ProductController::class, 'featured'])->name('product.featured');
+
 		// Add Attribute Add 
 		Route::post('/add-more-choice-option', [ProductController::class, 'add_more_choice_option'])->name('products.add-more-choice-option');
 
 		// ajax product page //
 		Route::get('/category/subcategory/ajax/{category_id}', [ProductController::class, 'GetSubProductCategory']);
 		Route::get('/subcategory/minicategory/ajax/{subcategory_id}', [ProductController::class, 'GetSubSubCategory']);
-
-		Route::get('/product_feature_status_change/{id}', [ProductController::class, 'changeFeatureStatus'])->name('product.changeFeatureStatus');
 	});
 
 

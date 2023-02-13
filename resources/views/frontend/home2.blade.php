@@ -266,10 +266,10 @@
                     @foreach(get_categories() as $category)
                         <div class="tab-pane fade" id="category{{ $category->id }}" role="tabpanel" aria-labelledby="tab-two">
                             @php
-                               $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderBy('id','DESC')->get(); 
+                               $products = get_category_products($category->slug);
                             @endphp
                             <div class="row product-grid-4">
-                                @forelse($catwiseProduct as $product)
+                                @forelse($products as $product)
                                     @include('frontend.common.product_grid_view')
                                 @empty
                                     @if(session()->get('language') == 'bangla') 

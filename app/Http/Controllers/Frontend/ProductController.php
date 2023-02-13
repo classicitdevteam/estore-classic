@@ -39,25 +39,25 @@ class ProductController extends Controller
         
         switch ($sort_by) {
             case 'newest':
-                $products_sort_by->orderBy('created_at', 'desc')->paginate(10);
+                $products_sort_by->orderBy('created_at', 'desc')->paginate(30);
                 break;
             case 'oldest':
-                $products_sort_by->orderBy('created_at', 'asc')->paginate(10);
+                $products_sort_by->orderBy('created_at', 'asc')->paginate(30);
                 break;
             case 'price-asc':
-                $products_sort_by->orderBy('regular_price', 'asc')->paginate(10);
+                $products_sort_by->orderBy('regular_price', 'asc')->paginate(30);
                 break;
             case 'price-desc':
-                $products_sort_by->orderBy('regular_price', 'desc')->paginate(10);
+                $products_sort_by->orderBy('regular_price', 'desc')->paginate(30);
                 break;
             default:
-                $products_sort_by->orderBy('id', 'desc')->paginate(10);
+                $products_sort_by->orderBy('id', 'desc')->paginate(30);
                 break;
         }
 
 
         // Start Shop Product //
-        $products = Product::orderBy('name_en', 'ASC')->where('status', 1)->latest()->paginate(10);
+        $products = Product::orderBy('name_en', 'ASC')->where('status', 1)->latest()->paginate(30);
         
         // Category Filter Start
         if ($request->get('filtercategory')){
@@ -71,7 +71,7 @@ class ProductController extends Controller
             }
             // filter With name end
 
-            $products = Product::whereIn('category_id', $catId)->where('status', 1)->latest()->paginate(10);
+            $products = Product::whereIn('category_id', $catId)->where('status', 1)->latest()->paginate(30);
             // dd($products);
         }
         // Category Filter End

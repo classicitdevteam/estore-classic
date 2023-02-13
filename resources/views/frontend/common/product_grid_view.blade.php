@@ -53,6 +53,12 @@
                 </a>
             </h2>
             <div class="product-category">
+                @if($product->unit_id)
+                    <div class="">
+                  	    <span class="unit">Unit: </span>
+                  	    <span class="unit text-brand fw-900"> {{ $product->unit_weight }} {{ $product->unit->name ?? '' }} </span>
+                    </div>
+              	@endif
                 <a href="{{ route('product.category', $product->category->slug) }}">
                     @if(session()->get('language') == 'bangla') 
                         {{ $product->category->name_bn }}

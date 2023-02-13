@@ -20,7 +20,7 @@
                             <th scope="col">Name (English)</th> 
                             <th scope="col">Name (Bangla)</th> 
                             <th scope="col">Status</th>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <th scope="col" class="text-end">Action</th>
                             @endif
                         </tr>
@@ -40,14 +40,14 @@
                             <td> {{ $brand->name_bn ?? 'NULL' }} </td>
                             <td>
                                 @if($brand->status == 1)
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('brand.in_active',['id'=>$brand->id]) }}" @endif>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('brand.in_active',['id'=>$brand->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('brand.active',['id'=>$brand->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('brand.active',['id'=>$brand->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
                                 @endif
                             </td>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
                                     <a href="#" class="btn btn-md rounded font-sm">Detail</a>
                                     <div class="dropdown">
@@ -70,5 +70,4 @@
         <!-- card-body end// -->
     </div>
 </section>
-
 @endsection

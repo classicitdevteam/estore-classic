@@ -20,7 +20,7 @@
                             <th scope="col">Email</th> 
                             <th scope="col">Address</th>
                             <th scope="col">Status</th>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <th scope="col" class="text-end">Action</th>
                             @endif
                         </tr>
@@ -35,14 +35,14 @@
                             <td> {{ $item->address ?? '' }} </td>
                             <td>
                                 @if($item->status == 1)
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('supplier.in_active',['id'=>$item->id]) }}" @endif>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('supplier.in_active',['id'=>$item->id]) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('supplier.active',['id'=>$item->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('supplier.active',['id'=>$item->id]) }}" @endif> <span class="badge rounded-pill alert-danger">Disable</span></a>
                                 @endif
                             </td>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
                                     {{-- <a href="#" class="btn btn-md rounded font-sm">Detail</a> --}}
                                     <a class="btn btn-md rounded font-sm" href="{{ route('supplier.edit',$item->id) }}">Edit info</a>

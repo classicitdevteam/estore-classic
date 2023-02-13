@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 03:23 PM
+-- Generation Time: Feb 09, 2023 at 08:55 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -87,7 +87,38 @@ INSERT INTO `account_ledgers` (`id`, `account_head_id`, `particulars`, `debit`, 
 (2, 2, 'Order ID: 25', 0, 64620, 64620, 2, 25, 0, '2022-10-18 03:39:04', '2022-10-18 03:39:04'),
 (3, 1, 'Product ID: 47', 100, 0, -100, 1, 0, 47, '2022-10-24 02:56:19', '2022-10-24 02:56:19'),
 (4, 2, 'Order ID: 26', 0, 600, 600, 2, 26, 0, '2022-10-24 03:36:35', '2022-10-24 03:36:35'),
-(5, 2, 'Order ID: 27', 0, 300, 300, 2, 27, 0, '2022-10-24 03:37:14', '2022-10-24 03:37:14');
+(5, 2, 'Order ID: 27', 0, 300, 300, 2, 27, 0, '2022-10-24 03:37:14', '2022-10-24 03:37:14'),
+(6, 2, 'Order ID: 28', 0, 3950, 3950, 2, 28, 0, '2022-12-12 22:11:28', '2022-12-12 22:11:28'),
+(7, 2, 'Order ID: 29', 0, 318, 318, 2, 29, 0, '2022-12-17 04:03:09', '2022-12-17 04:03:09'),
+(8, 2, 'Order ID: 30', 0, 388, 388, 2, 30, 0, '2022-12-19 00:15:12', '2022-12-19 00:15:12'),
+(9, 2, 'Order ID: 31', 0, 388, 388, 2, 31, 0, '2022-12-19 02:55:39', '2022-12-19 02:55:39'),
+(10, 2, 'Order ID: 32', 0, 1500, 1500, 2, 32, 0, '2022-12-19 03:00:25', '2022-12-19 03:00:25'),
+(11, 2, 'Order ID: 33', 0, 388, 388, 2, 33, 0, '2022-12-19 03:01:09', '2022-12-19 03:01:09'),
+(12, 2, 'Order ID: 34', 0, 388, 388, 2, 34, 0, '2022-12-19 03:05:10', '2022-12-19 03:05:10'),
+(13, 2, 'Order ID: 35', 0, 388, 388, 2, 35, 0, '2022-12-19 03:08:36', '2022-12-19 03:08:37'),
+(14, 2, 'Order ID: 36', 0, 318, 318, 2, 36, 0, '2022-12-20 06:05:34', '2022-12-20 06:05:34'),
+(15, 2, 'Order ID: 37', 0, 3080, 3080, 2, 37, 0, '2022-12-20 07:23:51', '2022-12-20 07:23:51'),
+(16, 2, 'Order ID: 38', 0, 1500, 1500, 2, 38, 0, '2022-12-20 07:38:57', '2022-12-20 07:38:57'),
+(17, 2, 'Order ID: 39', 0, 1500, 1500, 2, 39, 0, '2022-12-20 07:54:45', '2022-12-20 07:54:45'),
+(18, 2, 'Order ID: 40', 0, 706, 706, 2, 40, 0, '2022-12-20 07:57:45', '2022-12-20 07:57:45'),
+(19, 2, 'Order ID: 41', 0, 1580, 1580, 2, 41, 0, '2022-12-20 23:43:03', '2022-12-20 23:43:03'),
+(20, 2, 'Order ID: 43', 0, 468, 468, 2, 43, 0, '2022-12-26 23:03:49', '2022-12-26 23:03:49'),
+(21, 2, 'Order ID: 44', 0, 398, 398, 2, 44, 0, '2022-12-28 03:02:24', '2022-12-28 03:02:24'),
+(22, 2, 'Order ID: 45', 0, 398, 398, 2, 45, 0, '2022-12-31 00:14:59', '2022-12-31 00:14:59'),
+(23, 1, 'Product ID: 48', 568, 0, -568, 1, 0, 48, '2022-12-31 02:48:24', '2022-12-31 02:48:24'),
+(24, 1, 'Product ID: 49', 200, 0, -200, 1, 0, 49, '2022-12-31 02:50:51', '2022-12-31 02:50:51'),
+(25, 1, 'Product ID: 50', 2547, 0, -2547, 1, 0, 50, '2023-01-03 07:40:18', '2023-01-03 07:40:18'),
+(26, 2, 'Order ID: 46', 0, 67080, 67080, 2, 46, 0, '2023-01-04 00:10:53', '2023-01-04 00:10:53'),
+(27, 2, 'Order ID: 47', 0, 68086, 68086, 2, 47, 0, '2023-01-04 00:14:45', '2023-01-04 00:14:45'),
+(28, 2, 'Order ID: 48', 0, 6580, 6580, 2, 48, 0, '2023-01-04 04:06:56', '2023-01-04 04:06:56'),
+(29, 2, 'Order ID: 49', 0, 538, 538, 2, 49, 0, '2023-01-04 23:27:07', '2023-01-04 23:27:07'),
+(30, 2, 'Order ID: 50', 0, 2286, 2286, 2, 50, 0, '2023-01-05 01:00:25', '2023-01-05 01:00:25'),
+(31, 2, 'Order ID: 51', 0, 2286, 2286, 2, 51, 0, '2023-01-05 01:16:07', '2023-01-05 01:16:07'),
+(32, 2, 'Order ID: 52', 0, 468, 468, 2, 52, 0, '2023-01-06 23:26:30', '2023-01-06 23:26:30'),
+(33, 2, 'Order ID: 53', 0, 380, 380, 2, 53, 0, '2023-01-07 00:37:50', '2023-01-07 00:37:50'),
+(34, 1, 'Product ID: 51', 2635, 0, -2635, 1, 0, 51, '2023-01-10 06:40:44', '2023-01-10 06:40:44'),
+(35, 2, 'Order ID: 54', 0, 3948080, 3948080, 2, 54, 0, '2023-01-14 05:18:16', '2023-01-14 05:18:16'),
+(36, 2, 'Order ID: 55', 0, 468, 468, 2, 55, 0, '2023-01-31 05:25:38', '2023-01-31 05:25:38');
 
 -- --------------------------------------------------------
 
@@ -117,8 +148,9 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`id`, `user_id`, `name`, `division_name`, `district_name`, `upazilla_name`, `division_id`, `district_id`, `upazilla_id`, `address`, `is_default`, `status`, `created_at`, `updated_at`) VALUES
-(112, 1, NULL, NULL, NULL, NULL, 2, 6, 52, 'aa', 0, 1, '2022-09-07 00:18:50', '2022-09-10 08:01:01'),
-(116, 1, NULL, NULL, NULL, NULL, 2, 11, 101, 'Lama', 1, 1, '2022-09-10 08:00:53', '2022-09-10 08:01:01');
+(112, 1, NULL, NULL, NULL, NULL, 2, 6, 52, 'aa', 0, 1, '2022-09-07 00:18:50', '2022-11-28 08:04:06'),
+(116, 1, NULL, NULL, NULL, NULL, 2, 11, 101, 'Lama', 1, 1, '2022-09-10 08:00:53', '2022-11-28 08:04:06'),
+(159, 3, NULL, NULL, NULL, NULL, 1, 52, 369, 'dsd', 0, 1, '2022-12-17 02:28:11', '2022-12-17 02:28:11');
 
 -- --------------------------------------------------------
 
@@ -143,7 +175,7 @@ INSERT INTO `attributes` (`id`, `name`, `status`, `created_by`, `created_at`, `u
 (4, 'Color', 1, 4, '2022-08-27 00:14:35', '2022-08-27 00:14:35'),
 (5, 'Size', 1, 4, '2022-08-27 00:16:20', '2022-08-27 00:16:20'),
 (6, 'Extra', 1, 4, '2022-08-27 00:17:09', '2022-08-27 00:17:09'),
-(7, 'Ram', 1, 4, '2022-08-27 00:22:51', '2022-10-24 02:32:33');
+(7, 'Ram', 1, 23, '2022-08-27 00:22:51', '2023-01-31 04:31:11');
 
 -- --------------------------------------------------------
 
@@ -190,7 +222,7 @@ INSERT INTO `attribute_values` (`id`, `attribute_id`, `value`, `status`, `create
 (37, 6, '62', 1, 4, '2022-08-27 00:17:30', '2022-08-27 00:17:30'),
 (38, 6, '30', 1, 4, '2022-08-27 00:17:38', '2022-08-27 00:17:38'),
 (39, 6, '32', 1, 4, '2022-08-27 00:17:48', '2022-08-27 00:17:48'),
-(40, 7, '3gb', 1, 4, '2022-08-27 00:23:00', '2022-08-27 00:23:00'),
+(40, 7, '3gb', 1, 23, '2022-08-27 00:23:00', '2023-01-31 04:37:31'),
 (41, 7, '4gb', 1, 4, '2022-08-27 00:23:11', '2022-08-27 00:23:11'),
 (42, 7, '8gb', 1, 4, '2022-08-27 00:23:19', '2022-08-27 00:23:19'),
 (43, 7, '32gb', 1, 4, '2022-08-27 00:23:32', '2022-08-27 00:23:32');
@@ -218,7 +250,7 @@ CREATE TABLE `banners` (
   `title_en` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title_bn` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `banner_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `banner_url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#',
+  `banner_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description_en` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description_bn` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `position` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=>Home Banner, 0=>Footer Banner',
@@ -313,7 +345,7 @@ CREATE TABLE `campaings` (
 
 INSERT INTO `campaings` (`id`, `name_en`, `name_bn`, `slug`, `campaing_image`, `flash_start`, `flash_end`, `is_featured`, `status`, `created_at`, `updated_at`) VALUES
 (52, 'Josiah Casey', 'আমাদের সম্পর্কে', 'josiah-casey', 'upload/campaing/1744308128899603.jpg', '01-09-2022 13:00:00', '31-10-2022 21:00:00', 1, 0, '2022-09-18 05:51:02', '2022-09-21 01:51:59'),
-(54, 'Electronics', 'ইলেকট্রনিক্স', 'electronics', 'upload/campaing/1744378472694096.jpg', '01-11-2022 12:20:00', '01-12-2022 12:25:00', 1, 1, '2022-09-19 00:29:07', '2022-11-09 00:05:48');
+(54, 'Electronics', 'ইলেকট্রনিক্স', 'electronics', 'upload/campaing/1744378472694096.jpg', '01-11-2022 12:20:00', '01-12-2022 12:25:00', 1, 0, '2022-09-19 00:29:07', '2022-12-21 07:35:51');
 
 -- --------------------------------------------------------
 
@@ -608,7 +640,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (78, '2022_08_06_053505_create_attribute_values_table', 18),
 (79, '2022_08_14_105132_create_orders_table', 18),
 (80, '2022_10_16_060400_create_account_heads_table', 19),
-(82, '2022_10_16_082419_create_account_ledgers_table', 20);
+(82, '2022_10_16_082419_create_account_ledgers_table', 20),
+(84, '2022_12_31_055130_create_units_table', 21);
 
 -- --------------------------------------------------------
 
@@ -724,7 +757,9 @@ INSERT INTO `multi_imgs` (`id`, `product_id`, `photo_name`, `created_at`, `updat
 (156, 40, 'upload/products/multi-image/1744649456079990.jpg', '2022-09-22 00:16:17', NULL),
 (157, 40, 'upload/products/multi-image/1744649456174697.jpg', '2022-09-22 00:16:17', NULL),
 (158, 41, 'upload/products/multi-image/1744649730529745.jpg', '2022-09-22 00:20:39', NULL),
-(159, 47, 'upload/products/multi-image/1747558627286605.jpg', '2022-10-24 02:56:19', NULL);
+(162, 49, 'upload/products/multi-image/1753718876345560.jpg', '2022-12-31 02:50:50', NULL),
+(163, 49, 'upload/products/multi-image/1753718876574593.jpg', '2022-12-31 02:50:51', NULL),
+(168, 47, 'upload/products/multi-image/1756171915386974.jpg', '2023-01-27 04:40:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -736,8 +771,9 @@ CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `seller_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `division_id` int(11) NOT NULL,
   `district_id` int(11) NOT NULL,
   `upazilla_id` int(11) NOT NULL,
@@ -745,8 +781,12 @@ CREATE TABLE `orders` (
   `payment_method` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cash',
   `payment_status` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '1=>paid, 0=>Unpaid',
   `payment_details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `grand_total` double(8,2) NOT NULL DEFAULT 0.00,
-  `coupon_discount` double(8,2) NOT NULL DEFAULT 0.00,
+  `shipping_charge` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `shipping_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_total` decimal(10,2) DEFAULT 0.00,
+  `grand_total` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `discount` decimal(10,2) NOT NULL DEFAULT 0.00,
   `invoice_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `viewed` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `delivery_viewed` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
@@ -773,34 +813,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `seller_id`, `phone`, `email`, `division_id`, `district_id`, `upazilla_id`, `address`, `payment_method`, `payment_status`, `payment_details`, `grand_total`, `coupon_discount`, `invoice_no`, `viewed`, `delivery_viewed`, `payment_status_viewed`, `commission_calculated`, `comment`, `delivery_status`, `tracking_code`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `delivered_date`, `cancel_date`, `return_date`, `return_reason`, `type`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, '', '', 1, 52, 369, 'aa', 'cash', 0, NULL, 60300.00, 0.00, '20220907-04180636', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-06 16:18:06', '2022-09-06 16:18:06'),
-(2, 1, NULL, '', '', 1, 52, 369, 'aa', 'cash', 0, NULL, 60300.00, 0.00, '20220907-04261723', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-06 16:26:17', '2022-09-06 16:26:17'),
-(3, 1, NULL, '', '', 1, 52, 365, 'twt', 'cash', 0, NULL, 1360.00, 0.00, '20220907-05403312', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-06 17:40:33', '2022-09-06 17:40:33'),
-(4, 1, NULL, '', '', 2, 6, 55, 'trh', 'cash', 0, NULL, 60300.00, 0.00, '20220907-05424341', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-06 17:42:43', '2022-09-06 17:42:43'),
-(5, 1, NULL, '', '', 2, 6, 57, 'etgre', 'cash', 0, NULL, 340.00, 0.00, '20220908-13382242', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-08 01:38:22', '2022-09-08 01:38:22'),
-(6, 1, NULL, '', '', 6, 36, 283, 'gsdhas', 'cash', 0, NULL, 259800.00, 0.00, '20220910-08315247', '0', '1', '1', '0', NULL, 'confirmed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-09 20:31:52', '2022-09-11 01:05:14'),
-(7, 1, NULL, '', '', 3, 19, 163, 'hbgftyh', 'cash', 1, NULL, 331380.00, 0.00, '20220910-08522452', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-09 20:52:24', '2022-09-11 01:05:00'),
-(8, 1, NULL, '', '', 5, 31, 234, 'gdsgds', 'cod', 0, NULL, 532000.00, 0.00, '20220915-13562515', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-15 01:56:25', '2022-09-15 01:56:25'),
-(9, 1, NULL, '', '', 2, 6, 52, 'aa', 'cod', 0, NULL, 138000.00, 0.00, '20220917-06364013', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-16 18:36:40', '2022-09-16 18:36:40'),
-(10, 1, NULL, '', '', 2, 6, 52, 'aa', 'cod', 0, NULL, 138000.00, 0.00, '20220917-06381166', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-16 18:38:11', '2022-09-16 18:38:11'),
-(11, 1, NULL, '', '', 2, 6, 52, 'aa', 'cod', 0, NULL, 138000.00, 0.00, '20220917-06440521', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-16 18:44:05', '2022-09-16 18:44:05'),
-(12, 1, NULL, '', '', 4, 20, 172, 'asf', 'cod', 0, NULL, 2700.00, 0.00, '20220918-11270971', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-17 23:27:09', '2022-09-17 23:27:09'),
-(13, 1, NULL, '', '', 3, 14, 127, 'asf', 'cod', 0, NULL, 2700.00, 0.00, '20220918-11272874', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-17 23:27:28', '2022-09-17 23:27:28'),
-(14, 1, NULL, '', '', 2, 7, 61, 'asf', 'cod', 0, NULL, 340.00, 0.00, '20220918-11301127', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-17 23:30:11', '2022-09-17 23:30:11'),
-(15, 1, NULL, '', '', 2, 10, 89, 'asdf', 'cod', 0, NULL, 6620.00, 0.00, '20220918-11522552', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-17 23:52:25', '2022-09-17 23:52:25'),
-(16, 1, NULL, '01702010236', 'user@gmail.com', 2, 6, 52, 'aa', 'cod', 0, NULL, 129900.00, 0.00, '20220921-06071868', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-20 18:07:18', '2022-09-20 18:07:18'),
-(17, 1, NULL, '01627490402', 'user@gmail.com', 2, 6, 52, 'aa', 'cod', 0, NULL, 129900.00, 0.00, '20220921-06075862', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 4, '2022-09-20 18:07:58', '2022-09-20 18:07:58'),
-(18, 1, NULL, '01627490402', 'moloy@gmail.com', 4, 20, 176, 'aaa', 'cod', 0, NULL, 131970.00, 0.00, '20220922-05314855', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-21 17:31:48', '2022-09-21 17:31:48'),
-(19, 1, NULL, '01627490402', 'moloy@gmail.com', 4, 20, 176, 'aaa', 'cod', 0, NULL, 131970.00, 0.00, '20220922-05330760', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-21 17:33:07', '2022-09-21 17:33:07'),
-(20, 1, NULL, '01627490402', 'moloy@gmail.com', 4, 20, 176, 'aaa', 'cod', 0, NULL, 131970.00, 0.00, '20220922-05332098', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-21 17:33:20', '2022-09-21 17:33:20'),
-(21, 1, NULL, '01721320124', 'motiur@gmail.com', 2, 9, 81, 'aarf', 'cod', 0, NULL, 318.00, 0.00, '20220929-06264163', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, '2022-09-28 18:26:41', '2022-09-28 18:26:41'),
-(22, 1, NULL, '3525623', '233hnasrin@gmail.com', 3, 16, 146, 'aafged', 'cod', 0, NULL, 318.00, 0.00, '20221013-05150074', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2022-10-12 23:15:00', '2022-10-12 23:15:00'),
-(23, 1, NULL, '555', 'abc@gmail.com', 5, 31, 239, 'aa', 'cod', 0, NULL, 318.00, 0.00, '20221013-05210785', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2022-10-12 23:21:07', '2022-10-12 23:21:07'),
-(24, 1, NULL, '01721523654', 'nazrul@gamil.com', 1, 52, 367, 'ewfer', 'cod', 0, NULL, 4149.32, 0.00, '20221016-09310821', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2022-10-16 03:31:08', '2022-10-16 03:31:08'),
-(25, 1, NULL, '555', 'motiur@gmail.com', 6, 39, 302, 'aa', 'cod', 0, NULL, 64620.00, 0.00, '20221018-09390398', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2022-10-18 03:39:03', '2022-10-18 03:39:03'),
-(26, 1, NULL, '01721320124', 'admin@gmail.com', 6, 37, 288, 'jmjhk', 'cod', 0, NULL, 600.00, 0.00, '20221024-09363554', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2022-10-24 03:36:35', '2022-10-24 03:36:35'),
-(27, 1, NULL, '01783465103', 'nazrul@gamil.com', 3, 16, 145, 'kjnhi', 'cod', 0, NULL, 300.00, 0.00, '20221024-09371453', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2022-10-24 03:37:14', '2022-10-24 03:37:14');
+INSERT INTO `orders` (`id`, `user_id`, `seller_id`, `name`, `phone`, `email`, `division_id`, `district_id`, `upazilla_id`, `address`, `payment_method`, `payment_status`, `payment_details`, `shipping_charge`, `shipping_type`, `shipping_name`, `sub_total`, `grand_total`, `discount`, `invoice_no`, `viewed`, `delivery_viewed`, `payment_status_viewed`, `commission_calculated`, `comment`, `delivery_status`, `tracking_code`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `delivered_date`, `cancel_date`, `return_date`, `return_reason`, `type`, `created_by`, `created_at`, `updated_at`) VALUES
+(55, 1, NULL, 'Admin', '01958106312', 'admin@gmail.com', 2, 6, 54, 'Uttara, Dhaka', 'cod', 0, NULL, '80.00', '1', 'Redex', '388.00', '468.00', '0.00', '0000001', '0', '1', '1', '0', NULL, 'pending', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, NULL, '2023-01-31 05:25:38', '2023-01-31 05:25:38');
 
 -- --------------------------------------------------------
 
@@ -844,7 +858,42 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `product_name`, `is
 (34, 25, 35, NULL, 1, '[{\"attribute_name\":\"Ram\",\"attribute_value\":\"4gb\"},{\"attribute_name\":\"Color\",\"attribute_value\":\"Green\"}]', '1', 64320.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-10-18 03:39:04', NULL),
 (35, 25, 41, NULL, 1, '[{\"attribute_name\":\"Size\",\"attribute_value\":\"XL\"},{\"attribute_name\":\"Color\",\"attribute_value\":\"White\"}]', '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-10-18 03:39:04', NULL),
 (36, 26, 41, NULL, 1, '[{\"attribute_name\":\"Size\",\"attribute_value\":\"XL\"},{\"attribute_name\":\"Color\",\"attribute_value\":\"White\"}]', '2', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-10-24 03:36:35', NULL),
-(37, 27, 41, NULL, 1, '[{\"attribute_name\":\"Size\",\"attribute_value\":\"XL\"},{\"attribute_name\":\"Color\",\"attribute_value\":\"White\"}]', '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-10-24 03:37:14', NULL);
+(37, 27, 41, NULL, 1, '[{\"attribute_name\":\"Size\",\"attribute_value\":\"XL\"},{\"attribute_name\":\"Color\",\"attribute_value\":\"White\"}]', '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-10-24 03:37:14', NULL),
+(38, 28, 36, NULL, 0, NULL, '1', 3950.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-12 22:11:28', NULL),
+(39, 29, 38, NULL, 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-17 04:03:09', NULL),
+(40, 30, 40, NULL, 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-19 00:15:12', NULL),
+(41, 31, 40, NULL, 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-19 02:55:39', NULL),
+(42, 32, 37, NULL, 0, NULL, '1', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-19 03:00:25', NULL),
+(43, 33, 40, NULL, 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-19 03:01:09', NULL),
+(44, 34, 40, NULL, 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-19 03:05:10', NULL),
+(45, 35, 40, NULL, 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-19 03:08:36', NULL),
+(46, 36, 38, NULL, 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 06:05:34', NULL),
+(47, 37, 37, NULL, 0, NULL, '2', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 07:23:51', NULL),
+(48, 38, 37, NULL, 0, NULL, '1', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 07:38:57', NULL),
+(49, 39, 37, NULL, 0, NULL, '1', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 07:54:45', NULL),
+(50, 40, 40, NULL, 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 07:57:45', NULL),
+(51, 40, 38, NULL, 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 07:57:45', NULL),
+(52, 41, 37, NULL, 0, NULL, '1', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-20 23:43:03', NULL),
+(53, 43, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-26 23:03:49', NULL),
+(54, 44, 38, 'Lifebuoy Handwash Lemon Fresh Refil', 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-28 03:02:24', NULL),
+(55, 45, 38, 'Lifebuoy Handwash Lemon Fresh Refil', 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2022-12-31 00:14:59', NULL),
+(56, 46, 50, 'Chal', 1, '[{\"attribute_name\":\"Extra\",\"attribute_value\":\"62\"}]', '1', 67000.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 00:10:53', NULL),
+(57, 47, 49, 'Test product', 0, NULL, '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 00:14:45', NULL),
+(58, 47, 50, 'Chal', 1, '[{\"attribute_name\":\"Extra\",\"attribute_value\":\"62\"}]', '1', 67000.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 00:14:45', NULL),
+(59, 47, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 00:14:45', NULL),
+(60, 47, 38, 'Lifebuoy Handwash Lemon Fresh Refil', 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 00:14:45', NULL),
+(61, 48, 50, 'Chal', 1, '[{\"attribute_name\":\"Extra\",\"attribute_value\":\"30\"}]', '1', 6500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 04:06:56', NULL),
+(62, 49, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-04 23:27:07', NULL),
+(63, 50, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-05 01:00:25', NULL),
+(64, 50, 37, 'V380 ptz camera WiFi IP Camera', 0, NULL, '1', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-05 01:00:25', NULL),
+(65, 50, 38, 'Lifebuoy Handwash Lemon Fresh Refil', 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-05 01:00:25', NULL),
+(66, 51, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-05 01:16:07', NULL),
+(67, 51, 38, 'Lifebuoy Handwash Lemon Fresh Refil', 0, NULL, '1', 318.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-05 01:16:07', NULL),
+(68, 51, 37, 'V380 ptz camera WiFi IP Camera', 0, NULL, '1', 1500.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-05 01:16:07', NULL),
+(69, 52, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-06 23:26:30', NULL),
+(70, 53, 49, 'Test product', 0, NULL, '1', 300.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-07 00:37:50', NULL),
+(71, 54, 34, 'HP Pavilion 15-eg', 1, '[{\"attribute_name\":\"Ram\",\"attribute_value\":\"32gb\"},{\"attribute_name\":\"Size\",\"attribute_value\":\"M\"},{\"attribute_name\":\"Color\",\"attribute_value\":\"White\"}]', '30', 131600.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-14 05:18:16', NULL),
+(72, 55, 40, 'Red Cow Butter Oil', 0, NULL, '1', 388.00, 0.00, 0.00, 'unpaid', NULL, NULL, NULL, 'pending', '2023-01-31 05:25:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -920,11 +969,13 @@ CREATE TABLE `products` (
   `tags` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `vendor_id` int(11) DEFAULT NULL,
   `supplier_id` int(11) DEFAULT NULL,
+  `unit_id` int(11) DEFAULT NULL,
   `campaing_id` int(11) DEFAULT NULL,
   `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name_bn` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `unit_weight` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `purchase_price` double NOT NULL DEFAULT 0,
   `is_wholesell` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '1=>Wholesell, 0=>Not Wholesell',
   `wholesell_price` double NOT NULL DEFAULT 0,
@@ -955,17 +1006,18 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `brand_id`, `category_id`, `sub_category_id`, `sub_sub_category_id`, `tags`, `vendor_id`, `supplier_id`, `campaing_id`, `name_en`, `name_bn`, `slug`, `product_code`, `purchase_price`, `is_wholesell`, `wholesell_price`, `wholesell_minimum_qty`, `regular_price`, `discount_price`, `discount_type`, `minimum_buy_qty`, `stock_qty`, `product_thumbnail`, `description_en`, `description_bn`, `attributes`, `is_varient`, `attribute_values`, `variations`, `is_featured`, `is_deals`, `status`, `is_approved`, `is_digital`, `created_by`, `created_at`, `updated_at`) VALUES
-(32, 17, 48, NULL, NULL, 'leptop', NULL, NULL, NULL, 'HUAWEI MateBook D 15 - 8 GB', 'HUAWEI MateBook D 15 - 8 GB', 'huawei-matebook-d-15---8-gb', '68230', 100000, 0, 120000, 3, 130000, 100, 1, 34, 54, 'upload/products/thumbnails/1743137219075381.jpg', 'Product details of HUAWEI MateBook D 15 - 8 GB RAM - 512 GB SSD - 15.6 \" Screen', 'Product details of HUAWEI MateBook D 15 - 8 GB RAM - 512 GB SSD - 15.6 \" Screen', '[\"5\",\"4\"]', 1, '[{\"attribute_id\":\"5\",\"values\":[\"XL\",\"XXl\"]},{\"attribute_id\":\"4\",\"values\":[\"White\",\"Green\"]}]', NULL, 0, 0, 1, 1, 0, 4, '2022-09-05 01:39:55', '2022-09-05 01:39:56'),
-(33, 17, 27, NULL, NULL, 'breakfast,paratha', NULL, NULL, NULL, 'Golden Harvest Deshi Paratha 1300 gm', 'গোল্ডেন হার্ভেস্ট দেশি পরাঠা 1300 গ্রাম', 'golden-harvest-deshi-paratha-1300-gm', '78752', 200, 0, 300, 4, 400, 30, 1, 40, 53, 'upload/products/thumbnails/1743137433218614.jpg', 'Get a classic golden frozen paratha family pack from us as your daily breakfast. One pack covers for one family. Hassle-free and easy to serve. Just tear off the packet and put it on the griddle for a few minutes and then serve it. It’s a good food for your good health.', 'Get a classic golden frozen paratha family pack from us as your daily breakfast. One pack covers for one family. Hassle-free and easy to serve. Just tear off the packet and put it on the griddle for a few minutes and then serve it. It’s a good food for your good health.', '[]', 0, '[]', NULL, 0, 0, 1, 1, 0, 4, '2022-09-05 01:43:20', '2022-09-21 17:33:21'),
-(34, 17, 49, NULL, NULL, 'hp,leptop', NULL, NULL, NULL, 'HP Pavilion 15-eg', 'HP প্যাভিলিয়ন 15-যেমন', 'hp-pavilion-15-eg', '19156', 120000, 0, 0, 1, 140000, 6, 2, 30, 42, 'upload/products/thumbnails/1743137698305071.jpg', 'Product details of HP Pavilion 15-eg0082TU Core i5 11th Gen 15.6\" FHD Laptop', 'Product details of HP Pavilion 15-eg0082TU Core i5 11th Gen 15.6\" FHD Laptop', '[\"7\",\"5\",\"4\"]', 1, '[{\"attribute_id\":\"7\",\"values\":[\"8gb\",\"32gb\"]},{\"attribute_id\":\"5\",\"values\":[\"M\",\"XL\",\"XXl\"]},{\"attribute_id\":\"4\",\"values\":[\"Red\",\"White\"]}]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-05 01:47:02', '2022-09-21 17:33:21'),
-(35, 10, 45, NULL, NULL, 'mobile,sumsung', NULL, NULL, NULL, 'Samsung Galaxy F23', 'Samsung Galaxy F23', 'samsung-galaxy-f23', '88641', 50000, 0, 56000, 2, 67000, 4, 2, 24, 52, 'upload/products/thumbnails/1743138000587790.jpg', 'Product details of Samsung Galaxy F23 5G-6GB/128GB Smartphone', 'Product details of Samsung Galaxy F23 5G-6GB/128GB Smartphone', '[\"7\",\"4\"]', 1, '[{\"attribute_id\":\"7\",\"values\":[\"4gb\",\"8gb\"]},{\"attribute_id\":\"4\",\"values\":[\"White\",\"Green\"]}]', NULL, 0, 0, 1, 1, 0, 4, '2022-09-05 01:52:21', '2022-10-18 03:39:04'),
-(36, 17, 40, NULL, NULL, 'women', NULL, NULL, NULL, 'BREYLEE Acne Treatment Cream Anti Acne Face Cream', 'BREYLEE ব্রণ চিকিত্সা ক্রিম অ্যান্টি ব্রণ ফেস ক্রিম', 'breylee-acne-treatment-cream-anti-acne-face-cream', '33747', 2000, 0, 3500, 5, 4000, 50, 1, 34, 53, 'upload/products/thumbnails/1743138270294789.jpg', 'Product details of BREYLEE Acne Treatment Cream Anti Acne Face Cream', 'Product details of BREYLEE Acne Treatment Cream Anti Acne Face Cream', '[]', 0, '[]', NULL, 0, 0, 1, 1, 0, 4, '2022-09-05 01:56:38', '2022-09-18 18:29:07'),
-(37, 17, 49, NULL, NULL, 'electronic', 3, 5, NULL, 'V380 ptz camera WiFi IP Camera', 'V380 ptz ক্যামেরা ওয়াইফাই আইপি ক্যামেরা', 'v380-ptz-camera-wifi-ip-camera', '34637', 1300, 0, 0, 1, 1600, 100, 1, 12, 32, 'upload/products/thumbnails/1747018171263124.jpg', 'V380 ptz camera WiFi IP Camera V380 IP Camera 360 Degree CCTV Camera a Wireless Mini CC Camera IP Webcam Wireless CCTV Camera 360 Degree IP Camera', 'V380 ptz camera WiFi IP Camera V380 IP Camera 360 Degree CCTV Camera a Wireless Mini CC Camera IP Webcam Wireless CCTV Camera 360 Degree IP Camera', '[]', 0, '[]', NULL, 1, 1, 1, 1, 1, 4, '2022-09-05 02:00:10', '2022-10-18 03:46:00'),
-(38, 17, 49, NULL, NULL, 'care,handwash', 3, 5, NULL, 'Lifebuoy Handwash Lemon Fresh Refil', 'লাইফবয় হ্যান্ডওয়াশ লেমন ফ্রেশ রিফিল', 'lifebuoy-handwash-lemon-fresh-refil', '12910', 200, 0, 300, 5, 350, 32, 1, 23, 39, 'upload/products/thumbnails/1747023069172298.jpg', 'Lifebuoy Handwash Total Refill\r\n170 ml', 'Lifebuoy Handwash Total Refill\r\n170 ml', '[]', 0, '[]', NULL, 1, 1, 1, 1, 1, 4, '2022-09-05 02:03:32', '2022-10-18 05:03:51'),
-(40, 17, 49, NULL, NULL, 'Oil', 3, 5, NULL, 'Red Cow Butter Oil', 'লাল গরুর মাখন তেল', 'red-cow-butter-oil', '34951', 305, 0, 340, 5, 400, 3, 2, 43, 34, 'upload/products/thumbnails/1747018059289145.jpg', 'Red Cow Butter Oil made from pure cow\'s milk. It contains energy, protein, carbohydrate and fat.\r\n\r\nNew Zealand Dairy Product BD Ltd.', 'খাঁটি গরুর দুধ থেকে তৈরি রেড কাউ বাটার অয়েল। এতে রয়েছে শক্তি, প্রোটিন, কার্বোহাইড্রেট এবং চর্বি।\r\n\r\n নিউজিল্যান্ড ডেইরি প্রোডাক্ট বিডি লিমিটেড।', '[]', 0, '[]', NULL, 1, 1, 1, 1, 1, 4, '2022-09-21 18:16:17', '2022-10-18 03:44:13'),
-(41, 17, 36, NULL, NULL, '', 3, 5, NULL, 'RFL Mini Rack (SM Blue)', 'আরএফএল মিনি র্যাক (এসএম ব্লু)', 'rfl-mini-rack-(sm-blue)', '69883', 260, 0, 300, 4, 350, 50, 1, 32, 49, 'upload/products/thumbnails/1744649730468264.jpg', 'Origin: Bangladesh\r\n\r\nModel: 86291.', 'Origin: Bangladesh\r\n\r\nModel: 86291.', '[\"5\",\"4\"]', 1, '[{\"attribute_id\":\"5\",\"values\":[\"XL\"]},{\"attribute_id\":\"4\",\"values\":[\"White\"]}]', NULL, 0, 0, 1, 1, 0, 4, '2022-09-21 18:20:39', '2022-10-24 03:37:14'),
-(47, 10, 49, NULL, NULL, 'miu', 0, 5, NULL, 'Test Product Without vendor', 'Test Product Without vendor', 'test-product-without-vendor', '58553', 100, 0, 0, 1, 120, 0, 1, 1, 70, 'upload/products/thumbnails/1747558626714424.jpg', '<p>Test product</p>', '<p>Test product</p>', '[]', 0, '[]', NULL, 0, 0, 1, 1, 0, 4, '2022-10-24 02:56:19', '2022-10-24 02:59:36');
+INSERT INTO `products` (`id`, `brand_id`, `category_id`, `sub_category_id`, `sub_sub_category_id`, `tags`, `vendor_id`, `supplier_id`, `unit_id`, `campaing_id`, `name_en`, `name_bn`, `slug`, `product_code`, `unit_weight`, `purchase_price`, `is_wholesell`, `wholesell_price`, `wholesell_minimum_qty`, `regular_price`, `discount_price`, `discount_type`, `minimum_buy_qty`, `stock_qty`, `product_thumbnail`, `description_en`, `description_bn`, `attributes`, `is_varient`, `attribute_values`, `variations`, `is_featured`, `is_deals`, `status`, `is_approved`, `is_digital`, `created_by`, `created_at`, `updated_at`) VALUES
+(32, 17, 48, NULL, NULL, 'leptop', 0, 0, 0, NULL, 'HUAWEI MateBook D 15 - 8 GB', 'HUAWEI MateBook D 15 - 8 GB', 'huawei-matebook-d-15---8-gb', '68230', NULL, 100000, 0, 120000, 3, 130000, 100, 1, 1, 54, 'upload/products/thumbnails/1743137219075381.jpg', 'Product details of HUAWEI MateBook D 15 - 8 GB RAM - 512 GB SSD - 15.6 \" Screen', 'Product details of HUAWEI MateBook D 15 - 8 GB RAM - 512 GB SSD - 15.6 \" Screen', '[\"5\",\"4\"]', 1, '[{\"attribute_id\":\"5\",\"values\":[\"XL\",\"XXl\"]},{\"attribute_id\":\"4\",\"values\":[\"White\",\"Green\"]}]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-05 01:39:55', '2023-01-27 04:42:34'),
+(33, 17, 27, NULL, NULL, 'breakfast,paratha', 0, 0, 0, NULL, 'Golden Harvest Deshi Paratha 1300 gm', 'গোল্ডেন হার্ভেস্ট দেশি পরাঠা 1300 গ্রাম', 'golden-harvest-deshi-paratha-1300-gm', '78752', NULL, 200, 0, 300, 4, 400, 30, 1, 1, 53, 'upload/products/thumbnails/1743137433218614.jpg', 'Get a classic golden frozen paratha family pack from us as your daily breakfast. One pack covers for one family. Hassle-free and easy to serve. Just tear off the packet and put it on the griddle for a few minutes and then serve it. It’s a good food for your good health.', 'Get a classic golden frozen paratha family pack from us as your daily breakfast. One pack covers for one family. Hassle-free and easy to serve. Just tear off the packet and put it on the griddle for a few minutes and then serve it. It’s a good food for your good health.', '[]', 0, '[]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-05 01:43:20', '2023-01-27 04:42:17'),
+(34, 17, 49, NULL, NULL, 'hp,leptop', 0, 0, 0, NULL, 'HP Pavilion 15-eg', 'HP প্যাভিলিয়ন 15-যেমন', 'hp-pavilion-15-eg', '19156', NULL, 120000, 0, 0, 1, 140000, 6, 2, 1, 12, 'upload/products/thumbnails/1743137698305071.jpg', 'Product details of HP Pavilion 15-eg0082TU Core i5 11th Gen 15.6\" FHD Laptop', 'Product details of HP Pavilion 15-eg0082TU Core i5 11th Gen 15.6\" FHD Laptop', '[\"7\",\"5\",\"4\"]', 1, '[{\"attribute_id\":\"7\",\"values\":[\"8gb\",\"32gb\"]},{\"attribute_id\":\"5\",\"values\":[\"M\",\"XL\",\"XXl\"]},{\"attribute_id\":\"4\",\"values\":[\"Red\",\"White\"]}]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-05 01:47:02', '2023-01-27 04:20:00'),
+(35, 10, 45, NULL, NULL, 'mobile,sumsung', 0, 0, 0, NULL, 'Samsung Galaxy F23', 'Samsung Galaxy F23', 'samsung-galaxy-f23', '88641', NULL, 50000, 0, 56000, 2, 67000, 4, 2, 1, 52, 'upload/products/thumbnails/1743138000587790.jpg', 'Product details of Samsung Galaxy F23 5G-6GB/128GB Smartphone', 'Product details of Samsung Galaxy F23 5G-6GB/128GB Smartphone', '[\"7\",\"4\"]', 1, '[{\"attribute_id\":\"7\",\"values\":[\"4gb\",\"8gb\"]},{\"attribute_id\":\"4\",\"values\":[\"White\",\"Green\"]}]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-05 01:52:21', '2023-01-27 04:42:03'),
+(36, 17, 40, NULL, NULL, 'women', 0, 0, 0, NULL, 'BREYLEE Acne Treatment Cream Anti Acne Face Cream', 'BREYLEE ব্রণ চিকিত্সা ক্রিম অ্যান্টি ব্রণ ফেস ক্রিম', 'breylee-acne-treatment-cream-anti-acne-face-cream', '33747', NULL, 2000, 0, 3500, 5, 4000, 50, 1, 1, 52, 'upload/products/thumbnails/1743138270294789.jpg', 'Product details of BREYLEE Acne Treatment Cream Anti Acne Face Cream', 'Product details of BREYLEE Acne Treatment Cream Anti Acne Face Cream', '[]', 0, '[]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-05 01:56:38', '2023-01-27 04:41:51'),
+(37, 17, 49, NULL, NULL, 'electronic', 3, 5, 0, NULL, 'V380 ptz camera WiFi IP Camera', 'V380 ptz ক্যামেরা ওয়াইফাই আইপি ক্যামেরা', 'v380-ptz-camera-wifi-ip-camera', '34637', NULL, 1300, 0, 0, 1, 1600, 100, 1, 1, 24, 'upload/products/thumbnails/1747018171263124.jpg', 'V380 ptz camera WiFi IP Camera V380 IP Camera 360 Degree CCTV Camera a Wireless Mini CC Camera IP Webcam Wireless CCTV Camera 360 Degree IP Camera', 'V380 ptz camera WiFi IP Camera V380 IP Camera 360 Degree CCTV Camera a Wireless Mini CC Camera IP Webcam Wireless CCTV Camera 360 Degree IP Camera', '[]', 0, '[]', NULL, 1, 1, 1, 1, 1, 4, '2022-09-05 02:00:10', '2023-01-27 04:41:40'),
+(38, 17, 49, NULL, NULL, 'care,handwash', 3, 5, 0, NULL, 'Lifebuoy Handwash Lemon Fresh Refil', 'লাইফবয় হ্যান্ডওয়াশ লেমন ফ্রেশ রিফিল', 'Lifebuoy-Handwash-Lemon-Fresh-Refil-0ETCv', '12910', NULL, 200, 0, 300, 5, 350, 32, 1, 1, 31, 'upload/products/thumbnails/1747023069172298.jpg', 'Lifebuoy Handwash Total Refill\r\n170 ml', 'Lifebuoy Handwash Total Refill\r\n170 ml', '[]', 0, '[]', NULL, 1, 1, 1, 1, 1, 4, '2022-09-05 02:03:32', '2023-01-27 04:41:29'),
+(40, 17, 49, NULL, NULL, 'Oil', 3, 5, 0, NULL, 'Red Cow Butter Oil', 'লাল গরুর মাখন তেল', 'red-cow-butter-oil', '34951', NULL, 305, 0, 340, 5, 400, 3, 2, 1, 21, 'upload/products/thumbnails/1747018059289145.jpg', 'Red Cow Butter Oil made from pure cow\'s milk. It contains energy, protein, carbohydrate and fat.\r\n\r\nNew Zealand Dairy Product BD Ltd.', 'খাঁটি গরুর দুধ থেকে তৈরি রেড কাউ বাটার অয়েল। এতে রয়েছে শক্তি, প্রোটিন, কার্বোহাইড্রেট এবং চর্বি।\r\n\r\n নিউজিল্যান্ড ডেইরি প্রোডাক্ট বিডি লিমিটেড।', '[]', 0, '[]', NULL, 1, 1, 1, 1, 1, 4, '2022-09-21 18:16:17', '2023-01-31 05:25:38'),
+(41, 17, 36, NULL, NULL, '', 3, 5, 0, NULL, 'RFL Mini Rack (SM Blue)', 'আরএফএল মিনি র্যাক (এসএম ব্লু)', 'rfl-mini-rack-(sm-blue)', '69883', NULL, 260, 0, 300, 4, 350, 50, 1, 1, 49, 'upload/products/thumbnails/1744649730468264.jpg', 'Origin: Bangladesh\r\n\r\nModel: 86291.', 'Origin: Bangladesh\r\n\r\nModel: 86291.', '[\"5\",\"4\"]', 1, '[{\"attribute_id\":\"5\",\"values\":[\"XL\"]},{\"attribute_id\":\"4\",\"values\":[\"White\"]}]', NULL, 1, 1, 1, 1, 0, 4, '2022-09-21 18:20:39', '2023-01-27 04:41:07'),
+(47, 17, 36, NULL, NULL, 'miu', 3, 5, 0, NULL, 'Bag', 'ব্যাগ', 'Bag-9atad', '58553', NULL, 100, 0, 0, 1, 120, 0, 1, 1, 70, 'upload/products/thumbnails/1756171915036415.jpg', '<p>Test product</p>', '<p>Test product</p>', '[]', 0, '[]', NULL, 1, 1, 1, 1, 0, 4, '2022-10-24 02:56:19', '2023-01-27 04:40:50'),
+(49, NULL, 25, NULL, NULL, '', 0, 0, 2, NULL, 'Test product', 'Test product', 'Test-product-QmENr', '78844', '2', 200, 0, 0, 0, 300, 0, 1, 1, 2, 'upload/products/thumbnails/1753718876186122.jpg', NULL, NULL, '[]', 0, '[]', NULL, 1, 1, 1, 1, 0, 4, '2022-12-31 02:50:50', '2023-01-07 00:37:50');
 
 -- --------------------------------------------------------
 
@@ -1016,7 +1068,7 @@ INSERT INTO `product_stocks` (`id`, `product_id`, `varient`, `sku`, `price`, `qt
 (106, 34, '8gb-XXl-Red', 'sku-8gb-XXl-Red', 140000.00, 10, 'upload/products/variations/1743137667231614.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
 (107, 34, '8gb-XXl-White', 'sku-8gb-XXl-White', 140000.00, 10, 'upload/products/variations/1743137667328823.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
 (108, 34, '32gb-M-Red', 'sku-32gb-M-Red', 140000.00, 10, 'upload/products/variations/1743137667425218.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
-(109, 34, '32gb-M-White', 'sku-32gb-M-White', 140000.00, 10, 'upload/products/variations/1743137667522206.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
+(109, 34, '32gb-M-White', 'sku-32gb-M-White', 140000.00, -20, 'upload/products/variations/1743137667522206.jpg', '2022-09-05 07:47:03', '2023-01-14 05:18:16'),
 (110, 34, '32gb-XL-Red', 'sku-32gb-XL-Red', 140000.00, 10, 'upload/products/variations/1743137667624238.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
 (111, 34, '32gb-XL-White', 'sku-32gb-XL-White', 140000.00, 10, 'upload/products/variations/1743137667718263.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
 (112, 34, '32gb-XXl-Red', 'sku-32gb-XXl-Red', 140000.00, 10, 'upload/products/variations/1743137667815778.jpg', '2022-09-05 07:47:03', '2022-09-05 07:47:03'),
@@ -1112,9 +1164,8 @@ CREATE TABLE `shippings` (
 --
 
 INSERT INTO `shippings` (`id`, `name`, `type`, `shipping_charge`, `time`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'Sundarban Courier', 2, 150.00, '1 day', 1, '2022-09-03 03:39:25', '2022-09-03 03:39:25'),
-(4, 'UTTARA PICKUP HUB', 1, 80.00, 'Inside Dhaka', 1, '2022-09-03 03:39:50', '2022-09-03 03:39:50'),
-(5, 'Redex', 1, 80.00, '45 minutes', 1, '2022-09-03 03:40:16', '2022-09-03 03:40:16');
+(1, 'Redex', 1, 80.00, '45 minutes', 1, '2022-09-03 03:40:16', '2022-09-03 03:40:16'),
+(2, 'Sundarban Courier', 2, 150.00, '1 day', 1, '2022-09-03 03:39:25', '2022-09-03 03:39:25');
 
 -- --------------------------------------------------------
 
@@ -1127,7 +1178,7 @@ CREATE TABLE `sliders` (
   `slider_img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title_en` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title_bn` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slider_url` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#',
+  `slider_url` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description_bn` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description_en` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1144,7 +1195,7 @@ INSERT INTO `sliders` (`id`, `slider_img`, `title_en`, `title_bn`, `slider_url`,
 (2, 'upload/slider/16623840641741959642291437.png', 'Don’t miss amazing grocery deals', 'আশ্চর্যজনক মুদির ডিল মিস করবেন না', '#', 'আশ্চর্যজনক মুদির ডিল মিস করবেন না', 'Don’t miss amazing grocery deals', 'dont-miss-amazing-grocery-deals', 1, '2022-08-27 04:26:46', '2022-08-27 04:26:46'),
 (3, 'upload/slider/1741959679454916.png', 'Fresh Vegetables  Big discount', 'তাজা সবজি বড় ডিসকাউন্ট', '#', 'আপনার প্রথম অর্ডারে 50% পর্যন্ত ছাড় সংরক্ষণ করুন', 'Save up to 50% off on your first order', 'fresh-vegetables--big-discount', 1, '2022-08-27 04:35:02', '2022-08-27 04:35:02'),
 (4, 'upload/slider/16623840641741959642291437.png', 'Ready Saree with Blouse', 'ব্লাউজ সহ রেডি শাড়ি', '#', 'সেরা পণ্য', 'Best Product', 'ready-saree-with-blouse', 1, '2022-09-05 07:21:04', '2022-09-05 07:21:04'),
-(5, 'upload/slider/1747023276560806.jpg', 'Creative Texture Furniture', 'ক্রিয়েটিভ টেক্সচার আসবাবপত্র', '#', 'ক্রিয়েটিভ টেক্সচার আসবাবপত্র', 'Creative Texture Furniture', 'creative-texture-furniture', 1, '2022-10-18 05:07:09', '2022-10-18 05:07:09');
+(5, 'upload/slider/1747023276560806.jpg', 'Creative Texture Furniture', 'ক্রিয়েটিভ টেক্সচার আসবাবপত্র', NULL, 'ক্রিয়েটিভ টেক্সচার আসবাবপত্র', 'Creative Texture Furniture', 'creative-texture-furniture', 1, '2022-12-13 06:39:26', '2022-12-13 06:39:26');
 
 -- --------------------------------------------------------
 
@@ -1208,13 +1259,6 @@ CREATE TABLE `staff` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `staff`
---
-
-INSERT INTO `staff` (`id`, `user_id`, `role_id`, `created_at`, `updated_at`) VALUES
-(2, 7, 1, '2022-10-08 07:34:19', '2022-10-08 07:34:19');
 
 -- --------------------------------------------------------
 
@@ -1318,6 +1362,28 @@ CREATE TABLE `tags` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1=>Active, 0=>Inactive',
+  `created_by` bigint(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `name`, `status`, `created_by`, `created_at`, `updated_at`) VALUES
+(2, 'Slices (Slice)', 1, 4, '2022-12-31 00:27:02', '2022-12-31 00:34:47');
 
 -- --------------------------------------------------------
 
@@ -1858,12 +1924,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role`, `name`, `username`, `phone`, `email`, `address`, `profile_image`, `email_verified_at`, `password`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 3, 'User Moloy', 'user', '01702010236', 'user@gmail.com', 'Dhaka', 'upload/user/1663045118avatar5.png', NULL, '$2y$10$iy93F5hZNH/zmluBuHBm5.1.hUsNJVR5PauM4Nu4Dg0rt5dBhoODK', 1, NULL, '2022-07-30 03:25:27', '2022-09-12 22:58:38'),
+(1, 4, 'Guest User', 'guest-user', '01627490402', 'guestuser@gmail.com', 'Dhaka', 'upload/user/1663045118avatar5.png', NULL, '$2y$10$iy93F5hZNH/zmluBuHBm5.1.hUsNJVR5PauM4Nu4Dg0rt5dBhoODK', 1, NULL, '2022-07-30 03:25:27', '2023-01-05 01:18:49'),
 (2, 3, 'zahidul islam', 'Zahidul', NULL, 'zahidul@gmail.com', NULL, NULL, NULL, '$2y$10$W8KZlVNFQbfjXYHA2sz9LupIqYekPqOFnaRPmmjs/E6UfSFDpzD0G', 1, NULL, '2022-08-06 01:34:58', '2022-08-06 01:34:58'),
 (3, 3, 'Moloy Das', 'moloy', '0172152365442', 'moloy@gmail.com', NULL, 'upload/user/1660471315IMG20201203151328.jpg', NULL, '$2y$10$j3KyJDNtn6RV2vthFR4Wu.4fclng80Rx2nFcMKYs88YgPt/2xE5dG', 1, NULL, '2022-08-08 05:55:14', '2022-08-18 07:03:37'),
 (4, 1, 'Admin', 'admin', '01721523654', 'admin@gmail.com', 'Uttara, Dhaka', '202208201411avatar5.png', NULL, '$2y$10$76y.6leBgFOLXpo3T4T9NusHuQ1kWmwLSUoAzaGyCNz7QIlzfw.gC', 1, NULL, '2022-08-12 23:46:40', '2022-08-20 08:11:59'),
-(6, 2, 'Classic Vendor', 'cvendor', '0170000000', 'cvendor@gmail.com', 'Dhaka', NULL, NULL, '$2y$10$iy93F5hZNH/zmluBuHBm5.1.hUsNJVR5PauM4Nu4Dg0rt5dBhoODK', 1, NULL, NULL, NULL),
-(7, 5, 'abc', NULL, '01783465103', 'abc@gmail.com', NULL, NULL, NULL, '$2y$10$6a3yk8EGOXwkW40IKbqKk.xk23iPtYZHnlje4jkxwtYr.fuatzyXm', 1, NULL, '2022-10-08 07:34:19', '2022-10-08 07:34:19');
+(23, 2, 'Imogene Carr', 'Imogene-Carr-nlIIl', '01958106312', 'jazataqig@mailinator.com', 'Eum exercitation ea', NULL, NULL, '$2y$10$idvPLWfdLMIiUEfOH96QFeSTgcDBGhza3j2pK8L1oACN3/xf9NeMS', 1, NULL, '2023-01-31 02:06:35', '2023-01-31 02:09:07');
 
 -- --------------------------------------------------------
 
@@ -1874,9 +1939,9 @@ INSERT INTO `users` (`id`, `role`, `name`, `username`, `phone`, `email`, `addres
 CREATE TABLE `vendors` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` int(11) NOT NULL,
-  `shop_name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shop_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fb_url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#',
+  `fb_url` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bank_account` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `bank_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `holder_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1890,6 +1955,7 @@ CREATE TABLE `vendors` (
   `nid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `trade_license` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1=>Active, 0=>Inactive',
+  `created_by` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1898,8 +1964,8 @@ CREATE TABLE `vendors` (
 -- Dumping data for table `vendors`
 --
 
-INSERT INTO `vendors` (`id`, `user_id`, `shop_name`, `slug`, `fb_url`, `bank_account`, `bank_name`, `holder_name`, `branch_name`, `routing_name`, `address`, `commission`, `description`, `shop_profile`, `shop_cover`, `nid`, `trade_license`, `status`, `created_at`, `updated_at`) VALUES
-(3, 6, 'Others', 'others', 'https://www.facebook.com/', '75893234542', 'One Bank', 'August Harding', 'Uttara', 'Hector Beasley', 'Uttara, Dhaka', '0', 'AAA', 'upload/vendor/1744649275922259.png', 'upload/vendor/1744649275951960.png', 'upload/vendor/1744649275975862.png', 'upload/vendor/1744649276001563.png', 1, NULL, NULL);
+INSERT INTO `vendors` (`id`, `user_id`, `shop_name`, `slug`, `fb_url`, `bank_account`, `bank_name`, `holder_name`, `branch_name`, `routing_name`, `address`, `commission`, `description`, `shop_profile`, `shop_cover`, `nid`, `trade_license`, `status`, `created_by`, `created_at`, `updated_at`) VALUES
+(8, 23, 'Imogene Carr', 'Imogene-Carr-nlIIl', NULL, NULL, NULL, NULL, NULL, NULL, 'Eum exercitation ea', 'Et saepe fugiat face', 'Inventore ca', 'upload/vendor/1756524595993381.jpg', 'upload/vendor/1756524597899285.jpg', '', '', 1, 4, NULL, '2023-01-31 02:09:07');
 
 --
 -- Indexes for dumped tables
@@ -2148,6 +2214,12 @@ ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `upazillas`
 --
 ALTER TABLE `upazillas`
@@ -2182,19 +2254,19 @@ ALTER TABLE `account_heads`
 -- AUTO_INCREMENT for table `account_ledgers`
 --
 ALTER TABLE `account_ledgers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT for table `attributes`
 --
 ALTER TABLE `attributes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `attribute_product`
@@ -2206,7 +2278,7 @@ ALTER TABLE `attribute_product`
 -- AUTO_INCREMENT for table `attribute_values`
 --
 ALTER TABLE `attribute_values`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `attribute_value_product_price`
@@ -2218,7 +2290,7 @@ ALTER TABLE `attribute_value_product_price`
 -- AUTO_INCREMENT for table `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -2248,7 +2320,7 @@ ALTER TABLE `campaing_products`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `coupons`
@@ -2278,25 +2350,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `multi_imgs`
 --
 ALTER TABLE `multi_imgs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -2314,7 +2386,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `product_prices`
@@ -2326,7 +2398,7 @@ ALTER TABLE `product_prices`
 -- AUTO_INCREMENT for table `product_stocks`
 --
 ALTER TABLE `product_stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2356,7 +2428,7 @@ ALTER TABLE `sliders`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `subscribers`
@@ -2389,6 +2461,12 @@ ALTER TABLE `tags`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `upazillas`
 --
 ALTER TABLE `upazillas`
@@ -2398,13 +2476,13 @@ ALTER TABLE `upazillas`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

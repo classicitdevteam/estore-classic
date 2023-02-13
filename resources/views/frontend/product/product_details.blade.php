@@ -105,7 +105,7 @@
 								                <img style="height: 100px !important;" srcset="{{ asset($img->photo_name ) }}"/>
 								            </a>
 								            @endforeach
-											@foreach($product->stocks as $stock)
+											{{-- @foreach($product->stocks as $stock)
 												@if ($stock->image && $stock->image!='' && $stock->image!=NULL)
 													<a
 														class="me-4"
@@ -118,7 +118,7 @@
 														<img style="height: 100px !important;" srcset="{{ asset($stock->image ) }}"/>
 													</a>
 												@endif
-								            @endforeach
+								            @endforeach --}}
 								        </div>
 								    </div>
 								    <!-- Product Zoom Image End -->

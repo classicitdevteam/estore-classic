@@ -31,7 +31,7 @@
                         @method('PUT')
                         <div class="mb-4">
                             <label for="name" class="col-form-label col-md-2" style="font-weight: bold;"> Name:</label>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <input class="form-control" id="name" type="text" name="name" placeholder="Write attribute name" value="{{$attribute->name}}">
                             @else
                                 <input class="form-control" id="name" type="text" name="name" placeholder="Write attribute name" readonly value="{{$attribute->name}}">
@@ -103,7 +103,7 @@
                             <th scope="col">Sl</th>
                             <th scope="col">Value</th> 
                             <th scope="col">Status</th>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <th scope="col" class="text-end">Action</th>
                             @endif
                         </tr>
@@ -115,16 +115,16 @@
                             <td> {{ $value->value ?? 'NULL' }} </td>
                             <td>
                                 @if($value->status == 1)
-                                  <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('attribute_value.in_active',$value->id) }}" @endif>
+                                  <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('attribute_value.in_active',$value->id) }}" @endif>
                                     <span class="badge rounded-pill alert-success">Active</span>
                                   </a>
                                 @else
-                                    <a @if(!Auth::guard('admin')->user()->role == '2') href="{{ route('attribute_value.active',$value->id) }}" @endif>
+                                    <a @if(Auth::guard('admin')->user()->role != '2') href="{{ route('attribute_value.active',$value->id) }}" @endif>
                                         <span class="badge rounded-pill alert-danger">Disable</span>
                                     </a>
                                 @endif
                             </td>
-                            @if(!Auth::guard('admin')->user()->role == '2')
+                            @if(Auth::guard('admin')->user()->role != '2')
                                 <td class="text-end">
                                     {{-- <a class="btn btn-primary btn-icon btn-circle btn-sm btn-xs" href="#" data-bs-toggle="modal" data-bs-target="#value{{ $value->id }}">Edit</a> --}}
                                     <a class="btn btn-primary btn-icon btn-circle btn-sm btn-xs" href="{{ route('attribute_value.edit',$value->id) }}">Edit</a>
