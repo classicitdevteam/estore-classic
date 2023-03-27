@@ -157,8 +157,8 @@ Route::get('/varient-price/{id}/{varient}',[ProductController::class, 'getVarien
 Route::get('/nagad/callback', [NagadController::class, 'verify'])->name('nagad.callback');
 
 // bKash
-Route::post('/bkash/createpayment', [BkashController::class, 'checkout'])->name('bkash.checkout');
-Route::post('/bkash/executepayment', [BkashController::class, 'excecute'])->name('bkash.excecute');
+Route::post('/bkash/create', [BkashController::class, 'checkout'])->name('bkash.checkout');
+Route::get('/bkash/callback', [BkashController::class, 'callback'])->name('bkash.callback');
 Route::get('/bkash/success', [BkashController::class, 'success'])->name('bkash.success');
 Route::get('/payment/error', [BkashController::class, 'error'])->name('bkash.error');
 

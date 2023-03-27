@@ -213,12 +213,12 @@
                     </div>
                     <p class="font-sm">
                         Developed by:
-                        <a target="_blank" href="https://classicit.com.bd/">Classic IT & Sky Mart Ltd</a>
+                        <a target="_blank" href="https://classicit.com.bd/">Classic IT</a>
                     </p>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
                     <a href="#">
-                        <img class="" src="{{asset('frontend/assets/imgs/theme/payment-method.png')}}" alt="" />
+                        <img class="" src="{{asset('frontend/assets/imgs/theme/payment-method.png')}}" alt="">
                     </a>
                 </div>
             </div>

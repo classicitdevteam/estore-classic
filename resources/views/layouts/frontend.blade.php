@@ -2,47 +2,67 @@
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="description" content="" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="{{ (get_setting('site_name')->value ?? ' ') }}" />
-    <meta property="og:type" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="{{ (get_setting('site_name')->value ?? ' ') }}">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
 
     <!-- Favicon -->
     @php
         $logo = get_setting('site_favicon');
     @endphp
     @if($logo != null)
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? ' ') }}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset(get_setting('site_favicon')->value ?? ' ') }}">
     @else
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}" />
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('upload/no_image.jpg') }}" alt="{{ env('APP_NAME') }}">
     @endif
     <!-- Bootstrap -->
     <link href="{{asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css?v=5.3')}}" />
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/main.css?v=5.3')}}">
     <!-- font awesome -->
-    <link rel="stylesheet" href="{{asset('frontend/css/fontawesome.min.css')}}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{asset('frontend/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     
     <!-- Sweetalert css-->
     <link rel="stylesheet" href="{{asset('frontend/css/sweetalert2.css')}}">
     <!-- Template CSS -->
-    <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/slider-range.css ')}}" />
-    <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/animate.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/slider-range.css ')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/plugins/animate.min.css')}}">
     <!-- Toastr css -->
     <link rel="stylesheet" href="{{asset('frontend/css/toastr.css')}}">
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{asset('frontend/css/app.css')}}" />
     <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('frontend/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
 
     @stack('css')
+
+    @if(get_setting('pixel_status')->value == 1)
+        <!-- Meta Pixel Code -->
+        <script>
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='{{ (get_setting('pixel_version')->value ?? ' ') }}';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '{{ (get_setting('pixel_id')->value ?? ' ') }}');
+            fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id={{ (get_setting('pixel_id')->value ?? ' ') }}&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Meta Pixel Code -->
+    @endif
+
 </head>
 
 <body>
@@ -93,6 +113,8 @@
     <script src="{{asset('frontend/assets/js/plugins/jquery.elevatezoom.js')}}"></script>
     <!-- Toastr js -->
     <script src="{{asset('frontend/js/toastr.min.js')}}"></script>
+    <!-- lazyload -->
+    <script src="{{asset('frontend/js/jquery.lazyload.js')}}"></script>
     <!-- Sweetalert js -->
     <script src="{{asset('frontend/js/sweetalert2@11.js')}}"></script>
     <!-- Template  JS -->
@@ -101,43 +123,47 @@
     <!-- Custom Js -->
     <script src="{{asset('frontend/js/app.js')}}"></script>
 
+    {{-- Messenger Chat Plugin Code Start --}}
+    @if(get_setting('messenger_status')->value == 1)
+        <!-- Messenger Chat Plugin Code -->
+        <div id="fb-root"></div>
+
+        <!-- Your Chat Plugin code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+
+        <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "{{ (get_setting('messenger_page_id')->value ?? '') }}");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+
+        <!-- Your SDK code -->
+        <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            xfbml            : true,
+            version          : '{{  (get_setting('messenger_version')->value ?? '') }}'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+    @endif
+    {{-- Messenger Chat Plugin Code End --}}
+
     {{-- Image lazyload Start --}}
     <script type="text/javascript">
         $("img").lazyload({
             effect : "fadeIn"
         });
     </script>
-    {{-- <script>
-        if ('loading' in HTMLImageElement.prototype) {
-            const images = document.querySelectorAll("img.lazyload");
-            images.forEach(img => {
-                img.src = img.dataset.src;
-            });
-        } else {
-            // Dynamically import the LazySizes library
-          let script = document.createElement("script");
-          script.async = true;
-          script.src =
-            "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js";
-          document.body.appendChild(script);
-        }
-      </script> --}}
-    {{-- <script>
-        (async () => {
-            if ('loading' in HTMLImageElement.prototype) {
-                const images = document.querySelectorAll("img.lazyload");
-                images.forEach(img => {
-                    img.src = img.dataset.src;
-                });
-            } else {
-                // Dynamically import the LazySizes library
-                const lazySizesLib = await import('https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.1.8/lazysizes.min.js');
-                Initiate LazySizes (reads data-src & class=lazyload)
-                lazySizes.init(); // lazySizes works off a global.
-            }
-        })();
-    </script> --}}
-    {{-- Image lazyload End --}}
 
     <!-- Image Show -->
     <script type="text/javascript">

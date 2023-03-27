@@ -325,6 +325,7 @@
                 {{ ($route == 'shipping.index')? 'active':'' }}
                 {{ ($route == 'shipping.create')? 'active':'' }}
                 {{ ($route == 'shipping.edit')? 'active':'' }}
+                {{ ($route == 'setting.facebook_plugin_setting')? 'active':'' }}
                 ">
                     <a class="menu-link" href="#">
                         <i class="icon material-icons md-settings"></i>
@@ -333,6 +334,7 @@
                     <div class="submenu">
                         <a class="{{ ($route == 'setting.index') ? 'active':'' }}" href="{{ route('setting.index') }}">Home</a>
                         <a class="{{ ($route == 'setting.activation') ? 'active':'' }}" href="{{ route('setting.activation') }}">Activation</a>
+                        <a class="{{ ($route == 'setting.facebook_plugin_setting') ? 'active':'' }}" href="{{ route('setting.facebook_plugin_setting') }}">Facebook Plugin</a>
                         <a class="{{ ($route == 'shipping.index')||($route == 'shipping.create')||($route == 'shipping.edit') ? 'active':'' }}" href="{{ route('shipping.index') }}">Shipping Methods</a>
                         <a class="{{ ($route == 'paymentMethod.config') ? 'active':'' }}" href="{{ route('paymentMethod.config') }}">Payment Methods</a>
                     </div>

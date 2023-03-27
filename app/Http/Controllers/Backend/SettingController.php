@@ -28,6 +28,12 @@ class SettingController extends Controller
         return view('backend.setting.setting_activation', compact('settings'));
     }
 
+    public function facebook_plugin_setting()
+    {
+        $settings = Setting::find(1);
+        return view('backend.setting.facebook_plugin', compact('settings'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -58,10 +58,9 @@ class ProductController extends Controller
 
         // Start Shop Product //
         $products = Product::orderBy('name_en', 'ASC')->where('status', 1)->latest()->paginate(30);
-        
-        // Category Filter Start
-        if ($request->get('filtercategory')){
-
+        $min_price = $request->get('filter_price_start');
+        $max_price = $request->get('filter_price_end');
+        if($min_price != null && $max_price != null && $request->get('filtercategory') != null){
             $checked = $_GET['filtercategory'];
             // filter With name start
             $category_filter = Category::whereIn('name_en', $checked)->get();
@@ -69,10 +68,26 @@ class ProductController extends Controller
             foreach($category_filter as $cat_list){
                 array_push($catId, $cat_list->id);
             }
-            // filter With name end
-
-            $products = Product::whereIn('category_id', $catId)->where('status', 1)->latest()->paginate(30);
+            $products->where('regular_price', '>=', $min_price)->where('regular_price', '<=', $max_price)->where('category_id', $catId);
             // dd($products);
+        }else if ($min_price == null && $max_price == null && $request->get('filtercategory') == null){
+            $products = Product::where('status', 1)->latest()->paginate(30);
+            // dd($products);
+        }else{
+            if($min_price == null && $max_price == null){
+                $checked = $_GET['filtercategory'];
+            // filter With name start
+                $category_filter = Category::whereIn('name_en', $checked)->get();
+                $catId = [];
+                foreach($category_filter as $cat_list){
+                    array_push($catId, $cat_list->id);
+                }
+                $products->where('category_id', $catId);
+                // dd($products);
+            }else{
+                $products->where('regular_price', '>=', $min_price)->where('regular_price', '<=', $max_price);
+                // dd($products);
+            }
         }
         // Category Filter End
 

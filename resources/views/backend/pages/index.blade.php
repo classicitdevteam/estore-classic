@@ -33,9 +33,9 @@
                                 <?php $des =  strip_tags(html_entity_decode($page->description_en))?>
                                 {{ Str::limit($des, $limit = 40, $end = '. . .') }}
 
-                                <button type="button" class="btn btn-md rounded font-sm viweBtn">
+                                {{-- <button type="button" class="btn btn-md rounded font-sm viweBtn">
                                 <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>Details
-                                </button>
+                                </button> --}}
 
                                 <!-- Show Modal -->
                                 {{-- <button type="button" class="btn btn-md rounded font-sm" style="display: block;" data-bs-toggle="modal" data-bs-target="#viewModal{{ $page->id }}">

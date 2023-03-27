@@ -85,16 +85,16 @@
 
 	                                <!-- Product Zoom Image -->
 	                                <div class="app-figure" id="zoom-fig">
-								        <a id="Zoom-1" class="MagicZoom" title="Product Images."
+								        <a rel="selectors-effect-speed: 600; disable-zoom: true;" id="Zoom-1" class="MagicZoom Active" data-options="zoomWidth: 500; zoomHeight: 500; expandZoomMode: magnifier; expandZoomOn: always; variableZoom: true; rightClick: true;" title="Show your product in stunning detail with {{config('app.name')}} Zoom." style="max-width: 438px; max-height: 438px;"
 								            href="{{ asset($product->product_thumbnail) }}?h=1400"
 								            data-zoom-image-2x="{{ asset($product->product_thumbnail) }}"
 								            data-image-2x="{{ asset($product->product_thumbnail) }}"
 								        >
-								            <img id="product_zoom_img" style="max-width: 438px;max-height: 438px;" src="{{ asset($product->product_thumbnail ) }}" srcset="{{ asset($product->product_thumbnail) }}" alt=""/>
+								            <img id="product_zoom_img" style="max-width: 438px; max-height: 438px;" src="{{ asset($product->product_thumbnail ) }}" srcset="{{ asset($product->product_thumbnail) }}" alt="">
 								        </a>
-								        <div class="selectors mt-30">
+								        <div class="selectors">
 								        	@foreach($product->multi_imgs as $img)
-								            <a
+								            <a rel="selectors-effect-speed: 600; disable-zoom: true;"
 								            	class="me-4"
 								                data-zoom-id="Zoom-1"
 								                href="{{ asset($img->photo_name ) }}"
@@ -102,7 +102,7 @@
 								                data-zoom-image-2x="{{ asset($img->photo_name ) }}"
 								                data-image-2x="{{ asset($img->photo_name ) }}"
 								            >
-								                <img style="height: 100px !important;" srcset="{{ asset($img->photo_name ) }}"/>
+								                <img style="height: 80px !important;" srcset="{{ asset($img->photo_name ) }}">
 								            </a>
 								            @endforeach
 											{{-- @foreach($product->stocks as $stock)
@@ -272,7 +272,7 @@
 	                                    <div class="detail-extralink mb-50">
 	                                        <div class="product-extra-link2">
 
-	                                        	<input type="hidden" id="product_id" value="{{ $product->id }}"  min="1">
+	                                        	<input type="hidden" id="product_id" value="{{ $product->id }}">
 
 	                                        	<input type="hidden" id="pname" value="{{ $product->name_en }}">
 
@@ -608,7 +608,7 @@
                                                                 <a class="add" id="{{ $product->id }}" onclick="productView(this.id)" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                             @else
                                                                 <input type="hidden" id="pfrom" value="direct">
-                                                                <input type="hidden" id="product_product_id" value="{{ $product->id }}"  min="1">
+                                                                <input type="hidden" id="product_product_id" value="{{ $product->id }}">
                                                                 <input type="hidden" id="{{ $product->id }}-product_pname" value="{{ $product->name_en }}">
                                                                 <a class="add" onclick="addToCartDirect({{ $product->id }})" ><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                             @endif

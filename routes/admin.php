@@ -213,6 +213,10 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 	Route::post('/settings/update', [SettingController::class, 'update'])->name('update.setting');
 	Route::get('/settings/activation', [SettingController::class, 'activation'])->name('setting.activation');
 
+	// Facebook plugin
+	Route::get('/facebook_plugin_setting', [SettingController::class, 'facebook_plugin_setting'])->name('setting.facebook_plugin_setting');
+	Route::post('/facebook_plugin_setting', [SettingController::class, 'update'])->name('setting.facebook_plugin_setting');
+
 	// Shipping Methods Route
 	Route::get('/shipping/index', [ShippingController::class, 'index'])->name('shipping.index');
 	Route::get('/shipping/create', [ShippingController::class, 'create'])->name('shipping.create');

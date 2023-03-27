@@ -72,13 +72,13 @@
 					<td class="text-right"></td>
 				</tr>
 				<tr>
-					<td class="gry-color small">Email:  {{ $order->email }} </td>
+					<td class="gry-color small">Email: {{ get_setting('email')->value }} </td>
 					<td class="text-right small"><span class="gry-color small">Order ID
 					:</span> <span class="strong">{{ $order->invoice_no }}</span></td>
 				</tr>
 				<tr>
-					<td class="gry-color small">Phone:  {{ $order->phone }}</td>
-					<td class="text-right small"><span class="gry-color small">Order Date:</span> <span class=" strong">{{ date('d-m-Y', $order->date) }}</span></td>
+					<td class="gry-color small">Phone:  {{ get_setting('phone')->value }}</td>
+					<td class="text-right small"><span class="gry-color small">Order Date:</span> <span class=" strong">{{ date('d-m-Y', strtotime($order->created_at)) }}</span></td>
 				</tr>
 				<tr>
 					<td class="gry-color small"></td>

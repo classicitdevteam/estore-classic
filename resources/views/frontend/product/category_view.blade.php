@@ -84,7 +84,7 @@ Category Nest Online Shop
                                         <select class="form-control select-active" onchange="filter()" name="brand">
                                             <option value="">All Brands</option>
                                             @foreach (\App\Models\Brand::all() as $brand)
-                                                <option value="{{ $brand->slug }}" @if ($brand_id == $brand->id) selected @endif >{{ $brand->name_en ?? 'Null' }}</option>
+                                                <option value="{{ $brand->slug }}" @if ($brand_id == $brand->id) selected @endif >{{ $brand->name_en ?? '' }}</option>
                                             @endforeach
                                         </select>
                                     </div>

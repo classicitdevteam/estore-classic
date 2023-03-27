@@ -18,9 +18,10 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $sort_by =null;
-        $products = Product::orderBy('created_at', 'desc')->where('vendor_id', Auth::guard('admin')->user()->id);
+        $products = Product::orderBy('created_at', 'desc');
 
         if(Auth::guard('admin')->user()->role == '2'){
+            $products = Product::orderBy('created_at', 'desc')->where('vendor_id', Auth::guard('admin')->user()->id);
             if ($request->has('category_id')){
                 $sort_by = $request->category_id;
                 $products = $products->where('category_id', $sort_by);

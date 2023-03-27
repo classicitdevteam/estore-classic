@@ -87,7 +87,7 @@
                                     <td>
                                         <?php 
                                             $discount_total = $order->grand_total-$order->discount;
-                                            $total_ammount = $discount_total+$order->shipping_charge;
+                                            $total_ammount = $discount_total;
                                         ?>
                                         {{ $total_ammount }}
                                     </td>

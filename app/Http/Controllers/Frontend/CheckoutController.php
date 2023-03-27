@@ -111,6 +111,7 @@ class CheckoutController extends Controller
             'address' => 'required|max:10000',  
             'payment_option'=>'required',
             'comment' => 'nullable|max:2000',
+            'shipping_id' => 'required',
         ]);
         // dd(Cart::total()+$request->total_amount);
         // dd($request->total_amount);
@@ -140,19 +141,10 @@ class CheckoutController extends Controller
 
         if($request->payment_option == 'cod'){
             $payment_status = 0;
+            $invoice_no = date('YmdHis') . rand(10, 99);
         }else{
             $payment_status = 1;
-        }
-
-        $invoice_data = Order::orderBy('id','desc')->first();
-        
-        if($invoice_data){
-            $lastId = $invoice_data->id;
-            // $idd = str_replace("E-", "", $lastId);
-            $id = str_pad($lastId + 1, 7, 0, STR_PAD_LEFT);
-            $invoice_no = $id;
-        }else{
-            $invoice_no = "0000001";
+            $invoice_no = Session::get('invoice_no');
         }
 
         // order add //
@@ -344,13 +336,6 @@ class CheckoutController extends Controller
         //
     }
 
-    // public function Myorders(){
-
-    //     $orders = Order::where('user_id',Auth::id())->orderBy('id','DESC')->get();
-    //     return view('frontend.user.order.order_view',compact('orders'));
-
-    // }
-
     public function payment(Request $request){
         //dd($request->payment_option);
         if($request->payment_option == 'cod'){
@@ -358,11 +343,13 @@ class CheckoutController extends Controller
             return $checkout->store($request);
         }
 
+        Session::put('checkout_request', $request->all());
+
         $payment_method = $request->payment_option;
         $total_amount = Cart::total();
         $last_order = Order::orderBy('id','DESC')->first();
         $order_id = $last_order->id+1;
-        $invoice_no = date('YmdHi').$order_id;
+        $invoice_no = date('YmdHis') . rand(10, 99);
         Session::put('invoice_no', $invoice_no);
 
         if($request->payment_option == 'cod'){
