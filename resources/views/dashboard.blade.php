@@ -18,7 +18,7 @@ Dashboard Nest Online Shop
                 <div class="col-lg-10 m-auto">
                     <div class="row">
                         <div class="col-md-3">
-                            <div><p class="fs-4 fw-bolder mb-3 text-brand text-center"><i>Hallo {{ Auth::user()->name ?? 'Null' }}</i></p></div>
+                            <div><p class="fs-4 fw-bolder mb-3 text-brand text-center"><i>Hello {{ Auth::user()->name ?? 'Null' }}</i></p></div>
                             <div class="dashboard-menu">
                                 <ul class="nav flex-column" role="tablist">
                                     <li class="nav-item">

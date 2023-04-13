@@ -382,7 +382,7 @@
 	                                            </tbody>
 	                                        </table>
 	                                    </div>
-										@if(get_setting('multi_vendor')->value)
+										<!-- {{-- @if(get_setting('multi_vendor')->value)
 											<div class="tab-pane fade" id="Vendor-info">
 												<div class="vendor-logo d-flex mb-30">
 													<img src="{{asset('frontend')}}/assets/imgs/vendor/vendor-18.svg" alt="" />
@@ -420,6 +420,50 @@
 													Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington, D.C.
 												</p>
 											</div>
+										@endif --}} -->
+										@if(get_setting('multi_vendor')->value)
+										    @php
+										        $vendor = \App\Models\Vendor::where('id', $product->vendor_id)->first();
+										    @endphp
+										    @if($vendor)
+    											<div class="tab-pane fade" id="Vendor-info">
+    												<div class="vendor-logo d-flex mb-30">
+    													<img src="{{ asset($vendor->shop_profile) }}" alt="" />
+    													<div class="vendor-name ml-15">
+    														<h6>
+    															<a href="{{ route('vendor.product', $vendor->slug) }}">{{ $vendor->shop_name }}</a>
+    														</h6>
+    														<!--<div class="product-rate-cover text-end">-->
+    														<!--	<div class="product-rate d-inline-block">-->
+    														<!--		<div class="product-rating" style="width: 90%"></div>-->
+    														<!--	</div>-->
+    														<!--	<span class="font-small ml-5 text-muted"> (32 reviews)</span>-->
+    														<!--</div>-->
+    													</div>
+    												</div>
+    												<ul class="contact-infor mb-50">
+    													<li><img src="{{asset('frontend')}}/assets/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>{{ $vendor->address }}</span></li>
+    													<!--<li><img src="{{asset('frontend')}}/assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>-->
+    												</ul>
+    												<!--<div class="d-flex mb-55">-->
+    												<!--	<div class="mr-30">-->
+    												<!--		<p class="text-brand font-xs">Rating</p>-->
+    												<!--		<h4 class="mb-0">92%</h4>-->
+    												<!--	</div>-->
+    												<!--	<div class="mr-30">-->
+    												<!--		<p class="text-brand font-xs">Ship on time</p>-->
+    												<!--		<h4 class="mb-0">100%</h4>-->
+    												<!--	</div>-->
+    												<!--	<div>-->
+    												<!--		<p class="text-brand font-xs">Chat response</p>-->
+    												<!--		<h4 class="mb-0">89%</h4>-->
+    												<!--	</div>-->
+    												<!--</div>-->
+    												<p>
+    													{{ $vendor->description }}
+    												</p>
+    											</div>
+											@endif
 										@endif
 	                                   {{-- <div class="tab-pane fade" id="Reviews">
 	                                        <!--Comments-->

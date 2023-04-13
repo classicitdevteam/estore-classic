@@ -83,7 +83,7 @@
                             	@foreach ($orders as $key => $order)
                                 <tr>
                                     <td>{{ $order->invoice_no }}</td>
-                                    <td><b>{{ $order->name }}</b></td>
+                                    <td><b>@if($order->user->role == 4) Walk-in Customer  @else  {{ $order->user->name ?? 'Walk-in Customer' }} @endif</b></td>
                                     <td>
                                         <?php 
                                             $discount_total = $order->grand_total-$order->discount;

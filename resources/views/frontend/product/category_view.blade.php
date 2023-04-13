@@ -134,3 +134,23 @@ Category Nest Online Shop
     </div>
 </main>
 @endsection
+@push('footer-script')
+    <script type="text/javascript">
+
+        // function sort_price_filter(){
+        //    var start = $('#slider-range-value1').html();
+        //    var end = $('#slider-range-value2').html();
+        //    // alert(start+'--'+end);
+        //    $('#filter_price_start').val(start);
+        //    $('#filter_price_end').val(end);
+        //    $('#search-form').submit();
+        // }
+
+    </script>
+
+    <script type="text/javascript">
+        function filter(){
+            $('#search-form').submit();
+        }
+    </script>
+@endpush

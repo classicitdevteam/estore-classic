@@ -89,31 +89,31 @@
 		    <div class="home-slide-cover">
 		        <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
 		        	@foreach($sliders as $slider)
-		            <a href="{{$slider->slider_url}}">
 		            	<div class="single-hero-slider single-animation-wrap" style="background-image: url('{{asset($slider->slider_img)}}')">
 			                <div class="slider-content">
-			                    <h1 class="display-2 mb-40">
-			                        @if(session()->get('language') == 'bangla') 
-	                                    {{ $slider->title_bn }}
-	                                @else 
-	                                    {{ $slider->title_en }} 
-	                                @endif
-			                    </h1>
-			                    <p class="mb-65">
-			                    	@if(session()->get('language') == 'bangla') 
-	                                    {{ $slider->description_bn }}
-	                                @else 
-	                                    {{ $slider->description_en }}
-	                                @endif
-			                    </p>
+	            				<a href="{{$slider->slider_url}}">
+				                    <h1 class="display-2 mb-40">
+				                        @if(session()->get('language') == 'bangla') 
+		                                    {{ $slider->title_bn }}
+		                                @else 
+		                                    {{ $slider->title_en }} 
+		                                @endif
+				                    </h1>
+				                    <p class="mb-65">
+				                    	@if(session()->get('language') == 'bangla') 
+		                                    {{ $slider->description_bn }}
+		                                @else 
+		                                    {{ $slider->description_en }}
+		                                @endif
+				                    </p>
+		            			</a>
 				                <form class="form-subcriber d-flex" method="POST" action="{{ route('subscribers.store') }}">
 				                	@csrf
 			                        <input type="email" name="email" placeholder="Your emaill address" required="" />
 			                        <button class="btn" type="submit">Subscribe</button>
 			                    </form>
-			                </div> 
+			                </div>
 			            </div>
-		            </a>
 		            @endforeach
 		        </div>
 		        <div class="slider-arrow hero-slider-1-arrow"></div>

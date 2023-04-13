@@ -14,6 +14,7 @@ use Session;
 use Artisan;
 use Cache;
 use Illuminate\Support\Facades\DB;
+use Image;
 
 class AdminController extends Controller
 {

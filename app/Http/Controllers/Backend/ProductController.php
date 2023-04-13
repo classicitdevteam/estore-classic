@@ -188,18 +188,18 @@ class ProductController extends Controller
                         'qty'        => $request->vqtys[$i],
                     ]);
 
-                    $image = $request->vimages[$i];
-                    if($image){
-                        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                        Image::make($image)->resize(438,438)->save('upload/products/variations/'.$name_gen);
-                        $save_url = 'upload/products/variations/'.$name_gen;
-                    }else{
-                        $save_url = '';
+                    if($request->vimages){
+                        $image = $request->vimages[$i];
+                        if($image){
+                            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                            Image::make($image)->resize(438,438)->save('upload/products/variations/'.$name_gen);
+                            $save_url = 'upload/products/variations/'.$name_gen;
+                        }else{
+                            $save_url = '';
+                        }
+                        $stock->image = $save_url;
                     }
-
-                    $stock->image = $save_url;
                     $stock->save();
-
                     $i++;
                 }
             }
@@ -225,16 +225,16 @@ class ProductController extends Controller
 
         $product->save();
 
+        $ledger_balance = get_account_balance() - $product->purchase_price;
         //Ledger Entry
         $ledger = AccountLedger::create([
             'account_head_id' => 1,
             'particulars' => 'Product ID: '.$product->id,
             'debit' => $product->purchase_price,
+            'balance' => $ledger_balance,
             'product_id' => $product->id,
             'type' => 1,
         ]);
-        $ledger->balance = get_account_balance() - $product->purchase_price;
-        $ledger->save();
 
         $notification = array(
             'message' => 'Product Inserted Successfully',
@@ -423,19 +423,18 @@ class ProductController extends Controller
                             'price'      => $request->vprices[$i],
                             'qty'        => $request->vqtys[$i],
                         ]);
-
-                        $image = $request->vimages[$i];
-                        if($image){
-                            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                            Image::make($image)->resize(438,438)->save('upload/products/variations/'.$name_gen);
-                            $save_url = 'upload/products/variations/'.$name_gen;
-                        }else{
-                            $save_url = '';
+                        if($request->vimages){
+                            $image = $request->vimages[$i];
+                            if($image){
+                                $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                                Image::make($image)->resize(438,438)->save('upload/products/variations/'.$name_gen);
+                                $save_url = 'upload/products/variations/'.$name_gen;
+                            }else{
+                                $save_url = '';
+                            }
+                            $stock->image = $save_url;
                         }
-
-                        $stock->image = $save_url;
                         $stock->save();
-
                         $i++;
                     }
                 }

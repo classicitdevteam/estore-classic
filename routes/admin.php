@@ -242,6 +242,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::get('/orders_delete/{id}', [OrderController::class, 'destroy'])->name('delete.orders');
 		Route::post('/orders_update/{id}', [OrderController::class, 'update'])->name('admin.orders.update');
 		Route::get('/invoice/{id}', [OrderController::class, 'invoice_download'])->name('invoice.download');
+		Route::get('/print/invoice/{order}', [OrderController::class, 'invoice_print_download'])->name('print.invoice.download');
 	});
 
 	// payment status 
@@ -315,6 +316,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::post('/account-ledgers/store', [AccountsController::class, 'store_ledger'])->name('accounts.ledgers.store');
 		Route::get('/account-ledgers/delete/{id}', [AccountsController::class, 'ledger_destroy'])->name('accounts.ledgers.delete');
 	});
+
+	Route::post('/pos/customer/insert',[PosController::class,'customerInsert'])->name('customer.ajax.store.pos');
 
 	//Admin POS All Routes
 	Route::prefix('pos')->group(function(){

@@ -275,5 +275,14 @@ class OrderController extends Controller
         return $pdf->download('invoice.pdf');
     } // end method
     /* ============= End invoice_download Method ============== */
+     public function invoice_print_download($id){
+        //dd($id);
+        $order = Order::findOrFail($id);
+        //dd(app('url')->asset('upload/abc.png'));
+        // $pdf = PDF::loadView('backend.invoices.invoice',compact('order'))->setPaper('a4');
+        // dd($pdf);
+        return view('backend.invoices.invoice_print', compact('order'));
+        // return $pdf->loadView('invoice.pdf');
+    } // end method
 
 }

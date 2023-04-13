@@ -67,6 +67,50 @@ class FrontendController extends Controller
         return view($home_view, compact('categories','sliders','featured_category','products','product_top_sellings','product_trendings','product_recently_adds','product_top_rates','home_banners','sort_search','todays_sale','home2_featured_categories','hot_deals'));
     } // end method
 
+
+    /*=================== Start Index Methoed ===================*/
+    public function index2(Request $request)
+    {
+        $products = Product::where('status',1)->where('is_featured',1)->orderBy('id','DESC')->get();
+        // Search Start
+        $sort_search =null;
+        if ($request->has('search')){
+            $sort_search = $request->search;
+            $products = $products->where('name_en', 'like', '%'.$sort_search.'%');
+            // dd($products);
+        }else{
+            $products = Product::where('status',1)->where('is_featured',1)->orderBy('id','DESC')->get();
+        }
+        // Header Category Start
+        $categories = Category::orderBy('name_en','DESC')->where('status','=',1)->limit(5)->get();
+        // Header Category End
+        // Category Featured all
+        $featured_category = Category::orderBy('name_en','DESC')->where('is_featured','=',1)->where('status','=',1)->limit(15)->get();
+        //Slider
+        $sliders = Slider::where('status',1)->orderBy('id','DESC')->limit(10)->get();
+        // Product Top Selling
+        $product_top_sellings = Product::where('status',1)->orderBy('id','ASC')->limit(2)->get();
+        //Product Trending
+        $product_trendings = Product::where('status',1)->orderBy('id','ASC')->skip(2)->limit(2)->get();
+        //Product Recently Added
+        $product_recently_adds = Product::where('status',1)->latest()->skip(2)->limit(2)->get();
+
+        $product_top_rates = Product::where('status',1)->orderBy('regular_price')->limit(2)->get();
+        // Home Banner
+        $home_banners = Banner::where('status',1)->where('position',1)->orderBy('id','DESC')->get();
+        // Daily Best Sells 
+        $todays_sale  = OrderDetail::where('created_at', 'like', '%'.date('Y-m-d').'%')->get();
+        $todays_sale = $todays_sale->unique('product_id');
+        //Home2 featured category
+        $home2_featured_categories = Category::orderBy('name_en','DESC')->where('is_featured','=',1)->where('status','=',1)->get();
+        // Hot deals product
+        $hot_deals = Product::where('status',1)->where('is_deals',1)->latest()->take(4)->get();
+
+        $home_view = 'frontend.home2';
+
+        return view($home_view, compact('categories','sliders','featured_category','products','product_top_sellings','product_trendings','product_recently_adds','product_top_rates','home_banners','sort_search','todays_sale','home2_featured_categories','hot_deals'));
+    } // end method
+
     /* ========== Start ProductDetails Method ======== */
     public function productDetails($slug){
 

@@ -47,7 +47,7 @@
                     @endif
                     
                     <!-- <a class="btn btn-primary" href="#">Save</a> -->
-                    <a class="btn btn-secondary print ms-2" href="#" onclick="window.print();"><i class="icon material-icons md-print"></i></a>
+                    <!-- <a class="btn btn-secondary print ms-2" href="#" onclick="window.print();"><i class="icon material-icons md-print"></i></a> -->
                 </div>
             </div>
         </header>
@@ -105,8 +105,8 @@
                         <div class="text">
                             <h6 class="mb-1">Deliver to</h6>
                             <p class="mb-1">
-                                City: {{ ucwords($order->upazilla->name_en ?? 'Null' ) }}, <br />{{ ucwords($order->district->district_name_en ?? 'Null') }},<br />
-                                {{ ucwords($order->division->division_name_en ?? 'Null') }}
+                                City: {{ ucwords($order->upazilla->name_en ?? '' ) }}, <br />{{ ucwords($order->district->district_name_en ?? '') }},<br />
+                                {{ ucwords($order->division->division_name_en ?? '') }}
                             </p>
                             <!-- <a  href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $order->id }}">Edit Address</a> -->
 
@@ -122,7 +122,7 @@
                             <tbody>
                                 <tr>
                                     <th>Invoice</th>
-                                    <td>{{ $order->invoice_no?? 'Null'}}</td>
+                                    <td>{{ $order->invoice_no?? ''}}</td>
                                     <th>Email</th>
                                     <td><input type="" class="form-control" name="email" value="{{ $order->email ?? 'Null'}}"></td>
                                 </tr>
